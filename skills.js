@@ -209,3 +209,28 @@ window.SKILLS = {
     ],
   },
 };
+// Cartoon videos (YouTube IDs) لكل مهارة
+// استخدمي embed مثل: https://www.youtube-nocookie.com/embed/VIDEO_ID
+
+window.SKILL_VIDEOS = {
+  // حسب أسماء صورك في مجلد image/
+  "skill_sun-moon-lam": "chfSXsFL3Wg",      // اللام الشمسية واللام القمرية
+  "skill_exception": "gZNAER56rJs",         // أسلوب الاستثناء
+  "skill_tanween": "jHqSkKwkeX4",           // التنوين
+  "skill_tafdeel": "OfSZhQgnbr8",           // اسم التفضيل (موشن/كرتون)
+
+  // هذه مهاراتك الباقية (إن لم تختاري فيديوهاتها بعد نضعها مؤقتًا فارغة)
+  "skill_synonyms": "",                     // مرادفات
+  "skill_antonyms": "",                     // أضداد
+  "skill_text_parts": "",                   // عناصر النص الأساسية
+  "skill_title": "",                        // عنوان النص
+  "skill_compare": "",                      // أوجه الشبه والاختلاف
+  "skill_sentence": "",                     // الجملة المفيدة
+  "skill_punctuation": "",                  // أدوات الترقيم
+  "skill_verb-types": "",                   // أنواع الفعل
+  "skill_word_types": "",                   // أقسام الكلمة (اسم/فعل/حرف)
+  "skill_madd-letters": "",                 // حروف المد
+  "skill_taa-skills": "",                   // التاء المربوطة/المفتوحة/الهاء
+  "skill_active-passive": "",               // المعلوم/المجهول
+  "skill_nakira-ma3rifa": ""                // النكرة/المعرفة
+};
