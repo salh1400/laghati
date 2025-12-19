@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مهارات لغتي</title>
+
+<style>
+body{
+  font-family: Cairo, Arial;
+  background:#f6f7fb;
+  margin:0;
+  padding:20px;
+}
+h1{
+  text-align:center;
+  margin-bottom:25px;
+}
+.skills{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap:18px;
+}
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
+  text-align:center;
+}
+.card img{
+  width:100%;
+  border-radius:14px;
+}
+.card h3{
+  font-size:16px;
+  margin:10px 0;
+}
+.card button{
+  width:100%;
+  margin-top:6px;
+  padding:10px;
+  border:none;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.video{
+  background:#4f46e5;
+  color:#fff;
+}
+.quiz{
+  background:#16a34a;
+  color:#fff;
+}
+</style>
+</head>
+
+<body>
+
+<h1>مهارات لغتي الممتعة</h1>
+
+<div class="skills">
+
+<!-- بطاقة -->
+<div class="card">
+<img src="images/skill_word_types.png">
+<h3>أنواع الكلمة</h3>
+<button class="video" onclick="openVideo('https://youtu.be/CvTvx1TRYw4')">🎬 فيديو</button>
+<button class="quiz" onclick="alert('اختبار 5 أسئلة – أنواع الكلمة')">📝 اختبار</button>
+</div>
+
+<div class="card">
+<img src="images/skill_verb-types.png">
+<h3>أنواع الفعل</h3>
+<button class="video" onclick="openVideo('https://youtu.be/-fNt_5kOvIs')">🎬 فيديو</button>
+<button class="quiz" onclick="alert('اختبار 5 أسئلة – أنواع الفعل')">📝 اختبار</button>
+</div>
+
+<div class="card">
+<img src="images/skill_title.png">
+<h3>العنوان المناسب</h3>
+<button class="video" onclick="openVideo('https://youtu.be/KWRbbfoP20c')">🎬 فيديو</button>
+<button class="quiz" onclick="alert('اختبار 5 أسئلة – العنوان')">📝 اختبار</button>
+</div>
+
+<div class="card">
+<img src="images/skill_tanween.png">
+<h3>التنوين</h3>
+<button class="video" onclick="openVideo('https://youtu.be/U3D7_jGq5NA')">🎬 فيديو</button>
+<button class="quiz" onclick="alert('اختبار 5 أسئلة – التنوين')">📝 اختبار</button>
+</div>
+
+<div class="card">
+<img src="images/skill_tafdeel.png">
+<h3>أسلوب التفضيل</h3>
+<button class="video" onclick="openVideo('https://youtu.be/pl5BGnN-Cdc')">🎬 فيديو</button>
+<button class="quiz" onclick="alert('اختبار 5 أسئلة – التفضيل')">📝 اختبار</button>
+</div>
+
+<div class="card">
+<img src="images/skill_synonyms.png">
+<h3>المرادفات</h3>
+<button class="video" onclick="openVideo('https://youtu.be/Ue9sNE6oF98')">🎬 فيديو</button>
+<button class="quiz" onclick="alert('اختبار 5 أسئلة – المرادفات')">📝 اختبار</button>
+</div>
+
+<div class="card">
+<img src="images/skill_antonyms.png">
+<h3>الأضداد</h3>
+<button class="video" onclick="openVideo('https://youtu.be/kqTJtHz8U-Y')">🎬 فيديو</button>
+<button class="quiz" onclick="alert('اختبار 5 أسئلة – الأضداد')">📝 اختبار</button>
+</div>
+
+<div class="card">
+<img src="images/skill_main_idea.png">
+<h3>الفكرة الرئيسة</h3>
+<button class="video" onclick="openVideo('https://youtu.be/jhuaaQjiZIs')">🎬 فيديو</button>
+<button class="quiz" onclick="alert('اختبار 5 أسئلة – الفكرة الرئيسة')">📝 اختبار</button>
+</div>
+
+</div>
+
+<script>
+function openVideo(url){
+  window.open(url,'_blank');
+}
+</script>
+
+</body>
+</html>
