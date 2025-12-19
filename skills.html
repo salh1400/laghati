@@ -2,45 +2,50 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>مهارات لغتي الممتعة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body{
-  font-family: "Cairo", Arial;
-  background:#f5f7ff;
   margin:0;
-  padding:20px;
+  font-family: "Cairo", Arial;
+  background:#f4f6fb;
 }
-h1{
+header{
+  background:#3f51b5;
+  color:#fff;
+  padding:18px;
   text-align:center;
-  margin-bottom:10px;
-}
-p{
-  text-align:center;
-  color:#444;
+  font-size:22px;
+  font-weight:bold;
 }
 .back{
-  display:block;
-  margin:10px auto 25px;
-  background:#4f46e5;
-  color:#fff;
-  border:none;
-  padding:10px 18px;
+  display:inline-block;
+  margin:15px;
+  padding:8px 16px;
+  background:#e5e7eb;
   border-radius:20px;
-  cursor:pointer;
+  text-decoration:none;
+  color:#111;
   font-weight:bold;
+}
+.container{
+  padding:20px;
+}
+h2{
+  text-align:center;
+  margin-bottom:25px;
 }
 .skills{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
   gap:18px;
 }
 .card{
   background:#fff;
   border-radius:18px;
   padding:12px;
-  box-shadow:0 10px 25px rgba(0,0,0,.12);
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
   text-align:center;
 }
 .card img{
@@ -48,79 +53,89 @@ p{
   border-radius:14px;
 }
 .card h3{
-  font-size:16px;
   margin:10px 0;
+  font-size:16px;
 }
-.card button{
+.btn{
   width:100%;
-  margin-top:6px;
   padding:10px;
+  margin-top:6px;
   border:none;
   border-radius:12px;
+  font-size:14px;
   font-weight:bold;
   cursor:pointer;
 }
-.video{
-  background:#2563eb;
-  color:#fff;
-}
-.quiz{
-  background:#16a34a;
-  color:#fff;
+.video{background:#2563eb;color:#fff;}
+.quiz{background:#16a34a;color:#fff;}
+footer{
+  margin-top:30px;
+  text-align:center;
+  color:#555;
+  font-size:13px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📘 مهارات لغتي الممتعة</h1>
-<p>اختاري مهارة ثم شاهدي الفيديو أو حلي اختبارًا قصيرًا</p>
+<header>مهارات لغتي الممتعة</header>
 
-<button class="back" onclick="location.href='index.html'">⬅ العودة للرئيسية</button>
+<a class="back" href="index.html">⬅ العودة للرئيسية</a>
+
+<div class="container">
+<h2>اختاري مهارة 👇</h2>
 
 <div class="skills">
 
+<!-- بطاقة -->
 <div class="card">
 <img src="skill_word_types.png">
 <h3>أنواع الكلمة</h3>
-<button class="video" onclick="openVideo('https://youtu.be/CvTvx1TRYw4')">🎬 فيديو</button>
-<button class="quiz" onclick="alert('اختبار 5 أسئلة – أنواع الكلمة')">📝 اختبار</button>
+<button class="btn video" onclick="openVideo('https://youtu.be/CvTvx1TRYw4')">🎬 فيديو</button>
+<button class="btn quiz" onclick="alert('اختبار (5 أسئلة) – أنواع الكلمة')">📝 اختبار</button>
 </div>
 
 <div class="card">
 <img src="skill_verb-types.png">
 <h3>أنواع الفعل</h3>
-<button class="video" onclick="openVideo('https://youtu.be/-fNt_5kOvIs')">🎬 فيديو</button>
-<button class="quiz" onclick="alert('اختبار 5 أسئلة – أنواع الفعل')">📝 اختبار</button>
+<button class="btn video" onclick="openVideo('https://youtu.be/-fNt_5kOvIs')">🎬 فيديو</button>
+<button class="btn quiz" onclick="alert('اختبار (5 أسئلة) – أنواع الفعل')">📝 اختبار</button>
 </div>
 
 <div class="card">
 <img src="skill_title.png">
 <h3>العنوان المناسب</h3>
-<button class="video" onclick="openVideo('https://youtu.be/KWRbbfoP20c')">🎬 فيديو</button>
-<button class="quiz" onclick="alert('اختبار 5 أسئلة – العنوان')">📝 اختبار</button>
+<button class="btn video" onclick="openVideo('https://youtu.be/KWRbbfoP20c')">🎬 فيديو</button>
+<button class="btn quiz" onclick="alert('اختبار (5 أسئلة) – العنوان')">📝 اختبار</button>
 </div>
 
 <div class="card">
 <img src="skill_tanween.png">
 <h3>التنوين</h3>
-<button class="video" onclick="openVideo('https://youtu.be/U3D7_jGq5NA')">🎬 فيديو</button>
-<button class="quiz" onclick="alert('اختبار 5 أسئلة – التنوين')">📝 اختبار</button>
+<button class="btn video" onclick="openVideo('https://youtu.be/U3D7_jGq5NA')">🎬 فيديو</button>
+<button class="btn quiz" onclick="alert('اختبار (5 أسئلة) – التنوين')">📝 اختبار</button>
 </div>
 
 <div class="card">
-<img src="skill_tafdeel.png">
-<h3>أسلوب التفضيل</h3>
-<button class="video" onclick="openVideo('https://youtu.be/pl5BGnN-Cdc')">🎬 فيديو</button>
-<button class="quiz" onclick="alert('اختبار 5 أسئلة – التفضيل')">📝 اختبار</button>
+<img src="skill_synonyms.png">
+<h3>المرادفات</h3>
+<button class="btn video" onclick="openVideo('https://youtu.be/Ue9sNE6oF98')">🎬 فيديو</button>
+<button class="btn quiz" onclick="alert('اختبار (5 أسئلة) – المرادفات')">📝 اختبار</button>
 </div>
 
 <div class="card">
 <img src="skill_antonyms.png">
 <h3>الأضداد</h3>
-<button class="video" onclick="openVideo('https://youtu.be/kqTJtHz8U-Y')">🎬 فيديو</button>
-<button class="quiz" onclick="alert('اختبار 5 أسئلة – الأضداد')">📝 اختبار</button>
+<button class="btn video" onclick="openVideo('https://youtu.be/kqTJtHz8U-Y')">🎬 فيديو</button>
+<button class="btn quiz" onclick="alert('اختبار (5 أسئلة) – الأضداد')">📝 اختبار</button>
 </div>
+
+</div>
+
+<footer>
+© تصميم: صالحة علي الغامدي – لغتي الممتعة
+</footer>
 
 </div>
 
