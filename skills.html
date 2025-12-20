@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>مهارات لغتي</title>
+<title>مهارات لغتي الممتعة</title>
 
 <style>
   :root{
@@ -11,79 +11,72 @@
     --card:#ffffff;
     --ink:#111827;
     --muted:#6b7280;
+
     --primary:#4f46e5;
     --success:#16a34a;
-    --warning:#f59e0b;
     --danger:#ef4444;
-    --shadow: 0 10px 24px rgba(0,0,0,.10);
-    --radius:18px;
-  }
+    --gold:#f59e0b;
 
+    --shadow: 0 12px 28px rgba(0,0,0,.12);
+    --radius:20px;
+  }
   *{ box-sizing:border-box; }
   body{
-    font-family: "Cairo", "Tajawal", Arial, sans-serif;
-    background: var(--bg);
+    font-family:"Cairo","Tajawal",Arial,sans-serif;
+    background:var(--bg);
     margin:0;
     padding:16px;
     color:var(--ink);
   }
 
-  /* Top bar */
+  /* ===== Topbar ===== */
   .topbar{
     max-width:1100px;
     margin:0 auto 14px;
     display:flex;
-    flex-wrap:wrap;
     align-items:center;
-    gap:10px;
     justify-content:space-between;
-  }
-  .brand{
-    display:flex;
-    align-items:center;
     gap:10px;
+    flex-wrap:wrap;
   }
   .brand h1{
     margin:0;
     font-size:22px;
-    font-weight:900;
+    font-weight:1000;
+    letter-spacing:.2px;
   }
   .brand .sub{
-    font-size:13px;
+    margin-top:4px;
     color:var(--muted);
-    font-weight:700;
-    margin-top:2px;
+    font-weight:800;
+    font-size:13px;
   }
 
-  .actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
+  .actions{ display:flex; gap:10px; flex-wrap:wrap; }
   .btn{
-    border:none;
+    border:0;
     border-radius:14px;
     padding:10px 12px;
     cursor:pointer;
-    font-weight:900;
+    font-weight:1000;
     display:flex;
     align-items:center;
     gap:8px;
-    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    box-shadow:0 10px 18px rgba(0,0,0,.08);
+    user-select:none;
   }
   .btn.primary{ background:var(--primary); color:#fff; }
   .btn.gray{ background:#1118270f; color:#111827; }
   .btn.danger{ background:var(--danger); color:#fff; }
 
-  /* Progress */
+  /* ===== Progress ===== */
   .progressWrap{
     max-width:1100px;
     margin:0 auto 16px;
     background:#fff;
     border-radius:18px;
     box-shadow: var(--shadow);
-    padding:12px;
+    padding:12px 12px 14px;
     border:1px solid #00000010;
   }
   .progressTop{
@@ -94,13 +87,12 @@
     flex-wrap:wrap;
   }
   .progressTop .txt{
-    font-weight:900;
-    color:#111827;
+    font-weight:1000;
     font-size:14px;
   }
   .progressTop .mini{
+    font-weight:900;
     color:var(--muted);
-    font-weight:800;
     font-size:13px;
   }
   .bar{
@@ -117,7 +109,7 @@
     transition: width .35s ease;
   }
 
-  /* Grid */
+  /* ===== Grid ===== */
   .skills{
     max-width:1100px;
     margin:0 auto;
@@ -133,20 +125,20 @@
     text-align:center;
     position:relative;
     border:1px solid #00000010;
+    overflow:hidden;
   }
   .card img{
     width:100%;
-    border-radius:14px;
+    border-radius:16px;
     display:block;
     cursor: zoom-in;
   }
   .card h3{
-    font-size:16px;
     margin:10px 0 8px;
-    font-weight:900;
+    font-size:16px;
+    font-weight:1000;
   }
 
-  /* Trophy badge */
   .badge{
     position:absolute;
     top:10px;
@@ -156,69 +148,58 @@
     border-radius:999px;
     padding:6px 10px;
     font-weight:1000;
-    box-shadow: 0 10px 18px rgba(0,0,0,.10);
+    box-shadow: 0 12px 18px rgba(0,0,0,.10);
     display:none;
     align-items:center;
     gap:6px;
   }
   .badge.show{ display:flex; }
-  .badge .small{
-    font-size:12px;
-    color:var(--muted);
-    font-weight:900;
-  }
+  .badge .small{ font-size:12px; color:var(--muted); font-weight:900; }
 
   .card button{
     width:100%;
     margin-top:8px;
-    padding:10px;
-    border:none;
-    border-radius:12px;
+    padding:11px 12px;
+    border:0;
+    border-radius:14px;
     font-weight:1000;
     cursor:pointer;
     font-size:14px;
+    box-shadow: 0 10px 18px rgba(0,0,0,.06);
   }
-  .video{
-    background:var(--primary);
-    color:#fff;
-  }
-  .quiz{
-    background:var(--success);
-    color:#fff;
-  }
-  .disabled{
-    opacity:.55;
-    pointer-events:none;
-  }
+  .videoBtn{ background:var(--primary); color:#fff; }
+  .quizBtn{ background:var(--success); color:#fff; }
+  .disabled{ opacity:.55; pointer-events:none; }
 
-  /* Footer */
   .footer{
     max-width:1100px;
     margin:18px auto 6px;
     text-align:center;
     color:var(--muted);
-    font-weight:900;
+    font-weight:1000;
     font-size:13px;
   }
 
-  /* Modal overlay (Quiz + Parent) */
+  /* ===== Overlay / Modal (Video + Quiz + Parent) ===== */
   .overlay{
     position:fixed;
     inset:0;
-    background: rgba(17,24,39,.55);
+    background: rgba(17,24,39,.58);
     display:none;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
     padding:14px;
     z-index:999;
+    overflow:auto;
   }
   .overlay.show{ display:flex; }
 
   .modal{
-    width:min(760px, 96vw);
+    width:min(820px, 96vw);
+    margin-top:16px;
     background:#fff;
-    border-radius:22px;
-    box-shadow: 0 25px 80px rgba(0,0,0,.30);
+    border-radius:24px;
+    box-shadow: 0 26px 90px rgba(0,0,0,.35);
     overflow:hidden;
     border:1px solid #00000012;
   }
@@ -236,7 +217,7 @@
     font-size:16px;
   }
   .closeBtn{
-    border:none;
+    border:0;
     border-radius:12px;
     padding:8px 10px;
     cursor:pointer;
@@ -244,10 +225,41 @@
     background: rgba(255,255,255,.18);
     color:#fff;
   }
+  .modalBody{ padding:14px; }
 
-  .modalBody{
-    padding:14px;
+  /* ===== Video frame (small & nice) ===== */
+  .videoWrap{
+    width:100%;
+    background:#111827;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #00000018;
+    box-shadow: 0 16px 30px rgba(0,0,0,.18);
   }
+  .videoWrap iframe{
+    width:100%;
+    height:min(52vh, 420px);
+    border:0;
+    display:block;
+  }
+  .videoTools{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:12px;
+  }
+  .pill{
+    background:#1118270f;
+    border:1px solid #00000010;
+    border-radius:999px;
+    padding:8px 12px;
+    font-weight:1000;
+    font-size:13px;
+    color:#111827;
+  }
+
+  /* ===== Quiz ===== */
   .qText{
     font-weight:1000;
     font-size:16px;
@@ -255,24 +267,31 @@
     text-align:center;
     margin:4px 0 12px;
     color:#111827;
+    white-space:pre-line;
   }
-  .options{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:10px;
-  }
+  .options{ display:flex; flex-direction:column; gap:10px; }
   .opt{
-    border:none;
-    border-radius:14px;
+    border:0;
+    border-radius:16px;
     padding:12px;
     cursor:pointer;
     font-weight:1000;
-    background:#eef2ff;
-    color:#111827;
-    box-shadow: 0 10px 18px rgba(0,0,0,.06);
+    background: linear-gradient(180deg, #2b86ff, #1e74e6);
+    color:#fff;
+    box-shadow: 0 14px 22px rgba(30,116,230,.18);
+    text-align:center;
+    transition: transform .08s ease;
   }
-  .opt.good{ background:#dcfce7; color:#065f46; }
-  .opt.bad{ background:#ffe4e6; color:#9f1239; }
+  .opt:active{ transform: translateY(1px); }
+  .opt.good{
+    background: linear-gradient(180deg, #7cffb2, #55f09d);
+    color:#0b5a2f;
+  }
+  .opt.bad{
+    background: linear-gradient(180deg, #ff7c9a, #ff5f86);
+    color:#7a0f25;
+  }
+  .opt.disabled{ pointer-events:none; opacity:.98; }
 
   .quizFooter{
     margin-top:12px;
@@ -282,55 +301,49 @@
     gap:10px;
     flex-wrap:wrap;
   }
-  .pill{
-    background:#1118270f;
-    border:1px solid #00000010;
-    border-radius:999px;
-    padding:8px 12px;
-    font-weight:900;
-    color:#111827;
-    font-size:13px;
-  }
-
   .resultBox{
-    margin-top:10px;
-    background:#fff7ed;
-    border:1px solid #fed7aa;
-    border-radius:16px;
+    margin-top:12px;
+    border-radius:18px;
     padding:10px 12px;
     font-weight:1000;
     text-align:center;
+    border:1px solid #00000010;
+    background:#fff7ed;
+  }
+  .hint{
+    text-align:center;
+    margin-top:10px;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:900;
   }
 
-  /* Parent report table */
+  /* ===== Parent report ===== */
   table{
     width:100%;
     border-collapse:separate;
     border-spacing:0;
     overflow:hidden;
-    border-radius:14px;
+    border-radius:16px;
     border:1px solid #00000010;
   }
   th, td{
-    padding:10px 10px;
+    padding:10px;
     text-align:center;
-    font-weight:900;
+    font-weight:1000;
     font-size:13px;
     border-bottom:1px solid #00000010;
   }
-  th{
-    background:#eef2ff;
-    color:#111827;
-  }
+  th{ background:#eef2ff; }
   tr:last-child td{ border-bottom:none; }
   .okTag{ color:#166534; }
   .noTag{ color:#9f1239; }
 
-  /* Image zoom */
+  /* ===== Image Zoom ===== */
   .imgOverlay{
     position:fixed;
     inset:0;
-    background: rgba(0,0,0,.70);
+    background: rgba(0,0,0,.72);
     display:none;
     align-items:center;
     justify-content:center;
@@ -339,12 +352,17 @@
   }
   .imgOverlay.show{ display:flex; }
   .imgOverlay img{
-    width:min(920px, 96vw);
-    max-height: 88vh;
+    width:min(960px, 96vw);
+    max-height:88vh;
     object-fit:contain;
-    border-radius:18px;
-    box-shadow: 0 24px 80px rgba(0,0,0,.45);
+    border-radius:20px;
+    box-shadow: 0 26px 100px rgba(0,0,0,.5);
     cursor: zoom-out;
+  }
+
+  @media (max-width:520px){
+    .modal{ margin-top:10px; }
+    .videoWrap iframe{ height:min(46vh, 320px); }
   }
 </style>
 </head>
@@ -355,7 +373,7 @@
     <div class="brand">
       <div>
         <h1>مهارات لغتي الممتعة</h1>
-        <div class="sub">اختر مهارة ثم شاهد الفيديو أو نفّذ الاختبار (5 أسئلة)</div>
+        <div class="sub">اختر مهارة (بصيغة المذكر) ثم شاهد الفيديو أو نفّذ الاختبار</div>
       </div>
     </div>
 
@@ -369,7 +387,7 @@
   <div class="progressWrap">
     <div class="progressTop">
       <div class="txt" id="progressText">التقدّم: 0 / 0 🏆</div>
-      <div class="mini" id="progressMini">يُحسب الإنجاز عند الحصول على 3/5 فأعلى</div>
+      <div class="mini" id="progressMini">يُمنح الكأس عند الحصول على 3/5 فأعلى</div>
     </div>
     <div class="bar"><div class="fill" id="progressFill"></div></div>
   </div>
@@ -378,11 +396,33 @@
 
   <div class="footer">تصميم: صالحة علي الغامدي</div>
 
-  <!-- Quiz Modal -->
+  <!-- ===== Video Modal ===== -->
+  <div class="overlay" id="videoOverlay" aria-hidden="true">
+    <div class="modal">
+      <div class="modalHeader">
+        <div class="ttl" id="videoTitle">🎬 فيديو المهارة</div>
+        <button class="closeBtn" type="button" onclick="closeVideo()">إغلاق ✕</button>
+      </div>
+      <div class="modalBody">
+        <div class="videoWrap">
+          <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+
+        <div class="videoTools">
+          <div class="pill" id="videoTip">اضغط تشغيل داخل النافذة</div>
+          <button class="btn gray" type="button" onclick="openInYoutube()">📺 فتح في يوتيوب</button>
+        </div>
+
+        <div class="hint">يُغلق الفيديو عند الضغط خارج النافذة أو زر الإغلاق.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Quiz Modal ===== -->
   <div class="overlay" id="quizOverlay" aria-hidden="true">
     <div class="modal">
       <div class="modalHeader">
-        <div class="ttl" id="quizTitle">اختبار المهارة</div>
+        <div class="ttl" id="quizTitle">📝 اختبار المهارة</div>
         <button class="closeBtn" type="button" onclick="closeQuiz()">إغلاق ✕</button>
       </div>
       <div class="modalBody">
@@ -395,11 +435,12 @@
         </div>
 
         <div class="resultBox" id="resultBox" style="display:none;"></div>
+        <div class="hint">تُعرض نتيجة كل سؤال بالألوان مع صوت واضح.</div>
       </div>
     </div>
   </div>
 
-  <!-- Parent Modal -->
+  <!-- ===== Parent Modal ===== -->
   <div class="overlay" id="parentOverlay" aria-hidden="true">
     <div class="modal">
       <div class="modalHeader">
@@ -407,9 +448,7 @@
         <button class="closeBtn" type="button" onclick="closeParentMode()">إغلاق ✕</button>
       </div>
       <div class="modalBody">
-        <div class="resultBox" id="parentSummary" style="background:#ecfeff;border-color:#a5f3fc;">
-          —
-        </div>
+        <div class="resultBox" id="parentSummary" style="background:#ecfeff;">—</div>
         <div style="height:10px;"></div>
         <div style="overflow:auto;">
           <table>
@@ -418,7 +457,7 @@
                 <th>المهارة</th>
                 <th>أفضل درجة</th>
                 <th>محاولات</th>
-                <th>الإنجاز</th>
+                <th>الكأس</th>
               </tr>
             </thead>
             <tbody id="parentTable"></tbody>
@@ -428,20 +467,20 @@
     </div>
   </div>
 
-  <!-- Image Zoom -->
+  <!-- ===== Image Zoom ===== -->
   <div class="imgOverlay" id="imgOverlay" aria-hidden="true" onclick="closeImg()">
     <img id="zoomImg" alt="صورة المهارة" />
   </div>
 
 <script>
   /***********************
-   * إعدادات عامة
+   * إعدادات
    ***********************/
-  const PASS_SCORE = 3; // 3/5 فأعلى = كأس 🏆
-  const STORE_KEY = "laghati_progress_v1";
+  const PASS_SCORE = 3; // كأس عند 3/5 فأعلى
+  const STORE_KEY = "laghati_progress_v2";
 
-  // مهاراتك (حسب الصور والروابط التي زوّدتِني بها)
-  // ملاحظة: حذفنا "المبني للمعلوم والمبني للمجهول" بناءً على طلبك.
+  // مهاراتك (بدون إضافة لعبتي reading/vocab)
+  // ملاحظة: تم حذف "المبني للمعلوم/المجهول" كما طلبتِ.
   const SKILLS = [
     { id:"word_types", title:"أقسام الكلمة", img:"image/skill_word_types.png", video:"https://youtu.be/CvTvx1TRYw4?feature=shared" },
     { id:"verb_types", title:"أنواع الفعل", img:"image/skill_verb-types.png", video:"https://youtu.be/-fNt_5kOvIs?feature=shared" },
@@ -461,15 +500,10 @@
     { id:"exception", title:"أسلوب الاستثناء", img:"image/skill_exception.png", video:"https://youtu.be/_l3t_vDpIJE?feature=shared" },
     { id:"compare", title:"أوجه الشبه والاختلاف", img:"image/skill_compare.png", video:"https://youtu.be/ySR-1AgoQPY?feature=shared" },
     { id:"antonyms", title:"الأضداد", img:"image/skill_antonyms.png", video:"https://youtu.be/kqTJtHz8U-Y?feature=shared" },
-
-    // مهارتان (لو عندك صور/روابط لاحقًا أضيفيها هنا بنفس النمط)
-    // { id:"text_elements", title:"عناصر النص الأساسية", img:"image/skill_text-elements.png", video:"https://...." },
-    // { id:"something2", title:".....", img:"image/....png", video:"https://...." },
   ];
 
   /***********************
-   * بنك أسئلة عام (5 أسئلة لكل مهارة)
-   * ملاحظة: أسئلة عامة مبسطة (يمكنك لاحقًا استبدالها بأسئلة من منهجك حرفيًا)
+   * بنك أسئلة عام (5 لكل مهارة)
    ***********************/
   const QUESTION_BANK = {
     word_types: [
@@ -494,7 +528,7 @@
       q("العنوان الجيد يكون:", ["واضحًا ومناسبًا","مكررًا","غامضًا","بعيدًا عن الفكرة"], 0),
     ],
     tanween: [
-      q("التنوين هو:", ["حركة واحدة","نون ساكنة تلفظ لا تكتب","حرف مد","همزة"], 1),
+      q("التنوين هو:", ["حركة واحدة","نون ساكنة تُلفظ لا تُكتب","حرف مد","همزة"], 1),
       q("أي كلمة منونة؟", ["كتابٌ","الكتاب","كتابان","كتابه"], 0),
       q("تنوين الفتح يكون:", ["ــٌ","ــٍ","ــً","لا شيء"], 2),
       q("تنوين الكسر يكون:", ["ــٍ","ــً","ــٌ","ــَ"], 0),
@@ -510,9 +544,9 @@
     taa: [
       q("التاء المربوطة تكون:", ["ت","ة","ه","ث"], 1),
       q("أي كلمة فيها تاء مربوطة؟", ["مدرسة","بيت","مطر","قلم"], 0),
-      q("أي كلمة فيها هاء؟", ["هُدَى","مدينة","شجرة","سيارة"], 0),
       q("التاء المفتوحة تكتب:", ["ة","ت","ه","ا"], 1),
       q("اختر كلمة فيها تاء مفتوحة:", ["بنت","مدرسة","حديقة","قطة"], 0),
+      q("اختر كلمة تنتهي بـ (هـ):", ["وجه","لعبة","مدرسة","قطة"], 0),
     ],
     synonyms: [
       q("مرادف (سعيد) هو:", ["حزين","فرحان","غاضب","متعب"], 1),
@@ -522,11 +556,11 @@
       q("مرادف (ذكي) هو:", ["فطن","كسول","مريض","خائف"], 0),
     ],
     sun_moon_lam: [
-      q("اللام الشمسية تُنطق أم لا؟", ["تُنطق","لا تُنطق","حسب الكلمة","لا علاقة"], 1),
-      q("مثال للام قمرية:", ["الشمس","البيت","الطريق","السماء؟"], 1),
-      q("مثال للام شمسية:", ["البيت","القمر","الشجرة","الشمس"], 3),
-      q("في كلمة (الـشَّمس) اللام:", ["قمرية","شمسية","غير موجودة","مد"], 1),
-      q("في كلمة (الـقَمَر) اللام:", ["قمرية","شمسية","غير موجودة","تنوين"], 0),
+      q("اللام الشمسية:", ["تُنطق","لا تُنطق","لا توجد","حرف مد"], 1),
+      q("مثال للام قمرية:", ["البيت","الشمس","الشجرة","السماء؟"], 0),
+      q("مثال للام شمسية:", ["الكتاب","القمر","الشمس","الباب"], 2),
+      q("في كلمة (الشَّمس) اللام:", ["قمرية","شمسية","لا شيء","تنوين"], 1),
+      q("في كلمة (القَمَر) اللام:", ["قمرية","شمسية","لا شيء","مد"], 0),
     ],
     sentence: [
       q("الجملة المفيدة هي:", ["كلمتان بلا معنى","كلام تام المعنى","حرف واحد","عنوان"], 1),
@@ -552,9 +586,9 @@
     main_idea: [
       q("الفكرة الرئيسة هي:", ["تفاصيل صغيرة","الفكرة العامة للنص","عنوان الكتاب فقط","اسم الكاتب"], 1),
       q("نص عن النظافة… الفكرة الرئيسة:", ["الرياضة","النظافة مهمة","السفر","الطعام"], 1),
-      q("لإيجاد الفكرة الرئيسة نبحث عن:", ["الجمل المهمة","الزخرفة","الألوان","الأرقام فقط"], 0),
-      q("الفكرة الرئيسة غالبًا تتكرر في:", ["بداية النص أو نهايته","الهوامش","العنوان فقط","لا تظهر"], 0),
-      q("اختر الفكرة الرئيسة لنص عن ترشيد الماء:", ["أهمية ترشيد الماء","مغامرة في البحر","قصة الأسد","درس الرياضة"], 0),
+      q("لإيجاد الفكرة الرئيسة نبحث عن:", ["الجمل المهمة","الألوان","الأرقام فقط","الصور فقط"], 0),
+      q("الفكرة الرئيسة غالبًا تتكرر في:", ["بداية النص أو نهايته","الهوامش","لا تظهر","الزخرفة"], 0),
+      q("اختر الفكرة الرئيسة لنص عن ترشيد الماء:", ["أهمية ترشيد الماء","مغامرة بحر","قصة الأسد","درس الرياضة"], 0),
     ],
     mad: [
       q("حروف المد هي:", ["ا و ي","ب ت ث","س ش ص","ء ؤ ئ"], 0),
@@ -579,14 +613,14 @@
     ],
     exception: [
       q("أداة الاستثناء الأشهر هي:", ["إلا","ثم","حتى","أو"], 0),
-      q("في جملة (حضر الطلاب إلا طالبًا) المستثنى هو:", ["الطلاب","طالبًا","حضر","إلا"], 1),
-      q("في جملة (نجح الجميع غير طالب) الأداة هي:", ["غير","طالب","نجح","الجميع"], 0),
-      q("اختر جملة فيها استثناء:", ["ذهب علي إلى المدرسة","حضر الجميع إلا خالدًا","السماء صافية","قرأ الطالب الدرس"], 1),
+      q("في (حضر الطلاب إلا طالبًا) المستثنى هو:", ["الطلاب","طالبًا","حضر","إلا"], 1),
+      q("في (نجح الجميع غير طالب) الأداة هي:", ["غير","طالب","نجح","الجميع"], 0),
+      q("اختر جملة فيها استثناء:", ["ذهب علي للمدرسة","حضر الجميع إلا خالدًا","السماء صافية","قرأ الطالب"], 1),
       q("المستثنى منه هو:", ["الذي استُثني منه","الأداة","الفعل","الحرف"], 0),
     ],
     compare: [
       q("وجه الشبه يعني:", ["الاختلاف","ما يشتركان فيه","العنوان","النتيجة"], 1),
-      q("وجه الاختلاف يعني:", ["التشابه","ما يختلفان فيه","الفكرة الرئيسة","الزمن"], 1),
+      q("وجه الاختلاف يعني:", ["التشابه","ما يختلفان فيه","الفكرة","الزمان"], 1),
       q("اختر (وجه شبه):", ["كلاهما يحب القراءة","أحدهما سريع والآخر بطيء","الأول طويل","الثاني قصير"], 0),
       q("اختر (وجه اختلاف):", ["كلاهما مجتهد","الأول يقرأ والثاني لا يقرأ","كلاهما يساعد","كلاهما نظيف"], 1),
       q("المقارنة تساعد على:", ["فهم النص","إخفاء المعنى","زيادة الأخطاء","نسيان الأحداث"], 0),
@@ -600,9 +634,7 @@
     ],
   };
 
-  function q(text, choices, correctIndex){
-    return { text, choices, correctIndex };
-  }
+  function q(text, choices, correctIndex){ return { text, choices, correctIndex }; }
 
   /***********************
    * التخزين
@@ -613,13 +645,9 @@
       if(!raw) return {};
       const obj = JSON.parse(raw);
       return obj && typeof obj === "object" ? obj : {};
-    }catch(e){
-      return {};
-    }
+    }catch(e){ return {}; }
   }
-  function saveProgress(p){
-    localStorage.setItem(STORE_KEY, JSON.stringify(p));
-  }
+  function saveProgress(p){ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }
 
   function getSkillProgress(skillId){
     const p = loadProgress();
@@ -629,6 +657,66 @@
     const p = loadProgress();
     p[skillId] = data;
     saveProgress(p);
+  }
+
+  /***********************
+   * الأصوات (أوضح مثل السابق)
+   ***********************/
+  let audioUnlocked = false;
+  let audioCtx = null;
+
+  function ensureAudio(){
+    if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if(audioCtx.state === "suspended") audioCtx.resume();
+    audioUnlocked = true;
+  }
+
+  function tone({ type="sine", f1=440, f2=null, dur=0.18, gain=0.18 }){
+    if(!audioUnlocked || !audioCtx) return;
+    const ctx = audioCtx;
+    const t0 = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const g = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(f1, t0);
+    if(f2 !== null) osc.frequency.linearRampToValueAtTime(f2, t0 + dur);
+
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(gain, t0 + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+
+    osc.connect(g); g.connect(ctx.destination);
+    osc.start(t0);
+    osc.stop(t0 + dur + 0.03);
+  }
+
+  function soundCorrect(){
+    tone({ type:"triangle", f1:880, f2:1320, dur:0.16, gain:0.22 });
+    setTimeout(()=>tone({ type:"sine", f1:1100, f2:1600, dur:0.12, gain:0.18 }), 90);
+  }
+  function soundWrong(){
+    tone({ type:"sawtooth", f1:260, f2:140, dur:0.28, gain:0.24 });
+    setTimeout(()=>tone({ type:"sawtooth", f1:220, f2:120, dur:0.24, gain:0.22 }), 120);
+  }
+  function soundWin(){
+    soundCorrect();
+    setTimeout(()=>soundCorrect(), 170);
+  }
+
+  // فك قفل الصوت عند أول تفاعل
+  window.addEventListener("pointerdown", ()=>ensureAudio(), { once:true });
+
+  /***********************
+   * أدوات
+   ***********************/
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]]=[a[j],a[i]];
+    }
+    return a;
   }
 
   /***********************
@@ -649,7 +737,7 @@
 
       const badge = document.createElement("div");
       badge.className = "badge" + (prog.mastered ? " show":"");
-      badge.innerHTML = `🏆 <span>منجزة</span> <span class="small">(${prog.best}/5)</span>`;
+      badge.innerHTML = `🏆 <span>كأس</span> <span class="small">(${prog.best}/5)</span>`;
       card.appendChild(badge);
 
       const img = document.createElement("img");
@@ -662,21 +750,18 @@
       h3.textContent = skill.title;
       card.appendChild(h3);
 
-      // زر فيديو (نفس الطريقة)
       const vBtn = document.createElement("button");
-      vBtn.className = "video";
-      vBtn.textContent = "🎬 فيديو";
+      vBtn.className = "videoBtn";
       vBtn.type = "button";
-      vBtn.onclick = ()=> openVideo(skill.video);
+      vBtn.textContent = "🎬 فيديو";
+      vBtn.onclick = ()=> openVideo(skill);
       card.appendChild(vBtn);
 
-      // زر اختبار (اختبار فعلي 5 أسئلة)
       const qBtn = document.createElement("button");
-      qBtn.className = "quiz";
-      qBtn.textContent = "📝 اختبار";
+      qBtn.className = "quizBtn";
       qBtn.type = "button";
-      qBtn.onclick = ()=> startQuiz(skill.id);
-      // إن لم يوجد بنك أسئلة للمهارة (لو أضفتي مهارات جديدة ولم تكتبي أسئلتها بعد)
+      qBtn.textContent = "📝 اختبار (5 أسئلة)";
+      qBtn.onclick = ()=> startQuiz(skill);
       if(!QUESTION_BANK[skill.id]) qBtn.classList.add("disabled");
       card.appendChild(qBtn);
 
@@ -689,29 +774,70 @@
   function renderProgressBar(){
     const total = SKILLS.length;
     let mastered = 0;
-    SKILLS.forEach(s=>{
-      if(getSkillProgress(s.id).mastered) mastered++;
-    });
+    SKILLS.forEach(s=>{ if(getSkillProgress(s.id).mastered) mastered++; });
+    const percent = total ? Math.round((mastered/total)*100) : 0;
 
     progressText.textContent = `التقدّم: ${mastered} / ${total} 🏆`;
-    const percent = total ? Math.round((mastered/total)*100) : 0;
     progressFill.style.width = percent + "%";
   }
 
   /***********************
-   * فيديو
+   * الفيديو داخل نافذة صغيرة (Modal)
    ***********************/
-  function openVideo(url){
-    if(!url){ alert("لا يوجد رابط فيديو لهذه المهارة."); return; }
-    window.open(url, "_blank");
+  const videoOverlay = document.getElementById("videoOverlay");
+  const videoTitle = document.getElementById("videoTitle");
+  const videoFrame = document.getElementById("videoFrame");
+
+  let currentVideoUrl = "";
+
+  function toEmbedUrl(url){
+    // يدعم youtu.be و youtube.com/watch
+    try{
+      const u = new URL(url);
+      let id = "";
+      if(u.hostname.includes("youtu.be")){
+        id = u.pathname.replace("/","");
+      }else if(u.hostname.includes("youtube.com")){
+        id = u.searchParams.get("v") || "";
+      }
+      if(!id) return url;
+      return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`;
+    }catch(e){
+      return url;
+    }
   }
 
+  function openVideo(skill){
+    ensureAudio();
+    currentVideoUrl = skill.video || "";
+    videoTitle.textContent = `🎬 فيديو: ${skill.title}`;
+    videoFrame.src = toEmbedUrl(currentVideoUrl);
+    videoOverlay.classList.add("show");
+    videoOverlay.setAttribute("aria-hidden","false");
+  }
+
+  function closeVideo(){
+    videoOverlay.classList.remove("show");
+    videoOverlay.setAttribute("aria-hidden","true");
+    // إيقاف الفيديو
+    videoFrame.src = "";
+    currentVideoUrl = "";
+  }
+
+  function openInYoutube(){
+    if(!currentVideoUrl) return;
+    window.open(currentVideoUrl, "_blank");
+  }
+
+  videoOverlay.addEventListener("click", (e)=>{
+    if(e.target === videoOverlay) closeVideo();
+  });
+
   /***********************
-   * تكبير الصورة
+   * تكبير الصور
    ***********************/
   const imgOverlay = document.getElementById("imgOverlay");
   const zoomImg = document.getElementById("zoomImg");
-
   function openImg(src){
     zoomImg.src = src;
     imgOverlay.classList.add("show");
@@ -724,7 +850,7 @@
   }
 
   /***********************
-   * الاختبار (5 أسئلة)
+   * الاختبار (Modal) بنفس أسلوب أول + أصوات أوضح
    ***********************/
   const quizOverlay = document.getElementById("quizOverlay");
   const quizTitle = document.getElementById("quizTitle");
@@ -734,27 +860,26 @@
   const qScoreEl = document.getElementById("qScore");
   const resultBox = document.getElementById("resultBox");
 
-  let quizSkillId = null;
+  let quizSkill = null;
   let quizQuestions = [];
   let quizIndex = 0;
   let quizScore = 0;
   let locked = false;
 
-  function startQuiz(skillId){
-    const bank = QUESTION_BANK[skillId];
+  function startQuiz(skill){
+    ensureAudio();
+    const bank = QUESTION_BANK[skill.id];
     if(!bank || bank.length < 5){
       alert("لا يوجد بنك أسئلة مكتمل لهذه المهارة بعد.");
       return;
     }
-
-    quizSkillId = skillId;
+    quizSkill = skill;
     quizQuestions = shuffle(bank).slice(0,5);
     quizIndex = 0;
     quizScore = 0;
     locked = false;
 
-    const skill = SKILLS.find(s=>s.id===skillId);
-    quizTitle.textContent = `اختبار: ${skill ? skill.title : "المهارة"}`;
+    quizTitle.textContent = `📝 اختبار: ${skill.title}`;
     resultBox.style.display = "none";
     resultBox.textContent = "";
 
@@ -778,7 +903,7 @@
       b.className = "opt";
       b.type = "button";
       b.textContent = choice;
-      b.onclick = ()=> chooseAnswer(idx);
+      b.addEventListener("click", ()=> chooseAnswer(idx));
       optionsEl.appendChild(b);
     });
   }
@@ -788,70 +913,62 @@
     locked = true;
 
     const item = quizQuestions[quizIndex];
-    const buttons = [...optionsEl.children];
+    const btns = [...optionsEl.children];
+    btns.forEach(btn => btn.classList.add("disabled"));
+
     const isCorrect = idx === item.correctIndex;
 
-    // تلوين
-    buttons.forEach((btn, i)=>{
+    // تلوين الخيارات
+    btns.forEach((btn, i)=>{
       if(i === item.correctIndex) btn.classList.add("good");
       if(i === idx && !isCorrect) btn.classList.add("bad");
-      btn.style.pointerEvents = "none";
     });
 
-    // أصوات تشجيع بسيطة
     if(isCorrect){
       quizScore++;
-      beep(true);
+      soundCorrect();
     }else{
-      beep(false);
+      soundWrong();
     }
 
     qScoreEl.textContent = `الدرجة: ${quizScore} / 5`;
 
     setTimeout(()=>{
       quizIndex++;
-      if(quizIndex >= 5){
-        finishQuiz();
-      }else{
-        renderQuestion();
-      }
-    }, 650);
+      if(quizIndex >= 5) finishQuiz();
+      else renderQuestion();
+    }, 700);
   }
 
   function finishQuiz(){
     // تحديث التقدم
-    const prev = getSkillProgress(quizSkillId);
+    const prev = getSkillProgress(quizSkill.id);
     const best = Math.max(prev.best || 0, quizScore);
     const attempts = (prev.attempts || 0) + 1;
     const mastered = best >= PASS_SCORE;
 
-    setSkillProgress(quizSkillId, {
-      best,
-      attempts,
-      mastered,
+    setSkillProgress(quizSkill.id, {
+      best, attempts, mastered,
       lastScore: quizScore
     });
 
-    renderProgressBar();
     renderSkills(); // لإظهار الكأس فورًا
 
-    // رسالة نهائية
     resultBox.style.display = "block";
     if(quizScore >= PASS_SCORE){
-      resultBox.textContent = `🎉 ممتاز! درجتك ${quizScore}/5 — تم منحك كأس المهارة 🏆`;
+      resultBox.textContent = `🎉 ممتاز! درجتك ${quizScore}/5 — حصلت على كأس المهارة 🏆`;
+      soundWin();
     }else{
-      resultBox.textContent = `💪 أحسنت المحاولة! درجتك ${quizScore}/5 — أعد التدريب لتحصل على الكأس 🏆 (النجاح من ${PASS_SCORE}/5)`;
+      resultBox.textContent = `💪 أحسنت! درجتك ${quizScore}/5 — أعد المحاولة لتحصل على الكأس 🏆 (النجاح من ${PASS_SCORE}/5)`;
     }
   }
 
   function closeQuiz(){
     quizOverlay.classList.remove("show");
     quizOverlay.setAttribute("aria-hidden","true");
-    quizSkillId = null;
-    quizQuestions = [];
+    quizSkill = null; quizQuestions = [];
   }
 
-  // إغلاق بالضغط خارج النافذة
   quizOverlay.addEventListener("click", (e)=>{
     if(e.target === quizOverlay) closeQuiz();
   });
@@ -864,7 +981,7 @@
   const parentSummary = document.getElementById("parentSummary");
 
   function openParentMode(){
-    // حاجز بسيط (اختياري)
+    ensureAudio();
     const ok = confirm("هل أنت وليّ الأمر؟");
     if(!ok) return;
 
@@ -883,14 +1000,14 @@
         <td>${s.title}</td>
         <td>${p.best || 0} / 5</td>
         <td>${p.attempts || 0}</td>
-        <td class="${p.mastered ? "okTag":"noTag"}">${p.mastered ? "🏆 منجزة":"—"}</td>
+        <td class="${p.mastered ? "okTag":"noTag"}">${p.mastered ? "🏆" : "—"}</td>
       `;
       parentTable.appendChild(tr);
     });
 
     const percent = total ? Math.round((masteredCount/total)*100) : 0;
     parentSummary.textContent =
-      `إجمالي المهارات: ${total} | المهارات المنجزة: ${masteredCount} 🏆 | نسبة الإنجاز: ${percent}% | مجموع المحاولات: ${totalAttempts}`;
+      `إجمالي المهارات: ${total} | الكؤوس: ${masteredCount} 🏆 | نسبة الإنجاز: ${percent}% | مجموع المحاولات: ${totalAttempts}`;
 
     parentOverlay.classList.add("show");
     parentOverlay.setAttribute("aria-hidden","false");
@@ -909,50 +1026,18 @@
    * مسح التقدم
    ***********************/
   function resetProgress(){
-    const ok = confirm("هل تريد مسح التقدم (الكؤوس والدرجات)؟");
+    ensureAudio();
+    const ok = confirm("هل تريد مسح التقدّم (الكؤوس والدرجات)؟");
     if(!ok) return;
     localStorage.removeItem(STORE_KEY);
     renderSkills();
   }
 
   /***********************
-   * الصفحة الرئيسية
+   * العودة للرئيسية
    ***********************/
   function goHome(){
-    // عدّلي الاسم إذا كانت صفحتك الرئيسية ليست index.html
-    window.location.href = "index.html";
-  }
-
-  /***********************
-   * أدوات مساعدة
-   ***********************/
-  function shuffle(arr){
-    const a = arr.slice();
-    for(let i=a.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [a[i],a[j]]=[a[j],a[i]];
-    }
-    return a;
-  }
-
-  // صوت بسيط (تشجيع/خطأ)
-  let audioCtx = null;
-  function beep(success){
-    try{
-      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const ctx = audioCtx;
-      const o = ctx.createOscillator();
-      const g = ctx.createGain();
-      o.type = "sine";
-      const now = ctx.currentTime;
-      o.frequency.setValueAtTime(success ? 880 : 220, now);
-      g.gain.setValueAtTime(0.0001, now);
-      g.gain.exponentialRampToValueAtTime(0.12, now + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
-      o.connect(g); g.connect(ctx.destination);
-      o.start(now);
-      o.stop(now + 0.2);
-    }catch(e){}
+    window.location.href = "index.html"; // غيّريها إذا اسم الرئيسية مختلف
   }
 
   /***********************
