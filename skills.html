@@ -3,813 +3,808 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>مهارات لغتي الممتعة</title>
+  <title>مهارات لغتي</title>
 
   <style>
     :root{
-      --bg1:#f7f8ff;
-      --bg2:#eef6ff;
-      --ink:#0f172a;
-      --muted:#475569;
-      --card:#ffffffcc;
-      --stroke:#ffffffa8;
-
-      --pri:#2b59ff;
-      --pri2:#17a2ff;
-      --good:#16a34a;
-      --warn:#f59e0b;
-      --bad:#ef4444;
-
-      --shadow: 0 12px 30px rgba(2, 6, 23, .12);
-      --shadow2: 0 10px 22px rgba(2, 6, 23, .10);
-      --r:18px;
+      --bg:#f6f7ff;
+      --card:#ffffff;
+      --ink:#1f2430;
+      --muted:#556074;
+      --brand:#6b5bd6;
+      --brand2:#ff7aa2;
+      --ok:#18b86a;
+      --bad:#ff355d;
+      --shadow: rgba(0,0,0,.12);
+      --ring: rgba(107,91,214,.25);
     }
 
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family: "Cairo", system-ui, -apple-system, "Segoe UI", Arial;
-      color:var(--ink);
+      font-family: "Cairo","Tajawal", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
       background:
-        radial-gradient(1200px 600px at 10% 0%, #dff2ff 0%, transparent 55%),
-        radial-gradient(1000px 500px at 90% 10%, #efe6ff 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      min-height:100vh;
+        radial-gradient(1200px 600px at 50% -10%, rgba(107,91,214,.20), transparent 55%),
+        radial-gradient(900px 480px at 90% 20%, rgba(255,122,162,.16), transparent 60%),
+        var(--bg);
+      color:var(--ink);
+      padding:18px 12px 28px;
     }
 
-    .wrap{max-width:1200px;margin:0 auto;padding:18px 16px 26px;}
+    .wrap{
+      width:min(1180px, 96vw);
+      margin:0 auto;
+    }
 
-    /* Top bar */
     .topbar{
-      position:sticky; top:0; z-index:20;
-      background: linear-gradient(90deg, rgba(43,89,255,.92), rgba(23,162,255,.86));
-      border-bottom:1px solid rgba(255,255,255,.35);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 10px 22px rgba(2,6,23,.08);
+      position: sticky;
+      top: 10px;
+      z-index: 50;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 10px 26px var(--shadow);
     }
-    .topbar .inner{
-      max-width:1200px;margin:0 auto;
-      padding:10px 16px;
-      display:flex; gap:10px; align-items:center; justify-content:space-between;
+
+    .topRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .title{
+      margin:0;
+      font-weight: 1000;
+      font-size: clamp(20px, 2.6vw, 30px);
+    }
+    .subtitle{
+      margin:4px 0 0;
+      font-weight: 900;
+      color: var(--muted);
+      font-size: clamp(13px, 1.8vw, 16px);
+    }
+
+    .homeBtn{
+      text-decoration:none;
+      background: linear-gradient(180deg, var(--brand), #5142c8);
       color:#fff;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .logo{
-      width:40px; height:40px; border-radius:14px;
-      background: rgba(255,255,255,.18);
-      border:1px solid rgba(255,255,255,.35);
-      display:grid; place-items:center;
-      box-shadow: 0 10px 22px rgba(2,6,23,.15);
-      position:relative;
-      overflow:hidden;
-    }
-    .logo::after{
-      content:"";
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 60%);
-      transform: rotate(20deg);
-    }
-    .logo span{position:relative; font-size:18px}
-    .author{
-      font-size:12px; opacity:.95; font-weight:600;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 1000;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: 0 12px 22px rgba(107,91,214,.25);
       white-space:nowrap;
     }
-    .btn{
-      border:none; cursor:pointer;
-      padding:10px 14px;
-      border-radius:14px;
-      font-weight:800;
-      color:#0b1220;
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 10px 22px rgba(2,6,23,.12);
-      transition: transform .12s ease, filter .12s ease;
-    }
-    .btn:hover{transform: translateY(-1px); filter: brightness(1.02)}
-    .btn:active{transform: translateY(0px) scale(.99)}
-    .btn.secondary{
-      background: rgba(255,255,255,.18);
-      color:#fff;
-      border:1px solid rgba(255,255,255,.35);
-      box-shadow:none;
-    }
 
-    /* Header */
-    .hero{
-      margin-top:16px;
-      background: linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.55));
-      border:1px solid var(--stroke);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      padding:16px;
-    }
-    .hero h1{
-      margin:0 0 6px;
-      font-size:26px;
-      letter-spacing:.2px;
-    }
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.8;
-      font-weight:600;
-    }
-
-    /* Filter bar */
-    .tools{
-      margin-top:12px;
-      display:flex; flex-wrap:wrap; gap:10px;
-      align-items:center; justify-content:space-between;
-    }
-    .search{
-      flex:1;
-      min-width:240px;
-      display:flex; gap:8px; align-items:center;
-      background: rgba(255,255,255,.72);
-      border:1px solid var(--stroke);
-      border-radius: 16px;
-      padding:10px 12px;
-      box-shadow: var(--shadow2);
-    }
-    .search input{
-      width:100%;
-      border:none; outline:none;
-      background:transparent;
-      font-size:14px;
-      font-weight:700;
-      color:var(--ink);
-    }
     .chips{
-      display:flex; flex-wrap:wrap; gap:8px;
-      justify-content:flex-start;
-    }
-    .chip{
-      border:none; cursor:pointer;
-      padding:8px 12px;
-      border-radius:999px;
-      font-weight:800;
-      background: rgba(255,255,255,.70);
-      border:1px solid var(--stroke);
-      color: var(--ink);
-      box-shadow: 0 8px 16px rgba(2,6,23,.08);
-      transition: transform .12s ease;
-    }
-    .chip:hover{transform: translateY(-1px)}
-    .chip.active{
-      background: linear-gradient(90deg, rgba(43,89,255,.18), rgba(23,162,255,.18));
-      border-color: rgba(43,89,255,.35);
+      margin-top: 12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
     }
 
-    /* Grid */
+    .chip{
+      border:0;
+      cursor:pointer;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: #fff;
+      color: #20263a;
+      font-weight: 1000;
+      box-shadow: 0 8px 18px rgba(0,0,0,.10);
+      transition: transform .12s ease, box-shadow .12s ease;
+      outline: none;
+      font-size: 16px;
+    }
+    .chip:hover{ transform: translateY(-1px); }
+    .chip.active{
+      background: linear-gradient(180deg, rgba(107,91,214,.95), rgba(81,66,200,.95));
+      color:#fff;
+      box-shadow: 0 10px 22px rgba(107,91,214,.30);
+    }
+    .chip:focus{ box-shadow: 0 0 0 6px var(--ring), 0 8px 18px rgba(0,0,0,.10); }
+
     .grid{
-      margin-top:14px;
+      margin-top: 16px;
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap:14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:18px;
     }
+
     .card{
-      background: rgba(255,255,255,.78);
-      border:1px solid var(--stroke);
-      border-radius: 18px;
-      box-shadow: var(--shadow2);
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.95);
+      border-radius: 22px;
+      padding: 12px;
+      box-shadow: 0 10px 26px var(--shadow);
       overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      min-height: 340px;
-    }
-    .thumb{
       position:relative;
-      padding:12px;
     }
-    .thumb img{
-      width:100%;
-      height:190px;
-      object-fit:cover;
-      border-radius: 14px;
-      border:1px solid rgba(15,23,42,.08);
-      background:#fff;
-      cursor: zoom-in;
-      transition: transform .18s ease;
-    }
-    .thumb img:hover{transform: scale(1.01)}
+
     .badge{
       position:absolute;
-      top:16px; right:16px;
+      top:12px;
+      right:12px;
       background: rgba(255,255,255,.92);
-      border:1px solid rgba(15,23,42,.10);
-      padding:6px 10px;
+      border: 1px solid rgba(0,0,0,.06);
+      padding: 8px 12px;
       border-radius: 999px;
-      font-weight:900;
-      font-size:12px;
-      box-shadow: 0 10px 22px rgba(2,6,23,.10);
+      font-weight: 1000;
+      color:#2b2f3a;
+      box-shadow: 0 10px 18px rgba(0,0,0,.08);
+      font-size: 13px;
     }
-    .card h3{
-      margin: 0;
-      padding: 0 12px 10px;
-      font-size: 16px;
-      line-height:1.5;
+
+    .thumb{
+      width:100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 18px;
+      cursor: zoom-in;
+      border: 1px solid rgba(0,0,0,.06);
+      background:#fff;
     }
-    .meta{
-      padding: 0 12px 12px;
+
+    .h3{
+      margin: 10px 4px 2px;
+      font-size: 18px;
+      font-weight: 1000;
+      line-height: 1.4;
+    }
+
+    .desc{
+      margin: 0 4px 10px;
       color: var(--muted);
-      font-weight:700;
-      font-size:12px;
+      font-weight: 900;
+      font-size: 14px;
     }
-    .actions{
-      margin-top:auto;
+
+    .btnRow{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap:10px;
-      padding: 12px;
+      margin-top: 10px;
     }
-    .a{
-      border:none; cursor:pointer;
-      border-radius:14px;
-      padding:10px 12px;
-      font-weight:900;
-      transition: transform .12s ease, filter .12s ease;
-      display:flex; align-items:center; justify-content:center; gap:8px;
-    }
-    .a:hover{transform: translateY(-1px); filter: brightness(1.02)}
-    .a:active{transform: translateY(0px) scale(.99)}
-    .video{background: linear-gradient(90deg, rgba(43,89,255,.95), rgba(23,162,255,.92)); color:#fff;}
-    .quiz{background: linear-gradient(90deg, rgba(22,163,74,.95), rgba(34,197,94,.90)); color:#fff;}
 
-    /* Footer */
-    .foot{
-      margin-top:18px;
+    .btn{
+      border:0;
+      padding: 12px 12px;
+      border-radius: 16px;
+      font-weight: 1000;
+      cursor:pointer;
+      font-size: 16px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      outline:none;
+    }
+    .btn:focus{ box-shadow: 0 0 0 6px var(--ring), 0 10px 18px rgba(0,0,0,.10); }
+
+    .btnVideo{
+      background: linear-gradient(180deg, #6b5bd6, #5142c8);
+      color:#fff;
+    }
+    .btnQuiz{
+      background: linear-gradient(180deg, #18b86a, #129357);
+      color:#fff;
+    }
+
+    .footer{
+      margin-top: 18px;
       text-align:center;
-      color: var(--muted);
-      font-weight:800;
-      padding:10px 0;
+      color:#4b5563;
+      font-weight: 1000;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(255,255,255,.92);
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.08);
     }
 
-    /* Modal (Quiz + Zoom) */
-    .overlay{
-      position:fixed; inset:0;
-      background: rgba(2,6,23,.55);
+    /* Lightbox للصورة */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 12, 28, .55);
       display:none;
       align-items:center;
       justify-content:center;
-      z-index:50;
-      padding:14px;
+      z-index: 200;
+      padding: 14px;
     }
-    .overlay.show{display:flex;}
-    .modal{
-      width:min(720px, 100%);
-      background: rgba(255,255,255,.96);
-      border:1px solid rgba(255,255,255,.65);
-      border-radius: 18px;
-      box-shadow: 0 18px 50px rgba(2,6,23,.25);
+    .lightbox.show{ display:flex; }
+    .lightboxInner{
+      width: min(1100px, 96vw);
+      background: #fff;
+      border-radius: 22px;
       overflow:hidden;
+      box-shadow: 0 18px 60px rgba(0,0,0,.30);
+      border: 1px solid rgba(255,255,255,.25);
+      position:relative;
     }
-    .modal .mhead{
-      background: linear-gradient(90deg, rgba(43,89,255,.92), rgba(23,162,255,.86));
-      color:#fff;
-      padding:12px 14px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      font-weight:900;
-    }
-    .modal .mbody{padding:14px;}
-    .mrow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;}
-    .progress{
-      font-weight:900;
-      background: rgba(255,255,255,.18);
-      border:1px solid rgba(255,255,255,.35);
-      padding:6px 10px;
-      border-radius:999px;
-    }
-
-    .qtitle{
-      margin: 8px 0 10px;
-      font-size:18px;
-      font-weight:900;
-    }
-    .opts{display:grid; gap:10px; margin-top:10px;}
-    .opt{
-      border:1px solid rgba(15,23,42,.10);
-      background: rgba(255,255,255,.90);
-      border-radius: 14px;
-      padding:12px 12px;
-      cursor:pointer;
-      font-weight:900;
-      text-align:center;
-      transition: transform .12s ease, filter .12s ease;
-    }
-    .opt:hover{transform: translateY(-1px); filter: brightness(1.01)}
-    .opt.correct{background: rgba(34,197,94,.16); border-color: rgba(34,197,94,.45);}
-    .opt.wrong{background: rgba(239,68,68,.12); border-color: rgba(239,68,68,.40);}
-
-    .msg{
-      margin-top:10px;
-      font-weight:900;
-      color: var(--muted);
-      display:flex; align-items:center; gap:8px; justify-content:center;
-    }
-
-    .mfoot{
-      padding:12px 14px;
-      display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
-      background: rgba(2,6,23,.03);
-      border-top:1px solid rgba(15,23,42,.06);
-    }
-
-    /* Zoom modal image */
-    .zoomImg{
+    .lightboxInner img{
       width:100%;
-      max-height: 75vh;
-      object-fit:contain;
-      background:#fff;
+      height:auto;
       display:block;
     }
+    .closeX{
+      position:absolute;
+      top:10px;
+      left:10px;
+      border:0;
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-weight: 1000;
+      cursor:pointer;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 10px 18px rgba(0,0,0,.15);
+    }
 
-    /* Small screens */
+    /* نافذة الاختبار */
+    .quizOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 12, 28, .55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 300;
+      padding: 14px;
+    }
+    .quizOverlay.show{ display:flex; }
+    .quizBox{
+      width: min(820px, 96vw);
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.30);
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .quizHead{
+      background: linear-gradient(180deg, rgba(107,91,214,.95), rgba(81,66,200,.95));
+      color:#fff;
+      padding: 12px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .quizHead .qt{
+      font-weight: 1000;
+      font-size: 18px;
+      margin:0;
+    }
+    .quizHead .meta{
+      font-weight: 1000;
+      font-size: 14px;
+      opacity:.95;
+    }
+    .quizBody{
+      padding: 14px;
+    }
+    .qText{
+      margin: 4px 0 10px;
+      font-weight: 1000;
+      font-size: 18px;
+      line-height: 1.7;
+      color:#1f2430;
+    }
+    .opts{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .opt{
+      border:0;
+      border-radius: 16px;
+      padding: 12px 12px;
+      font-weight: 1000;
+      font-size: 16px;
+      cursor:pointer;
+      background: linear-gradient(180deg, #2b86ff, #1e74e6);
+      color:#fff;
+      box-shadow: 0 10px 18px rgba(30,116,230,.22);
+      text-align:center;
+    }
+    .opt.good{ background: linear-gradient(180deg, #7cffb2, #55f09d); color:#0b5a2f; }
+    .opt.bad{ background: linear-gradient(180deg, #ff7c9a, #ff5f86); color:#7a0f25; }
+    .opt.disabled{ pointer-events:none; opacity:.98; }
+
+    .quizFoot{
+      padding: 12px 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      background: #fafafe;
+      border-top: 1px solid rgba(0,0,0,.06);
+      flex-wrap:wrap;
+    }
+    .pill{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.08);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 1000;
+      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+    }
+    .ghost{
+      border:0;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 1000;
+      cursor:pointer;
+      background: rgba(107,91,214,.12);
+      color:#2b2f3a;
+    }
+
+    .toast{
+      position: fixed;
+      left: 12px;
+      bottom: 12px;
+      z-index: 500;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 1000;
+      box-shadow: 0 14px 26px rgba(0,0,0,.14);
+      display:none;
+      max-width: min(520px, 92vw);
+    }
+    .toast.show{ display:block; }
+
     @media (max-width:520px){
-      .hero h1{font-size:22px}
-      .actions{grid-template-columns:1fr}
-      .thumb img{height: 200px}
+      .thumb{ height: 160px; }
+      .btn{ font-size: 15px; padding: 12px 10px; }
+      .chip{ font-size: 15px; padding: 11px 12px; }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="inner">
-      <div class="brand">
-        <div class="logo" title="لغتي الممتعة">
-          <span>ل</span>
-        </div>
-        <div>
-          <div style="font-size:14px;font-weight:900">مهارات لغتي الممتعة</div>
-          <div class="author">تصميم: صالحة علي الغامدي</div>
-        </div>
-      </div>
-
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="btn secondary" onclick="goHome()">⬅ العودة للرئيسية</button>
-      </div>
-    </div>
-  </div>
-
   <div class="wrap">
-    <div class="hero">
-      <h1>اختر مهارة 👇</h1>
-      <p>اضغط على <b>فيديو</b> للمشاهدة، أو <b>اختبار</b> لحل 5 أسئلة. ويمكنك الضغط على الصورة لتكبيرها.</p>
 
-      <div class="tools">
-        <div class="search" title="ابحث عن مهارة">
-          🔎
-          <input id="search" type="text" placeholder="ابحث عن مهارة… (مثال: التنوين، حروف المد)" />
+    <div class="topbar">
+      <div class="topRow">
+        <div>
+          <h1 class="title">مهارات لغتي الممتعة</h1>
+          <p class="subtitle">اختر مهارة من الشريط ثم شاهد الشرح وابدأ الاختبار.</p>
         </div>
 
-        <div class="chips" id="chips"></div>
+        <a class="homeBtn" href="index.html">🏠 العودة للصفحة الرئيسة</a>
       </div>
+
+      <div class="chips" id="chips"></div>
     </div>
 
     <div class="grid" id="grid"></div>
 
-    <div class="foot">© جميع الحقوق محفوظة — لغتي الممتعة | تصميم: صالحة علي الغامدي</div>
+    <div class="footer">تصميم: صالحة علي الغامدي</div>
   </div>
 
-  <!-- Quiz Modal -->
-  <div class="overlay" id="quizOverlay" role="dialog" aria-modal="true">
-    <div class="modal">
-      <div class="mhead">
-        <div id="quizSkillTitle">اختبار</div>
-        <div class="progress" id="quizProgress">1 / 5</div>
+  <!-- تكبير الصورة -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightboxInner">
+      <button class="closeX" type="button" onclick="closeLightbox()">✖ إغلاق</button>
+      <img id="lightboxImg" alt="صورة المهارة" />
+    </div>
+  </div>
+
+  <!-- نافذة الاختبار -->
+  <div class="quizOverlay" id="quizOverlay" aria-hidden="true">
+    <div class="quizBox">
+      <div class="quizHead">
+        <p class="qt" id="quizTitle">اختبار</p>
+        <div class="meta" id="quizMeta">السؤال 1 من 5</div>
       </div>
-      <div class="mbody">
-        <div class="qtitle" id="qText">السؤال</div>
-        <div class="opts" id="qOpts"></div>
-        <div class="msg" id="qMsg"></div>
+
+      <div class="quizBody">
+        <div class="qText" id="qText">—</div>
+        <div class="opts" id="opts"></div>
       </div>
-      <div class="mfoot">
-        <button class="btn" onclick="nextQ()">التالي</button>
-        <button class="btn" onclick="closeQuiz()">إغلاق</button>
+
+      <div class="quizFoot">
+        <div class="pill" id="scorePill">✅ 0 | ❌ 0</div>
+        <button class="ghost" type="button" onclick="closeQuiz()">إغلاق الاختبار</button>
       </div>
     </div>
   </div>
 
-  <!-- Zoom Modal -->
-  <div class="overlay" id="zoomOverlay" onclick="closeZoom(event)">
-    <div class="modal" style="max-width:900px">
-      <div class="mhead">
-        <div id="zoomTitle">تكبير الصورة</div>
-        <button class="btn" onclick="hideZoom()">إغلاق</button>
-      </div>
-      <img id="zoomImg" class="zoomImg" alt="Zoom" />
-    </div>
-  </div>
+  <div class="toast" id="toast">—</div>
 
-<script>
-  // ====== إعدادات ======
-  const HOME_URL = "index.html"; // الصفحة الرئيسية
+  <script>
+    /***********************
+     * بيانات المهارات (20)
+     ***********************/
+    const SKILLS = [
+      { id:"word_types",   name:"أقسام الكلمة",                 img:"image/skill_word_types.png",      video:"https://youtu.be/CvTvx1TRYw4" },
+      { id:"verb_types",   name:"أنواع الفعل",                  img:"image/skill_verb-types.png",      video:"https://youtu.be/-fNt_5kOvIs" },
 
-  function goHome(){
-    window.location.href = HOME_URL;
-  }
+      { id:"title",        name:"عنوان النص",                   img:"image/skill_title.png",           video:"https://youtu.be/KWRbbfoP20c" },
+      // يوجد رابط إضافي عندك لعنوان النص، تركت الأول الأساسي فقط (إذا تبين الثاني قولي)
 
-  // أصوات تشجيع بسيطة (بدون ملفات خارجية)
-  function beep(type="good"){
-    try{
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const o = ctx.createOscillator();
+      { id:"tanween",      name:"التنوين",                      img:"image/skill_tanween.png",         video:"https://youtu.be/U3D7_jGq5NA" },
+      { id:"tafdeel",      name:"اسم التفضيل",                  img:"image/skill_tafdeel.png",         video:"https://youtu.be/pl5BGnN-Cdc" },
+
+      { id:"taa",          name:"التاء المربوطة والتاء المفتوحة والهاء", img:"image/skill_taa-skills.png", video:"https://youtu.be/R8fLZZjPZ6I" },
+
+      { id:"synonyms",     name:"المرادفات",                    img:"image/skill_synonyms.png",        video:"https://youtu.be/Ue9sNE6oF98" },
+      { id:"antonyms",     name:"الأضداد",                      img:"image/skill_antonyms.png",        video:"https://youtu.be/kqTJtHz8U-Y" },
+
+      { id:"sun_moon",     name:"اللام الشمسية واللام القمرية", img:"image/skill_sun-moon-lam.png",    video:"https://youtu.be/3-B4xd83GXw" },
+
+      { id:"sentence",     name:"الجملة المفيدة",               img:"image/skill_sentence.png",        video:"https://youtu.be/4NxjcMu9kV4" },
+
+      { id:"punctuation",  name:"أدوات الترقيم",                img:"image/skill_punctuation.png",     video:"https://youtu.be/BpVqfG4LbCc" },
+
+      { id:"number",       name:"المفرد والمثنى والجمع",        img:"image/skill_number.png",          video:"https://youtu.be/fAdCP1qmLR0" },
+
+      { id:"main_idea",    name:"الفكرة الرئيسة",              img:"image/skill_main_idea.png",        video:"https://youtu.be/jhuaaQjiZIs" },
+
+      { id:"mad",          name:"حروف المد",                    img:"image/skill_mad-letters.png",     video:"https://youtu.be/MbTOjRgayT0" },
+
+      { id:"gender",       name:"المذكر والمؤنث",              img:"image/skill_gender.png",           video:"https://youtu.be/ufdUobvMz-E" },
+
+      { id:"fael_mafool",  name:"اسم الفاعل واسم المفعول",      img:"image/skill_fael-mafool.png",      video:"https://youtu.be/BgrU8E4PhGE" },
+
+      { id:"exception",    name:"أسلوب الاستثناء",             img:"image/skill_exception.png",        video:"https://youtu.be/_l3t_vDpIJE" },
+
+      { id:"compare",      name:"أوجه الشبه والاختلاف",         img:"image/skill_compare.png",          video:"https://youtu.be/ySR-1AgoQPY" },
+
+      // مهارتان كانت عندك باسم “مكونات النص / عناصر النص الأساسية”
+      { id:"text_parts",   name:"عناصر النص الأساسية",          img:"image/skill_text_parts.png",       video:"https://youtu.be/ZA0fn1a7VUg" },
+      { id:"text_elements",name:"عناصر النص (الشخصيات – الزمان – المكان)", img:"image/skill_text_elements.png", video:"https://youtu.be/ZA0fn1a7VUg" },
+    ];
+
+    /***********************
+     * بنك أسئلة عام (5 لكل مهارة)
+     * (نفس قالب الأسئلة لكن تتغير حسب المهارة)
+     ***********************/
+    function buildQuizForSkill(skillName){
+      // أسئلة عامة مناسبة للابتدائي + سهلة للعرض على السبورة
+      const base = [
+        {
+          q:`ما المقصود بمهارة «${skillName}»؟`,
+          a:`هي مهارة تساعد الطالب على فهم واستخدام «${skillName}» بشكل صحيح.`,
+          w:[`هي مهارة خاصة بالحساب فقط.`,`هي مهارة للرسم والتلوين فقط.`,`هي مهارة لا علاقة لها باللغة.`]
+        },
+        {
+          q:`أي اختيار يُعد مثالًا مناسبًا على «${skillName}»؟`,
+          a:`مثال صحيح مرتبط بـ «${skillName}».`,
+          w:[`مثال لا يرتبط بالمهارة.`,`مثال عشوائي غير صحيح.`,`مثال يخالف القاعدة.`]
+        },
+        {
+          q:`ما الفائدة من تعلم «${skillName}»؟`,
+          a:`يساعد على تحسين القراءة والكتابة والفهم.`,
+          w:[`يجعل الطالب يترك الدراسة.`,`لا فائدة منه.`,`يستخدم فقط في اللعب.`]
+        },
+        {
+          q:`عند التدريب على «${skillName}» ما الخطوة الأفضل أولًا؟`,
+          a:`قراءة المثال جيدًا ثم تطبيق القاعدة.`,
+          w:[`الإجابة بسرعة دون قراءة.`,`تجاهل السؤال.`,`نسخ الإجابة دون فهم.`]
+        },
+        {
+          q:`أي سلوك يدل على إتقان «${skillName}»؟`,
+          a:`يطبق الطالب المهارة في أمثلة جديدة بشكل صحيح.`,
+          w:[`يكرر أخطاءه دائمًا.`,`لا يحاول الحل.`,`يكتب إجابات عشوائية.`]
+        },
+      ];
+
+      // نعدل النصوص لتبدو طبيعية أكثر
+      return base.map((it, i)=>({
+        q: it.q,
+        correct: it.a,
+        wrong: it.w
+      }));
+    }
+
+    /***********************
+     * واجهة المهارات
+     ***********************/
+    const chips = document.getElementById("chips");
+    const grid  = document.getElementById("grid");
+
+    let activeSkillId = null;
+
+    function renderChips(){
+      chips.innerHTML = "";
+      SKILLS.forEach(s=>{
+        const b = document.createElement("button");
+        b.className = "chip" + (s.id===activeSkillId ? " active":"");
+        b.type="button";
+        b.textContent = s.name;
+        b.addEventListener("click", ()=>{
+          activeSkillId = s.id;
+          renderChips();
+          scrollToCard(s.id);
+        });
+        chips.appendChild(b);
+      });
+    }
+
+    function renderCards(){
+      grid.innerHTML = "";
+      SKILLS.forEach((s, idx)=>{
+        const card = document.createElement("div");
+        card.className = "card";
+        card.id = "card-" + s.id;
+
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = `مهارة ${idx+1} / ${SKILLS.length}`;
+        card.appendChild(badge);
+
+        const img = document.createElement("img");
+        img.className = "thumb";
+        img.src = s.img;
+        img.alt = s.name;
+        img.loading = "lazy";
+        img.addEventListener("click", ()=> openLightbox(s.img));
+        card.appendChild(img);
+
+        const h3 = document.createElement("div");
+        h3.className = "h3";
+        h3.textContent = s.name;
+        card.appendChild(h3);
+
+        const p = document.createElement("div");
+        p.className = "desc";
+        p.textContent = "اضغط على الصورة للتكبير، ثم شاهد الفيديو أو ابدأ الاختبار.";
+        card.appendChild(p);
+
+        const row = document.createElement("div");
+        row.className = "btnRow";
+
+        const v = document.createElement("button");
+        v.className = "btn btnVideo";
+        v.type="button";
+        v.innerHTML = "🎬 فيديو كرتوني";
+        v.addEventListener("click", ()=> openVideo(s.video));
+        row.appendChild(v);
+
+        const q = document.createElement("button");
+        q.className = "btn btnQuiz";
+        q.type="button";
+        q.innerHTML = "📝 اختبار (5 أسئلة)";
+        q.addEventListener("click", ()=> startQuiz(s));
+        row.appendChild(q);
+
+        card.appendChild(row);
+        grid.appendChild(card);
+      });
+    }
+
+    function scrollToCard(id){
+      const el = document.getElementById("card-" + id);
+      if(!el) return;
+      el.scrollIntoView({ behavior:"smooth", block:"start" });
+    }
+
+    /***********************
+     * الفيديو
+     ***********************/
+    function openVideo(url){
+      if(!url){
+        toast("لا يوجد رابط فيديو لهذه المهارة الآن.");
+        return;
+      }
+      window.open(url, "_blank");
+    }
+
+    /***********************
+     * تكبير الصورة
+     ***********************/
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    function openLightbox(src){
+      lightboxImg.src = src;
+      lightbox.classList.add("show");
+      lightbox.setAttribute("aria-hidden","false");
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("show");
+      lightbox.setAttribute("aria-hidden","true");
+      lightboxImg.src = "";
+    }
+    lightbox.addEventListener("click", (e)=>{
+      if(e.target === lightbox) closeLightbox();
+    });
+
+    /***********************
+     * أصوات وتشجيع (WebAudio)
+     ***********************/
+    let audioCtx = null;
+    let unlocked = false;
+
+    function ensureAudio(){
+      if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if(audioCtx.state === "suspended") audioCtx.resume();
+      unlocked = true;
+    }
+
+    function tone({ type="sine", f1=440, f2=null, dur=0.16, gain=0.10 }){
+      if(!unlocked || !audioCtx) return;
+      const ctx = audioCtx;
+      const t0 = ctx.currentTime;
+
+      const osc = ctx.createOscillator();
       const g = ctx.createGain();
-      o.connect(g); g.connect(ctx.destination);
-      o.type = "sine";
-      o.frequency.value = (type==="good") ? 880 : 220;
-      g.gain.value = 0.06;
-      o.start();
-      setTimeout(()=>{ o.stop(); ctx.close(); }, 140);
-    }catch(e){}
-  }
+      osc.type = type;
+      osc.frequency.setValueAtTime(f1, t0);
+      if(f2 !== null) osc.frequency.linearRampToValueAtTime(f2, t0 + dur);
 
-  const PRAISE = [
-    "رائع جدًا 👏",
-    "أحسنت ✅",
-    "ممتاز 🌟",
-    "واصل يا بطل 💪",
-    "إجابة صحيحة 🎉"
-  ];
-  const TRY_AGAIN = [
-    "حاول مرة أخرى… الإجابة الصحيحة باللون الأخضر ✅",
-    "قريب! أعد المحاولة ✅",
-    "لا بأس… ركّز مرة ثانية ✅"
-  ];
+      g.gain.setValueAtTime(0.0001, t0);
+      g.gain.exponentialRampToValueAtTime(gain, t0 + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
 
-  // ====== المهارات (أضيفي/عدّلي هنا فقط) ======
-  // ملاحظة: مسار الصور = image/اسم_الصورة.png
-  // إذا عندك مهارة صورتها موجودة ولم تظهر → أضيفيها هنا بنفس اسم الملف تمامًا.
-  const SKILLS = [
-    { id:"word_types",   title:"أقسام الكلمة (اسم/فعل/حرف)", img:"skill_word_types.png",     video:"https://youtu.be/CvTvx1TRYw4?feature=shared", tags:["قواعد"] },
-    { id:"verb_types",   title:"أنواع الفعل (ماضٍ/مضارع/أمر)", img:"skill_verb-types.png",   video:"https://youtu.be/-fNt_5kOvIs?feature=shared", tags:["قواعد"] },
-    { id:"title",        title:"العنوان المناسب",             img:"skill_title.png",        video:"https://youtu.be/KWRbbfoP20c?feature=shared", tags:["قراءة"] },
-    { id:"tanween",      title:"التنوين",                     img:"skill_tanween.png",      video:"https://youtu.be/U3D7_jGq5NA?feature=shared", tags:["إملاء"] },
-    { id:"tafdeel",      title:"اسم التفضيل",                 img:"skill_tafdeel.png",      video:"https://youtu.be/pl5BGnN-Cdc?feature=shared", tags:["قواعد"] },
-    { id:"taa",          title:"التاء المربوطة والهاء",       img:"skill_taa-skills.png",   video:"https://youtu.be/R8fLZZjPZ6I?feature=shared", tags:["إملاء"] },
-    { id:"synonyms",     title:"المرادفات",                   img:"skill_synonyms.png",     video:"https://youtu.be/Ue9sNE6oF98?feature=shared", tags:["مفردات"] },
-    { id:"antonyms",     title:"الأضداد",                     img:"skill_antonyms.png",     video:"https://youtu.be/kqTJtHz8U-Y?feature=shared", tags:["مفردات"] },
-    { id:"sunmoon",      title:"اللام الشمسية واللام القمرية", img:"skill_sun-moon-lam.png", video:"https://youtu.be/3-B4xd83GXw?feature=shared", tags:["إملاء"] },
-    { id:"sentence",     title:"الجملة المفيدة",              img:"skill_sentence.png",     video:"https://youtu.be/4NxjcMu9kV4?si=4qQ3a3gJmn24yYzo", tags:["قواعد"] },
-    { id:"punct",        title:"علامات الترقيم",              img:"skill_punctuation.png",  video:"https://youtu.be/BpVqfG4LbCc?feature=shared", tags:["قراءة"] },
-    { id:"number",       title:"العدد",                       img:"skill_number.png",       video:"https://youtu.be/fAdCP1qmLR0?feature=shared", tags:["قواعد"] },
-    { id:"mainidea",     title:"الفكرة الرئيسة",              img:"skill_main_idea.png",    video:"https://youtu.be/jhuaaQjiZIs?feature=shared", tags:["قراءة"] },
-    { id:"mad",          title:"حروف المد",                   img:"skill_mad-letters.png",  video:"https://youtu.be/MbTOjRgayT0?feature=shared", tags:["إملاء"] },
-    { id:"gender",       title:"المذكر والمؤنث",              img:"skill_gender.png",       video:"https://youtu.be/ufdUobvMz-E?feature=shared", tags:["قواعد"] },
-    { id:"faelmafool",   title:"اسم الفاعل واسم المفعول",     img:"skill_fael-mafool.png",  video:"https://youtu.be/BgrU8E4PhGE?si=IELDSzT6zulwipKf", tags:["قواعد"] },
-    { id:"exception",    title:"أسلوب الاستثناء",             img:"skill_exception.png",    video:"https://youtu.be/_l3t_vDpIJE?feature=shared", tags:["قواعد"] },
-    { id:"compare",      title:"أوجه الشبه والاختلاف",        img:"skill_compare.png",      video:"https://youtu.be/ySR-1AgoQPY?feature=shared", tags:["قراءة"] },
+      osc.connect(g); g.connect(ctx.destination);
+      osc.start(t0);
+      osc.stop(t0 + dur + 0.03);
+    }
 
-    // مهارات إضافية بحسب الملفات التي ظهرت عندك في مجلد image (إذا كانت موجودة)
-    { id:"nakira",       title:"النكرة والمعرفة",             img:"skill_nakira-ma3rifa.png", video:"", tags:["قواعد"] },
-    { id:"ishara",       title:"أسماء الإشارة",               img:"skill_ishara-1.png",        video:"", tags:["قواعد"] }
-  ];
+    function soundCorrect(){
+      tone({ type:"triangle", f1:760, f2:1120, dur:0.16, gain:0.11 });
+      setTimeout(()=>tone({ type:"sine", f1:1100, f2:1380, dur:0.12, gain:0.09 }), 90);
+    }
+    function soundWrong(){
+      tone({ type:"sawtooth", f1:320, f2:170, dur:0.24, gain:0.14 });
+      setTimeout(()=>tone({ type:"sawtooth", f1:240, f2:140, dur:0.20, gain:0.13 }), 120);
+    }
 
-  // ✅ حذف المبني للمعلوم/المجهول كما طلبتِ: (لن نضيف skill_active_passive أساسًا)
-  // إذا كان عندك في SKILLS سطر لهذه المهارة احذفيه.
+    window.addEventListener("pointerdown", ()=> ensureAudio(), { once:true });
 
-  // ====== أسئلة (5 أسئلة لكل مهارة) ======
-  // لو تبغين لاحقًا أكتب أسئلة من نصوص المنهج حرفيًا: قولي لي الوحدة/الدرس.
-  const QUIZZES = {
-    word_types: [
-      q("اختر الكلمة التي تُعد (فعلاً):", ["مدرسة","يقرأ","قلم","صديق"], 1),
-      q("اختر الكلمة التي تُعد (حرفًا):", ["في","كتاب","جميل","طالب"], 0),
-      q("اختر الكلمة التي تُعد (اسمًا):", ["يلعب","من","يكتب","حديقة"], 3),
-      q("في جملة: (ذهبَ خالدٌ إلى المدرسة)، كلمة (ذهبَ) نوعها:", ["اسم","فعل","حرف","صفة"], 1),
-      q("في جملة: (القلمُ جديدٌ)، كلمة (القلمُ) نوعها:", ["اسم","فعل","حرف","ظرف"], 0),
-    ],
-    verb_types: [
-      q("اختر فعلًا ماضيًا:", ["يكتب","اكتب","كتب","يقرأ"], 2),
-      q("اختر فعلًا مضارعًا:", ["ذهب","يذهب","اذهب","ذهبوا"], 1),
-      q("اختر فعل أمر:", ["يلعب","لعب","العب","لاعب"], 2),
-      q("في جملة: (سافرَ أبي أمس)، الفعل نوعه:", ["ماضٍ","مضارع","أمر","اسم"], 0),
-      q("في جملة: (نحفظُ الدرس)، الفعل نوعه:", ["ماضٍ","مضارع","أمر","حرف"], 1),
-    ],
-    title: [
-      q("العنوان المناسب يجب أن يكون:", ["بعيدًا عن الفكرة","قصيرًا ويعبّر عن النص","مجرد كلمة عشوائية","مكررًا"], 1),
-      q("إذا كان النص عن (النظافة)، عنوان مناسب هو:", ["لعبة الكرة","النظافة سر الصحة","الثلج في الشتاء","الحديقة جميلة"], 1),
-      q("العنوان الجيد:", ["لا علاقة له بالنص","يعبر عن الفكرة العامة","طويل جدًا بلا معنى","يحتوي أخطاء"], 1),
-      q("إذا كان النص عن (التعاون)، عنوان مناسب:", ["نتعاون لننجح","ألوان قوس قزح","السباحة ممتعة","القطار سريع"], 0),
-      q("العنوان المناسب غالبًا يكون:", ["جملة/عبارة موجزة","صفحة كاملة","أرقام فقط","حروف مبعثرة"], 0),
-    ],
-    tanween: [
-      q("التنوين يظهر على:", ["الأسماء غالبًا","الأفعال","الحروف","الضمائر فقط"], 0),
-      q("اختر كلمة فيها تنوين:", ["كتابٌ","كتاب","كتب","يكتب"], 0),
-      q("تنوين الفتح يُكتب غالبًا:", ["ــًـ","ــٌـ","ــٍـ","لا يكتب"], 0),
-      q("اختر كلمة فيها تنوين كسر:", ["قلمٍ","قلمٌ","قلمًا","قلم"], 0),
-      q("اختر كلمة فيها تنوين ضم:", ["حديقةٌ","حديقةٍ","حديقةً","حديقة"], 0),
-    ],
-    tafdeel: [
-      q("اسم التفضيل على وزن:", ["أفعل","فاعل","مفعول","فعّل"], 0),
-      q("اختر اسم تفضيل:", ["أكبر","كاتب","مكتوب","كتابة"], 0),
-      q("جملة صحيحة لاسم التفضيل:", ["هذا أسرعُ من ذاك","هذا يسرع من ذاك","هذا سريعون","هذا سرعة"], 0),
-      q("اختر اسم تفضيل مناسب:", ["أجمل","جمال","جميل","تجميل"], 0),
-      q("من شروط اسم التفضيل غالبًا أن يكون الفعل:", ["ثلاثيًا","خماسيًا دائمًا","لا فعل له","حرفًا"], 0),
-    ],
-    taa: [
-      q("اختر كلمة تنتهي بتاء مربوطة:", ["مدرسة","بيت","طالب","قلم"], 0),
-      q("التاء المربوطة تُنطق عند الوقف:", ["هاء","تاء","لا تُنطق","كاف"], 0),
-      q("اختر كلمة تنتهي بهاء:", ["وجه","مدرسة","حديقة","فاطمة"], 0),
-      q("كلمة (شجرة) آخرها:", ["تاء مربوطة","هاء","تاء مفتوحة","ألف"], 0),
-      q("كلمة (وجه) آخرها:", ["هاء","تاء مربوطة","تاء مفتوحة","ياء"], 0),
-    ],
-    synonyms: [
-      q("مرادف (سريع) هو:", ["بطيء","عاجل","ثقيل","ضعيف"], 1),
-      q("مرادف (سعيد) هو:", ["فرحان","حزين","متعب","غاضب"], 0),
-      q("مرادف (جميل) هو:", ["قبيح","حسن","مؤلم","خطر"], 1),
-      q("مرادف (ذكي) هو:", ["فطن","كسول","هادئ","قاسٍ"], 0),
-      q("مرادف (نظيف) هو:", ["متسخ","طاهر","صاخب","قليل"], 1),
-    ],
-    antonyms: [
-      q("ضد (كبير) هو:", ["عظيم","صغير","طويل","قوي"], 1),
-      q("ضد (سريع) هو:", ["حار","بطيء","خفيف","سهل"], 1),
-      q("ضد (سعيد) هو:", ["فرح","حزين","سليم","ذكي"], 1),
-      q("ضد (نظيف) هو:", ["متسخ","مشرق","جميل","واسع"], 0),
-      q("ضد (قريب) هو:", ["بعيد","سريع","عميق","قديم"], 0),
-    ],
-    sunmoon: [
-      q("في (الشَّمس) اللام:", ["شمسية","قمرية","لا توجد","مد"], 0),
-      q("في (القمر) اللام:", ["شمسية","قمرية","لا توجد","همزة"], 1),
-      q("اختر كلمة بلام شمسية:", ["الطريق","القلم","البيت","النجمة"], 3),
-      q("اختر كلمة بلام قمرية:", ["الشجرة","السماء","القمر","النور"], 2),
-      q("اللام الشمسية تُكتب وتُـ:", ["لا تُنطق","تُدغم ولا تُنطق","تُحذف","تُقلب ياء"], 1),
-    ],
-    sentence: [
-      q("الجملة المفيدة هي التي:", ["لا معنى لها","تفهم منها معنى كامل","حرف واحد","أرقام فقط"], 1),
-      q("أي مما يلي جملة مفيدة؟", ["في المدرسة","ذهبَ الطالبُ","إلى","ثم"], 1),
-      q("الجملة الاسمية تبدأ بـ:", ["فعل","اسم","حرف","عدد فقط"], 1),
-      q("الجملة الفعلية تبدأ بـ:", ["اسم","فعل","حرف","صفة"], 1),
-      q("اختر جملة مفيدة:", ["الكتابُ","الكتابُ مفيدٌ","في","من"], 1),
-    ],
-    punct: [
-      q("نضع (.) في نهاية:", ["السؤال","الجملة الخبرية","التعجب","النداء"], 1),
-      q("علامة الاستفهام هي:", ["؟","!","،","."], 0),
-      q("نضع الفاصلة (،) عند:", ["انتهاء الفقرة","فصل الجمل القصيرة","السؤال","التعجب"], 1),
-      q("علامة التعجب هي:", ["!","؟","،","."], 0),
-      q("اختر الجملة الصحيحة بعلامة استفهام:", ["أينَ ذهبتَ؟","أين ذهبت.","أين ذهبت!","أين، ذهبت"], 0),
-    ],
-    number: [
-      q("اختر كلمة تدل على عدد:", ["ثلاثة","جميل","يكتب","في"], 0),
-      q("العدد (2) يُسمى:", ["واحد","اثنان","ثلاثة","أربعة"], 1),
-      q("اختر عددًا:", ["قلم","خمسة","مدرسة","يقرأ"], 1),
-      q("العدد (10) هو:", ["عشرة","تسعة","أحد عشر","ثمانية"], 0),
-      q("اختر جملة فيها عدد:", ["قرأتُ كتابًا","لدي ثلاثةُ أقلام","ذهبَ خالد","الجو جميل"], 1),
-    ],
-    mainidea: [
-      q("الفكرة الرئيسة تعني:", ["تفاصيل صغيرة","المعنى العام للنص","كلمة واحدة فقط","حرف"], 1),
-      q("نحدد الفكرة الرئيسة بـ:", ["قراءة العنوان والنص","تلوين الكلمات","حفظ الأرقام","عدم القراءة"], 0),
-      q("الفكرة الرئيسة غالبًا تكون:", ["غير مرتبطة بالنص","تلخص النص","اسم شخص","رقم"], 1),
-      q("إذا كان النص عن (التعاون)، فالفكرة الرئيسة:", ["أهمية التعاون","فوائد النوم","ألوان الزهور","كرة القدم"], 0),
-      q("من أدوات تحديد الفكرة:", ["السؤال: عن ماذا يتحدث النص؟","عدّ الحروف","نسخ النص","حذف الكلمات"], 0),
-    ],
-    mad: [
-      q("حروف المد هي:", ["ا، و، ي","ب، ت، ث","س، ش، ص","م، ن، ل"], 0),
-      q("اختر كلمة فيها حرف مد:", ["باب","كتب","جلس","دخل"], 0),
-      q("في كلمة (نور) حرف المد هو:", ["ن","و","ر","لا يوجد"], 1),
-      q("في كلمة (قيل) حرف المد هو:", ["ق","ي","ل","لا يوجد"], 1),
-      q("اختر كلمة فيها ألف مد:", ["كتاب","بيت","نور","علم"], 0),
-    ],
-    gender: [
-      q("الكلمة المؤنثة غالبًا تنتهي بـ:", ["ة","ب","ل","ق"], 0),
-      q("اختر كلمة مؤنثة:", ["طالب","معلمة","قلم","بيت"], 1),
-      q("اختر كلمة مذكرة:", ["شجرة","معلمة","طالب","حديقة"], 2),
-      q("كلمة (مدرسة) هي:", ["مذكر","مؤنث","حرف","فعل"], 1),
-      q("كلمة (ولد) هي:", ["مذكر","مؤنث","جمع","مثنى"], 0),
-    ],
-    faelmafool: [
-      q("اسم الفاعل يدل على:", ["من قام بالفعل","من وقع عليه الفعل","مكان","زمان"], 0),
-      q("اسم المفعول يدل على:", ["من قام بالفعل","من وقع عليه الفعل","صفة لون","عدد"], 1),
-      q("اختر اسم فاعل:", ["كاتب","مكتوب","كتاب","يكتب"], 0),
-      q("اختر اسم مفعول:", ["كاتب","مكتوب","كتابة","يكتب"], 1),
-      q("في (هذا طالبٌ مجتهدٌ)، كلمة (مجتهد) أقرب إلى:", ["اسم فاعل","اسم مفعول","حرف","عدد"], 0),
-    ],
-    exception: [
-      q("أسلوب الاستثناء يتضمن غالبًا:", ["إلا/غير/سوى","ثم/أو","لن/لم","على/في"], 0),
-      q("اختر جملة فيها استثناء:", ["حضر الطلاب إلا خالدًا","ذهب خالد إلى المدرسة","قرأ أحمد كتابًا","الجو جميل"], 0),
-      q("كلمة (إلا) تُسمى:", ["أداة استثناء","حرف مد","اسم إشارة","ضمير"], 0),
-      q("اختر أداة استثناء:", ["إلا","من","على","ثم"], 0),
-      q("في جملة (نجح الجميع إلا واحدًا) الاستثناء هو:", ["الجميع","واحدًا","نجح","إلا"], 1),
-    ],
-    compare: [
-      q("أوجه الشبه تعني:", ["الاختلاف فقط","ما يتشابه بين شيئين","الكذب","الأرقام"], 1),
-      q("أوجه الاختلاف تعني:", ["ما يختلف بين شيئين","التشابه فقط","الحروف","الصور"], 0),
-      q("مثال على التشابه:", ["كلاهما يطيران","واحد طويل والآخر قصير","هذا أحمر وهذا أزرق","هذا ثقيل وهذا خفيف"], 0),
-      q("مثال على الاختلاف:", ["كلاهما حيوان","كلاهما يعيش في الماء","واحد سريع والآخر بطيء","كلاهما جميل"], 2),
-      q("للمقارنة نستخدم:", ["مثل/بينما/لكن","لن/لم","في/على","إلى/من"], 0),
-    ],
-    nakira: [
-      q("النكرة هي:", ["اسم يدل على شيء غير محدد","اسم معرفة بـ(ال)","اسم إشارة","ضمير"], 0),
-      q("المعرفة هي:", ["اسم يدل على شيء محدد","أي اسم بلا تحديد","فعل","حرف"], 0),
-      q("اختر كلمة معرفة:", ["كتاب","الكتاب","قلم","مدرسة"], 1),
-      q("اختر كلمة نكرة:", ["المدرسة","البيت","قلم","الطالب"], 2),
-      q("التعريف بـ(ال) يجعل الكلمة:", ["معرفة","نكرة","فعل","حرف"], 0),
-    ],
-    ishara: [
-      q("اسم إشارة للمفرد المذكر:", ["هذا","هذه","هذان","هؤلاء"], 0),
-      q("اسم إشارة للمفرد المؤنث:", ["هذا","هذه","ذلك","أولئك"], 1),
-      q("اسم إشارة للجمع:", ["هؤلاء","هذا","هذه","تلك"], 0),
-      q("اختر جملة صحيحة:", ["هذا كتابٌ","هذه كتابٌ","هؤلاء كتابٌ","ذلك كتابٌة"], 0),
-      q("أسماء الإشارة تُستخدم لـ:", ["الدلالة على المشار إليه","زمن الفعل","حرف مد","عدد"], 0),
-    ]
-  };
+    /***********************
+     * الاختبار (5 أسئلة)
+     ***********************/
+    const quizOverlay = document.getElementById("quizOverlay");
+    const quizTitle   = document.getElementById("quizTitle");
+    const quizMeta    = document.getElementById("quizMeta");
+    const qText       = document.getElementById("qText");
+    const opts        = document.getElementById("opts");
+    const scorePill   = document.getElementById("scorePill");
 
-  function q(text, opts, answerIndex){
-    return { text, opts, answerIndex };
-  }
+    let quiz = null;
+    let qi = 0;
+    let ok = 0;
+    let bad = 0;
+    let locked = false;
 
-  // ====== توليد التاجات/الفلترة ======
-  const ALL_TAGS = ["الكل", ...Array.from(new Set(SKILLS.flatMap(s => s.tags || [])))];
+    function shuffle(arr){
+      const a = arr.slice();
+      for(let i=a.length-1;i>0;i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [a[i],a[j]]=[a[j],a[i]];
+      }
+      return a;
+    }
 
-  const chipsEl = document.getElementById("chips");
-  let activeTag = "الكل";
+    function startQuiz(skill){
+      ensureAudio();
+      quiz = buildQuizForSkill(skill.name);
+      qi = 0; ok = 0; bad = 0;
+      locked = false;
 
-  function renderChips(){
-    chipsEl.innerHTML = "";
-    ALL_TAGS.forEach(t=>{
-      const b = document.createElement("button");
-      b.className = "chip" + (t===activeTag ? " active" : "");
-      b.textContent = t;
-      b.onclick = ()=>{ activeTag=t; renderChips(); renderGrid(); };
-      chipsEl.appendChild(b);
-    });
-  }
+      quizTitle.textContent = `اختبار: ${skill.name}`;
+      scorePill.textContent = `✅ ${ok} | ❌ ${bad}`;
 
-  // ====== عرض البطاقات ======
-  const gridEl = document.getElementById("grid");
-  const searchEl = document.getElementById("search");
+      quizOverlay.classList.add("show");
+      quizOverlay.setAttribute("aria-hidden","false");
+      renderQuestion();
+    }
 
-  searchEl.addEventListener("input", ()=> renderGrid());
+    function renderQuestion(){
+      locked = false;
+      const item = quiz[qi];
+      quizMeta.textContent = `السؤال ${qi+1} من ${quiz.length}`;
+      qText.textContent = item.q;
 
-  function renderGrid(){
-    const term = (searchEl.value || "").trim();
-    gridEl.innerHTML = "";
+      const choices = shuffle([item.correct, ...item.wrong]).slice(0,4);
+      opts.innerHTML = "";
+      choices.forEach(choice=>{
+        const b = document.createElement("button");
+        b.className = "opt";
+        b.type="button";
+        b.textContent = choice;
+        b.addEventListener("click", ()=> answer(choice, item.correct));
+        opts.appendChild(b);
+      });
+    }
 
-    const filtered = SKILLS.filter(s=>{
-      const okTag = (activeTag==="الكل") || (s.tags || []).includes(activeTag);
-      const okSearch = !term || (s.title.includes(term));
-      return okTag && okSearch;
+    function answer(chosen, correct){
+      if(locked) return;
+      locked = true;
+
+      const buttons = [...opts.children];
+      buttons.forEach(x=> x.classList.add("disabled"));
+
+      const isCorrect = (chosen.trim() === correct.trim());
+
+      buttons.forEach(btn=>{
+        if(btn.textContent.trim() === correct.trim()) btn.classList.add("good");
+        if(btn.textContent.trim() === chosen.trim() && !isCorrect) btn.classList.add("bad");
+      });
+
+      if(isCorrect){
+        ok++;
+        soundCorrect();
+        toast(randomEncourage(true));
+      }else{
+        bad++;
+        soundWrong();
+        toast(randomEncourage(false));
+      }
+
+      scorePill.textContent = `✅ ${ok} | ❌ ${bad}`;
+
+      setTimeout(()=>{
+        qi++;
+        if(qi >= quiz.length){
+          toast(`انتهى الاختبار 👏 نتيجتك: ✅ ${ok} | ❌ ${bad}`);
+          setTimeout(()=> closeQuiz(), 600);
+        }else{
+          renderQuestion();
+        }
+      }, 650);
+    }
+
+    function closeQuiz(){
+      quizOverlay.classList.remove("show");
+      quizOverlay.setAttribute("aria-hidden","true");
+      quiz = null;
+    }
+
+    quizOverlay.addEventListener("click", (e)=>{
+      if(e.target === quizOverlay) closeQuiz();
     });
 
-    filtered.forEach((s, idx)=>{
-      const card = document.createElement("div");
-      card.className = "card";
-
-      const imgSrc = "image/" + s.img;
-
-      card.innerHTML = `
-        <div class="thumb">
-          <span class="badge">مهارة ${idx+1}</span>
-          <img src="${imgSrc}" alt="${escapeHtml(s.title)}" loading="lazy"
-               onerror="this.onerror=null; this.style.objectFit='contain'; this.style.background='#fff'; this.style.border='1px dashed rgba(15,23,42,.25)'; this.title='الصورة غير موجودة: ${imgSrc}';"
-               onclick="showZoom('${imgSrc}','${escapeJs(s.title)}')"
-          />
-        </div>
-        <h3>${escapeHtml(s.title)}</h3>
-        <div class="meta">${(s.tags||[]).join(" • ") || ""}</div>
-        <div class="actions">
-          <button class="a video" onclick="openVideo('${escapeJs(s.video||"")}')">🎬 فيديو</button>
-          <button class="a quiz" onclick="startQuiz('${escapeJs(s.id)}','${escapeJs(s.title)}')">📝 اختبار</button>
-        </div>
-      `;
-      gridEl.appendChild(card);
-    });
-
-    if(filtered.length===0){
-      gridEl.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--muted);font-weight:900;padding:16px;">لا توجد نتائج… جرّب كلمة أخرى.</div>`;
-    }
-  }
-
-  function openVideo(url){
-    if(!url){
-      alert("لم يتم إضافة رابط الفيديو لهذه المهارة بعد.");
-      return;
-    }
-    window.open(url, "_blank");
-  }
-
-  // ====== Zoom ======
-  const zoomOverlay = document.getElementById("zoomOverlay");
-  const zoomImgEl = document.getElementById("zoomImg");
-  const zoomTitleEl = document.getElementById("zoomTitle");
-
-  function showZoom(src, title){
-    zoomTitleEl.textContent = title;
-    zoomImgEl.src = src;
-    zoomOverlay.classList.add("show");
-  }
-  function hideZoom(){ zoomOverlay.classList.remove("show"); }
-  function closeZoom(e){
-    if(e.target === zoomOverlay) hideZoom();
-  }
-
-  // ====== Quiz ======
-  const quizOverlay = document.getElementById("quizOverlay");
-  const quizSkillTitleEl = document.getElementById("quizSkillTitle");
-  const quizProgressEl = document.getElementById("quizProgress");
-  const qTextEl = document.getElementById("qText");
-  const qOptsEl = document.getElementById("qOpts");
-  const qMsgEl  = document.getElementById("qMsg");
-
-  let curQuiz = [];
-  let curIdx = 0;
-  let locked = false;
-
-  function startQuiz(skillId, skillTitle){
-    const bank = QUIZZES[skillId];
-
-    if(!bank || bank.length < 5){
-      alert("لا يوجد اختبار مكتمل لهذه المهارة بعد (5 أسئلة). سأضيفه لك بمجرد تزويدي باسم المهارة/الدرس المطلوب.");
-      return;
+    function randomEncourage(correct){
+      const good = ["أحسنت! ممتاز 👏","رائع جدًا ⭐","إجابة صحيحة ✅","بطل! كمل 👌","ممتاز!"];
+      const bad  = ["قريب! جرّب مرة أخرى 💪","لا بأس… ركّز ✅","محاولة جيدة 👍","تابع… أنت قادر 🌟","جرب مرة ثانية"];
+      const arr = correct ? good : bad;
+      return arr[Math.floor(Math.random()*arr.length)];
     }
 
-    // خذ أول 5 (ممكن لاحقًا نعمل سحب عشوائي)
-    curQuiz = bank.slice(0,5);
-    curIdx = 0;
-    locked = false;
+    /***********************
+     * Toast
+     ***********************/
+    const toastEl = document.getElementById("toast");
+    let toastTimer = null;
 
-    quizSkillTitleEl.textContent = `اختبار: ${skillTitle}`;
-    quizOverlay.classList.add("show");
-    renderQ();
-  }
-
-  function renderQ(){
-    locked = false;
-    qMsgEl.textContent = "";
-    qOptsEl.innerHTML = "";
-
-    const q = curQuiz[curIdx];
-    quizProgressEl.textContent = `${curIdx+1} / ${curQuiz.length}`;
-    qTextEl.textContent = q.text;
-
-    q.opts.forEach((opt, i)=>{
-      const b = document.createElement("div");
-      b.className = "opt";
-      b.textContent = opt;
-      b.onclick = ()=> chooseOpt(i);
-      qOptsEl.appendChild(b);
-    });
-  }
-
-  function chooseOpt(i){
-    if(locked) return;
-    locked = true;
-
-    const q = curQuiz[curIdx];
-    const opts = Array.from(qOptsEl.querySelectorAll(".opt"));
-
-    opts[q.answerIndex].classList.add("correct");
-
-    if(i === q.answerIndex){
-      beep("good");
-      qMsgEl.textContent = PRAISE[Math.floor(Math.random()*PRAISE.length)];
-    }else{
-      beep("bad");
-      opts[i].classList.add("wrong");
-      qMsgEl.textContent = TRY_AGAIN[Math.floor(Math.random()*TRY_AGAIN.length)];
+    function toast(msg){
+      toastEl.textContent = msg;
+      toastEl.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> toastEl.classList.remove("show"), 1600);
     }
-  }
 
-  function nextQ(){
-    if(!curQuiz.length) return;
-    if(!locked){
-      alert("اختر إجابة أولاً.");
-      return;
+    /***********************
+     * تشغيل أولي
+     ***********************/
+    function init(){
+      activeSkillId = SKILLS[0]?.id || null;
+      renderChips();
+      renderCards();
+
+      // إذا كانت عندك مهارتين صورها غير موجودة (text_parts / text_elements)
+      // فقط ارفعي صورها داخل image بنفس الأسماء:
+      // image/skill_text_parts.png
+      // image/skill_text_elements.png
+      // أو قولي لي أسماء صورك الحقيقية وسأعدلها لك مباشرة.
     }
-    curIdx++;
-    if(curIdx >= curQuiz.length){
-      beep("good");
-      qTextEl.textContent = "انتهى الاختبار ✅ أحسنت!";
-      qOptsEl.innerHTML = "";
-      qMsgEl.textContent = "يمكنك إغلاق النافذة أو إعادة فتح الاختبار مرة أخرى.";
-      curQuiz = [];
-      return;
-    }
-    renderQ();
-  }
-
-  function closeQuiz(){
-    quizOverlay.classList.remove("show");
-    curQuiz = [];
-    curIdx = 0;
-  }
-
-  // ====== Helpers ======
-  function escapeHtml(str){
-    return String(str||"").replace(/[&<>"']/g, s=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[s]));
-  }
-  function escapeJs(str){
-    return String(str||"").replace(/\\/g,"\\\\").replace(/'/g,"\\'");
-  }
-
-  // Init
-  renderChips();
-  renderGrid();
-</script>
-
+    init();
+  </script>
 </body>
 </html>
