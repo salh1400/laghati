@@ -15,7 +15,6 @@
     --primary:#4f46e5;
     --success:#16a34a;
     --danger:#ef4444;
-    --gold:#f59e0b;
 
     --shadow: 0 12px 28px rgba(0,0,0,.12);
     --radius:20px;
@@ -43,12 +42,11 @@
     margin:0;
     font-size:22px;
     font-weight:1000;
-    letter-spacing:.2px;
   }
   .brand .sub{
     margin-top:4px;
     color:var(--muted);
-    font-weight:800;
+    font-weight:900;
     font-size:13px;
   }
 
@@ -86,15 +84,8 @@
     gap:10px;
     flex-wrap:wrap;
   }
-  .progressTop .txt{
-    font-weight:1000;
-    font-size:14px;
-  }
-  .progressTop .mini{
-    font-weight:900;
-    color:var(--muted);
-    font-size:13px;
-  }
+  .progressTop .txt{ font-weight:1000; font-size:14px; }
+  .progressTop .mini{ font-weight:900; color:var(--muted); font-size:13px; }
   .bar{
     margin-top:10px;
     height:14px;
@@ -114,9 +105,10 @@
     max-width:1100px;
     margin:0 auto;
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap:16px;
   }
+
   .card{
     background:var(--card);
     border-radius:var(--radius);
@@ -126,17 +118,6 @@
     position:relative;
     border:1px solid #00000010;
     overflow:hidden;
-  }
-  .card img{
-    width:100%;
-    border-radius:16px;
-    display:block;
-    cursor: zoom-in;
-  }
-  .card h3{
-    margin:10px 0 8px;
-    font-size:16px;
-    font-weight:1000;
   }
 
   .badge{
@@ -152,24 +133,84 @@
     display:none;
     align-items:center;
     gap:6px;
+    z-index:4;
   }
   .badge.show{ display:flex; }
   .badge .small{ font-size:12px; color:var(--muted); font-weight:900; }
 
-  .card button{
+  /* ===== Media area ===== */
+  .media{
+    position:relative;
+    border-radius:16px;
+    overflow:hidden;
+    cursor: zoom-in;
+  }
+  .media img{
     width:100%;
-    margin-top:8px;
-    padding:11px 12px;
+    display:block;
+    border-radius:16px;
+    transition: transform .25s ease;
+  }
+  .card:hover .media img{ transform: scale(1.03); }
+
+  /* ===== Overlay toolbar فوق الصورة ===== */
+  .toolbar{
+    position:absolute;
+    inset:auto 10px 10px 10px;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    align-items:center;
+    padding:10px;
+    border-radius:16px;
+    background: rgba(17,24,39,.62);
+    border: 1px solid rgba(255,255,255,.14);
+    backdrop-filter: blur(8px);
+    transform: translateY(18px);
+    opacity:0;
+    transition: opacity .18s ease, transform .18s ease;
+    z-index:3;
+  }
+  .card:hover .toolbar{
+    opacity:1;
+    transform: translateY(0);
+  }
+
+  /* على الجوال: الشريط يظهر دائمًا */
+  @media (hover: none){
+    .toolbar{ opacity:1; transform: translateY(0); }
+  }
+
+  .toolBtn{
     border:0;
     border-radius:14px;
-    font-weight:1000;
+    padding:10px 12px;
     cursor:pointer;
-    font-size:14px;
-    box-shadow: 0 10px 18px rgba(0,0,0,.06);
+    font-weight:1000;
+    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#fff;
+    box-shadow: 0 12px 18px rgba(0,0,0,.18);
+    user-select:none;
+    white-space:nowrap;
   }
-  .videoBtn{ background:var(--primary); color:#fff; }
-  .quizBtn{ background:var(--success); color:#fff; }
-  .disabled{ opacity:.55; pointer-events:none; }
+  .toolBtn.video{ background: linear-gradient(180deg, #5b56ff, #3f39e8); }
+  .toolBtn.quiz { background: linear-gradient(180deg, #22c55e, #16a34a); }
+  .toolBtn.disabled{ opacity:.55; pointer-events:none; }
+
+  .card h3{
+    margin:10px 0 0;
+    font-size:16px;
+    font-weight:1000;
+  }
+  .miniNote{
+    margin-top:6px;
+    color:var(--muted);
+    font-weight:900;
+    font-size:12px;
+  }
 
   .footer{
     max-width:1100px;
@@ -212,10 +253,7 @@
     justify-content:space-between;
     gap:10px;
   }
-  .modalHeader .ttl{
-    font-weight:1000;
-    font-size:16px;
-  }
+  .modalHeader .ttl{ font-weight:1000; font-size:16px; }
   .closeBtn{
     border:0;
     border-radius:12px;
@@ -227,7 +265,7 @@
   }
   .modalBody{ padding:14px; }
 
-  /* ===== Video frame (small & nice) ===== */
+  /* ===== Video frame ===== */
   .videoWrap{
     width:100%;
     background:#111827;
@@ -371,10 +409,8 @@
 
   <div class="topbar">
     <div class="brand">
-      <div>
-        <h1>مهارات لغتي الممتعة</h1>
-        <div class="sub">اختر مهارة (بصيغة المذكر) ثم شاهد الفيديو أو نفّذ الاختبار</div>
-      </div>
+      <h1>مهارات لغتي الممتعة</h1>
+      <div class="sub">اختر مهارة ثم شاهد الفيديو أو نفّذ الاختبار</div>
     </div>
 
     <div class="actions">
@@ -479,8 +515,7 @@
   const PASS_SCORE = 3; // كأس عند 3/5 فأعلى
   const STORE_KEY = "laghati_progress_v2";
 
-  // مهاراتك (بدون إضافة لعبتي reading/vocab)
-  // ملاحظة: تم حذف "المبني للمعلوم/المجهول" كما طلبتِ.
+  // مهاراتك (بدون reading/vocab) + بدون المبني للمعلوم/المجهول
   const SKILLS = [
     { id:"word_types", title:"أقسام الكلمة", img:"image/skill_word_types.png", video:"https://youtu.be/CvTvx1TRYw4?feature=shared" },
     { id:"verb_types", title:"أنواع الفعل", img:"image/skill_verb-types.png", video:"https://youtu.be/-fNt_5kOvIs?feature=shared" },
@@ -633,7 +668,6 @@
       q("ضد (نظيف) هو:", ["مرتب","متسخ","جميل","جديد"], 1),
     ],
   };
-
   function q(text, choices, correctIndex){ return { text, choices, correctIndex }; }
 
   /***********************
@@ -648,7 +682,6 @@
     }catch(e){ return {}; }
   }
   function saveProgress(p){ localStorage.setItem(STORE_KEY, JSON.stringify(p)); }
-
   function getSkillProgress(skillId){
     const p = loadProgress();
     return p[skillId] || { best:0, attempts:0, mastered:false, lastScore:0 };
@@ -660,7 +693,7 @@
   }
 
   /***********************
-   * الأصوات (أوضح مثل السابق)
+   * الأصوات (واضحة)
    ***********************/
   let audioUnlocked = false;
   let audioCtx = null;
@@ -670,7 +703,6 @@
     if(audioCtx.state === "suspended") audioCtx.resume();
     audioUnlocked = true;
   }
-
   function tone({ type="sine", f1=440, f2=null, dur=0.18, gain=0.18 }){
     if(!audioUnlocked || !audioCtx) return;
     const ctx = audioCtx;
@@ -690,7 +722,6 @@
     osc.start(t0);
     osc.stop(t0 + dur + 0.03);
   }
-
   function soundCorrect(){
     tone({ type:"triangle", f1:880, f2:1320, dur:0.16, gain:0.22 });
     setTimeout(()=>tone({ type:"sine", f1:1100, f2:1600, dur:0.12, gain:0.18 }), 90);
@@ -699,12 +730,7 @@
     tone({ type:"sawtooth", f1:260, f2:140, dur:0.28, gain:0.24 });
     setTimeout(()=>tone({ type:"sawtooth", f1:220, f2:120, dur:0.24, gain:0.22 }), 120);
   }
-  function soundWin(){
-    soundCorrect();
-    setTimeout(()=>soundCorrect(), 170);
-  }
-
-  // فك قفل الصوت عند أول تفاعل
+  function soundWin(){ soundCorrect(); setTimeout(()=>soundCorrect(), 170); }
   window.addEventListener("pointerdown", ()=>ensureAudio(), { once:true });
 
   /***********************
@@ -740,30 +766,44 @@
       badge.innerHTML = `🏆 <span>كأس</span> <span class="small">(${prog.best}/5)</span>`;
       card.appendChild(badge);
 
+      const media = document.createElement("div");
+      media.className = "media";
+
       const img = document.createElement("img");
       img.src = skill.img;
       img.alt = skill.title;
       img.addEventListener("click", ()=> openImg(skill.img));
-      card.appendChild(img);
+      media.appendChild(img);
+
+      const toolbar = document.createElement("div");
+      toolbar.className = "toolbar";
+
+      const vBtn = document.createElement("button");
+      vBtn.className = "toolBtn video";
+      vBtn.type = "button";
+      vBtn.textContent = "🎬 فيديو";
+      vBtn.onclick = (e)=>{ e.stopPropagation(); openVideo(skill); };
+      toolbar.appendChild(vBtn);
+
+      const qBtn = document.createElement("button");
+      qBtn.className = "toolBtn quiz";
+      qBtn.type = "button";
+      qBtn.textContent = "📝 اختبار";
+      qBtn.onclick = (e)=>{ e.stopPropagation(); startQuiz(skill); };
+      if(!QUESTION_BANK[skill.id]) qBtn.classList.add("disabled");
+      toolbar.appendChild(qBtn);
+
+      media.appendChild(toolbar);
+      card.appendChild(media);
 
       const h3 = document.createElement("h3");
       h3.textContent = skill.title;
       card.appendChild(h3);
 
-      const vBtn = document.createElement("button");
-      vBtn.className = "videoBtn";
-      vBtn.type = "button";
-      vBtn.textContent = "🎬 فيديو";
-      vBtn.onclick = ()=> openVideo(skill);
-      card.appendChild(vBtn);
-
-      const qBtn = document.createElement("button");
-      qBtn.className = "quizBtn";
-      qBtn.type = "button";
-      qBtn.textContent = "📝 اختبار (5 أسئلة)";
-      qBtn.onclick = ()=> startQuiz(skill);
-      if(!QUESTION_BANK[skill.id]) qBtn.classList.add("disabled");
-      card.appendChild(qBtn);
+      const note = document.createElement("div");
+      note.className = "miniNote";
+      note.textContent = "اضغط على الصورة للتكبير";
+      card.appendChild(note);
 
       skillsGrid.appendChild(card);
     });
@@ -776,22 +816,19 @@
     let mastered = 0;
     SKILLS.forEach(s=>{ if(getSkillProgress(s.id).mastered) mastered++; });
     const percent = total ? Math.round((mastered/total)*100) : 0;
-
     progressText.textContent = `التقدّم: ${mastered} / ${total} 🏆`;
     progressFill.style.width = percent + "%";
   }
 
   /***********************
-   * الفيديو داخل نافذة صغيرة (Modal)
+   * الفيديو داخل نافذة صغيرة
    ***********************/
   const videoOverlay = document.getElementById("videoOverlay");
   const videoTitle = document.getElementById("videoTitle");
   const videoFrame = document.getElementById("videoFrame");
-
   let currentVideoUrl = "";
 
   function toEmbedUrl(url){
-    // يدعم youtu.be و youtube.com/watch
     try{
       const u = new URL(url);
       let id = "";
@@ -802,9 +839,7 @@
       }
       if(!id) return url;
       return `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1`;
-    }catch(e){
-      return url;
-    }
+    }catch(e){ return url; }
   }
 
   function openVideo(skill){
@@ -815,20 +850,16 @@
     videoOverlay.classList.add("show");
     videoOverlay.setAttribute("aria-hidden","false");
   }
-
   function closeVideo(){
     videoOverlay.classList.remove("show");
     videoOverlay.setAttribute("aria-hidden","true");
-    // إيقاف الفيديو
     videoFrame.src = "";
     currentVideoUrl = "";
   }
-
   function openInYoutube(){
     if(!currentVideoUrl) return;
     window.open(currentVideoUrl, "_blank");
   }
-
   videoOverlay.addEventListener("click", (e)=>{
     if(e.target === videoOverlay) closeVideo();
   });
@@ -850,7 +881,7 @@
   }
 
   /***********************
-   * الاختبار (Modal) بنفس أسلوب أول + أصوات أوضح
+   * الاختبار (Modal)
    ***********************/
   const quizOverlay = document.getElementById("quizOverlay");
   const quizTitle = document.getElementById("quizTitle");
@@ -918,18 +949,13 @@
 
     const isCorrect = idx === item.correctIndex;
 
-    // تلوين الخيارات
     btns.forEach((btn, i)=>{
       if(i === item.correctIndex) btn.classList.add("good");
       if(i === idx && !isCorrect) btn.classList.add("bad");
     });
 
-    if(isCorrect){
-      quizScore++;
-      soundCorrect();
-    }else{
-      soundWrong();
-    }
+    if(isCorrect){ quizScore++; soundCorrect(); }
+    else{ soundWrong(); }
 
     qScoreEl.textContent = `الدرجة: ${quizScore} / 5`;
 
@@ -941,18 +967,13 @@
   }
 
   function finishQuiz(){
-    // تحديث التقدم
     const prev = getSkillProgress(quizSkill.id);
     const best = Math.max(prev.best || 0, quizScore);
     const attempts = (prev.attempts || 0) + 1;
     const mastered = best >= PASS_SCORE;
 
-    setSkillProgress(quizSkill.id, {
-      best, attempts, mastered,
-      lastScore: quizScore
-    });
-
-    renderSkills(); // لإظهار الكأس فورًا
+    setSkillProgress(quizSkill.id, { best, attempts, mastered, lastScore: quizScore });
+    renderSkills();
 
     resultBox.style.display = "block";
     if(quizScore >= PASS_SCORE){
@@ -968,7 +989,6 @@
     quizOverlay.setAttribute("aria-hidden","true");
     quizSkill = null; quizQuestions = [];
   }
-
   quizOverlay.addEventListener("click", (e)=>{
     if(e.target === quizOverlay) closeQuiz();
   });
@@ -1012,12 +1032,10 @@
     parentOverlay.classList.add("show");
     parentOverlay.setAttribute("aria-hidden","false");
   }
-
   function closeParentMode(){
     parentOverlay.classList.remove("show");
     parentOverlay.setAttribute("aria-hidden","true");
   }
-
   parentOverlay.addEventListener("click", (e)=>{
     if(e.target === parentOverlay) closeParentMode();
   });
@@ -1029,7 +1047,7 @@
     ensureAudio();
     const ok = confirm("هل تريد مسح التقدّم (الكؤوس والدرجات)؟");
     if(!ok) return;
-    localStorage.removeItem(STORE_KEY);
+    localStorage.removeItem("laghati_progress_v2");
     renderSkills();
   }
 
@@ -1037,7 +1055,7 @@
    * العودة للرئيسية
    ***********************/
   function goHome(){
-    window.location.href = "index.html"; // غيّريها إذا اسم الرئيسية مختلف
+    window.location.href = "index.html";
   }
 
   /***********************
