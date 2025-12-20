@@ -7,827 +7,870 @@
 
   <style>
     :root{
-      --bg:#f6f9ff;
-      --ink:#111827;
+      /* ألوان مناسبة للسبورة: تباين قوي + مبهجة */
+      --bg1:#0b1220;
+      --bg2:#0f1b3d;
+      --card:#ffffff;
+      --ink:#0f172a;
       --muted:#475569;
 
-      --pri:#1e3a8a;
-      --pri2:#2563eb;
-
-      --card: rgba(255,255,255,.78);
-      --stroke: rgba(255,255,255,.65);
-      --shadow: rgba(0,0,0,.12);
-
-      --orange:#f59e0b;
-      --green:#16a34a;
-      --blue:#2d7dff;
-
-      --radius: 22px;
+      --pri:#2563eb;     /* أزرق واضح */
+      --pri2:#1d4ed8;
+      --ok:#16a34a;      /* أخضر */
+      --bad:#ef4444;     /* أحمر */
+      --gold:#f59e0b;    /* ذهبي للتشجيع */
+      --chip:#e2e8f0;
     }
 
     *{ box-sizing:border-box; }
     body{
       margin:0;
-      font-family:"Cairo","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-      background:
-        radial-gradient(900px 520px at 50% 0%, rgba(37,99,235,.18), transparent 55%),
-        radial-gradient(900px 520px at 20% 30%, rgba(34,197,94,.12), transparent 55%),
-        radial-gradient(900px 520px at 80% 40%, rgba(245,158,11,.12), transparent 55%),
-        var(--bg);
-      color:var(--ink);
-      padding:18px 12px 30px;
-      display:flex;
-      justify-content:center;
-    }
-
-    .wrap{
-      width:min(1100px, 96vw);
-      background: rgba(255,255,255,.55);
-      border:1px solid rgba(255,255,255,.7);
-      border-radius: 26px;
-      box-shadow: 0 18px 50px var(--shadow);
-      backdrop-filter: blur(10px);
-      overflow:hidden;
-    }
-
-    /* Header */
-    .top{
-      padding:16px 16px 14px;
-      background: linear-gradient(135deg, var(--pri), var(--pri2));
+      font-family: "Cairo", system-ui, Arial;
+      background: radial-gradient(1200px 700px at 20% 20%, #1b2a5a 0%, var(--bg1) 45%, #070b14 100%);
       color:#fff;
+      min-height:100vh;
+      padding:18px;
     }
-    .topRow{
+
+    /* شريط علوي مناسب للسبورة */
+    .topbar{
+      max-width:1200px;
+      margin:0 auto 14px;
+      padding:14px 16px;
+      background: linear-gradient(90deg, rgba(37,99,235,.35), rgba(245,158,11,.25));
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:18px;
+      box-shadow:0 18px 40px rgba(0,0,0,.25);
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      gap:10px;
+      justify-content:space-between;
+      gap:12px;
       flex-wrap:wrap;
     }
-    .title{
-      font-weight:1000;
-      font-size: clamp(20px, 3vw, 30px);
-      margin:0;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
-    .sub{
-      margin:4px 0 0;
+    .logo{
+      width:46px;height:46px;
+      border-radius:14px;
+      background: linear-gradient(135deg, #60a5fa, #f59e0b);
+      display:grid;
+      place-items:center;
       font-weight:900;
-      opacity:.95;
-      font-size: clamp(12px, 1.8vw, 14px);
+      color:#0b1220;
+      box-shadow:0 12px 26px rgba(0,0,0,.25);
+      user-select:none;
     }
-    .backBtn{
-      border:0;
-      background: rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.25);
-      color:#fff;
-      padding:10px 12px;
-      border-radius:16px;
-      font-weight:1000;
-      cursor:pointer;
-      box-shadow: 0 10px 25px rgba(0,0,0,.12);
+    .titlebox h1{
+      margin:0;
+      font-size:26px; /* كبير للسبورة */
+      letter-spacing:.3px;
     }
-
-    /* Skill picker bar */
-    .bar{
-      padding:12px 14px 14px;
-      background: rgba(255,255,255,.18);
-      border:1px solid rgba(255,255,255,.22);
-      border-radius: 20px;
-      margin-top:12px;
-      box-shadow: 0 14px 30px rgba(0,0,0,.10);
-    }
-    .barHead{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    .barHead .hint{
-      font-weight:1000;
+    .titlebox p{
+      margin:2px 0 0;
+      color:rgba(255,255,255,.85);
       font-size:14px;
     }
-    .search{
-      width:min(380px, 100%);
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(0,0,0,.10);
-      outline:none;
-      font-weight:900;
-    }
 
-    .skillsPills{
+    .top-actions{
       display:flex;
+      gap:10px;
       flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-    }
-    .pill{
-      border:0;
-      padding:10px 14px;
-      border-radius:999px;
-      background: rgba(255,255,255,.75);
-      border:1px solid rgba(0,0,0,.08);
-      font-weight:1000;
-      cursor:pointer;
-      transition: transform .12s ease, filter .12s ease;
-      box-shadow: 0 10px 18px rgba(0,0,0,.08);
-      color:#1f2a44;
-    }
-    .pill:hover{ transform: translateY(-1px); filter:brightness(1.02); }
-    .pill.active{
-      background: rgba(255,255,255,.92);
-      outline: 3px solid rgba(245,158,11,.35);
-    }
-
-    /* Cards */
-    .content{
-      padding:16px;
-    }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap:14px;
-    }
-
-    .card{
-      background: var(--card);
-      border:1px solid var(--stroke);
-      border-radius: var(--radius);
-      overflow:hidden;
-      box-shadow: 0 14px 30px rgba(0,0,0,.10);
-      display:flex;
-      flex-direction:column;
-      min-height: 310px;
-    }
-
-    .imgWrap{
-      position:relative;
-      padding:12px 12px 0;
-    }
-    .imgWrap img{
-      width:100%;
-      height:160px;
-      object-fit:cover;
-      border-radius:18px;
-      border:1px solid rgba(0,0,0,.06);
-      background:#fff;
-    }
-
-    .badge{
-      position:absolute;
-      top:14px;
-      right:14px;
-      background: rgba(255,255,255,.88);
-      border:1px solid rgba(0,0,0,.08);
-      padding:7px 10px;
-      border-radius:999px;
-      font-weight:1000;
-      font-size:12px;
-      color:#1f2a44;
-    }
-
-    .cardBody{
-      padding:12px 12px 12px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      flex:1;
-    }
-    .card h3{
-      margin:0;
-      font-size:16px;
-      font-weight:1000;
-      color:#111b33;
-      line-height:1.5;
-    }
-    .card p{
-      margin:0;
-      color:var(--muted);
-      font-weight:900;
-      font-size:12.5px;
-      line-height:1.7;
-    }
-
-    .btns{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top:auto;
     }
     .btn{
-      border:0;
-      border-radius:16px;
-      padding:11px 10px;
-      font-weight:1000;
+      border:none;
       cursor:pointer;
-      box-shadow: 0 12px 22px rgba(0,0,0,.10);
-      transition: transform .12s ease, filter .12s ease;
-      font-size:14px;
+      padding:12px 16px; /* كبير للسبورة */
+      border-radius:14px;
+      font-weight:800;
+      font-size:15px;
+      color:#fff;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      transition:.2s;
+      user-select:none;
     }
-    .btn:hover{ transform: translateY(-1px); filter:brightness(1.02); }
-    .btn:active{ transform: translateY(1px); }
+    .btn:hover{ transform: translateY(-2px); }
+    .btn:active{ transform: translateY(0); }
 
-    .videoBtn{ background: linear-gradient(180deg, #5aa8ff, #2d7dff); color:#fff; }
-    .quizBtn{ background: linear-gradient(180deg, #34d399, #16a34a); color:#062814; }
+    .btn-home{ background: linear-gradient(135deg, rgba(37,99,235,.9), rgba(29,78,216,.9)); }
+    .btn-sound{ background: linear-gradient(135deg, rgba(245,158,11,.92), rgba(234,88,12,.92)); }
 
-    .footer{
-      text-align:center;
-      padding:10px 16px 18px;
-      color:#475569;
-      font-weight:1000;
+    /* شريط بحث سريع (اختيار مهارة) */
+    .toolbar{
+      max-width:1200px;
+      margin:0 auto 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .search{
+      flex:1;
+      min-width:260px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:16px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .search input{
+      width:100%;
+      border:none;
+      outline:none;
+      background:transparent;
+      color:#fff;
+      font-size:16px; /* كبير للسبورة */
+    }
+    .hint{
+      color:rgba(255,255,255,.85);
+      font-size:14px;
+      user-select:none;
+    }
+
+    /* شبكة البطاقات */
+    .skills{
+      max-width:1200px;
+      margin:0 auto 20px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:18px;
+    }
+
+    /* بطاقة مهارة: الصورة “شرح بصري” */
+    .card{
+      background: rgba(255,255,255,.95);
+      color: var(--ink);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+      border: 1px solid rgba(15,23,42,.08);
+      transition:.25s;
+    }
+    .card:hover{ transform: translateY(-4px); }
+
+    .imgwrap{
+      position:relative;
+      background:#f8fafc;
+      cursor: zoom-in;
+    }
+    .imgwrap img{
+      width:100%;
+      display:block;
+    }
+    .zoomBadge{
+      position:absolute;
+      top:10px;
+      left:10px;
+      background: rgba(15,23,42,.78);
+      color:#fff;
+      padding:7px 10px;
+      border-radius:12px;
+      font-weight:800;
       font-size:13px;
     }
 
-    /* Modal quiz */
-    .overlay{
+    .cardbody{
+      padding:14px 14px 16px;
+    }
+    .card h3{
+      margin:2px 0 10px;
+      font-size:20px; /* أكبر للسبورة */
+      color:#0f172a;
+    }
+    .sub{
+      margin:0 0 12px;
+      color: var(--muted);
+      font-size:14px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+    }
+    .actions button{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:14px;
+      font-weight:900;
+      font-size:15px; /* أكبر */
+      cursor:pointer;
+      transition:.2s;
+    }
+    .actions button:hover{ transform: translateY(-2px); }
+    .actions button:active{ transform: translateY(0); }
+
+    .video{
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color:#fff;
+    }
+    .quiz{
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color:#fff;
+    }
+
+    /* نافذة تكبير الصورة */
+    .modal{
       position:fixed;
       inset:0;
-      background: rgba(15, 23, 42, .55);
+      background: rgba(0,0,0,.65);
       display:none;
       align-items:center;
       justify-content:center;
-      padding:14px;
+      padding:18px;
       z-index:999;
     }
-    .overlay.show{ display:flex; }
-
-    .modal{
-      width:min(640px, 96vw);
-      background:#fff;
-      border-radius:24px;
-      box-shadow: 0 18px 70px rgba(0,0,0,.35);
+    .modal.open{ display:flex; }
+    .modalCard{
+      width:min(1100px, 96vw);
+      max-height: 90vh;
+      background:#0b1220;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:18px;
       overflow:hidden;
-      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 26px 60px rgba(0,0,0,.4);
+      position:relative;
     }
     .modalHead{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
       padding:12px 14px;
-      background: linear-gradient(135deg, var(--pri), var(--pri2));
+      background: linear-gradient(90deg, rgba(37,99,235,.35), rgba(245,158,11,.25));
       color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .modalHead .mTitle{
-      font-weight:1000;
-      font-size:15px;
-    }
-    .closeBtn{
-      border:0;
-      background: rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.25);
-      color:#fff;
-      padding:8px 10px;
-      border-radius:14px;
-      font-weight:1000;
-      cursor:pointer;
-    }
-
-    .modalBody{
-      padding:14px;
-    }
-
-    .qBox{
-      background: #f8fafc;
-      border:1px solid rgba(0,0,0,.07);
-      border-radius:18px;
-      padding:12px;
-    }
-    .qText{
-      margin:0 0 10px;
-      font-weight:1000;
+      font-weight:900;
       font-size:16px;
-      color:#0f172a;
-      line-height:1.8;
-      white-space:pre-line;
-      text-align:center;
     }
-    .opts{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .opt{
-      border:0;
-      border-radius:16px;
-      padding:12px 12px;
-      font-weight:1000;
+    .close{
+      border:none;
       cursor:pointer;
-      background: linear-gradient(180deg, #ffcf66, #f59e0b);
-      color:#2b1a00;
-      box-shadow: 0 10px 18px rgba(245,158,11,.18);
-      text-align:center;
+      padding:10px 12px;
+      border-radius:12px;
+      background: rgba(255,255,255,.18);
+      color:#fff;
+      font-weight:900;
+      font-size:14px;
     }
-    .opt.good{ background: linear-gradient(180deg, #7cffb2, #3fe68f); color:#0b5a2f; }
-    .opt.bad{ background: linear-gradient(180deg, #ff7c9a, #ff5f86); color:#7a0f25; }
-    .opt.disabled{ pointer-events:none; opacity:.98; }
+    .modalImgWrap{
+      background:#fff;
+      padding:10px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      max-height: calc(90vh - 56px);
+    }
+    .modalImgWrap img{
+      width:100%;
+      height:auto;
+      max-height: calc(90vh - 76px);
+      object-fit: contain;
+      border-radius:12px;
+      background:#fff;
+    }
 
-    .meta{
+    /* نافذة الاختبار */
+    .quizModal .modalCard{ background:#ffffff; color:var(--ink); }
+    .quizModal .modalHead{ color:#fff; }
+    .quizBody{
+      padding:16px;
+      max-height: calc(90vh - 56px);
+      overflow:auto;
+    }
+    .qTop{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:10px;
+    }
+    .pill{
+      background: var(--chip);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:900;
+      font-size:14px;
+      color:#0f172a;
+    }
+    .question{
+      margin:10px 0 12px;
+      font-size:20px; /* كبير للسبورة */
+      font-weight:900;
+      color:#0f172a;
+    }
+    .choices{
+      display:grid;
+      gap:10px;
+      margin-bottom:14px;
+    }
+    .choice{
+      border:2px solid rgba(15,23,42,.10);
+      background:#f8fafc;
+      padding:12px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:800;
+      font-size:16px; /* كبير */
+      transition:.15s;
+    }
+    .choice:hover{ transform: translateY(-2px); }
+    .choice.correct{ border-color: rgba(22,163,74,.8); background: rgba(22,163,74,.12); }
+    .choice.wrong{ border-color: rgba(239,68,68,.8); background: rgba(239,68,68,.12); }
+
+    .qActions{
       display:flex;
       gap:10px;
+      flex-wrap:wrap;
       justify-content:space-between;
       align-items:center;
-      flex-wrap:wrap;
-      margin-top:10px;
-      font-weight:1000;
-      color:#334155;
-      font-size:13px;
+      margin-top:8px;
     }
-    .scoreTag{
-      background:#eef2ff;
-      border:1px solid rgba(37,99,235,.20);
-      border-radius:999px;
-      padding:8px 12px;
+    .btn2{
+      border:none;
+      cursor:pointer;
+      padding:12px 14px;
+      border-radius:14px;
+      font-weight:900;
+      font-size:15px;
+      color:#fff;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    }
+    .btn2.secondary{
+      background: rgba(15,23,42,.10);
+      color:#0f172a;
+      border:1px solid rgba(15,23,42,.12);
     }
 
-    @media (max-width: 1050px){
-      .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .result{
+      margin-top:10px;
+      padding:12px;
+      border-radius:14px;
+      background:#f1f5f9;
+      border:1px solid rgba(15,23,42,.10);
+      font-weight:900;
+      font-size:16px;
+      display:none;
     }
-    @media (max-width: 520px){
-      .grid{ grid-template-columns: 1fr; }
-      .imgWrap img{ height:170px; }
+
+    footer{
+      max-width:1200px;
+      margin:0 auto;
+      padding:10px 4px 0;
+      color:rgba(255,255,255,.8);
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* وضع السبورة: تكبير إضافي للأجهزة الكبيرة */
+    @media (min-width: 1100px){
+      .titlebox h1{ font-size:30px; }
+      .card h3{ font-size:22px; }
+      .actions button{ font-size:16px; padding:13px; }
+      .question{ font-size:22px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <!-- Header -->
-    <div class="top">
-      <div class="topRow">
-        <div>
-          <h1 class="title">مهارات لغتي الممتعة</h1>
-          <p class="sub">اختر مهارة من الشريط، ثم شاهد الفيديو أو حل اختبار (5 أسئلة).</p>
-        </div>
-        <button class="backBtn" type="button" onclick="goHome()">⬅ العودة للرئيسية</button>
-      </div>
-
-      <div class="bar">
-        <div class="barHead">
-          <div class="hint">✅ اختر مهارة</div>
-          <input id="search" class="search" type="search" placeholder="ابحث عن مهارة (مثال: التنوين)" />
-        </div>
-        <div class="skillsPills" id="skillsPills"></div>
+  <!-- شريط علوي -->
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">لغ</div>
+      <div class="titlebox">
+        <h1>مهارات لغتي الممتعة</h1>
+        <p>اختَر مهارة ثم اضغط “فيديو” أو “اختبار (5 أسئلة)”</p>
       </div>
     </div>
 
-    <!-- Cards -->
-    <div class="content">
-      <div class="grid" id="grid"></div>
+    <div class="top-actions">
+      <button class="btn btn-home" onclick="goHome()">↩︎ العودة للرئيسية</button>
+      <button class="btn btn-sound" id="soundBtn" onclick="toggleSound()">🔊 الصوت: تشغيل</button>
     </div>
-
-    <div class="footer">© إعداد: صالحة علي الغامدي — جميع الحقوق محفوظة</div>
   </div>
 
-  <!-- Quiz Modal -->
-  <div class="overlay" id="overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-label="اختبار المهارة">
+  <!-- شريط بحث -->
+  <div class="toolbar">
+    <div class="search">
+      🔎
+      <input id="searchInput" type="text" placeholder="ابحث عن مهارة (مثال: التنوين، أسلوب التفضيل...)" oninput="filterSkills()" />
+    </div>
+    <div class="hint">💡 تلميح: اضغط على الصورة لتكبيرها</div>
+  </div>
+
+  <!-- شبكة المهارات -->
+  <div class="skills" id="skillsGrid"></div>
+
+  <footer>تصميم وإعداد: صالحة علي الغامدي © جميع الحقوق محفوظة</footer>
+
+  <!-- نافذة تكبير الصورة -->
+  <div class="modal" id="imgModal" onclick="closeImgModal(event)">
+    <div class="modalCard" onclick="event.stopPropagation()">
       <div class="modalHead">
-        <div class="mTitle" id="mTitle">اختبار</div>
-        <button class="closeBtn" type="button" onclick="closeQuiz()">إغلاق ✕</button>
+        <span id="imgModalTitle">عرض الصورة</span>
+        <button class="close" onclick="closeImgModal()">إغلاق ✕</button>
       </div>
-      <div class="modalBody">
-        <div class="qBox">
-          <p class="qText" id="qText">—</p>
-          <div class="opts" id="opts"></div>
-        </div>
-        <div class="meta">
-          <div class="scoreTag">النتيجة: <span id="score">0</span> / 5</div>
-          <div>السؤال: <span id="qNo">1</span> / 5</div>
-        </div>
+      <div class="modalImgWrap">
+        <img id="imgModalSrc" src="" alt="صورة مكبرة" />
       </div>
     </div>
   </div>
 
-  <script>
-    /***********************
-     * بيانات المهارات: صورة + فيديو + بنك أسئلة (5 أسئلة)
-     * ملاحظة: استخدمت أسئلة عامة بسيطة حسب طلبك.
-     ***********************/
-    const SKILLS = [
-      {
-        id:"word_types",
-        name:"أقسام الكلمة (اسم/فعل/حرف)",
-        img:"images/skill_word_types.png",
-        video:"https://youtu.be/CvTvx1TRYw4",
-        quiz:[
-          q("أي الكلمات اسم؟","مدرسة",["يلعب","في","ذهب"]),
-          q("أي الكلمات فعل؟","كتبَ",["كتاب","على","قلم"]),
-          q("أي الكلمات حرف؟","إلى",["الطالب","يقرأ","دفتر"]),
-          q("الجملة: «قرأَ الطالبُ الدرسَ» — الكلمة الفعل هي:","قرأَ",["الطالبُ","الدرسَ","الـ"]),
-          q("الكلمة «في» تُعد:","حرف",["اسم","فعل","صفة"]),
-        ]
-      },
-      {
-        id:"verb_types",
-        name:"أنواع الفعل (ماضٍ/مضارع/أمر)",
-        img:"images/skill_verb-types.png",
-        video:"https://youtu.be/-fNt_5kOvIs",
-        quiz:[
-          q("الفعل «ذهبَ» نوعه:","ماضٍ",["مضارع","أمر","اسم"]),
-          q("الفعل «يكتبُ» نوعه:","مضارع",["ماضٍ","أمر","حرف"]),
-          q("الفعل «اكتبْ» نوعه:","أمر",["ماضٍ","مضارع","اسم"]),
-          q("أي الأفعال ماضٍ؟","نجحَ",["ينجحُ","انجحْ","نجاح"]),
-          q("أي الأفعال مضارع؟","يلعبُ",["لعبَ","اللاعب","الملعب"]),
-        ]
-      },
-      {
-        id:"title",
-        name:"عنوان النص",
-        img:"images/skill_title.png",
-        video:"https://youtu.be/KWRbbfoP20c",
-        quiz:[
-          q("العنوان المناسب عادةً يكون:","قصيرًا ومعبرًا",["طويلًا جدًا","جملة عشوائية","كلمة بلا معنى"]),
-          q("أفضل عنوان لنص عن النظافة:","النظافة عنوان الصحة",["أسرار الفضاء","رحلة إلى البحر","المطر الجميل"]),
-          q("العنوان يساعد القارئ على:","معرفة فكرة النص",["نسيان النص","تغيير اللغة","إطالة القراءة"]),
-          q("أي عنوان أنسب لقصة عن الصدق؟","الصدق نجاة",["ألوان الربيع","المقصف المدرسي","كرة القدم"]),
-          q("من صفات العنوان الجيد:","واضح وجذاب",["مبهم جدًا","مكرر بلا معنى","غير مرتبط بالنص"]),
-        ]
-      },
-      {
-        id:"tanween",
-        name:"التنوين",
-        img:"images/skill_tanween.png",
-        video:"https://youtu.be/U3D7_jGq5NA",
-        quiz:[
-          q("علامة التنوين تظهر في آخر:","الاسم",["الفعل","الحرف","الجملة"]),
-          q("أي كلمة فيها تنوين؟","كتابٌ",["الكتاب","يكتب","في"]),
-          q("تنوين الفتح يكون شكله:","ـً",["ـٌ","ـٍ","ـْ"]),
-          q("أي كلمة بتنوين الكسر؟","حديقةٍ",["حديقةٌ","حديقةً","الحديقة"]),
-          q("التنوين يدل غالبًا على:","نكرة",["معرفة","فعل","حرف"]),
-        ]
-      },
-      {
-        id:"tafdeel",
-        name:"اسم التفضيل",
-        img:"images/skill_tafdeel.png",
-        video:"https://youtu.be/pl5BGnN-Cdc",
-        quiz:[
-          q("اسم التفضيل غالبًا يأتي على وزن:","أفعل",["فاعل","مفعول","فعيل"]),
-          q("أي كلمة اسم تفضيل؟","أكبر",["كبير","كبرَ","تكبير"]),
-          q("جملة: «الصدقُ أفضلُ من الكذب» — اسم التفضيل هو:","أفضل",["الصدق","من","الكذب"]),
-          q("«أسرع» تعني:","أكثر سرعة",["سرعة","سريع","سرّع"]),
-          q("أي كلمة ليست اسم تفضيل؟","جميل",["أجمل","أفضل","أقوى"]),
-        ]
-      },
-      {
-        id:"taa",
-        name:"التاء المربوطة والتاء المفتوحة والهاء",
-        img:"images/skill_taa-skills.png",
-        video:"https://youtu.be/R8fLZZjPZ6I",
-        quiz:[
-          q("كلمة «مدرسة» تنتهي بـ:","تاء مربوطة",["هاء","تاء مفتوحة","ألف"]),
-          q("كلمة «بنت» تنتهي بـ:","تاء مفتوحة",["تاء مربوطة","هاء","ياء"]),
-          q("عند الوقف على «مدرسة» تُنطق غالبًا:","مدرسه",["مدرست","مدرسا","مدرسي"]),
-          q("كلمة «وجه» تنتهي بـ:","هاء",["تاء مربوطة","تاء مفتوحة","واو"]),
-          q("أي كلمة فيها تاء مربوطة؟","حديقة",["بيت","ولد","قلم"]),
-        ]
-      },
-      {
-        id:"synonyms",
-        name:"المرادفات",
-        img:"images/skill_synonyms.png",
-        video:"https://youtu.be/Ue9sNE6oF98",
-        quiz:[
-          q("مرادف «سعيد» هو:","فرِح",["حزين","غاضب","متعب"]),
-          q("مرادف «كبير» هو:","عظيم",["صغير","قصير","ضعيف"]),
-          q("مرادف «سريع» هو:","عاجل",["بطيء","ثقيل","متأخر"]),
-          q("مرادف «نظيف» هو:","طاهر",["متسخ","مبلل","غامق"]),
-          q("مرادف «ذكي» هو:","فَطِن",["كسول","جاهل","غافل"]),
-        ]
-      },
-      {
-        id:"sunmoon",
-        name:"اللام الشمسية واللام القمرية",
-        img:"images/skill_sun-moon-lam.png",
-        video:"https://youtu.be/3-B4xd83GXw",
-        quiz:[
-          q("في «الشمس» اللام:","شمسية",["قمرية","ساكنة","مخففة"]),
-          q("في «القمر» اللام:","قمرية",["شمسية","محذوفة","مشددة دائمًا"]),
-          q("أي كلمة فيها لام شمسية؟","الطريق",["البيت","القلم","الكتاب"]),
-          q("أي كلمة فيها لام قمرية؟","الكتاب",["السماء","الشارع","النظافة"]),
-          q("عند اللام الشمسية:","تُدغم اللام في الحرف",["تظهر اللام دائمًا","تحذف الألف","يتغير معنى الكلمة"]),
-        ]
-      },
-      {
-        id:"sentence",
-        name:"الجملة المفيدة",
-        img:"images/skill_sentence.png",
-        video:"https://youtu.be/4NxjcMu9kV4",
-        quiz:[
-          q("الجملة المفيدة هي التي:","تعطي معنى تامًا",["تبدأ بحرف فقط","تكون كلمة واحدة بلا معنى","تكون رموزًا"]),
-          q("أي عبارة جملة مفيدة؟","ذهبَ الطالبُ إلى المدرسة",["في المدرسة","الطالبُ","إلى"]),
-          q("الجملة تتكون غالبًا من:","كلمتين فأكثر",["حرف واحد","نقطة فقط","رقم فقط"]),
-          q("«الجوُ جميلٌ» نوعها:","جملة اسمية",["جملة فعلية","حرف","فعل"]),
-          q("«يلعبُ الطفلُ» نوعها:","جملة فعلية",["جملة اسمية","حرف","اسم"]),
-        ]
-      },
-      {
-        id:"punct",
-        name:"أدوات الترقيم",
-        img:"images/skill_punctuation.png",
-        video:"https://youtu.be/BpVqfG4LbCc",
-        quiz:[
-          q("علامة الاستفهام هي:","؟",["!","،","."]),
-          q("علامة التعجب هي:","!",["؟","؛","،"]),
-          q("تُستخدم الفاصلة (،) للفصل بين:","الجمل القصيرة أو المفردات",["الكلمات المتصلة","الحروف فقط","الأرقام فقط"]),
-          q("تُستخدم النقطة (.) في نهاية:","الجملة الخبرية",["السؤال","التعجب","النداء"]),
-          q("العلامة المناسبة: «كم هو جميلٌ هذا المنظر ___»","!",["؟","،","."]),
-        ]
-      },
-      {
-        id:"number",
-        name:"المفرد والمثنى والجمع",
-        img:"images/skill_number.png",
-        video:"https://youtu.be/fAdCP1qmLR0",
-        quiz:[
-          q("كلمة «طالبان» تدل على:","مثنى",["مفرد","جمع","حرف"]),
-          q("كلمة «طلاب» تدل على:","جمع",["مفرد","مثنى","فعل"]),
-          q("كلمة «كتاب» تدل على:","مفرد",["مثنى","جمع","حرف"]),
-          q("مثنى «قلم» هو:","قلمان",["أقلام","قلمون","قلمة"]),
-          q("جمع «حديقة» هو:","حدائق",["حديقتان","حديقةً","حديقةٌ"]),
-        ]
-      },
-      {
-        id:"mainidea",
-        name:"الفكرة الرئيسة",
-        img:"images/skill_main_idea.png",
-        video:"https://youtu.be/jhuaaQjiZIs",
-        quiz:[
-          q("الفكرة الرئيسة هي:","أهم ما يدور حوله النص",["تفاصيل صغيرة","كلمة صعبة","اسم الكاتب فقط"]),
-          q("لنص عن ترشيد الماء، الفكرة الرئيسة:","الحفاظ على الماء",["ألعاب الصيف","رحلة جوية","أنواع الطعام"]),
-          q("الفكرة الرئيسة تُستخرج غالبًا من:","العنوان ومحتوى النص",["لون الصفحة","اسم المدرسة","شكل الخط"]),
-          q("أي عبارة تمثل فكرة عامة؟","أهمية التعاون",["قلم أزرق","كتاب جديد","كرسي مكسور"]),
-          q("من علامات الفكرة الرئيسة أنها:","تتكرر أو تدعمها التفاصيل",["لا علاقة لها بالتفاصيل","تكون كلمة عشوائية","تكون رقمًا"]),
-        ]
-      },
-      {
-        id:"mad",
-        name:"حروف المد",
-        img:"images/skill_mad-letters.png",
-        video:"https://youtu.be/MbTOjRgayT0",
-        quiz:[
-          q("حروف المد هي:","ا، و، ي",["ب، ت، ث","س، ش، ص","د، ذ، ر"]),
-          q("في كلمة «كتاب» حرف المد هو:","الألف (ا)",["الكاف","التاء","الباء"]),
-          q("في كلمة «نور» حرف المد هو:","الواو (و)",["النون","الراء","لا يوجد"]),
-          q("في كلمة «قيل» حرف المد هو:","الياء (ي)",["القاف","اللام","لا يوجد"]),
-          q("حرف المد يأتي بعد:","حركة مناسبة",["سكون دائمًا","همزة دائمًا","شدّة دائمًا"]),
-        ]
-      },
-      {
-        id:"gender",
-        name:"المذكر والمؤنث",
-        img:"images/skill_gender.png",
-        video:"https://youtu.be/ufdUobvMz-E",
-        quiz:[
-          q("كلمة «معلمة» هي:","مؤنث",["مذكر","جمع","مثنى"]),
-          q("كلمة «طالب» هي:","مذكر",["مؤنث","جمع","حرف"]),
-          q("غالبًا علامة التأنيث تكون:","التاء المربوطة",["الألف المقصورة","الواو","الهمزة"]),
-          q("أي كلمة مؤنثة؟","شجرة",["ولد","قلم","درس"]),
-          q("أي كلمة مذكّرة؟","رجل",["فتاة","مدرسة","حديقة"]),
-        ]
-      },
-      {
-        id:"faelmafool",
-        name:"اسم الفاعل واسم المفعول",
-        img:"images/skill_fael-mafool.png",
-        video:"https://youtu.be/BgrU8E4PhGE?si=IELDSzT6zulwipKf",
-        quiz:[
-          q("اسم الفاعل يدل على:","من قام بالفعل",["من وقع عليه الفعل","المكان","الزمان"]),
-          q("اسم المفعول يدل على:","من وقع عليه الفعل",["من قام بالفعل","الحرف","العدد"]),
-          q("«كاتب» هو:","اسم فاعل",["اسم مفعول","فعل","حرف"]),
-          q("«مكتوب» هو:","اسم مفعول",["اسم فاعل","اسم مكان","فعل"]),
-          q("«لاعب» هو:","اسم فاعل",["اسم مفعول","حرف","ظرف"]),
-        ]
-      },
-      {
-        id:"exception",
-        name:"أسلوب الاستثناء",
-        img:"images/skill_exception.png",
-        video:"https://youtu.be/_l3t_vDpIJE",
-        quiz:[
-          q("في «حضر الطلابُ إلا طالبًا» أداة الاستثناء هي:","إلا",["حضر","الطلاب","طالبًا"]),
-          q("في نفس الجملة، المستثنى هو:","طالبًا",["الطلاب","إلا","حضر"]),
-          q("من أدوات الاستثناء:","غير",["ثم","لكن","لعل"]),
-          q("جملة فيها استثناء:","نجح الجميعُ إلا طالبًا",["ذهب الطالبُ","الجو جميل","في المدرسة"]),
-          q("المستثنى منه في «نجح الجميع إلا طالبًا» هو:","الجميع",["طالبًا","إلا","نجح"]),
-        ]
-      },
-      {
-        id:"compare",
-        name:"أوجه الشبه والاختلاف",
-        img:"images/skill_compare.png",
-        video:"https://youtu.be/ySR-1AgoQPY",
-        quiz:[
-          q("وجه الشبه يعني:","ما يتفق فيه شيئان",["ما يختلف فيه شيئان","عنوان النص","نهاية القصة"]),
-          q("وجه الاختلاف يعني:","ما يختلف فيه شيئان",["ما يتشابه فيه شيئان","اسم الكاتب","نوع الخط"]),
-          q("إذا كان النص عن مدرستين، يمكن المقارنة في:","النظافة والتعاون",["لون الورق فقط","عدد الحروف","شكل النقطة"]),
-          q("مثال وجه شبه:","كلاهما يحب القراءة",["واحد طويل والآخر قصير (اختلاف)","نقطة في النهاية","علامة استفهام"]),
-          q("مثال وجه اختلاف:","هذا يقرأ صباحًا وذاك مساءً",["كلاهما يقرأ","كلاهما مجتهد","كلاهما سعيد"]),
-        ]
-      },
-      {
-        id:"antonyms",
-        name:"الأضداد",
-        img:"images/skill_antonyms.png",
-        video:"https://youtu.be/kqTJtHz8U-Y",
-        quiz:[
-          q("ضد «كبير» هو:","صغير",["عظيم","طويل","جميل"]),
-          q("ضد «سريع» هو:","بطيء",["قوي","واضح","سهل"]),
-          q("ضد «نظيف» هو:","متسخ",["مرتب","جميل","هادئ"]),
-          q("ضد «فرح» هو:","حزن",["سرور","سعادة","بهجة"]),
-          q("ضد «قريب» هو:","بعيد",["قريبًا","اقتراب","قرابة"]),
-        ]
-      },
-    ];
+  <!-- نافذة الاختبار -->
+  <div class="modal quizModal" id="quizModal" onclick="closeQuizModal(event)">
+    <div class="modalCard" onclick="event.stopPropagation()">
+      <div class="modalHead">
+        <span id="quizTitle">اختبار</span>
+        <button class="close" onclick="closeQuizModal()">إغلاق ✕</button>
+      </div>
 
-    function q(text, correct, wrong){
-      return { text, correct, wrong };
-    }
+      <div class="quizBody">
+        <div class="qTop">
+          <div class="pill" id="qCount">السؤال 1 / 5</div>
+          <div class="pill" id="qScore">النتيجة: 0</div>
+        </div>
 
-    /***********************
-     * Render pills + cards
-     ***********************/
-    const pillsEl = document.getElementById("skillsPills");
-    const gridEl  = document.getElementById("grid");
-    const searchEl = document.getElementById("search");
+        <div class="question" id="qText">...</div>
+        <div class="choices" id="qChoices"></div>
 
-    let activeSkillId = SKILLS[0]?.id || null;
+        <div class="qActions">
+          <button class="btn2 secondary" onclick="restartQuiz()">إعادة الاختبار</button>
+          <button class="btn2" id="nextBtn" onclick="nextQuestion()" disabled>التالي</button>
+        </div>
 
-    function render(){
-      const term = (searchEl.value || "").trim();
+        <div class="result" id="resultBox"></div>
+      </div>
+    </div>
+  </div>
 
-      // pills
-      pillsEl.innerHTML = "";
-      SKILLS.forEach(s=>{
-        if(term && !s.name.includes(term)) return;
-        const b = document.createElement("button");
-        b.className = "pill" + (s.id===activeSkillId ? " active":"");
-        b.type = "button";
-        b.textContent = s.name;
-        b.onclick = ()=>{
-          activeSkillId = s.id;
-          render();
-          // Scroll to first matching card
-          const card = document.querySelector(`[data-skill="${s.id}"]`);
-          if(card) card.scrollIntoView({behavior:"smooth", block:"start"});
-        };
-        pillsEl.appendChild(b);
-      });
+<script>
+/* =============================
+   1) بيانات المهارات + الاختبارات
+   ============================= */
 
-      // cards
-      gridEl.innerHTML = "";
-      SKILLS.forEach((s, idx)=>{
-        if(term && !s.name.includes(term)) return;
+/* ملاحظة:
+- img: اسم الصورة كما هو عندك (في نفس مجلد skills.html)
+- video: رابط اليوتيوب
+- quiz: 5 أسئلة (كل سؤال: نص + خيارات + رقم الإجابة الصحيحة index)
+*/
+const skillsData = [
+  {
+    key: "tanween",
+    title: "التنوين",
+    img: "skill_tanween.png",
+    video: "https://youtu.be/U3D7_jGq5NA",
+    quiz: [
+      { q:"علامة التنوين تكون…", choices:["حرفًا مستقلًا", "نونًا ساكنة تُنطق ولا تُكتب", "حركة تُكتب ولا تُنطق", "همزة على الألف"], correct:1 },
+      { q:"من أمثلة التنوين بالضم:", choices:["كِتابٍ", "كِتابًا", "كِتابٌ", "الكِتاب"], correct:2 },
+      { q:"التنوين بالفتح يُكتب غالبًا…", choices:["مرتين تحت الحرف", "مرتين فوق الحرف", "مع ألف بعده في آخر الاسم (غالبًا)", "مع شدة"], correct:2 },
+      { q:"التنوين يكون في…", choices:["الأسماء فقط", "الأفعال فقط", "الحروف فقط", "الأسماء والأفعال"], correct:0 },
+      { q:"الكلمة المنونة هي:", choices:["هذا", "الولدُ", "ولدٌ", "المدرسة"], correct:2 },
+    ]
+  },
+  {
+    key:"title",
+    title:"العنوان المناسب",
+    img:"skill_title.png",
+    video:"https://youtu.be/KWRbbfoP20c",
+    quiz:[
+      { q:"العنوان المناسب للنص هو الذي…", choices:["لا علاقة له بالنص", "يعبّر عن الفكرة العامة", "يصف شخصية واحدة فقط دائمًا", "يكون طويلًا جدًا"], correct:1 },
+      { q:"أفضل طريقة لاختيار عنوان:", choices:["قراءة النص سريعًا", "معرفة الكلمات الصعبة فقط", "تحديد الفكرة العامة", "نسخ أول جملة"], correct:2 },
+      { q:"عنوان مناسب لقصة عن صديق يساعد زميله:", choices:["رحلة إلى البحر", "التعاون والصداقة", "لعبة جديدة", "أيام الشتاء"], correct:1 },
+      { q:"عنوان غير مناسب:", choices:["يحكي مضمون النص", "يعكس الفكرة الرئيسة", "بعيد عن الموضوع", "قصير وواضح"], correct:2 },
+      { q:"العنوان الجيد عادة يكون…", choices:["غامضًا", "واضحًا وجذابًا", "مكررًا جدًا", "غير مفهوم"], correct:1 },
+    ]
+  },
+  {
+    key:"wordTypes",
+    title:"أنواع الكلمة",
+    img:"skill_word_types.png",
+    video:"https://youtu.be/CvTvx1TRYw4",
+    quiz:[
+      { q:"تنقسم الكلمة في اللغة العربية إلى:", choices:["اسم وفعل فقط", "اسم وفعل وحرف", "حرف فقط", "اسم وحرف فقط"], correct:1 },
+      { q:"(ذهب) نوعها:", choices:["اسم", "فعل", "حرف", "صفة"], correct:1 },
+      { q:"(في) نوعها:", choices:["اسم", "فعل", "حرف", "ضمير"], correct:2 },
+      { q:"(المدرسة) نوعها:", choices:["اسم", "فعل", "حرف", "أداة"], correct:0 },
+      { q:"الحرف هو:", choices:["ما يدل على معنى في نفسه", "ما يدل على معنى مع غيره", "ما يقبل (ال)", "ما يدل على زمن"], correct:1 },
+    ]
+  },
+  {
+    key:"verbTypes",
+    title:"أنواع الفعل",
+    img:"skill_verb-types.png",
+    video:"https://youtu.be/-fNt_5kOvIs",
+    quiz:[
+      { q:"الفعل الماضي يدل على…", choices:["الحاضر", "المستقبل", "الحدث في الزمن الماضي", "الاسم"], correct:2 },
+      { q:"(يكتب) فعل…", choices:["ماضٍ", "مضارع", "أمر", "حرف"], correct:1 },
+      { q:"(اكتب) فعل…", choices:["ماضٍ", "مضارع", "أمر", "اسم"], correct:2 },
+      { q:"علامة المضارع غالبًا يبدأ بـ:", choices:["أ، ن، ي، ت", "س", "ال", "لن"], correct:0 },
+      { q:"(سأذهب) يدل على:", choices:["الماضي", "الحاضر", "المستقبل", "الاسم"], correct:2 },
+    ]
+  },
+  {
+    key:"tafdeel",
+    title:"أسلوب التفضيل",
+    img:"skill_tafdeel.png",
+    video:"https://youtu.be/pl5BGnN-Cdc",
+    quiz:[
+      { q:"صيغة التفضيل تكون غالبًا على وزن:", choices:["فَعَّال", "أفعل", "مفعول", "فعيل"], correct:1 },
+      { q:"(أكبر) مثال على:", choices:["اسم مكان", "اسم تفضيل", "فعل مضارع", "حرف"], correct:1 },
+      { q:"جملة فيها تفضيل:", choices:["الجو جميل", "الطالب أذكى من زميله", "ذهب محمد", "في المدرسة"], correct:1 },
+      { q:"اسم التفضيل يُستخدم للمقارنة بين…", choices:["شيئين أو أكثر", "حرفين", "فعلين فقط", "جملتين فقط"], correct:0 },
+      { q:"(أفضل) معناها:", choices:["الأقل", "الأحسن", "الماضي", "الضعيف"], correct:1 },
+    ]
+  },
+  {
+    key:"syn",
+    title:"المرادفات",
+    img:"skill_synonyms.png",
+    video:"https://youtu.be/Ue9sNE6oF98",
+    quiz:[
+      { q:"المرادف هو:", choices:["كلمة عكس المعنى", "كلمة قريبة في المعنى", "كلمة بلا معنى", "جملة طويلة"], correct:1 },
+      { q:"مرادف (سعيد):", choices:["حزين", "فرِح", "غاضب", "متعب"], correct:1 },
+      { q:"مرادف (سريع):", choices:["بطيء", "عاجل", "قليل", "ثقيل"], correct:1 },
+      { q:"نستخدم المرادفات من أجل:", choices:["إضعاف النص", "تنويع الأسلوب", "زيادة الأخطاء", "تكرار نفس الكلمات دائمًا"], correct:1 },
+      { q:"مرادف (كبير):", choices:["ضخم", "صغير", "خفيف", "ضعيف"], correct:0 },
+    ]
+  },
+  {
+    key:"ant",
+    title:"الأضداد",
+    img:"skill_antonyms.png",
+    video:"https://youtu.be/kqTJtHz8U-Y",
+    quiz:[
+      { q:"الضد هو:", choices:["كلمة نفس المعنى", "كلمة عكس المعنى", "جملة مفيدة", "حرف"], correct:1 },
+      { q:"ضد (حار):", choices:["دافئ", "بارد", "جميل", "قريب"], correct:1 },
+      { q:"ضد (نجح):", choices:["تفوق", "رسب", "سرّ", "قرأ"], correct:1 },
+      { q:"ضد (طويل):", choices:["قصير", "كبير", "سريع", "سهل"], correct:0 },
+      { q:"ضد (نشاط):", choices:["تعب", "فرح", "نور", "ذكاء"], correct:0 },
+    ]
+  },
+  {
+    key:"mainIdea",
+    title:"الفكرة الرئيسة",
+    img:"skill_main_idea.png",
+    video:"https://youtu.be/jhuaaQjiZIs",
+    quiz:[
+      { q:"الفكرة الرئيسة هي:", choices:["تفصيل صغير", "عنوان النص", "أهم فكرة يدور حولها النص", "كلمة صعبة"], correct:2 },
+      { q:"لإيجاد الفكرة الرئيسة:", choices:["نقرأ العنوان ونحدد موضوع النص", "نحفظ النص", "نبحث عن أطول كلمة", "نقرأ آخر كلمة فقط"], correct:0 },
+      { q:"الفكرة الرئيسة غالبًا تكون…", choices:["في كل سطر مختلفة", "مرتبطة بكل النص", "لا علاقة لها بالنص", "في الأسماء فقط"], correct:1 },
+      { q:"التفاصيل في النص هدفها:", choices:["شرح الفكرة الرئيسة", "إخفاء الفكرة", "إرباك القارئ", "حذف العنوان"], correct:0 },
+      { q:"إذا كان النص عن فوائد القراءة فالفكرة الرئيسة:", choices:["القراءة مفيدة", "الكتاب ثقيل", "المعلم يشرح", "الدفتر جميل"], correct:0 },
+    ]
+  },
+];
 
-        const card = document.createElement("div");
-        card.className = "card";
-        card.setAttribute("data-skill", s.id);
+/* =============================
+   2) بناء الصفحة (بطاقات)
+   ============================= */
+const grid = document.getElementById("skillsGrid");
 
-        card.innerHTML = `
-          <div class="imgWrap">
-            <div class="badge">مهارة ${idx+1}</div>
-            <img src="${s.img}" alt="${s.name}" onerror="this.style.display='none'">
-          </div>
-          <div class="cardBody">
-            <h3>${s.name}</h3>
-            <p>فيديو كرتوني + اختبار سريع (5 أسئلة).</p>
-            <div class="btns">
-              <button class="btn videoBtn" type="button">🎬 فيديو</button>
-              <button class="btn quizBtn" type="button">📝 اختبار</button>
-            </div>
-          </div>
-        `;
+function renderSkills(list){
+  grid.innerHTML = "";
+  list.forEach(skill => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.title = skill.title;
 
-        const videoBtn = card.querySelector(".videoBtn");
-        const quizBtn  = card.querySelector(".quizBtn");
+    card.innerHTML = `
+      <div class="imgwrap" title="اضغط لتكبير الصورة">
+        <div class="zoomBadge">🔍 تكبير</div>
+        <img src="${skill.img}" alt="شرح ${skill.title}" />
+      </div>
+      <div class="cardbody">
+        <h3>${skill.title}</h3>
+        <p class="sub">الصورة توضح المهارة بشكل بصري — ثم اختر فيديو أو اختبار.</p>
+        <div class="actions">
+          <button class="video">🎬 فيديو الشرح</button>
+          <button class="quiz">📝 اختبار (5 أسئلة)</button>
+        </div>
+      </div>
+    `;
 
-        videoBtn.onclick = ()=> openVideo(s.video);
-        quizBtn.onclick  = ()=> startQuiz(s);
-
-        gridEl.appendChild(card);
-      });
-    }
-
-    searchEl.addEventListener("input", render);
-
-    function openVideo(url){
-      window.open(url, "_blank");
-    }
-
-    function goHome(){
-      window.location.href = "index.html";
-    }
-
-    /***********************
-     * Quiz modal (5 questions)
-     ***********************/
-    const overlay = document.getElementById("overlay");
-    const mTitle  = document.getElementById("mTitle");
-    const qTextEl = document.getElementById("qText");
-    const optsEl  = document.getElementById("opts");
-    const scoreEl = document.getElementById("score");
-    const qNoEl   = document.getElementById("qNo");
-
-    let quizSkill = null;
-    let quizItems = [];
-    let qi = 0;
-    let score = 0;
-    let locked = false;
-
-    function startQuiz(skill){
-      quizSkill = skill;
-      quizItems = shuffle(skill.quiz).slice(0,5);
-      qi = 0;
-      score = 0;
-      scoreEl.textContent = "0";
-      qNoEl.textContent = "1";
-      mTitle.textContent = `اختبار: ${skill.name}`;
-      overlay.classList.add("show");
-      overlay.setAttribute("aria-hidden","false");
-      renderQuestion();
-    }
-
-    function renderQuestion(){
-      locked = false;
-      const item = quizItems[qi];
-      qTextEl.textContent = item.text;
-
-      const options = shuffle([item.correct, ...item.wrong]).slice(0,4);
-      optsEl.innerHTML = "";
-      options.forEach(opt=>{
-        const b = document.createElement("button");
-        b.className = "opt";
-        b.type = "button";
-        b.textContent = opt;
-        b.onclick = ()=> answer(opt, item.correct);
-        optsEl.appendChild(b);
-      });
-
-      qNoEl.textContent = String(qi+1);
-      scoreEl.textContent = String(score);
-    }
-
-    function answer(chosen, correct){
-      if(locked) return;
-      locked = true;
-
-      const btns = [...optsEl.children];
-      btns.forEach(b=>b.classList.add("disabled"));
-
-      const isOk = chosen.trim() === correct.trim();
-      btns.forEach(b=>{
-        const t = b.textContent.trim();
-        if(t === correct.trim()) b.classList.add("good");
-        if(t === chosen.trim() && !isOk) b.classList.add("bad");
-      });
-
-      if(isOk) score++;
-
-      setTimeout(()=>{
-        if(qi < 4){
-          qi++;
-          renderQuestion();
-        }else{
-          // نهاية
-          scoreEl.textContent = String(score);
-          qTextEl.textContent = `انتهى الاختبار ✅\nنتيجتك: ${score} / 5`;
-          optsEl.innerHTML = `
-            <button class="opt good" type="button" onclick="restartQuiz()">إعادة الاختبار</button>
-            <button class="opt" type="button" onclick="closeQuiz()">إغلاق</button>
-          `;
-        }
-      }, 650);
-    }
-
-    function restartQuiz(){
-      if(!quizSkill) return;
-      startQuiz(quizSkill);
-    }
-
-    function closeQuiz(){
-      overlay.classList.remove("show");
-      overlay.setAttribute("aria-hidden","true");
-      quizSkill = null;
-    }
-
-    overlay.addEventListener("click", (e)=>{
-      if(e.target === overlay) closeQuiz();
+    // تكبير الصورة
+    card.querySelector(".imgwrap").addEventListener("click", () => {
+      openImgModal(skill.title, skill.img);
     });
 
-    function shuffle(arr){
-      const a = arr.slice();
-      for(let i=a.length-1;i>0;i--){
-        const j = Math.floor(Math.random()*(i+1));
-        [a[i],a[j]]=[a[j],a[i]];
-      }
-      return a;
-    }
+    // فتح الفيديو
+    card.querySelector(".video").addEventListener("click", () => {
+      openVideo(skill.video);
+    });
 
-    // init
-    render();
-  </script>
+    // فتح الاختبار
+    card.querySelector(".quiz").addEventListener("click", () => {
+      openQuiz(skill);
+    });
+
+    grid.appendChild(card);
+  });
+}
+renderSkills(skillsData);
+
+/* بحث */
+function filterSkills(){
+  const q = (document.getElementById("searchInput").value || "").trim();
+  if(!q){ renderSkills(skillsData); return; }
+  const filtered = skillsData.filter(s => s.title.includes(q));
+  renderSkills(filtered);
+}
+
+/* العودة للرئيسية */
+function goHome(){
+  // إذا كانت الرئيسية index.html في نفس المجلد:
+  window.location.href = "index.html";
+}
+
+/* فتح فيديو */
+function openVideo(url){
+  // تشغيل الصوت لأول مرة (مطلوب في بعض المتصفحات)
+  ensureAudioUnlocked();
+  window.open(url, "_blank");
+}
+
+/* =============================
+   3) تكبير الصورة (Modal)
+   ============================= */
+const imgModal = document.getElementById("imgModal");
+const imgModalTitle = document.getElementById("imgModalTitle");
+const imgModalSrc = document.getElementById("imgModalSrc");
+
+function openImgModal(title, src){
+  ensureAudioUnlocked();
+  imgModalTitle.textContent = `عرض شرح: ${title}`;
+  imgModalSrc.src = src;
+  imgModal.classList.add("open");
+  // صوت لطيف
+  playDing();
+}
+
+function closeImgModal(e){
+  if(e && e.target && e.target.closest(".modalCard")) return;
+  imgModal.classList.remove("open");
+}
+
+/* =============================
+   4) الاختبارات الفعلية (5 أسئلة)
+   ============================= */
+const quizModal = document.getElementById("quizModal");
+const quizTitle = document.getElementById("quizTitle");
+const qCount = document.getElementById("qCount");
+const qScore = document.getElementById("qScore");
+const qText = document.getElementById("qText");
+const qChoices = document.getElementById("qChoices");
+const nextBtn = document.getElementById("nextBtn");
+const resultBox = document.getElementById("resultBox");
+
+let currentSkill = null;
+let currentIndex = 0;
+let score = 0;
+let locked = false;
+
+function openQuiz(skill){
+  ensureAudioUnlocked();
+  currentSkill = skill;
+  currentIndex = 0;
+  score = 0;
+  locked = false;
+  resultBox.style.display = "none";
+  quizTitle.textContent = `اختبار: ${skill.title}`;
+  quizModal.classList.add("open");
+  renderQuestion();
+  playDing();
+}
+
+function closeQuizModal(e){
+  if(e && e.target && e.target.closest(".modalCard")) return;
+  quizModal.classList.remove("open");
+}
+
+function renderQuestion(){
+  locked = false;
+  nextBtn.disabled = true;
+
+  const total = currentSkill.quiz.length;
+  const item = currentSkill.quiz[currentIndex];
+
+  qCount.textContent = `السؤال ${currentIndex + 1} / ${total}`;
+  qScore.textContent = `النتيجة: ${score}`;
+  qText.textContent = item.q;
+
+  qChoices.innerHTML = "";
+  item.choices.forEach((ch, idx) => {
+    const btn = document.createElement("div");
+    btn.className = "choice";
+    btn.textContent = ch;
+    btn.addEventListener("click", () => chooseAnswer(idx));
+    qChoices.appendChild(btn);
+  });
+}
+
+function chooseAnswer(idx){
+  if(locked) return;
+  locked = true;
+  const item = currentSkill.quiz[currentIndex];
+  const choicesEls = [...qChoices.querySelectorAll(".choice")];
+
+  if(idx === item.correct){
+    choicesEls[idx].classList.add("correct");
+    score++;
+    qScore.textContent = `النتيجة: ${score}`;
+    playCorrect();
+    showCheer("ممتاز! 👏 إجابة صحيحة");
+  }else{
+    choicesEls[idx].classList.add("wrong");
+    choicesEls[item.correct].classList.add("correct");
+    playWrong();
+    showCheer("حاول مرة أخرى 🌟 الصحيح مُحدد باللون الأخضر");
+  }
+
+  nextBtn.disabled = false;
+
+  // إذا كان آخر سؤال → زر إنهاء
+  if(currentIndex === currentSkill.quiz.length - 1){
+    nextBtn.textContent = "إنهاء";
+  }else{
+    nextBtn.textContent = "التالي";
+  }
+}
+
+function nextQuestion(){
+  if(currentIndex === currentSkill.quiz.length - 1){
+    finishQuiz();
+    return;
+  }
+  currentIndex++;
+  renderQuestion();
+}
+
+function finishQuiz(){
+  // تهنئة نهائية
+  const total = currentSkill.quiz.length;
+  resultBox.style.display = "block";
+
+  const percent = Math.round((score/total)*100);
+  let msg = `نتيجتك: ${score} من ${total} (${percent}%)`;
+
+  if(percent === 100){
+    msg += " 🎉 رائع جدًا! أنت بطل!";
+    playWin();
+  }else if(percent >= 60){
+    msg += " ✅ ممتاز! أكمل التقدم.";
+    playDing();
+  }else{
+    msg += " 🌱 بداية جميلة! أعد المحاولة لتحسن نتيجتك.";
+    playDing();
+  }
+
+  resultBox.textContent = msg;
+  nextBtn.disabled = true;
+}
+
+function restartQuiz(){
+  if(!currentSkill) return;
+  currentIndex = 0;
+  score = 0;
+  resultBox.style.display = "none";
+  nextBtn.textContent = "التالي";
+  renderQuestion();
+  playDing();
+}
+
+function showCheer(text){
+  // رسالة تشجيع خفيفة تظهر داخل صندوق النتيجة مؤقتًا
+  resultBox.style.display = "block";
+  resultBox.textContent = text;
+  setTimeout(() => {
+    // لا نخفيها إذا كان الاختبار انتهى
+    if(nextBtn.disabled) return;
+    resultBox.style.display = "none";
+  }, 1100);
+}
+
+/* =============================
+   5) الأصوات (بدون ملفات صوتية)
+   - نستخدم WebAudio لتجنب رفع ملفات
+   - ملاحظة: يجب أول تفاعل من المستخدم لفتح الصوت (مطبق هنا)
+   ============================= */
+let soundEnabled = true;
+let audioCtx = null;
+
+function ensureAudioUnlocked(){
+  if(!soundEnabled) return;
+  if(!audioCtx){
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AudioContext();
+  }
+  if(audioCtx && audioCtx.state === "suspended"){
+    audioCtx.resume();
+  }
+}
+
+function tone(freq=440, duration=0.12, type="sine", gain=0.08){
+  if(!soundEnabled) return;
+  ensureAudioUnlocked();
+  if(!audioCtx) return;
+
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.type = type;
+  o.frequency.value = freq;
+  g.gain.value = gain;
+
+  o.connect(g);
+  g.connect(audioCtx.destination);
+  o.start();
+  o.stop(audioCtx.currentTime + duration);
+}
+
+function playDing(){
+  // رنين لطيف
+  tone(880, 0.09, "sine", 0.08);
+  setTimeout(()=>tone(1175, 0.10, "sine", 0.07), 95);
+}
+
+function playCorrect(){
+  // نغمة نجاح
+  tone(784, 0.08, "triangle", 0.09);
+  setTimeout(()=>tone(988, 0.10, "triangle", 0.09), 90);
+  setTimeout(()=>tone(1319, 0.12, "triangle", 0.08), 190);
+}
+
+function playWrong(){
+  // نغمة خطأ
+  tone(220, 0.14, "sawtooth", 0.06);
+  setTimeout(()=>tone(196, 0.14, "sawtooth", 0.06), 120);
+}
+
+function playWin(){
+  // تهنئة قصيرة
+  playCorrect();
+  setTimeout(()=>tone(1568, 0.10, "triangle", 0.08), 350);
+  setTimeout(()=>tone(1760, 0.12, "triangle", 0.08), 470);
+}
+
+function toggleSound(){
+  soundEnabled = !soundEnabled;
+  const btn = document.getElementById("soundBtn");
+  btn.textContent = soundEnabled ? "🔊 الصوت: تشغيل" : "🔇 الصوت: إيقاف";
+  if(soundEnabled) playDing();
+}
+
+/* إغلاق بالنقر خارج النافذة */
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape"){
+    imgModal.classList.remove("open");
+    quizModal.classList.remove("open");
+  }
+});
+</script>
+
 </body>
 </html>
