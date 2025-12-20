@@ -1,128 +1,247 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لغتي الممتعة | الصفحة الرئيسية</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لغتي الممتعة | الصفحة الرئيسية</title>
 
-<style>
-body{
-  margin:0;
-  font-family: "Cairo", Arial, sans-serif;
-  background: linear-gradient(180deg,#eef2ff,#f8fafc);
-  color:#1f2937;
-}
+  <style>
+    :root{
+      --bg1:#f6f4ff;
+      --bg2:#eef1ff;
 
-.header{
-  background: linear-gradient(135deg,#6366f1,#4f46e5);
-  color:#fff;
-  padding:18px;
-  text-align:center;
-  font-size:22px;
-  font-weight:900;
-}
+      --ink:#1f2430;
+      --muted:#5b647a;
 
-.container{
-  max-width:900px;
-  margin:30px auto;
-  padding:0 16px;
-  text-align:center;
-}
+      --card: rgba(255,255,255,.72);
+      --stroke: rgba(255,255,255,.85);
+      --shadow: rgba(0,0,0,.12);
 
-h2{
-  margin-bottom:10px;
-}
+      --pri1:#4f46e5;
+      --pri2:#2f6fd8;
 
-.desc{
-  color:#475569;
-  margin-bottom:30px;
-  font-weight:600;
-}
+      --btnBlue1:#3b82f6; --btnBlue2:#1d4ed8;
+      --btnGreen1:#22c55e; --btnGreen2:#15803d;
+      --btnAmber1:#f59e0b; --btnAmber2:#b45309;
+    }
 
-.buttons{
-  display:flex;
-  gap:16px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:30px;
-}
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: "Cairo","Tajawal", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 50% -10%, var(--bg2), transparent 70%),
+        radial-gradient(900px 500px at 20% 0%, #ffffffaa, transparent 60%),
+        linear-gradient(180deg, var(--bg2), var(--bg1));
+      display:flex;
+      justify-content:center;
+      padding:18px 12px 26px;
+    }
 
-.mainBtn{
-  min-width:260px;
-  padding:16px 22px;
-  border-radius:999px;
-  border:none;
-  font-size:18px;
-  font-weight:900;
-  cursor:pointer;
-  color:#fff;
-  box-shadow:0 14px 28px rgba(0,0,0,.18);
-}
+    .wrap{
+      width:min(1020px, 96vw);
+    }
 
-.reading{
-  background:linear-gradient(135deg,#3b82f6,#2563eb);
-}
+    /* رأس الصفحة */
+    .hero{
+      background: linear-gradient(135deg, #4f46e5, #2f6fd8);
+      color:#fff;
+      border-radius:26px;
+      padding:18px 16px;
+      box-shadow: 0 18px 50px rgba(79,70,229,.22);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-80px -140px auto auto;
+      width:260px; height:260px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), transparent 60%);
+      border-radius:50%;
+      transform: rotate(15deg);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .heroTitle{
+      margin:0;
+      text-align:center;
+      font-weight:1000;
+      letter-spacing:.2px;
+      font-size: clamp(22px, 3.2vw, 34px);
+    }
+    .heroSub{
+      margin:8px 0 0;
+      text-align:center;
+      opacity:.95;
+      font-weight:900;
+      color:#eef2ff;
+      font-size: clamp(13px, 1.9vw, 16px);
+    }
 
-.vocab{
-  background:linear-gradient(135deg,#22c55e,#16a34a);
-}
+    /* صندوق المحتوى */
+    .panel{
+      margin-top:14px;
+      background: var(--card);
+      border:1px solid var(--stroke);
+      border-radius:26px;
+      padding:16px 14px 18px;
+      box-shadow: 0 18px 50px var(--shadow);
+      backdrop-filter: blur(10px);
+    }
 
-.skills{
-  background:linear-gradient(135deg,#f59e0b,#d97706);
-}
+    .sectionTitle{
+      text-align:center;
+      margin:8px 0 14px;
+      font-weight:1000;
+      font-size: clamp(18px, 2.5vw, 22px);
+      color:#1c2230;
+    }
+    .sectionHint{
+      text-align:center;
+      margin:-6px 0 14px;
+      color:var(--muted);
+      font-weight:900;
+      font-size: 13px;
+    }
 
-.mainBtn:hover{
-  opacity:.95;
-  transform:translateY(-1px);
-}
+    /* البطاقات */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
 
-.footer{
-  margin-top:40px;
-  padding:14px;
-  font-size:14px;
-  color:#475569;
-}
-</style>
+    .card{
+      border-radius:22px;
+      padding:14px;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow: 0 12px 26px rgba(0,0,0,.10);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-height: 170px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:1000;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(79,70,229,.12);
+      color:#2b2a66;
+      width: fit-content;
+    }
+
+    .cardTitle{
+      margin:0;
+      font-size:18px;
+      font-weight:1000;
+    }
+    .cardText{
+      margin:0;
+      color:var(--muted);
+      font-weight:900;
+      line-height:1.6;
+      font-size:14px;
+    }
+
+    .btn{
+      border:0;
+      border-radius:16px;
+      padding:12px 12px;
+      color:#fff;
+      font-weight:1000;
+      cursor:pointer;
+      box-shadow: 0 12px 22px rgba(0,0,0,.14);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-decoration:none;
+      user-select:none;
+    }
+    .btn:active{ transform: translateY(1px); }
+
+    .btnBlue{  background: linear-gradient(180deg, var(--btnBlue1),  var(--btnBlue2)); }
+    .btnGreen{ background: linear-gradient(180deg, var(--btnGreen1), var(--btnGreen2)); }
+    .btnAmber{ background: linear-gradient(180deg, var(--btnAmber1), var(--btnAmber2)); }
+
+    /* شريط سفلي */
+    .footer{
+      margin-top:14px;
+      text-align:center;
+      color:#6b7280;
+      font-weight:900;
+      font-size:13px;
+      padding:8px 0 0;
+    }
+    .sig{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,.72);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow: 0 10px 18px rgba(0,0,0,.08);
+    }
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-<div class="header">
-  منصة لغتي الممتعة
-</div>
+    <div class="hero">
+      <h1 class="heroTitle">منصّة لُغَتي المُمتِعَة</h1>
+      <p class="heroSub">اختر نشاطًا للبدء مباشرة</p>
+    </div>
 
-<div class="container">
+    <div class="panel">
+      <div class="sectionTitle">👇 اختر نشاطًا</div>
+      <div class="sectionHint">الأزرار تفتح الصفحات الموجودة داخل مشروعك</div>
 
-  <h2>اختاري مهارة 👇</h2>
-  <div class="desc">
-    اضغطي على أحد الخيارات للانتقال مباشرة
+      <div class="grid">
+
+        <!-- بنك الفهم (قراءة) -->
+        <div class="card">
+          <div class="badge">📘 بنك الفهم</div>
+          <h3 class="cardTitle">تدريبات الفهم القرائي</h3>
+          <p class="cardText">تدريب تفاعلي سريع بأسئلة متنوعة (من ملف اللعبة الموجود لديك).</p>
+          <a class="btn btnBlue" href="reading_skills_game.html">ابدأ الآن</a>
+        </div>
+
+        <!-- بنك الأسئلة (مفردات) -->
+        <div class="card">
+          <div class="badge">🧠 بنك الأسئلة</div>
+          <h3 class="cardTitle">تدريبات الأسئلة العامة</h3>
+          <p class="cardText">أسئلة سريعة ومتنوعة للتدريب والتثبيت (من ملف اللعبة الموجود لديك).</p>
+          <a class="btn btnGreen" href="vocab_game.html">ابدأ الآن</a>
+        </div>
+
+        <!-- بطاقات المهارات -->
+        <div class="card">
+          <div class="badge">🧩 بطاقات المهارات</div>
+          <h3 class="cardTitle">صور + فيديو + اختبار 5 أسئلة</h3>
+          <p class="cardText">اختر مهارة ثم افتح الفيديو أو حل اختبارًا قصيرًا داخل صفحة المهارات.</p>
+          <a class="btn btnAmber" href="skills.html">فتح صفحة المهارات</a>
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <span class="sig">© تصميم: صالحة علي الغامدي</span>
+      </div>
+    </div>
+
   </div>
-
-  <div class="buttons">
-    <!-- بنك الفهم -->
-    <button class="mainBtn reading"
-      onclick="location.href='reading_skills_game.html'">
-      📘بنك الفهم
-    </button>
-
-    <!-- بنك الاسئلة -->
-    <button class="mainBtn vocab"
-      onclick="location.href='vocab_game.html'">
-      🧠 بنك الاسئلة
-    </button>
-
-    <!--  بطاقات المهارات -->
-    <button class="mainBtn skills"
-      onclick="location.href='skills.html'">
-      🧩 بطاقات المهارات (صور + فيديو + اختبار)
-    </button>
-  </div>
-
-</div>
-
-<div class="footer">
-  تصميم: صالحة علي الغامدي © جميع الحقوق محفوظة
-</div>
-
 </body>
 </html>
