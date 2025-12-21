@@ -3,531 +3,528 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>الاختبار الإلكتروني (لغتي) — ٤ نماذج</title>
+  <title>الاختبار الإلكتروني (لغتي)</title>
 
   <style>
     :root{
       --bg1:#f3f0ff;
       --bg2:#e7e1ff;
+
       --ink:#1f2430;
+      --muted:#6b7280;
 
-      --card:#ffffffd9;
-      --card2:#ffffff;
+      --card:#ffffffcc;
+      --cardSolid:#fff;
 
-      --nav:#0b3b78;
-      --nav2:#0a2f61;
+      --nav1:#0b3a72;
+      --nav2:#082f5a;
 
-      --ok:#25c06d;
-      --bad:#ff3b5c;
+      --pill:#2c4669;
+      --pillOn:#ffffff;
+
+      --accent:#6b5bd6;
+      --accent2:#4c3fd4;
+
+      --green:#15b26b;
+      --green2:#0f8a52;
+
+      --red:#ff3b5b;
+      --red2:#d81433;
+
+      --blue:#2d8cff;
+      --blue2:#1f7be0;
 
       --shadow: rgba(0,0,0,.12);
-      --softShadow: rgba(0,0,0,.10);
+      --shadow2: rgba(0,0,0,.18);
 
-      --pick:#5b4fd6;
-      --pick2:#473db8;
+      --ring: rgba(107,91,214,.20);
+      --border: rgba(0,0,0,.06);
 
-      --optBg:#f7f8fc;
-      --optBorder:#d8ddea;
+      --paper:#fbfbff;         /* خلفية النص */
+      --paperBorder:#ececff;
 
-      --ring:#cbd5e1;
-
-      /* ✅ جديد: لون خلفية النص مختلف عن خلفية الأسئلة */
-      --passageBg1:#eef3ff;
-      --passageBg2:#e7ecff;
-      --passageBorder: rgba(91,79,214,.22);
+      --qbg:#ffffff;           /* خلفية الأسئلة */
     }
 
     *{ box-sizing:border-box; }
     body{
       margin:0;
       min-height:100vh;
-      font-family: "Cairo","Tajawal", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      font-family:"Cairo","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
       color:var(--ink);
       background: radial-gradient(1200px 600px at 50% 0%, var(--bg2), var(--bg1));
       display:flex;
       justify-content:center;
-      padding:14px 10px 26px;
+      padding:18px 12px 28px;
     }
 
     .wrap{
       width:min(980px, 96vw);
-      display:flex;
-      flex-direction:column;
-      gap:12px;
+      background: rgba(255,255,255,.55);
+      border:1px solid rgba(255,255,255,.7);
+      border-radius:26px;
+      padding:16px 14px 18px;
+      box-shadow: 0 18px 50px var(--shadow);
+      backdrop-filter: blur(10px);
     }
 
-    /* ===== Top Panel ===== */
-    .panel{
-      background: linear-gradient(180deg, var(--nav), var(--nav2));
+    /* ===== Header Card ===== */
+    .topCard{
+      background: linear-gradient(180deg, var(--nav1), var(--nav2));
+      border-radius:24px;
+      padding:16px 14px 14px;
       color:#fff;
-      border-radius:22px;
-      padding:14px 14px 12px;
-      box-shadow: 0 18px 48px rgba(7, 21, 46, .35);
+      box-shadow: 0 18px 45px rgba(0,0,0,.28);
       position:relative;
       overflow:hidden;
     }
-    .panel::before{
+    .topCard:before{
       content:"";
-      position:absolute; inset:auto -50px -60px auto;
-      width:200px; height:200px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), rgba(255,255,255,0));
-      border-radius:999px;
-      transform: rotate(18deg);
-      pointer-events:none;
+      position:absolute;
+      inset:auto -120px -120px auto;
+      width:260px;
+      height:260px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%);
+      transform: rotate(25deg);
     }
-
-    .panelTop{
+    .titleRow{
       display:flex;
-      gap:10px;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
-      flex-wrap:wrap;
+      gap:10px;
+      position:relative;
+      z-index:1;
     }
-
-    .panelTitle{
+    .mainTitle{
       font-weight:1000;
-      font-size:clamp(18px, 2.9vw, 26px);
-      line-height:1.3;
+      font-size:clamp(18px, 3.1vw, 26px);
       margin:0;
       display:flex;
       align-items:center;
       gap:8px;
+      line-height:1.2;
     }
-    .panelSub{
-      margin:6px 0 0;
+    .subTitle{
+      margin:6px 0 10px;
       opacity:.92;
-      font-weight:800;
-      font-size:clamp(12px, 2.2vw, 14px);
+      font-weight:900;
+      color:#e9efff;
+      position:relative;
+      z-index:1;
+      font-size:clamp(12px, 1.9vw, 14px);
     }
 
-    .models{
+    .modelBar{
       display:flex;
-      gap:8px;
       flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
+      gap:10px;
+      justify-content:center;
+      margin:12px 0 10px;
+      position:relative;
+      z-index:1;
     }
     .modelBtn{
       border:0;
       border-radius:999px;
       padding:10px 14px;
-      font-weight:1000;
-      cursor:pointer;
       background: rgba(255,255,255,.18);
       color:#fff;
-      box-shadow: 0 10px 22px rgba(0,0,0,.18);
-      transition: transform .12s ease, filter .12s ease, background .12s ease;
-      min-width:92px;
-      text-align:center;
+      font-weight:1000;
+      cursor:pointer;
+      min-width:110px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.16);
+      transition: transform .12s ease, filter .12s ease;
     }
-    .modelBtn:hover{ transform: translateY(-1px); filter:brightness(1.03); }
-    .modelBtn.active{ background:#fff; color:#0b3b78; }
+    .modelBtn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    .modelBtn.active{
+      background: var(--pillOn);
+      color:#13294a;
+      box-shadow: 0 12px 22px rgba(255,255,255,.18);
+    }
 
-    .panelMid{
-      margin-top:12px;
-      display:flex;
+    .hud{
+      display:grid;
+      grid-template-columns: 1fr;
       gap:10px;
+      margin-top:10px;
+      position:relative;
+      z-index:1;
+    }
+    .hudRow{
+      display:flex;
       flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
-    }
-
-    .timerPill{
-      display:flex;
-      align-items:center;
       gap:10px;
+      justify-content:center;
+      align-items:center;
+    }
+    .timePill{
       background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.18);
       padding:10px 14px;
       border-radius:999px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       font-weight:1000;
-      box-shadow: 0 12px 22px rgba(0,0,0,.18);
-      min-width:190px;
+      box-shadow: 0 12px 22px rgba(0,0,0,.14);
+      min-width: 220px;
       justify-content:center;
     }
-    .timerText{ font-size:16px; letter-spacing:.3px; }
-
-    .stats{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-start;
+    .timeVal{
+      font-size:20px;
+      letter-spacing:.5px;
     }
-    .stat{
-      min-width:150px;
-      border-radius:16px;
+
+    .scoreGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      width:min(860px, 100%);
+      margin: 0 auto;
+    }
+    .scoreBox{
+      border-radius:18px;
       padding:10px 12px;
       color:#fff;
       font-weight:1000;
-      box-shadow: 0 14px 26px rgba(0,0,0,.18);
+      text-align:center;
+      box-shadow: 0 12px 22px rgba(0,0,0,.12);
+      min-height:58px;
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+      flex-direction:column;
+      justify-content:center;
+      gap:2px;
     }
-    .stat .val{ font-size:18px; }
-    .statPts{ background: linear-gradient(180deg, #3aa0ff, #1f7be0); }
-    .statOk{ background: linear-gradient(180deg, #39d784, #1ea85e); }
-    .statBad{ background: linear-gradient(180deg, #ff5c78, #e01337); }
+    .scoreBox .lbl{ font-size:14px; opacity:.95; }
+    .scoreBox .val{ font-size:18px; }
+    .scoreBlue{ background: linear-gradient(180deg, var(--blue), var(--blue2)); }
+    .scoreGreen{ background: linear-gradient(180deg, var(--green), var(--green2)); }
+    .scoreRed{ background: linear-gradient(180deg, var(--red), var(--red2)); }
 
-    /* ===== Question Card ===== */
-    .card{
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,.75);
-      border-radius:22px;
-      padding:14px 14px 12px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.10);
-      backdrop-filter: blur(10px);
-    }
-
-    .qHeader{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    .qInfo{
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .qNo{
-      background: #fff;
-      border:1px solid rgba(0,0,0,.06);
-      padding:8px 12px;
-      border-radius:999px;
-      font-weight:1000;
-      box-shadow: 0 10px 20px rgba(0,0,0,.08);
-    }
-    .qHint{
-      font-weight:900;
-      opacity:.9;
-      color:#374151;
-      font-size:13px;
+    /* ===== Content ===== */
+    .content{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:12px;
     }
 
-    .qBody{
-      background: var(--card2);
-      border: 1px solid rgba(0,0,0,.06);
+    .note{
+      background: rgba(255,255,255,.65);
+      border:1px solid rgba(255,255,255,.8);
       border-radius:18px;
-      padding:12px 12px 10px;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);
+      padding:10px 12px;
+      color:#3b4358;
+      font-weight:900;
+      font-size:13px;
+      box-shadow: 0 12px 22px rgba(0,0,0,.06);
     }
 
-    /* ✅ خلفية النص مختلفة وواضحة */
-    .passage{
-      background: linear-gradient(180deg, var(--passageBg1), var(--passageBg2));
-      border:1px solid var(--passageBorder);
-      padding:12px 12px;
-      border-radius:16px;
-      margin-bottom:10px;
-      box-shadow: 0 10px 18px rgba(0,0,0,.06);
-    }
-    .passageTitle{
-      margin:0 0 8px;
-      font-weight:1000;
-      color:#1f2a44;
+    .qTopRow{
       display:flex;
       align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:2px;
+    }
+    .qCounter{
+      background: rgba(255,255,255,.95);
+      border:1px solid rgba(0,0,0,.05);
+      border-radius:999px;
+      padding:8px 12px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+      font-weight:1000;
+    }
+
+    /* ===== Passage Card ===== */
+    .passageCard{
+      background: var(--paper);
+      border:1px solid var(--paperBorder);
+      border-radius:18px;
+      padding:12px 12px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.06);
+    }
+    .passageHead{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
       gap:8px;
+      font-weight:1000;
+      margin-bottom:8px;
+      color:#1c2230;
     }
     .passageText{
-      margin:0;
+      background: rgba(255,255,255,.75);
+      border:1px dashed rgba(107,91,214,.20);
+      border-radius:16px;
+      padding:12px 12px;
       line-height:1.95;
       font-weight:900;
-      color:#0f172a;
-      font-size:15px;
+      color:#2a2f3a;
       white-space:pre-line;
     }
 
-    .question{
-      margin:0;
+    /* ===== Question Card ===== */
+    .questionCard{
+      background: var(--qbg);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:18px;
+      padding:12px 12px 12px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.06);
+    }
+    .qTitle{
       font-weight:1000;
-      font-size:16px;
-      line-height:1.85;
-      color:#111827;
-      padding:6px 2px 10px;
-      white-space:pre-line;
+      font-size:18px;
+      margin:2px 0 10px;
+      color:#1e2435;
+      line-height:1.7;
     }
 
-    /* ===== خيارات الإجابة ===== */
+    /* ===== Options ===== */
     .options{
       display:flex;
       flex-direction:column;
-      gap:12px;
+      gap:10px;
+      margin: 0;
+      padding: 0;
+      list-style:none;
     }
-
     .opt{
-      border:1px solid var(--optBorder);
-      background: linear-gradient(180deg, #ffffff, var(--optBg));
-      border-radius:18px;
-      padding:14px 14px;
-      cursor:pointer;
-      font-weight:1000;
-      box-shadow: 0 14px 26px rgba(0,0,0,.07);
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:16px;
+      padding:12px 12px;
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 10px 18px rgba(0,0,0,.05);
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      transition: transform .10s ease, border-color .12s ease, box-shadow .12s ease, background .12s ease;
-      position:relative;
-      overflow:hidden;
+      gap:10px;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease, box-shadow .08s ease, border-color .08s ease;
     }
-    .opt:hover{ transform: translateY(-1px); }
-    .opt:active{ transform: translateY(0); }
+    .opt:active{ transform: scale(.99); }
+    .opt:hover{
+      box-shadow: 0 14px 24px rgba(0,0,0,.07);
+      border-color: rgba(107,91,214,.25);
+    }
+    .optText{
+      font-weight:1000;
+      color:#2a2f3a;
+      line-height:1.6;
+      flex:1;
+    }
 
-    .badge{
-      width:40px; height:40px;
+    /* الدائرة يمين */
+    .optBadge{
+      width:44px;
+      height:44px;
       border-radius:999px;
+      border:2px solid rgba(107,91,214,.35);
       display:flex;
       align-items:center;
       justify-content:center;
       font-weight:1000;
-      background:#eef2ff;
-      color:#1d4ed8;
-      border:2px solid rgba(29,78,216,.20);
-      flex: 0 0 auto;
-      position:relative;
+      color:#2a2f3a;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 10px 18px rgba(107,91,214,.10);
+      flex:0 0 auto;
     }
 
-    .optText{
-      flex:1;
-      text-align:right;
-      font-size:16px;
-      color:#111827;
-      line-height:1.6;
+    /* ✅ عند الاختيار: تظليل واضح + الدائرة تتعبّى بالكامل */
+    .opt.selected{
+      border-color: rgba(107,91,214,.35);
+      box-shadow: 0 18px 30px rgba(107,91,214,.12);
+      outline: 3px solid var(--ring);
     }
-
-    .opt.chosen{
-      border-color: rgba(91,79,214,.70);
-      box-shadow: 0 18px 34px rgba(91,79,214,.18);
-      background: linear-gradient(180deg, #ffffff, #f1efff);
-    }
-    .opt.chosen .badge{
-      background: linear-gradient(180deg, var(--pick), var(--pick2));
+    .opt.selected .optBadge{
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border-color: transparent;
       color:#fff;
-      border-color: rgba(255,255,255,.55);
-      box-shadow: 0 12px 24px rgba(91,79,214,.30);
+      box-shadow: 0 14px 22px rgba(107,91,214,.22);
     }
-    .opt.chosen .badge::after{
-      content:"✓";
-      position:absolute;
-      left:-6px;
-      top:-6px;
-      width:18px; height:18px;
-      border-radius:999px;
-      background:#22c55e;
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
-      border:2px solid #fff;
-      box-shadow: 0 8px 16px rgba(0,0,0,.18);
-    }
-    .opt.disabled{ pointer-events:none; opacity:1; }
 
-    /* ===== زر التالي ===== */
-    .navUnder{
-      margin-top:14px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
+    /* بعد التصحيح */
+    .opt.correct{
+      border-color: rgba(21,178,107,.35);
+      outline: 3px solid rgba(21,178,107,.18);
     }
-    .btn{
+    .opt.correct .optBadge{
+      background: linear-gradient(180deg, var(--green), var(--green2));
+      border-color: transparent;
+      color:#fff;
+      box-shadow: 0 14px 22px rgba(21,178,107,.22);
+    }
+    .opt.wrong{
+      border-color: rgba(255,59,91,.35);
+      outline: 3px solid rgba(255,59,91,.16);
+    }
+    .opt.wrong .optBadge{
+      background: linear-gradient(180deg, var(--red), var(--red2));
+      border-color: transparent;
+      color:#fff;
+      box-shadow: 0 14px 22px rgba(255,59,91,.22);
+    }
+
+    /* ===== Buttons ===== */
+    .btnRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .btnWide{
+      width:100%;
       border:0;
       border-radius:999px;
       padding:14px 16px;
       font-weight:1000;
+      font-size:18px;
       cursor:pointer;
-      box-shadow: 0 16px 28px rgba(0,0,0,.14);
-      transition: transform .12s ease, filter .12s ease;
-      display:inline-flex;
+      box-shadow: 0 16px 28px rgba(0,0,0,.12);
+      display:flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      user-select:none;
     }
-    .btn:hover{ transform: translateY(-1px); filter:brightness(1.02); }
-    .btn:active{ transform: translateY(0); }
-
     .btnNext{
-      width:min(720px, 100%);
-      background: linear-gradient(180deg, #6b5bd6, #4f41bd);
+      background: linear-gradient(180deg, #6b5bd6, #4c3fd4);
       color:#fff;
-      font-size:18px;
     }
-    .btnRow{
-      margin-top:10px;
+    .btnSmall{
+      border:0;
+      border-radius:999px;
+      padding:12px 14px;
+      font-weight:1000;
+      cursor:pointer;
+      box-shadow: 0 12px 22px rgba(0,0,0,.10);
       display:flex;
-      gap:10px;
+      align-items:center;
       justify-content:center;
-      flex-wrap:wrap;
+      gap:8px;
+      min-width: 170px;
+      background: rgba(255,255,255,.85);
+      border:1px solid rgba(0,0,0,.06);
+      color:#2a2f3a;
     }
-    .btnReset{
-      background: linear-gradient(180deg, #f2f4f9, #e9edf6);
-      color:#1f2937;
-    }
-    .btnFinish{
-      background: linear-gradient(180deg, #21c06c, #0f8a52);
+    .btnGreen{
+      background: linear-gradient(180deg, var(--green), var(--green2));
       color:#fff;
+      border:0;
+    }
+    .btnGray{
+      background: rgba(255,255,255,.85);
+      color:#2a2f3a;
+    }
+    .btnHome{
+      background: rgba(255,255,255,.18);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.22);
     }
 
-    /* ===== ورقة التضليل (✅ عمود واحد + تضليل كامل الدائرة) ===== */
-    .sheet{
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,.75);
-      border-radius:22px;
-      padding:12px 12px 10px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.10);
-      backdrop-filter: blur(10px);
+    .tips{
+      margin-top:8px;
+      color:#384154;
+      font-weight:900;
+      font-size:13px;
+      text-align:center;
+      opacity:.95;
+    }
+
+    .credit{
+      margin-top:10px;
+      text-align:center;
+      font-weight:1000;
+      color:#3b2a2a;
+    }
+
+    /* ===== Answer Sheet ===== */
+    .sheetCard{
+      background: rgba(255,255,255,.85);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:18px;
+      padding:12px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.06);
+      margin-top:12px;
     }
     .sheetHead{
-      background: linear-gradient(180deg, #0b3b78, #0a2f61);
+      background: linear-gradient(180deg, var(--nav1), var(--nav2));
       color:#fff;
-      border-radius:16px;
+      border-radius:14px;
       padding:10px 12px;
       font-weight:1000;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      box-shadow: 0 16px 28px rgba(0,0,0,.18);
+      margin-bottom:12px;
     }
-    .sheetHead small{ opacity:.95; font-weight:900; }
+    .sheetHead small{
+      opacity:.95;
+      font-weight:900;
+    }
 
-    /* ✅ مثل أول تصميم: 1 ثم 2 ثم 3 ... (عمود واحد) */
+    /* ✅ مثل الصورة: شبكتين (عمودين) */
     .sheetGrid{
-      margin-top:10px;
       display:grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap:10px;
     }
 
-    .row{
+    .sheetItem{
       background:#fff;
       border:1px solid rgba(0,0,0,.06);
-      border-radius:14px;
-      padding:10px 10px;
+      border-radius:16px;
+      padding:10px 12px;
+      box-shadow: 0 10px 22px rgba(0,0,0,.05);
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      box-shadow: 0 10px 18px rgba(0,0,0,.05);
     }
-    .rowNo{
+    .sheetNum{
+      font-weight:1000;
+      font-size:18px;
+      color:#1f2430;
       width:34px;
       text-align:center;
-      font-weight:1000;
-      color:#111827;
-      opacity:.95;
-      flex:0 0 auto;
     }
     .bubbles{
       display:flex;
-      gap:10px;
+      gap:8px;
       align-items:center;
-      justify-content:flex-start;
-      flex-wrap:nowrap;
     }
-
-    /* ✅ الدائرة */
     .bubble{
-      width:34px; height:34px;
+      width:34px;
+      height:34px;
       border-radius:999px;
-      border: 2px solid var(--ring);
-      background:#fff;
+      border:2px solid rgba(35,55,120,.22);
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:13px;
       font-weight:1000;
-      color:#374151;
-      cursor:pointer;
-      transition: transform .10s ease, border-color .10s ease, background .10s ease, box-shadow .10s ease;
-      user-select:none;
+      color:#1f2430;
+      background:rgba(255,255,255,.95);
     }
-    .bubble:hover{ transform: translateY(-1px); }
-
-    /* ✅ التضليل الكامل: تعبئة 100% */
+    /* ✅ تظليل كامل للدائرة */
     .bubble.on{
-      border-color: rgba(91,79,214,.65);
-      background: linear-gradient(180deg, var(--pick), var(--pick2));
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border-color: transparent;
       color:#fff;
-      box-shadow: 0 14px 24px rgba(91,79,214,.25);
-    }
-
-    .row.locked .bubble{ cursor:default; opacity:.98; }
-    .row.locked .bubble:hover{ transform:none; }
-
-    /* ===== Results Modal ===== */
-    .overlay{
-      position:fixed;
-      inset:0;
-      background: rgba(15, 23, 42, 0.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:14px;
-      z-index:9999;
-    }
-    .overlay.show{ display:flex; }
-
-    .modal{
-      width:min(720px, 96vw);
-      background:#fff;
-      border-radius:22px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.35);
-      overflow:hidden;
-      border: 3px solid rgba(107,91,214,.35);
-    }
-    .modalHead{
-      background: linear-gradient(180deg, #6b5bd6, #4f41bd);
-      color:#fff;
-      padding:12px 14px;
-      font-weight:1000;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-    }
-    .modalBody{ padding:14px; }
-    .modalP{
-      margin:0 0 10px;
-      font-weight:1000;
-      color:#111827;
-      line-height:1.8;
-      white-space:pre-line;
-    }
-    .modalBtns{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-      padding:0 14px 14px;
-    }
-    .btnClose{
-      background: linear-gradient(180deg, #f2f4f9, #e9edf6);
-      color:#1f2937;
-    }
-    .btnRestart{
-      background: linear-gradient(180deg, #21c06c, #0f8a52);
-      color:#fff;
+      box-shadow: 0 10px 18px rgba(107,91,214,.22);
     }
 
     @media (max-width:520px){
-      .stat{ min-width: 145px; }
-      .timerPill{ min-width: 180px; }
-      .optText{ font-size:16px; }
-      .btnNext{ font-size:18px; }
-      .passageText{ font-size:14.5px; }
-      .question{ font-size:16px; }
-      .badge{ width:42px; height:42px; }
-      .bubble{ width:36px; height:36px; font-size:14px; }
+      .scoreGrid{ grid-template-columns: 1fr; }
+      .timePill{ min-width: auto; width:100%; }
+      .modelBtn{ min-width: 100px; }
+      .optBadge{ width:46px; height:46px; }
+      .bubble{ width:36px; height:36px; }
+      .btnSmall{ min-width: 150px; }
+      .sheetGrid{ grid-template-columns: 1fr; } /* على الجوال: عمود واحد أسهل */
     }
   </style>
 </head>
@@ -535,458 +532,485 @@
 <body>
   <div class="wrap">
 
-    <section class="panel" aria-label="لوحة التحكم">
-      <div class="panelTop">
-        <div>
-          <h1 class="panelTitle">📝 الاختبار الإلكتروني (لغتي) — <span id="modelLabel">(أ)</span></h1>
-          <div class="panelSub">سؤال واحد كل مرة — لا يمكن الرجوع للسؤال السابق — ورقة تضليل إلكترونية</div>
-        </div>
+    <div class="topCard">
+      <div class="titleRow">
+        <h1 class="mainTitle" id="pageTitle">📝 الاختبار الإلكتروني (لغتي) — (أ)</h1>
 
-        <div class="models" role="tablist" aria-label="نماذج الاختبار">
-          <button class="modelBtn active" data-model="A" type="button">نموذج أ</button>
-          <button class="modelBtn" data-model="B" type="button">نموذج ب</button>
-          <button class="modelBtn" data-model="C" type="button">نموذج ج</button>
-          <button class="modelBtn" data-model="D" type="button">نموذج د</button>
-        </div>
+        <a class="modelBtn btnHome" href="index.html" style="text-decoration:none; text-align:center;">
+          🏠 العودة للرئيسية
+        </a>
       </div>
 
-      <div class="panelMid">
-        <div class="timerPill" title="الوقت">
-          <span class="clock">⏱️</span>
-          <span class="timerText" id="timerText">الوقت 25:00</span>
-        </div>
-
-        <div class="stats" aria-label="الإحصاءات">
-          <div class="stat statPts"><span class="lbl">⭐ النقاط:</span><span class="val" id="ptsVal">0</span></div>
-          <div class="stat statOk"><span class="lbl">✅ الصحيح:</span><span class="val" id="okVal">0</span></div>
-          <div class="stat statBad"><span class="lbl">❌ الخطأ:</span><span class="val" id="badVal">0</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card" aria-label="سؤال الاختبار">
-      <div class="qHeader">
-        <div class="qInfo">
-          <div class="qNo" id="qNo">السؤال 1 / 20</div>
-          <div class="qHint">اختاري الإجابة ثم اضغطي <b>السؤال التالي</b>.</div>
-        </div>
-        <div class="qHint">لا يمكن الرجوع للسؤال السابق.</div>
+      <div class="subTitle">
+        سؤال واحد كل مرة — لا يمكن الرجوع للسؤال السابق — ورقة تضليل إلكترونية
       </div>
 
-      <div class="qBody">
-        <div class="passage">
-          <div class="passageTitle">📘 نص القراءة</div>
-          <p class="passageText" id="passageText">—</p>
+      <div class="modelBar" id="modelBar"></div>
+
+      <div class="hud">
+        <div class="hudRow">
+          <div class="timePill">
+            <span>⏱️ الوقت</span>
+            <span class="timeVal" id="timeVal">25:00</span>
+          </div>
         </div>
 
-        <p class="question" id="questionText">—</p>
-
-        <div class="options" id="options"></div>
-
-        <div class="navUnder">
-          <button class="btn btnNext" id="nextBtn" type="button">السؤال التالي ⬅️</button>
+        <div class="scoreGrid">
+          <div class="scoreBox scoreBlue">
+            <div class="lbl">⭐ النقاط</div>
+            <div class="val" id="ptsVal">0</div>
+          </div>
+          <div class="scoreBox scoreGreen">
+            <div class="lbl">✅ الصحيح</div>
+            <div class="val" id="okVal">0</div>
+          </div>
+          <div class="scoreBox scoreRed">
+            <div class="lbl">❌ الخطأ</div>
+            <div class="val" id="badVal">0</div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <div class="note" id="noteText">
+        • اختاري الإجابة ثم اضغطي <b>السؤال التالي</b>.<br>
+        • ورقة التضليل تظهر أسفل الصفحة وتُحدّث تلقائيًا.
+      </div>
+
+      <div class="qTopRow">
+        <div class="qCounter" id="qCounter">السؤال 1 / 20</div>
+        <div class="qCounter" id="modelCounter">نموذج: أ</div>
+      </div>
+
+      <div class="passageCard">
+        <div class="passageHead">📘 نص القراءة</div>
+        <div class="passageText" id="passageText">—</div>
+      </div>
+
+      <div class="questionCard" id="questionCard">
+        <div class="qTitle" id="qTitle">—</div>
+        <ul class="options" id="options"></ul>
+
+        <button class="btnWide btnNext" id="nextBtn" type="button">➡️ السؤال التالي</button>
 
         <div class="btnRow">
-          <button class="btn btnReset" id="resetBtn" type="button">🔁 إعادة الاختبار</button>
-          <button class="btn btnFinish" id="finishBtn" type="button">✅ إنهاء الاختبار</button>
+          <button class="btnSmall btnGray" id="restartBtn" type="button">🔁 إعادة الاختبار</button>
+          <button class="btnSmall btnGreen" id="finishBtn" type="button">✅ إنهاء الاختبار</button>
+        </div>
+
+        <div class="tips">
+          لا يمكن الرجوع للسؤال السابق بعد الضغط على (السؤال التالي).<br>
+          عند انتهاء الوقت سيتم الإنهاء تلقائيًا (وتبقى ورقة التضليل ظاهرة).
         </div>
       </div>
-    </section>
 
-    <section class="sheet" aria-label="ورقة التضليل">
-      <div class="sheetHead">
-        <div>إجابات الأسئلة (تضليل) — 20 سؤال</div>
-        <small>دوائر أ/ب/ج/د</small>
-      </div>
-      <div class="sheetGrid" id="sheetGrid"></div>
-    </section>
-  </div>
+      <div class="credit">تصميم: صالحة علي الغامدي</div>
 
-  <div class="overlay" id="overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-label="نتيجة الاختبار">
-      <div class="modalHead">
-        <div>🎉 النتيجة النهائية</div>
-        <div id="finalModel">نموذج —</div>
+      <!-- ✅ ورقة التضليل تظهر دائمًا في نفس الصفحة -->
+      <div class="sheetCard" id="sheetCard">
+        <div class="sheetHead">
+          <div>إجابات الأسئلة (تضليل) — 20 سؤال</div>
+          <small>دوائر: أ / ب / ج / د</small>
+        </div>
+        <div class="sheetGrid" id="sheetGrid"></div>
       </div>
-      <div class="modalBody">
-        <p class="modalP" id="finalText">—</p>
-        <p class="modalP" style="color:#374151; font-weight:900;">
-          ملاحظة: ورقة التضليل تظهر اختيارات الطالبة فقط.
-        </p>
-      </div>
-      <div class="modalBtns">
-        <button class="btn btnClose" id="closeModalBtn" type="button">إغلاق</button>
-        <button class="btn btnRestart" id="restartFromModalBtn" type="button">🔁 إعادة الاختبار</button>
-      </div>
+
     </div>
   </div>
 
   <script>
     /***********************
-     * بيانات الاختبار (4 نماذج × 20 سؤال)
+     * بيانات الاختبار: 4 نماذج × (نص طويل + 20 سؤال)
      ***********************/
-    const MODELS = {
-      A: makeModel(
-        "أ",
-        `في صباحٍ مُشرقٍ، استعدّت المدرسة لاستقبال «أسبوع القراءة». علّقت المعلمةُ ملصقاتٍ ملوّنة تُذكّر الطلاب بأن القراءة تفتح أبواب المعرفة وتزيد الثقة بالنفس.
-اجتمع الطلاب في المكتبة، فقُسِّمت الأدوار: فريقٌ يرتّب الكتب حسب العناوين، وفريقٌ يجهّز زاوية «قارئ اليوم»، وفريقٌ يكتب بطاقات تلخّص الفكرة العامة لكل قصة.
-بعد ذلك، قرأ الطلاب قصةً طويلة عن طفلٍ كان يضيّع وقته في اللعب، ثم اكتشف أن تنظيم الوقت يساعده على إنجاز واجباته والاستمتاع دون تأخّر.
-وفي نهاية الأسبوع، قدّم كل طالب عرضًا قصيرًا يوضح: الفكرة الرئيسة، حدثًا مهمًا، سببًا ونتيجة، وأوجه الشبه والاختلاف بين شخصيتين في القصة.
-وشدّدت المعلمة على آداب الحوار: الاستماع دون مقاطعة، واحترام رأي الآخرين، واختيار الكلمات الطيبة.
-كما ذكرت أن المحافظة على الكتاب مسؤولية، وأن الأمانة تظهر عندما نعيد الأشياء إلى أصحابها، وأن ترشيد الماء والكهرباء من السلوكيات التي تدل على وعيٍ وحبٍ للمدرسة والبيئة.`,
-        [
-          q("ما الهدف العام من «أسبوع القراءة» في النص؟", ["تشجيع الطلاب على القراءة وتنمية المعرفة","تعليم الطلاب السباحة","وصف رحلة إلى الصحراء","شرح أنواع الرياضة"], 0),
-          q("أين اجتمع الطلاب في بداية النشاط؟", ["في المقصف","في المكتبة","في الحديقة","في المختبر"], 1),
-          q("ما معنى «قُسِّمت الأدوار»؟", ["تجاهلوا العمل","وزّعوا المهام بينهم","خرجوا من المدرسة","ناموا مبكرًا"], 1),
-          q("ماذا تعلّم الطفل في القصة التي قرأها الطلاب؟", ["أن تنظيم الوقت يساعده على الإنجاز","أن اللعب أفضل من الدراسة دائمًا","أن القراءة لا فائدة منها","أن التأخر مطلوب"], 0),
-          q("ما الفكرة الرئيسة الأقرب للنص؟", ["القراءة والتنظيم وآداب الحوار سلوكيات تعزز التعلم","السفر ممتع في كل وقت","الرياضة أهم من كل شيء","المطر سبب السعادة"], 0),
-          q("أي عبارة تدل على آداب الحوار كما وردت؟", ["المقاطعة أثناء الحديث","الاستماع دون مقاطعة","رفع الصوت على الآخرين","السخرية من رأي الزملاء"], 1),
-          q("ما نتيجة تنظيم الوقت في القصة؟", ["تأخر عن واجباته","أنجز واجباته واستمتع دون تأخر","ترك المدرسة","نسي كتبه"], 1),
-          q("ما السلوك الذي يدل على الأمانة؟", ["إخفاء الأشياء","إعادة الأشياء إلى أصحابها","رمي الكتب","تأخير الواجب"], 1),
-          q("أي سلوك يدل على حب المدرسة والبيئة؟", ["هدر الماء والكهرباء","ترشيد الماء والكهرباء","تمزيق الملصقات","تجاهل النظافة"], 1),
-          q("ما «زاوية قارئ اليوم» غالبًا؟", ["مكان لعرض الطالب القارئ وتشجيعه","مكان للأكل","مكان للنوم","مكان للعب فقط"], 0),
-          q("ما الحدث الأخير في الأسبوع؟", ["سفر الطلاب","قدّم الطلاب عرضًا قصيرًا","انطفأت الأنوار","أغلقت المكتبة دائمًا"], 1),
-          q("أي مما يلي «سبب ونتيجة» من النص؟", ["علّقت المعلمة ملصقات ← زادت الثقة", "نظّم الطفل وقته ← أنجز واجباته", "رتّبوا الكتب ← هطل المطر", "كتبوا بطاقات ← تعطلت الحافلة"], 1),
-          q("أي خيار يمثل «الكلمات الطيبة»؟", ["شكراً لك","أكرهك","أنت سيئ","لن أساعدك"], 0),
-          q("مرادف «مسؤولية» في سياق النص:", ["واجب","لعب","ملل","خوف"], 0),
-          q("ضد «يضيّع وقته»:", ["يستثمر وقته","يؤخر وقته","ينسى وقته","يهمل وقته"], 0),
-          q("ما وجه الشبه بين فرق الطلاب؟", ["كلهم تعاونوا لإنجاح الأسبوع","كلهم تركوا العمل","كلهم ناموا في المكتبة","كلهم اختلفوا دائمًا"], 0),
-          q("ما الاختلاف بين فرق العمل؟", ["كل فريق له مهمة مختلفة","كل فريق نفس المهمة تمامًا","لا يوجد فرق","كل فريق لا يعمل"], 0),
-          q("أي جملة مفيدة عن القراءة؟", ["أقرأ القصص المفيدة كل يوم.","في المكتبة.","قراءة مفيدة.","أقرأ."], 0),
-          q("ما معنى «يوضح الفكرة العامة»؟", ["يذكر الفكرة الأساسية للنص","يكتب أسماء الطلاب","يرسم صورًا فقط","يحفظ الأرقام"], 0),
-          q("عند نهاية الوقت، ما المتوقع في الاختبار؟", ["يستمر بلا نهاية","يُنهى الاختبار وتظهر الدرجة","يُحذف السؤال السابق","تعود الأسئلة للخلف"], 1),
-        ]
-      ),
+    const EXAM = [
+      {
+        id:"A", label:"نموذج أ",
+        title:"الاختبار الإلكتروني (لغتي) — (أ)",
+        passage:
+`في صباحٍ مُشرِقٍ، استعدّت المدرسة لاستقبال «أسبوع القراءة». علّقت المعلمة ملصقاتٍ ملوّنةً تذكّر الطلاب بأن القراءة تفتح أبواب المعرفة، وتزيد الثقة بالنفس. 
+اجتمع الطلاب في المكتبة، فقُسِّمت الأدوار: فريقٌ يرتّب الكتب حسب العناوين، وفريقٌ يجهّز زاوية «قارئ اليوم»، وفريقٌ يكتب بطاقاتٍ تلخّص الفكرة العامة لكل قصة.
 
-      B: makeModel(
-        "ب",
-        `كان «سلمان» طالبًا مجتهدًا، لكنه كان يجيب بسرعة دون أن يقرأ السؤال جيدًا. في أحد الاختبارات، أخطأ في عدة أسئلة لأنه لم ينتبه للكلمات المهمة مثل: (إلا، غير، سوى) أو ترتيب الأحداث.
-بعد ذلك، قدم المعلم تدريبًا على مهارات الفهم: قراءة النص أولًا، تحديد الفكرة الرئيسة، معرفة المعاني، ثم الإجابة بهدوء.
-قرأ سلمان نصًا طويلًا عن «ترشيد الماء»: أن إغلاق الصنبور أثناء تنظيف الأسنان يوفر الكثير، وأن إصلاح التسربات يمنع الهدر، وأن مشاركة الأسرة في هذه العادات تجعل البيت منظمًا ومريحًا.
-وفي النشاط الجماعي، اتفق الطلاب على كتابة لوحة إرشادية: «حافظ على الماء… فهو نعمة»، ثم علّقوها قرب المغاسل، وراقبوا سلوكهم لمدة أسبوع.
-وفي نهاية الأسبوع، لاحظ سلمان تحسنًا واضحًا؛ لأنه أصبح يقرأ السؤال بتركيز، ويختار الإجابة الصحيحة دون تسرع.`,
-        [
-          q("ما سبب أخطاء سلمان في الاختبار الأول؟", ["لم يقرأ السؤال جيدًا وأجاب بسرعة","لم يحضر إلى المدرسة","لم يجد قلمًا","كان النص قصيرًا"], 0),
-          q("ما المهارة التي تدرب عليها سلمان؟", ["القفز العالي","قراءة النص وتحديد الفكرة ثم الإجابة بهدوء","الرسم فقط","اللعب في الساحة"], 1),
-          q("عن ماذا كان النص الطويل الذي قرأه سلمان؟", ["ترشيد الماء","السفر بالطائرة","كرة القدم","صناعة الحلوى"], 0),
-          q("أي سلوك يوفر الماء كما ورد؟", ["ترك الصنبور مفتوحًا","إغلاق الصنبور أثناء تنظيف الأسنان","اللعب بالماء","زيادة التسربات"], 1),
-          q("ما نتيجة إصلاح التسربات؟", ["يزيد الهدر","يمنع الهدر","يقلل النظافة","يزيد الفوضى"], 1),
-          q("ما الهدف من اللوحة الإرشادية؟", ["تشجيع الحفاظ على الماء","إعلان عن لعبة","زخرفة الفصل فقط","تعليم الطبخ"], 0),
-          q("أداة الاستثناء في (الكلمات المهمة مثل: إلا) هي:", ["إلا","الكلمات","المهمة","مثل"], 0),
-          q("مرادف «تسرّع»:", ["تعقّل","عجلة","هدوء","تنظيم"], 1),
-          q("ضد «تحسن»:", ["تقدم","تراجع","نجاح","نشاط"], 1),
-          q("ما الحدث الأخير في النص؟", ["ملاحظة تحسن سلمان","ضياع الدفتر","سفر سلمان","إغلاق المدرسة"], 0),
-          q("أي جملة تمثل سبب/نتيجة؟", ["قرأ بتركيز ← اختار الصحيح","كتب لوحة ← نسي الماء","أغلق الصنبور ← زاد الهدر","أصلح التسرب ← اتسخ البيت"], 0),
-          q("ما الفكرة الرئيسة الأقرب؟", ["القراءة بتركيز وترشيد الماء سلوك نافع","الألعاب أفضل من كل شيء","السفر دائمًا ممتع","الغضب مفيد"], 0),
-          q("ما معنى «راقبوا سلوكهم»؟", ["لاحظوا وتصرفوا بوعي","ناموا مبكرًا","سافروا","لعبوا فقط"], 0),
-          q("أي عبارة تدل على العمل الجماعي؟", ["اتفق الطلاب على كتابة لوحة","أغلق سلمان كتابه","خرج المعلم","اختفى الماء"], 0),
-          q("أي جملة مفيدة؟", ["حافظتُ على الماء لأنه نعمة.","على الماء.","ماء نعمة.","حافظتُ."], 0),
-          q("أي كلمة تدل على أداة استثناء أخرى غير (إلا)؟", ["غير","في","ثم","عن"], 0),
-          q("ما الهدف من التدريب الذي قدمه المعلم؟", ["تقليل الأخطاء وتحسين الفهم","زيادة الواجبات","إلغاء القراءة","منع الأسئلة"], 0),
-          q("ما معنى «هدر»؟", ["تبذير","تنظيم","ترتيب","تفوق"], 0),
-          q("في عبارة «حافظ على الماء… فهو نعمة» الفكرة:", ["دعوة للمحافظة على النعمة","وصف مباراة","قصة خيال","تعليم رسم"], 0),
-          q("ما السلوك الصحيح أثناء الاختبار؟", ["الإجابة بسرعة دون قراءة","قراءة السؤال بتركيز ثم الاختيار","الرجوع للسؤال السابق بعد التالي","ترك كل الأسئلة"], 1),
-        ]
-      ),
+بعد ذلك، قرأ الطلاب قصةً طويلةً عن طفلٍ كان يضيّع وقته في اللعب، ثم اكتشف أن تنظيم الوقت يساعده على إنجاز واجباته والاستمتاع دون تأخّر. وفي نهاية الأسبوع، قدّم كل طالب عرضًا قصيرًا يوضّح: الفكرة الرئيسة، حدثًا مهمًا، سببًا ونتيجة، وأوجه الشبه والاختلاف بين شخصيتين في القصة.
 
-      C: makeModel("ج", `نص (ج) — يمكنك استبداله لاحقًا بنفس الأسلوب…`, Array.from({length:20}, (_,i)=>q(`سؤال ${i+1} (ج)`, ["أ","ب","ج","د"], 0))),
-      D: makeModel("د", `نص (د) — يمكنك استبداله لاحقًا بنفس الأسلوب…`, Array.from({length:20}, (_,i)=>q(`سؤال ${i+1} (د)`, ["أ","ب","ج","د"], 0))),
+وشدّدت المعلمة على آداب الحوار: الاستماع دون مقاطعة، واحترام رأي الآخرين، واختيار الكلمات الطيبة. كما ذكرت أن المحافظة على الكتاب مسؤولية، وأن الأمانة تظهر عندما نعيد الأشياء إلى أصحابها، وأن ترشيد الماء والكهرباء من السلوكيات التي تدل على وعيٍ وحبٍ للمدرسة والبيئة.`,
+        questions: [
+          {q:"أين اجتمع الطلاب في بداية النشاط؟", options:["في المقصف","في المكتبة","في الحديقة","في المختبر"], answer:1},
+          {q:"ما الهدف من «أسبوع القراءة» كما فهمتِ من النص؟", options:["زيادة اللعب فقط","تشجيع القراءة والمعرفة","تعليم السباحة","تنظيم الرحلات"], answer:1},
+          {q:"ما معنى العبارة: «تفتح أبواب المعرفة»؟", options:["تزيد الفهم والتعلم","تغلق الكتب","تمنع القراءة","تجعل الوقت يضيع"], answer:0},
+          {q:"ما أول عمل قام به فريقٌ من الطلاب؟", options:["ترتيب الكتب حسب العناوين","السفر خارج المدينة","الرسم على الجدران","إغلاق المكتبة"], answer:0},
+          {q:"القصة التي قرأوها تتحدث عن طفلٍ كان…", options:["يضيّع وقته في اللعب","ينام مبكرًا دائمًا","يسافر كثيرًا","يبني بيتًا"], answer:0},
+          {q:"ما نتيجة اكتشاف الطفل في القصة؟", options:["ترك المدرسة","تنظيم الوقت يساعده على الإنجاز","كره الواجب","نسي القراءة"], answer:1},
+          {q:"في نهاية الأسبوع، ماذا قدّم كل طالب؟", options:["طعامًا لذيذًا","عرضًا قصيرًا عن القصة","مباراة كرة","لعبة إلكترونية"], answer:1},
+          {q:"من آداب الحوار المذكورة: ", options:["المقاطعة","السخرية","الاستماع دون مقاطعة","رفع الصوت"], answer:2},
+          {q:"تدل المحافظة على الكتاب في النص على:", options:["الإهمال","المسؤولية","الخوف","الكسل"], answer:1},
+          {q:"الأمانة تظهر عندما…", options:["نخفي الأشياء","نرمي الكتب","نعيد الأشياء لأصحابها","نقاطع الآخرين"], answer:2},
+          {q:"ترشيد الماء والكهرباء يدل على:", options:["وعي وحب للبيئة","عدم اهتمام","إزعاج","كثرة اللعب"], answer:0},
+          {q:"الفكرة الرئيسة الأقرب للنص:", options:["القراءة والتنظيم والسلوكيات الحسنة","السفر ممتع","الرياضة أهم شيء","الطعام سبب السعادة"], answer:0},
+          {q:"أي عبارة تعبّر عن «سبب ونتيجة» في النص؟", options:["علّقت المعلمة ملصقات","نظّم الطفل وقته فأنجز واجباته","اجتمع الطلاب في المكتبة","كتبوا بطاقات"], answer:1},
+          {q:"أي مما يأتي يُعدّ «حدثًا مهمًا»؟", options:["لون الملصقات","تقسيم الأدوار في المكتبة","شكل القلم","عدد المقاعد"], answer:1},
+          {q:"من القيم التي ركّز عليها النص:", options:["الصدق والأمانة","السرعة فقط","التفاخر","الإهمال"], answer:0},
+          {q:"ما معنى «زاوية قارئ اليوم» غالبًا؟", options:["مكان للقراءة وتقديم الطالب القارئ","مكان للنوم","مكان للبيع","مكان للسباحة"], answer:0},
+          {q:"اختيار الكلمات الطيبة يعني:", options:["الكلام الجارح","الكلام اللطيف","الصراخ","الضحك على الآخرين"], answer:1},
+          {q:"أفضل عنوان للنص:", options:["أسبوع القراءة في المدرسة","رحلة إلى البحر","قصة المطر","مغامرة في الجبل"], answer:0},
+          {q:"أي سلوك يدعمه النص؟", options:["رمي الورق","إطفاء الأنوار الزائدة","مقاطعة المتحدث","إهمال الكتب"], answer:1},
+          {q:"المقصود بـ«تزيد الثقة بالنفس» أن القراءة…", options:["تجعل الطالب يثق بقدراته","تجعله ينسى","تمنعه من التعلم","تقلل تركيزه"], answer:0},
+        ]
+      },
+
+      {
+        id:"B", label:"نموذج ب",
+        title:"الاختبار الإلكتروني (لغتي) — (ب)",
+        passage:
+`في يومٍ هادئٍ، أعلنت إدارة المدرسة عن «حملة النظافة والتشجير». بدأ الطلاب بتنظيف ساحة المدرسة، ثم وزّعوا أكياسًا مخصّصة للورق والبلاستيك. 
+بعد ذلك، زرعوا شتلاتٍ صغيرة، وتعلّموا أن الشجرة تُنقّي الهواء وتُظلّل المكان، وأن المحافظة على البيئة واجبٌ جميل.
+
+وخلال الحملة، لاحظت المعلمة أن بعض الطلاب يتركون الصنبور مفتوحًا أثناء غسل اليدين؛ فذكّرتهم بأن إغلاقه عند عدم الحاجة يوفر الماء. كما تحدثت عن حفظ الكهرباء بإطفاء الأنوار الزائدة وإغلاق الأجهزة بعد الانتهاء.
+
+وفي نهاية اليوم، وجد طالبٌ قلمًا لا يعرف صاحبه، فأعاده إلى مكتب الإرشاد. شكرت الإدارة الطالب على أمانته، وأكدت أن الكلمة الطيبة والاعتذار عند الخطأ يجعلان المدرسة مكانًا أكثر سعادةً واحترامًا.`,
+        questions: [
+          {q:"ما اسم النشاط الذي أعلنت عنه الإدارة؟", options:["مسابقة الطبخ","حملة النظافة والتشجير","رحلة إلى المتحف","سباق سريع"], answer:1},
+          {q:"أول عمل قام به الطلاب في الحملة هو:", options:["زراعة الشتلات","تنظيف الساحة","السفر","قراءة قصة"], answer:1},
+          {q:"ما الذي تعلموه عن الشجرة؟", options:["تطفئ النار","تنقّي الهواء وتظلّل المكان","تزيد الضوضاء","تمنع المطر"], answer:1},
+          {q:"لماذا وُزّعت أكياس للورق والبلاستيك؟", options:["للّعب بها","لتصنيف النفايات", "لبيعها", "لإخفائها"], answer:1},
+          {q:"سلوكٌ خاطئ لاحظته المعلمة هو:", options:["إطفاء الأنوار","ترك الصنبور مفتوحًا","زراعة الشتلات","تنظيف الساحة"], answer:1},
+          {q:"ترشيد الماء يعني:", options:["هدره","استعماله بحكمة","سكبه على الأرض","تركه جاريًا"], answer:1},
+          {q:"من طرق حفظ الكهرباء:", options:["فتح الأجهزة دائمًا","إطفاء الأنوار الزائدة","زيادة الإضاءة","ترك التلفاز يعمل"], answer:1},
+          {q:"وجد الطالب قلمًا فقام بـ:", options:["كسره","أخذه لنفسه","إعادته لمكتب الإرشاد","رميه"], answer:2},
+          {q:"القيمة التي يدل عليها إعادة القلم:", options:["الإهمال","الأمانة","الكسل","التكبر"], answer:1},
+          {q:"الكلمة الطيبة والاعتذار يؤديان إلى:", options:["زيادة المشاكل","سعادة واحترام","فوضى","خوف"], answer:1},
+          {q:"الفكرة الرئيسة للنص:", options:["البيئة والأمانة والسلوكيات الحسنة","السفر والطعام","الرياضة فقط","الفضاء"], answer:0},
+          {q:"أي عنوان مناسب للنص؟", options:["حملة مدرستي أجمل","قصة البحر","يوم المطر","ألعاب الصيف"], answer:0},
+          {q:"السبب والنتيجة الأقرب:", options:["زرعوا شتلات","أغلقوا الصنبور فوفّروا الماء","وجد قلمًا","شكرت الإدارة"], answer:1},
+          {q:"ماذا فعلت الإدارة عندما أعاد الطالب القلم؟", options:["عاقبته","شكرته","تجاهلته","طردته"], answer:1},
+          {q:"واجب المحافظة على البيئة يعني:", options:["عدم الاهتمام","العناية بالمكان","إتلاف النباتات","رمي الورق"], answer:1},
+          {q:"أي سلوك يدعمه النص؟", options:["فرز النفايات","ترك الصنبور مفتوحًا","تشغيل الأنوار دائمًا","أخذ أشياء الآخرين"], answer:0},
+          {q:"أفضل نتيجة للحملة:", options:["ازدياد الفوضى","تحسن نظافة المدرسة وجمالها","ضياع الكتب","انتهاء الدروس"], answer:1},
+          {q:"ذكر النص أن الاعتذار يكون:", options:["عند الخطأ","عند اللعب","عند النوم","عند السفر"], answer:0},
+          {q:"المقصود بـ«إغلاق الأجهزة بعد الانتهاء»:", options:["تركها تعمل","إيقافها توفيرًا للكهرباء","كسرها","بيعها"], answer:1},
+          {q:"ما المكان الأكثر ارتباطًا بأحداث النص؟", options:["المدرسة","المطار","السوق","البيت"], answer:0},
+        ]
+      },
+
+      {
+        id:"C", label:"نموذج ج",
+        title:"الاختبار الإلكتروني (لغتي) — (ج)",
+        passage:
+`في بداية الفصل الدراسي، اتفق الطلاب على تنظيم وقتهم بين الدراسة والراحة. كتبت إحدى الطالبات قائمة مهام يومية: الواجبات أولًا، ثم مراجعة قصيرة، ثم وقت للترفيه. 
+لاحظت الطالبة أنها عندما ترتّب أولوياتها تنجز بسرعة وتشعر بالراحة.
+
+وفي الحصة، طلب المعلم من الطلاب قراءة السؤال ببطء قبل الإجابة، وشرح أن الفهم الصحيح نصف الحل. كما ناقش معهم أهمية احترام المتحدث وعدم المقاطعة، وأن اختلاف الرأي لا يفسد للود قضية.
+
+وفي نهاية الأسبوع، شارك الطلاب في نشاطٍ جماعي؛ وزّعوا الأدوار، فتعاونوا ونجحوا في إنجاز المهمة. وأكد المعلم أن التعاون يجعل العمل أسهل وأجمل، وأن الطالب الذي يتعلم من خطئه يتحسن يومًا بعد يوم.`,
+        questions: [
+          {q:"بماذا بدأ النص؟", options:["حديث عن السفر","اتفاق الطلاب على تنظيم الوقت","قصة عن البحر","مباراة"], answer:1},
+          {q:"ما أول ما تضعه الطالبة في قائمتها؟", options:["الترفيه","الواجبات","النوم","السفر"], answer:1},
+          {q:"نتيجة ترتيب الأولويات:", options:["التأخر","الإنجاز بسرعة والشعور بالراحة","نسيان الواجب","زيادة الفوضى"], answer:1},
+          {q:"نصح المعلم الطلاب بـ:", options:["قراءة السؤال ببطء","ترك الدراسة","مقاطعة الآخرين","الحديث بصوت عال"], answer:0},
+          {q:"الفهم الصحيح يعني:", options:["عدم القراءة","نصف الحل","سبب الخطأ","إضاعة الوقت"], answer:1},
+          {q:"من آداب الحوار:", options:["المقاطعة","احترام المتحدث","السخرية","التعصب"], answer:1},
+          {q:"«اختلاف الرأي لا يفسد للود قضية» يعني:", options:["الخلاف يقطع الصداقة","يمكن الاختلاف مع بقاء الاحترام","يجب أن نتشاجر","لا نناقش"], answer:1},
+          {q:"في نهاية الأسبوع شاركوا في:", options:["نشاط جماعي","رحلة بحرية","مسابقة طبخ","حفل نوم"], answer:0},
+          {q:"كيف نجحوا في المهمة؟", options:["بالكسل","بتوزيع الأدوار والتعاون","بالصراخ","بالتأخير"], answer:1},
+          {q:"التعاون يجعل العمل:", options:["أصعب","أسهل وأجمل","مملًا","مستحيلًا"], answer:1},
+          {q:"ذكر النص أن التعلم من الخطأ يؤدي إلى:", options:["التراجع","التحسن","الخوف","ترك المدرسة"], answer:1},
+          {q:"الفكرة الرئيسة للنص:", options:["تنظيم الوقت والحوار والتعاون","الطعام","الطقس","الفضاء"], answer:0},
+          {q:"أفضل عنوان للنص:", options:["أوقاتي منظمة وتعاوني نجاح","رحلة القطار","صوت المطر","ألوان الربيع"], answer:0},
+          {q:"سبب ونتيجة في النص:", options:["قرأت ببطء ففهمت","سافرت بعيدًا","اشتريت قلمًا","لعبت كرة"], answer:0},
+          {q:"أي سلوك صحيح؟", options:["مقاطعة المتحدث","قراءة السؤال ببطء","ترك الواجب","السخرية"], answer:1},
+          {q:"توزيع الأدوار يعني:", options:["أن يعمل شخص واحد","تقسيم العمل بين الجميع","إلغاء العمل","الهروب"], answer:1},
+          {q:"المقصود بالأولوية:", options:["الأهم أولًا","الأقل أولًا","التأخير","إهمال"], answer:0},
+          {q:"الطالب الذي يراجع أخطاءه:", options:["لا يتحسن","يتحسن يومًا بعد يوم","يكره المدرسة","لا يفهم"], answer:1},
+          {q:"أقرب مكان لأحداث النص:", options:["المدرسة/الفصل","المطار","المستشفى","السوق"], answer:0},
+          {q:"العبارة التي تدل على احترام الآخرين:", options:["عدم المقاطعة","الصراخ","السخرية","التجاهل"], answer:0},
+        ]
+      },
+
+      {
+        id:"D", label:"نموذج د",
+        title:"الاختبار الإلكتروني (لغتي) — (د)",
+        passage:
+`في يومٍ ممطرٍ، دخل الطلاب إلى الفصل بهدوء. بدأت المعلمة درسًا عن «السلوكيات الإيجابية» في المدرسة. قالت: إن النظافة، والأمانة، والكلمة الطيبة، واحترام النظام تجعل بيئتنا جميلة.
+ثم ضربت مثالًا: طالبٌ وجد كتابًا في الساحة فأعاده إلى صاحبه، فشكره الجميع. وطالبةٌ ساعدت زميلتها الجديدة حتى تعرفت على الفصول، فشعرت الزميلة بالاطمئنان.
+
+وتحدثت المعلمة أيضًا عن ترشيد الماء بإغلاق الصنبور أثناء تنظيف الأسنان، وعن حفظ الكهرباء بإطفاء الأنوار الزائدة. وفي نهاية الدرس، اتفق الطلاب على وضع سلة للورق في الفصل، وعدم رمي المخلفات، وأن يعتذر من يخطئ حتى تبقى العلاقات طيبة.`,
+        questions: [
+          {q:"في أي يومٍ دخل الطلاب إلى الفصل؟", options:["يوم ممطر","يوم حار","يوم عيد","يوم سفر"], answer:0},
+          {q:"موضوع الدرس كان عن:", options:["السفر","السلوكيات الإيجابية","الفضاء","الطعام"], answer:1},
+          {q:"ما الذي يجعل البيئة جميلة حسب النص؟", options:["الإهمال","النظافة والأمانة والكلمة الطيبة","الصراخ","رمي الورق"], answer:1},
+          {q:"ماذا فعل الطالب الذي وجد كتابًا؟", options:["أخفاه","أعاده لصاحبه","مزّقه","رماه"], answer:1},
+          {q:"القيمة التي يدل عليها إعادة الكتاب:", options:["الأمانة","الكسل","التكبر","الخوف"], answer:0},
+          {q:"ماذا فعلت الطالبة مع زميلتها الجديدة؟", options:["سخرت منها","ساعدتها","تجاهلتها","أذتها"], answer:1},
+          {q:"شعرت الزميلة الجديدة بـ:", options:["الاطمئنان","الغضب","الخوف","الكسل"], answer:0},
+          {q:"ترشيد الماء يكون بـ:", options:["ترك الصنبور مفتوحًا","إغلاق الصنبور أثناء تنظيف الأسنان","سكبه","هدره"], answer:1},
+          {q:"حفظ الكهرباء يكون بـ:", options:["إطفاء الأنوار الزائدة","زيادة تشغيل الأجهزة","ترك الأنوار دائمًا","كسر المصابيح"], answer:0},
+          {q:"اتفق الطلاب في نهاية الدرس على:", options:["رمي المخلفات","وضع سلة للورق وعدم رمي المخلفات","كسر الأدوات","الصراخ"], answer:1},
+          {q:"الاعتذار عند الخطأ يؤدي إلى:", options:["زيادة المشكلات","بقاء العلاقات طيبة","الخوف","الفوضى"], answer:1},
+          {q:"الفكرة العامة للنص:", options:["سلوكيات إيجابية في المدرسة","السفر ممتع","الرياضة فقط","الفضاء"], answer:0},
+          {q:"أفضل عنوان للنص:", options:["مدرستي جميلة بسلوكي","رحلة بحرية","قصة أسد","ألعاب الشتاء"], answer:0},
+          {q:"سبب ونتيجة:", options:["ساعدت زميلتها فشعرت بالاطمئنان","نامت متأخرة","سافرت بعيدًا","لعبت كرة"], answer:0},
+          {q:"أي مما يلي سلوك صحيح؟", options:["رمي الورق","إعادة الأشياء لأصحابها","مقاطعة المتحدث","السخرية"], answer:1},
+          {q:"من السلوكيات الإيجابية المذكورة:", options:["الكلمة الطيبة","الكذب","الإهمال","الفوضى"], answer:0},
+          {q:"المكان الأقرب لأحداث النص:", options:["المدرسة/الفصل","المطار","السوق","الحديقة"], answer:0},
+          {q:"ما الشيء الذي وُضع للفصل؟", options:["قلم","سلة للورق","تلفاز","خيمة"], answer:1},
+          {q:"من يحافظ على النظام:", options:["من يرمي المخلفات","من يلتزم بالتعليمات","من يصرخ","من يقاطع"], answer:1},
+          {q:"الكلمة الطيبة تعني:", options:["كلامًا جارحًا","كلامًا لطيفًا","صراخًا","سخرية"], answer:1},
+        ]
+      }
+    ];
+
+    const TOTAL_Q = 20;
+    const DEFAULT_SECONDS = 25 * 60;
+
+    const state = {
+      modelIndex: 0,
+      qIndex: 0,
+      answers: Array(TOTAL_Q).fill(null),
+      finished: false,
+      ok: 0,
+      bad: 0,
+      pts: 0,
+      seconds: DEFAULT_SECONDS,
+      timer: null,
+      currentSelected: null,
     };
 
-    function makeModel(label, passage, questions){ return { label, passage, questions }; }
-    function q(text, options, correctIndex){ return { text, options, correctIndex }; }
+    const modelBar = document.getElementById("modelBar");
+    const pageTitle = document.getElementById("pageTitle");
+    const modelCounter = document.getElementById("modelCounter");
 
-    const modelBtns = document.querySelectorAll(".modelBtn");
-    const modelLabelEl = document.getElementById("modelLabel");
+    const timeVal = document.getElementById("timeVal");
+    const ptsVal = document.getElementById("ptsVal");
+    const okVal = document.getElementById("okVal");
+    const badVal = document.getElementById("badVal");
 
-    const timerTextEl = document.getElementById("timerText");
-    const ptsValEl = document.getElementById("ptsVal");
-    const okValEl = document.getElementById("okVal");
-    const badValEl = document.getElementById("badVal");
-
-    const qNoEl = document.getElementById("qNo");
-    const passageTextEl = document.getElementById("passageText");
-    const questionTextEl = document.getElementById("questionText");
+    const qCounter = document.getElementById("qCounter");
+    const passageText = document.getElementById("passageText");
+    const qTitle = document.getElementById("qTitle");
     const optionsEl = document.getElementById("options");
-
     const nextBtn = document.getElementById("nextBtn");
-    const resetBtn = document.getElementById("resetBtn");
+    const restartBtn = document.getElementById("restartBtn");
     const finishBtn = document.getElementById("finishBtn");
 
     const sheetGrid = document.getElementById("sheetGrid");
 
-    const overlay = document.getElementById("overlay");
-    const finalText = document.getElementById("finalText");
-    const finalModel = document.getElementById("finalModel");
-    const closeModalBtn = document.getElementById("closeModalBtn");
-    const restartFromModalBtn = document.getElementById("restartFromModalBtn");
+    function letterKey(idx){ return ["a","b","c","d"][idx]; }
+    function letterLabel(idx){ return ["أ","ب","ج","د"][idx]; }
 
-    const LETTERS = ["أ","ب","ج","د"];
-
-    let currentModelKey = "A";
-    let currentIndex = 0;
-    let answers = Array(20).fill(null);
-    let locked = Array(20).fill(false);
-    let scoreOk = 0, scoreBad = 0, points = 0;
-
-    const EXAM_SECONDS = 25 * 60;
-    let remaining = EXAM_SECONDS;
-    let timerId = null;
-    let started = false;
-
-    function pad2(n){ return String(n).padStart(2,"0"); }
-    function formatTime(sec){
+    function fmtTime(sec){
       const m = Math.floor(sec/60);
-      const s = sec%60;
-      return `${pad2(m)}:${pad2(s)}`;
+      const s = sec % 60;
+      return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
     }
 
-    function updateHeader(){
-      modelLabelEl.textContent = `(${MODELS[currentModelKey].label})`;
-      qNoEl.textContent = `السؤال ${currentIndex+1} / 20`;
-      ptsValEl.textContent = points;
-      okValEl.textContent = scoreOk;
-      badValEl.textContent = scoreBad;
+    function startTimer(){
+      stopTimer();
+      timeVal.textContent = fmtTime(state.seconds);
+      state.timer = setInterval(()=>{
+        if(state.finished) return;
+        state.seconds--;
+        if(state.seconds < 0){
+          finishExam(true);
+          return;
+        }
+        timeVal.textContent = fmtTime(state.seconds);
+      }, 1000);
+    }
+    function stopTimer(){
+      if(state.timer){
+        clearInterval(state.timer);
+        state.timer = null;
+      }
+    }
 
-      nextBtn.textContent = (currentIndex === 19) ? "إنهاء الاختبار ⬅️" : "السؤال التالي ⬅️";
+    function resetForModel(){
+      state.qIndex = 0;
+      state.answers = Array(TOTAL_Q).fill(null);
+      state.finished = false;
+      state.ok = 0;
+      state.bad = 0;
+      state.pts = 0;
+      state.seconds = DEFAULT_SECONDS;
+      state.currentSelected = null;
+      stopTimer();
+      startTimer();
+      renderAll();
+    }
+
+    function renderModels(){
+      modelBar.innerHTML = "";
+      EXAM.forEach((m, idx)=>{
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "modelBtn" + (idx===state.modelIndex ? " active":"");
+        b.textContent = m.label;
+        b.addEventListener("click", ()=>{
+          state.modelIndex = idx;
+          resetForModel();
+        });
+        modelBar.appendChild(b);
+      });
     }
 
     function renderQuestion(){
-      const model = MODELS[currentModelKey];
-      passageTextEl.textContent = model.passage;
+      const model = EXAM[state.modelIndex];
+      pageTitle.textContent = `📝 ${model.title}`;
+      modelCounter.textContent = `نموذج: ${model.id}`;
 
-      const item = model.questions[currentIndex];
-      questionTextEl.textContent = item.text;
+      passageText.textContent = model.passage;
+
+      const q = model.questions[state.qIndex];
+      qCounter.textContent = `السؤال ${state.qIndex+1} / ${TOTAL_Q}`;
+      qTitle.textContent = q.q;
 
       optionsEl.innerHTML = "";
-      item.options.forEach((opt, idx)=>{
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "opt";
-        btn.dataset.idx = String(idx);
+      state.currentSelected = null;
+
+      q.options.forEach((txt, idx)=>{
+        const li = document.createElement("li");
+        li.className = "opt";
+        li.setAttribute("data-key", letterKey(idx));
 
         const badge = document.createElement("div");
-        badge.className = "badge";
-        badge.textContent = LETTERS[idx];
+        badge.className = "optBadge";
+        badge.textContent = letterLabel(idx);
 
-        const txt = document.createElement("div");
-        txt.className = "optText";
-        txt.textContent = opt;
+        const span = document.createElement("div");
+        span.className = "optText";
+        span.textContent = txt;
 
-        btn.appendChild(badge);
-        btn.appendChild(txt);
+        li.appendChild(badge);
+        li.appendChild(span);
 
-        if(answers[currentIndex] === idx) btn.classList.add("chosen");
+        li.addEventListener("click", ()=>{
+          if(state.finished) return;
+          [...optionsEl.children].forEach(x=>x.classList.remove("selected"));
+          li.classList.add("selected");
+          state.currentSelected = letterKey(idx);
+        });
 
-        if(locked[currentIndex]){
-          btn.classList.add("disabled");
-          btn.style.cursor = "default";
-        }else{
-          btn.addEventListener("click", ()=> chooseAnswer(idx));
-        }
-
-        optionsEl.appendChild(btn);
+        optionsEl.appendChild(li);
       });
-
-      updateHeader();
-      renderSheet();
     }
 
-    function chooseAnswer(idx){
-      if(locked[currentIndex]) return;
-      answers[currentIndex] = idx;
-
-      [...optionsEl.querySelectorAll(".opt")].forEach(b=>{
-        b.classList.toggle("chosen", Number(b.dataset.idx) === idx);
-      });
-
-      renderSheet();
-      startTimerIfNeeded();
+    function updateScores(){
+      ptsVal.textContent = String(state.pts);
+      okVal.textContent  = String(state.ok);
+      badVal.textContent = String(state.bad);
     }
 
-    function gradeIfNeededForCurrent(){
-      if(answers[currentIndex] === null){
-        alert("رجاءً اختاري الإجابة أولًا.");
-        return false;
-      }
-
-      if(!locked[currentIndex]){
-        const correct = MODELS[currentModelKey].questions[currentIndex].correctIndex;
-        if(answers[currentIndex] === correct){
-          scoreOk += 1;
-          points += 1;
-        }else{
-          scoreBad += 1;
-        }
-        locked[currentIndex] = true;
-      }
-      return true;
-    }
-
-    function goNext(){
-      if(!gradeIfNeededForCurrent()) return;
-
-      if(currentIndex === 19){
-        finishExam();
-        return;
-      }
-      currentIndex += 1;
-      renderQuestion();
-    }
-
-    /* ✅ ورقة التضليل: 1 ثم 2 ثم 3 ... */
+    // ✅ ورقة تضليل مثل الصورة (شبكتين) وتظلّل الدائرة كاملة
     function renderSheet(){
       sheetGrid.innerHTML = "";
-
-      for(let i=0;i<20;i++){
+      for(let i=0;i<TOTAL_Q;i++){
         const row = document.createElement("div");
-        row.className = "row" + (locked[i] ? " locked":"");
-
-        const no = document.createElement("div");
-        no.className = "rowNo";
-        no.textContent = String(i+1);
+        row.className = "sheetItem";
 
         const bubbles = document.createElement("div");
         bubbles.className = "bubbles";
 
+        const chosen = state.answers[i];
+        const keys = ["a","b","c","d"];
+        const labels = ["أ","ب","ج","د"];
+
         for(let k=0;k<4;k++){
           const b = document.createElement("div");
-          b.className = "bubble";
-          b.textContent = LETTERS[k];
-
-          const on = (answers[i] === k);
-          if(on) b.classList.add("on");
-
-          if(i === currentIndex && !locked[i]){
-            b.addEventListener("click", ()=> chooseAnswer(k));
-          }
-
+          b.className = "bubble" + (chosen===keys[k] ? " on":"");
+          b.textContent = labels[k];
           bubbles.appendChild(b);
         }
 
-        row.appendChild(no);
+        const num = document.createElement("div");
+        num.className = "sheetNum";
+        num.textContent = String(i+1);
+
         row.appendChild(bubbles);
+        row.appendChild(num);
         sheetGrid.appendChild(row);
       }
     }
 
-    function tick(){
-      remaining = Math.max(0, remaining - 1);
-      timerTextEl.textContent = `الوقت ${formatTime(remaining)}`;
-      if(remaining <= 0){
-        finishExam(true);
-      }
-    }
+    function lockAndMoveNext(){
+      if(state.finished) return;
 
-    function startTimerIfNeeded(){
-      if(started) return;
-      started = true;
-      timerTextEl.textContent = `الوقت ${formatTime(remaining)}`;
-      timerId = setInterval(tick, 1000);
-    }
-
-    function stopTimer(){
-      if(timerId){
-        clearInterval(timerId);
-        timerId = null;
-      }
-    }
-
-    function finishExam(auto=false){
-      if(answers[currentIndex] !== null && !locked[currentIndex]){
-        gradeIfNeededForCurrent();
+      if(!state.currentSelected){
+        alert("اختاري إجابة أولًا ثم اضغطي (السؤال التالي).");
+        return;
       }
 
-      stopTimer();
+      state.answers[state.qIndex] = state.currentSelected;
 
-      const total = 20;
-      const score = scoreOk;
-      const percent = Math.round((score/total)*100);
+      const model = EXAM[state.modelIndex];
+      const q = model.questions[state.qIndex];
+      const correctKey = letterKey(q.answer);
+      const chosenKey = state.currentSelected;
 
-      finalModel.textContent = `نموذج (${MODELS[currentModelKey].label})`;
-      finalText.textContent =
-        `${auto ? "انتهى الوقت تلقائيًا.\n" : ""}` +
-        `درجتك: ${score} من ${total} (${percent}%).\n` +
-        `الصحيح: ${scoreOk} — الخطأ: ${scoreBad}.\n` +
-        `يمكنك إعادة الاختبار من زر «إعادة الاختبار».`;
-
-      overlay.classList.add("show");
-      overlay.setAttribute("aria-hidden","false");
-
-      updateHeader();
-      renderSheet();
-    }
-
-    function resetExam(keepModel=true){
-      stopTimer();
-      started = false;
-      remaining = EXAM_SECONDS;
-      timerTextEl.textContent = `الوقت ${formatTime(remaining)}`;
-
-      currentIndex = 0;
-      answers = Array(20).fill(null);
-      locked = Array(20).fill(false);
-      scoreOk = 0; scoreBad = 0; points = 0;
-
-      if(!keepModel) currentModelKey = "A";
-
-      renderQuestion();
-    }
-
-    function setModel(key){
-      if(!MODELS[key]) return;
-      currentModelKey = key;
-
-      modelBtns.forEach(b=> b.classList.toggle("active", b.dataset.model === key));
-
-      resetExam(true);
-      updateHeader();
-    }
-
-    nextBtn.addEventListener("click", goNext);
-
-    finishBtn.addEventListener("click", ()=>{
-      if(answers[currentIndex] !== null && !locked[currentIndex]){
-        gradeIfNeededForCurrent();
-      }
-      finishExam(false);
-    });
-
-    resetBtn.addEventListener("click", ()=>{
-      if(confirm("هل تريدين إعادة الاختبار؟ سيتم مسح الإجابات الحالية.")){
-        resetExam(true);
-      }
-    });
-
-    modelBtns.forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const key = btn.dataset.model;
-        if(key === currentModelKey) return;
-
-        if(started && (answers.some(a=>a!==null) || locked.some(x=>x))){
-          const ok = confirm("تغيير النموذج سيعيد الاختبار. هل تريدين المتابعة؟");
-          if(!ok) return;
-        }
-        setModel(key);
+      const items = [...optionsEl.children];
+      items.forEach(li=>{
+        const k = li.getAttribute("data-key");
+        li.classList.remove("correct","wrong");
+        if(k === correctKey) li.classList.add("correct");
+        if(k === chosenKey && chosenKey !== correctKey) li.classList.add("wrong");
       });
-    });
 
-    closeModalBtn.addEventListener("click", ()=>{
-      overlay.classList.remove("show");
-      overlay.setAttribute("aria-hidden","true");
-    });
+      if(chosenKey === correctKey){
+        state.ok++;
+        state.pts++;
+      }else{
+        state.bad++;
+      }
 
-    restartFromModalBtn.addEventListener("click", ()=>{
-      overlay.classList.remove("show");
-      overlay.setAttribute("aria-hidden","true");
-      resetExam(true);
-    });
+      updateScores();
+      renderSheet();
 
-    (function init(){
-      timerTextEl.textContent = `الوقت ${formatTime(remaining)}`;
-      setModel("A");
-    })();
+      setTimeout(()=>{
+        if(state.qIndex < TOTAL_Q-1){
+          state.qIndex++;
+          renderQuestion();
+        }else{
+          finishExam(false);
+        }
+      }, 450);
+    }
+
+    function finishExam(isAuto){
+      if(state.finished) return;
+      const msg = isAuto
+        ? "انتهى الوقت. سيتم إنهاء الاختبار الآن."
+        : "هل تريدين إنهاء الاختبار الآن؟";
+
+      const ok = window.confirm(msg);
+      if(!ok) return;
+
+      state.finished = true;
+      stopTimer();
+
+      // يبقى كل شيء ظاهر + ورقة التضليل موجودة
+      renderSheet();
+      alert("تم إنهاء الاختبار ✅ يمكنك مشاهدة ورقة التضليل أسفل الصفحة.");
+    }
+
+    function restartExam(){
+      const ok = window.confirm("هل تريدين إعادة الاختبار من البداية؟");
+      if(!ok) return;
+      resetForModel();
+    }
+
+    function renderAll(){
+      renderModels();
+      renderQuestion();
+      updateScores();
+      timeVal.textContent = fmtTime(state.seconds);
+      renderSheet(); // ✅ تظهر من البداية
+    }
+
+    nextBtn.addEventListener("click", lockAndMoveNext);
+    restartBtn.addEventListener("click", restartExam);
+    finishBtn.addEventListener("click", ()=>finishExam(false));
+
+    renderAll();
+    startTimer();
   </script>
 </body>
 </html>
