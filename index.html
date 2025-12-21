@@ -3,164 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>منصة لغتي الممتعة</title>
 
 <style>
+:root{
+  --purple:#6b6fd6;
+  --blue:#6fb7e9;
+  --green:#7fd1a3;
+  --orange:#f4b266;
+  --bg:#f4f5ff;
+  --text:#333;
+}
+
+*{
+  box-sizing:border-box;
+  font-family: "Tajawal", Arial, sans-serif;
+}
+
 body{
   margin:0;
-  font-family: "Cairo", Arial, sans-serif;
-  background:#f6f7fb;
-  color:#333;
+  background:linear-gradient(180deg,#f6f7ff,#ffffff);
+  color:var(--text);
 }
 
-/* ===== الهيدر ===== */
-.header{
-  background:linear-gradient(135deg,#6a5acd,#8a7cff);
-  color:#fff;
-  padding:30px 20px;
-  border-bottom-left-radius:30px;
-  border-bottom-right-radius:30px;
-  text-align:center;
-}
-
-.header h1{
-  margin:0;
-  font-size:30px;
-}
-
-.header p{
-  margin-top:10px;
-  font-size:16px;
-  opacity:.95;
-}
-
-/* ===== الأزرار العلوية ===== */
-.top-buttons{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  margin-top:20px;
-  flex-wrap:wrap;
-}
-
-.top-buttons a{
-  background:#fff;
-  color:#6a5acd;
-  padding:10px 18px;
-  border-radius:30px;
-  font-size:15px;
-  text-decoration:none;
-  box-shadow:0 6px 15px rgba(0,0,0,.15);
-  transition:.3s;
-}
-
-.top-buttons a:hover{
-  transform:scale(1.05);
-}
-
-/* ===== المحتوى ===== */
 .container{
-  max-width:900px;
-  margin:30px auto;
-  padding:20px;
+  max-width:420px;
+  margin:auto;
+  padding:24px 16px 40px;
 }
 
-/* ===== بطاقة رئيسية ===== */
-.card{
-  background:#fff;
-  border-radius:25px;
-  padding:25px;
-  box-shadow:0 10px 25px rgba(0,0,0,.12);
+h1{
   text-align:center;
+  color:var(--purple);
+  margin-bottom:6px;
 }
 
-/* ===== أزرار كبيرة ===== */
-.main-btn{
-  display:inline-block;
-  margin-top:20px;
-  padding:16px 35px;
-  border-radius:50px;
+.brand{
+  text-align:center;
+  font-size:17px;
+  font-weight:700;
+  color:#7a7ee6;
+  margin-bottom:16px;
+}
+
+.intro{
+  text-align:center;
+  line-height:1.9;
+  color:#555;
+  margin-bottom:30px;
+}
+
+/* cards */
+.card{
+  border-radius:20px;
+  padding:22px 18px;
+  margin-bottom:18px;
+  text-align:center;
+  box-shadow:0 10px 22px rgba(0,0,0,0.06);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.card h3{
+  margin:0;
   font-size:20px;
-  text-decoration:none;
-  color:#fff;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
-  transition:.3s;
 }
 
-.main-btn:hover{
-  transform:scale(1.08);
+.card p{
+  margin:8px 0 0;
+  font-size:15px;
+  opacity:.9;
 }
 
-/* ألوان الأزرار */
-.exam{ background:linear-gradient(135deg,#22c55e,#16a34a); }
-.skills{ background:linear-gradient(135deg,#6366f1,#4f46e5); }
-.reading{ background:linear-gradient(135deg,#f59e0b,#f97316); }
-.vocab{ background:linear-gradient(135deg,#06b6d4,#0ea5e9); }
+/* colors */
+.skills{ background:#e9eaff; }
+.reading{ background:#e6f3ff; }
+.vocab{ background:#e9f8ef; }
+.exam{ background:#fff0dc; }
 
-/* ===== الفوتر ===== */
+/* footer */
 .footer{
   text-align:center;
-  margin:40px 0 15px;
+  margin-top:36px;
   font-size:14px;
-  color:#666;
+  color:var(--purple);
+  font-weight:600;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== الهيدر ===== -->
-<div class="header">
-  <h1>منصة لغتي الممتعة 📘✨</h1>
-  <p>تعلم – شاهد – العب – اختبر</p>
-
-  <div class="top-buttons">
-    <a href="skills.html">🎯 المهارات</a>
-    <a href="exam.html">📝 الاختبار</a>
-    <a href="reading_skills_game.html">📚 Reading</a>
-    <a href="vocab_game.html">🧠 Vocab</a>
-    <a href="#">🏆 الصدارة</a>
-    <a href="#">👨‍👩‍👧 ولي الأمر</a>
-  </div>
-</div>
-
-<!-- ===== المحتوى ===== -->
 <div class="container">
-  <div class="card">
-    <h2>مرحبًا بكم 🌸</h2>
-    <p>
-      منصة تعليمية تفاعلية لطلاب المرحلة الابتدائية  
-      تعتمد على الألعاب، الصور، الفيديوهات، والاختبارات الإلكترونية.
-    </p>
 
-    <a href="exam.html" class="main-btn exam">
-      📝 الاختبار الإلكتروني
-    </a>
+  <h1>👋 أهلًا بكم</h1>
+  <div class="brand">في منصة لغتي الممتعة</div>
 
-    <br>
+  <p class="intro">
+    ستجدون مهارات لغوية، ألعاب تعليمية، واختبارات إلكترونية  
+    مصممة بأسلوب ممتع يناسب طلاب الصفوف الأولية  
+    ويشجعهم على التعلم بثقة وحماس.
+  </p>
 
-    <a href="skills.html" class="main-btn skills">
-      🎯 مهارات لغتي
-    </a>
-
-    <br>
-
-    <a href="reading_skills_game.html" class="main-btn reading">
-      📚 لعبة Reading
-    </a>
-
-    <br>
-
-    <a href="vocab_game.html" class="main-btn vocab">
-      🧠 لعبة Vocab
-    </a>
+  <!-- المهارات -->
+  <div class="card skills" onclick="location.href='skills.html'">
+    <h3>🎯 المهارات التفاعلية</h3>
+    <p>ألعاب وأنشطة تعليمية</p>
   </div>
-</div>
 
-<!-- ===== الفوتر ===== -->
-<div class="footer">
-  تصميم وإعداد: <strong>صالحة علي الغامدي</strong> ©
+  <!-- القراءة -->
+  <div class="card reading" onclick="location.href='reading.html'">
+    <h3>📘 لعبة القراءة</h3>
+    <p>تنمية مهارات الفهم</p>
+  </div>
+
+  <!-- المفردات -->
+  <div class="card vocab" onclick="location.href='vocab_game.html'">
+    <h3>🧩 لعبة المفردات</h3>
+    <p>مرادفات – أضداد</p>
+  </div>
+
+  <!-- الاختبار -->
+  <div class="card exam" onclick="location.href='exam.html'">
+    <h3>✍️ الاختبار الإلكتروني</h3>
+    <p>نماذج رسمية بأسلوب ممتع</p>
+  </div>
+
+  <div class="footer">
+    إعداد وتصميم ✨ صالحة علي الغامدي
+  </div>
+
 </div>
 
 </body>
