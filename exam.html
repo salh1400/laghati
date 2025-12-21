@@ -1,213 +1,973 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>الاختبار الإلكتروني</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الاختبار الإلكتروني - لغتي</title>
 
-<style>
-body{
-  font-family: "Cairo","Tajawal",sans-serif;
-  background:#f6f7fb;
-  margin:0;
-  padding:12px;
-}
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --ink:#1f2430;
+      --muted:#6b7280;
 
-.exam-box{
-  max-width:900px;
-  margin:auto;
-  background:#fff;
-  border-radius:16px;
-  padding:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.1);
-}
+      --blue:#0b3a82;        /* شريط رسمي */
+      --blue2:#0a2f6a;
 
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
+      --accent:#6b5bd6;      /* بنفسجي لطيف */
+      --accent2:#5146c5;
 
-.header h2{
-  margin:0;
-  font-size:20px;
-}
+      --ok:#15b26b;
+      --bad:#ff2f55;
 
-.model-select button{
-  border:0;
-  padding:8px 14px;
-  margin:2px;
-  border-radius:20px;
-  font-weight:700;
-  cursor:pointer;
-  background:#e0e0ff;
-}
-.model-select button.active{
-  background:#6b5bd6;
-  color:#fff;
-}
+      --line:#e5e7eb;
+      --shadow: rgba(0,0,0,.10);
+    }
 
-.text-box{
-  background:#f3f4ff;
-  padding:14px;
-  border-radius:12px;
-  margin:14px 0;
-  line-height:1.9;
-  font-weight:600;
-}
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:var(--bg);
+      font-family:"Cairo","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+      color:var(--ink);
+      padding:12px;
+    }
 
-.question{
-  margin-bottom:14px;
-  padding-bottom:10px;
-  border-bottom:1px dashed #ddd;
-}
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+    }
 
-.question h4{
-  margin:0 0 8px;
-  font-size:15px;
-}
+    /* رأس رسمي */
+    .header{
+      background: linear-gradient(180deg, var(--blue), var(--blue2));
+      color:#fff;
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 12px 28px rgba(11,58,130,.20);
+      margin-bottom: 12px;
+      position: sticky;
+      top: 10px;
+      z-index: 30;
+    }
+    .headerTop{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .title{
+      font-weight:1000;
+      font-size: 18px;
+      margin:0;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .sub{
+      font-weight:800;
+      opacity:.95;
+      font-size: 13px;
+      margin-top: 6px;
+      color: rgba(255,255,255,.92);
+    }
 
-.options{
-  display:grid;
-  grid-template-columns: repeat(4,1fr);
-  gap:8px;
-}
+    .headerTools{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-start;
+    }
 
-.option{
-  border:2px solid #bbb;
-  border-radius:50px;
-  padding:6px;
-  text-align:center;
-  cursor:pointer;
-  font-weight:700;
-  background:#fff;
-}
+    .modelBtns button{
+      border:0;
+      background: rgba(255,255,255,.15);
+      color:#fff;
+      font-weight:1000;
+      padding:8px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      transition: transform .10s ease, background .10s ease;
+    }
+    .modelBtns button:hover{ transform: translateY(-1px); }
+    .modelBtns button.active{
+      background: #fff;
+      color: var(--blue);
+    }
 
-.option.selected{
-  background:#6b5bd6;
-  color:#fff;
-  border-color:#6b5bd6;
-}
+    .timer{
+      background: rgba(255,255,255,.15);
+      padding:8px 12px;
+      border-radius: 999px;
+      font-weight:1000;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      min-width: 150px;
+      justify-content:center;
+    }
+    .timer b{ font-size: 14px; }
+    .timer .time{
+      font-size: 14px;
+      letter-spacing: .5px;
+    }
 
-.finish{
-  margin-top:20px;
-  text-align:center;
-}
+    .statusPills{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .pill{
+      background: rgba(255,255,255,.15);
+      padding:8px 12px;
+      border-radius: 999px;
+      font-weight:1000;
+      font-size: 13px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .pill.ok{ background: rgba(21,178,107,.20); }
+    .pill.bad{ background: rgba(255,47,85,.22); }
+    .pill.score{ background: rgba(107,91,214,.22); }
 
-.finish button{
-  border:0;
-  padding:12px 24px;
-  border-radius:30px;
-  background:#15b26b;
-  color:#fff;
-  font-size:16px;
-  font-weight:800;
-  cursor:pointer;
-}
+    /* بطاقة */
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 14px 40px var(--shadow);
+      margin-bottom: 12px;
+    }
 
-.score{
-  margin-top:12px;
-  font-size:18px;
-  font-weight:900;
-}
-</style>
+    /* نص طويل */
+    .passageBox{
+      background: #f1f3ff;
+      border: 1px solid #e7e9ff;
+      border-radius: 16px;
+      padding: 12px 12px 10px;
+      line-height: 2;
+      font-weight: 800;
+      color:#1f2a44;
+      white-space: pre-line;
+      position: relative;
+    }
+    .passageTag{
+      position:absolute;
+      top:10px;
+      left:10px;
+      background: #fff;
+      border: 1px solid #e7e9ff;
+      color: var(--accent2);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 1000;
+      font-size: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+
+    /* تقسيم: سؤال + ورقة إجابة */
+    .grid2{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:12px;
+      align-items:start;
+    }
+
+    @media (max-width: 860px){
+      .grid2{ grid-template-columns: 1fr; }
+    }
+
+    /* منطقة السؤال الحالي */
+    .qCard{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px;
+    }
+    .qTop{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-bottom: 10px;
+    }
+    .qNum{
+      font-weight:1000;
+      color: var(--accent2);
+      background: #eef2ff;
+      border:1px solid #e0e7ff;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .qLock{
+      font-weight:900;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .qText{
+      font-weight:1000;
+      font-size: 16px;
+      line-height: 1.9;
+      margin: 0 0 10px;
+      white-space: pre-line;
+    }
+
+    .opts{
+      display:grid;
+      gap:10px;
+    }
+    .opt{
+      border: 2px solid #cfd5ff;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 10px 12px;
+      cursor:pointer;
+      font-weight:1000;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.05);
+      user-select:none;
+      transition: transform .08s ease, border-color .08s ease, background .08s ease;
+    }
+    .opt:hover{ transform: translateY(-1px); }
+    .opt .bubble{
+      width:32px;
+      height:32px;
+      border-radius:999px;
+      border: 2px solid #7b83ff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:1000;
+      color:#3b45c7;
+      flex: 0 0 auto;
+      background: #f4f6ff;
+    }
+    .opt.selected{
+      border-color: var(--accent2);
+      background: linear-gradient(180deg, #f2f0ff, #ffffff);
+    }
+    .opt.selected .bubble{
+      background: var(--accent);
+      border-color: var(--accent);
+      color:#fff;
+    }
+    .opt.disabled{
+      pointer-events:none;
+      opacity:.98;
+      filter: grayscale(.1);
+    }
+
+    .navBtns{
+      margin-top: 12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .btn{
+      border:0;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 1000;
+      cursor:pointer;
+      box-shadow: 0 12px 24px rgba(0,0,0,.10);
+      transition: transform .08s ease;
+      min-width: 160px;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btnNext{
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      color:#fff;
+    }
+    .btnFinish{
+      background: linear-gradient(180deg, var(--ok), #0f8a52);
+      color:#fff;
+    }
+    .btnReset{
+      background: #f3f4f6;
+      color:#111827;
+      border:1px solid #e5e7eb;
+      box-shadow:none;
+    }
+
+    .note{
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+      line-height: 1.7;
+    }
+
+    /* ورقة الإجابة (تضليل) */
+    .omrCard{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow:hidden;
+      position: sticky;
+      top: 108px;
+    }
+    @media (max-width:860px){
+      .omrCard{ position: static; top:auto; }
+    }
+
+    .omrHeader{
+      background: linear-gradient(180deg, #0b3a82, #0a2f6a);
+      color:#fff;
+      padding: 10px 12px;
+      font-weight: 1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .omrHeader small{
+      opacity:.92;
+      font-weight: 900;
+    }
+
+    .omrBody{
+      padding: 10px;
+      background:#fff;
+    }
+
+    .omrGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .omrCol{
+      border:1px solid #eef2ff;
+      border-radius: 14px;
+      padding: 10px;
+      background: #fbfbff;
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 7px 6px;
+      border-bottom:1px dashed #e5e7eb;
+      font-weight: 1000;
+    }
+    .row:last-child{ border-bottom:none; }
+
+    .qno{
+      width:34px;
+      text-align:center;
+      color:#111827;
+      font-size: 13px;
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:10px;
+      padding: 3px 0;
+    }
+
+    .bubbles{
+      display:flex;
+      gap:6px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .bub{
+      width:24px;
+      height:24px;
+      border-radius:999px;
+      border:2px solid #c7cbe6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 12px;
+      font-weight: 1000;
+      color:#5b617a;
+      background:#fff;
+    }
+    .bub.filled{
+      background: var(--accent);
+      border-color: var(--accent);
+      color:#fff;
+    }
+    .row.current .qno{
+      border-color: var(--accent);
+      box-shadow: 0 10px 18px rgba(107,91,214,.18);
+    }
+
+    /* شاشة النتيجة */
+    .modal{
+      position: fixed;
+      inset:0;
+      background: rgba(15,23,42,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
+      z-index: 99;
+    }
+    .modal.show{ display:flex; }
+    .modalBox{
+      width:min(520px, 96vw);
+      background:#fff;
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      border: 4px solid #e5e7eb;
+      text-align:center;
+    }
+    .modalBox h3{
+      margin: 6px 0 8px;
+      font-size: 20px;
+      font-weight: 1000;
+      color:#111827;
+    }
+    .modalBox p{
+      margin: 0 0 12px;
+      font-weight: 900;
+      color:#374151;
+      line-height: 1.8;
+    }
+    .bigScore{
+      font-size: 34px;
+      font-weight: 1000;
+      color: var(--accent2);
+      margin: 8px 0 12px;
+    }
+    .modalBox button{
+      border:0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 1000;
+      cursor:pointer;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      color:#fff;
+      min-width: 180px;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-<div class="exam-box">
+    <div class="header">
+      <div class="headerTop">
+        <div>
+          <h1 class="title">📝 الاختبار الإلكتروني (لغتي) <span id="modelBadge">—</span></h1>
+          <div class="sub">سؤال واحد كل مرة — لا يمكن الرجوع للسؤال السابق — ورقة تضليل إلكترونية</div>
+        </div>
 
-  <div class="header">
-    <h2>الاختبار الإلكتروني – لغتي</h2>
-    <div class="model-select">
-      <button onclick="loadModel('A')" class="active" id="btnA">نموذج أ</button>
-      <button onclick="loadModel('B')" id="btnB">نموذج ب</button>
-      <button onclick="loadModel('C')" id="btnC">نموذج ج</button>
-      <button onclick="loadModel('D')" id="btnD">نموذج د</button>
+        <div class="headerTools">
+          <div class="modelBtns" id="modelBtns">
+            <button type="button" data-m="A" class="active">نموذج أ</button>
+            <button type="button" data-m="B">نموذج ب</button>
+            <button type="button" data-m="C">نموذج ج</button>
+            <button type="button" data-m="D">نموذج د</button>
+          </div>
+
+          <div class="timer" title="الوقت المتبقي">
+            ⏱️ <b>الوقت</b> <span class="time" id="timer">--:--</span>
+          </div>
+
+          <div class="statusPills">
+            <div class="pill score">⭐ النقاط: <span id="pts">0</span></div>
+            <div class="pill ok">✅ الصحيح: <span id="ok">0</span></div>
+            <div class="pill bad">❌ الخطأ: <span id="bad">0</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="passageBox" id="passage">
+        <span class="passageTag">النص الطويل</span>
+        —
+      </div>
+    </div>
+
+    <div class="card grid2">
+      <!-- سؤال واحد -->
+      <div class="qCard">
+        <div class="qTop">
+          <div class="qNum" id="qNum">السؤال —</div>
+          <div class="qLock" id="qLock">اختر إجابتك ثم اضغط (التالي) للانتقال</div>
+        </div>
+
+        <p class="qText" id="qText">—</p>
+
+        <div class="opts" id="opts"></div>
+
+        <div class="navBtns">
+          <button class="btn btnReset" id="resetBtn" type="button">🔁 إعادة الاختبار</button>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn btnFinish" id="finishBtn" type="button">✅ إنهاء الاختبار</button>
+            <button class="btn btnNext" id="nextBtn" type="button">التالي ⬅️</button>
+          </div>
+        </div>
+
+        <div class="note" style="margin-top:10px;">
+          - لا يمكن الرجوع للسؤال السابق بعد الضغط على (التالي).<br>
+          - عند انتهاء الوقت سيتم الإنهاء تلقائيًا وإظهار الدرجة.
+        </div>
+      </div>
+
+      <!-- ورقة الإجابة -->
+      <div class="omrCard">
+        <div class="omrHeader">
+          <div>إجابات الأسئلة (تضليل)</div>
+          <small id="omrSmall">٢٠ سؤال</small>
+        </div>
+        <div class="omrBody">
+          <div class="omrGrid" id="omrGrid"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- نتيجة -->
+  <div class="modal" id="modal">
+    <div class="modalBox">
+      <h3>🎉 انتهى الاختبار</h3>
+      <p id="resultText">—</p>
+      <div class="bigScore" id="bigScore">0 / 20</div>
+      <button type="button" id="closeModal">العودة للاختبار</button>
     </div>
   </div>
 
-  <div id="text" class="text-box"></div>
-
-  <div id="questions"></div>
-
-  <div class="finish">
-    <button onclick="finishExam()">إنهاء الاختبار</button>
-    <div class="score" id="score"></div>
-  </div>
-
-</div>
-
 <script>
-const models = {
-A:{
-text:`النص:
-تعاونَ طلابُ الصفِّ في تنظيفِ الفصلِ، فقام بعضُهم بترتيبِ المقاعد،
-وقام آخرون بتنظيفِ السبورة، وشعر الجميع بالسعادة بعد انتهاء العمل.`,
+/* =========================================================
+   1) بيانات 4 نماذج - كل نموذج: نص طويل + 20 سؤال (MCQ)
+   ========================================================= */
+const EXAMS = {
+  A: {
+    minutes: 25,
+    passage:
+`في صباحٍ مشرقٍ قررت المعلمة أن تجعل الحصة مختلفة. قالت للتلميذات: «اليوم سنقرأ نصًا عن التعاون ثم نطبّق ما نتعلمه».
+بدأت الحصة بقراءة نص يحكي عن مجموعة من الطالبات لاحظن أن ساحة المدرسة تحتاج إلى ترتيب. فاتفقن على خطة بسيطة: فريق ينظف المكان، وفريق يجمع الأوراق، وفريق يرتب المقاعد حول الأشجار. أثناء العمل تعاونت الطالبات وتبادلن الأدوات بابتسامة. وعندما انتهين، ظهرت الساحة نظيفة وجميلة، وشعرت كل طالبة بالفخر لأنها شاركت في عملٍ نافع.
+بعد ذلك ناقشت المعلمة مع التلميذات أن التعاون لا يعني فقط العمل معًا، بل يعني احترام دور الآخرين، والالتزام بالمهمة، ومساعدة من يحتاج للمساندة. وفي نهاية الحصة كتبت التلميذات عبارات قصيرة عن كيف يمكن للتعاون أن يجعل المدرسة أجمل والوقت أنفع.`,
+    questions: [
+      { q:"ما الفكرة العامة للنص؟", options:["التعاون يجعل المكان أجمل والعمل أسهل","الرحلات المدرسية ممتعة","النجاح يحتاج إلى المال","القراءة لا تفيد"], correct:0 },
+      { q:"ماذا لاحظت الطالبات في بداية النص؟", options:["أن ساحة المدرسة تحتاج إلى ترتيب","أن الفصل مظلم","أن الطقس ممطر","أن المكتبة مغلقة"], correct:0 },
+      { q:"ما أول خطوة قامت بها الطالبات؟", options:["اتفقن على خطة وتوزيع فرق","اشترين أدوات جديدة","ذهبن إلى المقصف","ألغين الحصة"], correct:0 },
+      { q:"أي عبارة تدل على روح التعاون؟", options:["تبادلن الأدوات بابتسامة","رفضن مساعدة بعضهن","غادرن المكان بسرعة","تخاصمن أثناء العمل"], correct:0 },
+      { q:"نتيجة التعاون في النص هي:", options:["ساحة نظيفة وشعور بالفخر","تأخر الدرس","إفساد الأشجار","ضياع الأدوات"], correct:0 },
+      { q:"التعاون في النص لا يعني فقط العمل معًا بل يعني أيضًا:", options:["احترام دور الآخرين والالتزام بالمهمة","السرعة دون نظام","ترك العمل للغير","التنافس المؤذي"], correct:0 },
+      { q:"أي عنوان مناسب للنص؟", options:["ساحة مدرستي أجمل بالتعاون","رحلة إلى البحر","أسرار الفضاء","وقت اللعب"], correct:0 },
+      { q:"مرادف كلمة «خطة» في السياق:", options:["ترتيب","صوت","نوم","حزن"], correct:0 },
+      { q:"ضد كلمة «نظيفة» هو:", options:["متسخة","مرتبّة","مضيئة","واسعة"], correct:0 },
+      { q:"الجملة التي تدل على سبب الفخر:", options:["لأن كل طالبة شاركت في عمل نافع","لأن الحصة انتهت مبكرًا","لأن الجو كان باردًا","لأنهن اشترين أدوات"], correct:0 },
+      { q:"في عبارة «كتبت التلميذات عبارات قصيرة»، كلمة «كتبت» هي:", options:["فعل","اسم","حرف","ظرف"], correct:0 },
+      { q:"في عبارة «حول الأشجار»، كلمة «حول» هي:", options:["اسم (ظرف مكان)","فعل","حرف جر","ضمير"], correct:0 },
+      { q:"أي جملة مفيدة وصحيحة؟", options:["تتعاون الطالباتُ في تنظيف الساحة.","في تنظيف الساحة.","الطالبات في.","تتعاون في."], correct:0 },
+      { q:"ما الهدف من مناقشة المعلمة بعد النص؟", options:["توضيح معنى التعاون وتطبيقه","إلغاء القراءة","زيادة الواجبات فقط","تغيير مكان الفصل"], correct:0 },
+      { q:"إذا أردنا تطبيق فكرة النص في البيت، فأفضل مثال هو:", options:["تعاون الأسرة في ترتيب المنزل","ترك الفوضى دائمًا","رفض المشاركة","إضاعة الوقت"], correct:0 },
+      { q:"نوع الجملة «ظهرت الساحة نظيفة»:", options:["جملة فعلية","جملة اسمية","أسلوب نداء","أسلوب استثناء"], correct:0 },
+      { q:"كلمة «مساندة» أقرب معنى إلى:", options:["مساعدة","خصام","تجاهل","تعب"], correct:0 },
+      { q:"أي مما يلي يُعد سلوكًا تعاونيًا؟", options:["توزيع الأدوار والالتزام بها","مقاطعة الآخرين","إهمال المهمة","السخرية"], correct:0 },
+      { q:"في نهاية الحصة كتبت التلميذات عن:", options:["كيف يجعل التعاون المدرسة أجمل والوقت أنفع","أن السفر أفضل","أن النوم أهم","أن اللعب فقط"], correct:0 },
+      { q:"مؤشر على نجاح الخطة:", options:["تنظيف الساحة وجمالها","زيادة الأوراق على الأرض","ضياع الأدوات","تأخر الجميع"], correct:0 },
+    ]
+  },
 
-questions:[
-{q:"ما الفكرة العامة للنص؟",a:["التعاون في تنظيف الفصل","اللعب في الساحة","زيارة المكتبة","رحلة مدرسية"],c:0},
-{q:"بماذا شعر الطلاب بعد انتهاء العمل؟",a:["السعادة","التعب","الغضب","الملل"],c:0},
-{q:"أين حدثت القصة؟",a:["في الفصل","في السوق","في الحديقة","في المنزل"],c:0},
-// ✨ كمّلي حتى 20 سؤال بنفس النمط
-]
-},
+  B: {
+    minutes: 25,
+    passage:
+`تحدث النص عن ترشيد الماء. لاحظت الطالبة أن صنبور الماء يظل مفتوحًا أثناء تنظيف الأسنان، وأن ذلك يهدر كمية كبيرة دون فائدة. قررت أن تبدأ بنفسها، فأغلقت الصنبور أثناء التنظيف، ثم فتحته عند الحاجة فقط. كما نصحت أخواتها بأن يستخدمن كوبًا صغيرًا للمضمضة بدل ترك الماء يجري. في المدرسة شاركت الطالبة في حملة توعوية، وكتبت مع زميلاتها لوحة تقول: «قطرة اليوم تصنع نهر الغد».
+في نهاية الأسبوع لاحظت الأسرة فرقًا في الاستهلاك، وشعرت الطالبة بالسعادة لأنها ساعدت في حفظ نعمة عظيمة. وعلمت أن ترشيد الماء لا يحتاج إلى أشياء صعبة، بل يحتاج إلى وعيٍ وعادةٍ جيدة واستمرار.`,
+    questions: [
+      { q:"ما الفكرة العامة للنص؟", options:["ترشيد الماء وحفظ النعمة","زيارة السوق","اللعب في الحديقة","تعلم الرسم"], correct:0 },
+      { q:"ما السلوك الخاطئ الذي لاحظته الطالبة؟", options:["ترك الصنبور مفتوحًا أثناء تنظيف الأسنان","قراءة كتاب","ترتيب الغرفة","الذهاب مبكرًا"], correct:0 },
+      { q:"ما أول خطوة قامت بها الطالبة؟", options:["أغلقت الصنبور أثناء التنظيف","اشترت صنبورًا جديدًا","سافرت","تركت التنظيف"], correct:0 },
+      { q:"نصيحتها لأخواتها كانت:", options:["استخدام كوب صغير للمضمضة","ترك الماء يجري","زيادة الاستهلاك","عدم الاهتمام"], correct:0 },
+      { q:"ماذا كتبت الطالبة في اللوحة التوعوية؟", options:["قطرة اليوم تصنع نهر الغد","الرياضة أولًا","النوم أفضل","الطعام ألذ"], correct:0 },
+      { q:"نتيجة الترشيد في نهاية الأسبوع:", options:["فرق في الاستهلاك وشعور بالسعادة","زيادة الاستهلاك","تأخر المدرسة","ضياع الكتب"], correct:0 },
+      { q:"مرادف كلمة «يهدر» هو:", options:["يضيع","ينظم","يزين","يشرح"], correct:0 },
+      { q:"ضد كلمة «عظيمة» هو:", options:["صغيرة","واسعة","كثيرة","قوية"], correct:0 },
+      { q:"الهدف من الحملة التوعوية:", options:["نشر الوعي بعادة ترشيد الماء","إلغاء الدروس","الترفيه فقط","بيع الماء"], correct:0 },
+      { q:"نوع كلمة «الماء» في الجملة:", options:["اسم","فعل","حرف","أداة"], correct:0 },
+      { q:"في «بدل ترك الماء يجري» كلمة «بدل» هي:", options:["اسم","فعل","حرف","ضمير"], correct:0 },
+      { q:"أي جملة مفيدة؟", options:["أحافظ على الماء ولا أهدره.","على الماء.","أهدر الماء.","الماء في."], correct:0 },
+      { q:"ترشيد الماء يحتاج إلى:", options:["وعي وعادة جيدة واستمرار","سرعة فقط","صعوبة كبيرة","إهمال"], correct:0 },
+      { q:"عنوان مناسب للنص:", options:["قطرة اليوم","رحلة الشتاء","سوق الجمعة","مغامرة البحر"], correct:0 },
+      { q:"ماذا تشعر الطالبة؟", options:["السعادة لأنها ساعدت في حفظ النعمة","الخوف من الماء","الملل من المدرسة","الغضب"], correct:0 },
+      { q:"أي سلوك صحيح؟", options:["إغلاق الصنبور عند عدم الحاجة","ترك الماء يجري دائمًا","كسر الصنبور","عدم الاهتمام"], correct:0 },
+      { q:"سبب حفظ الماء:", options:["لأنه نعمة يجب الحفاظ عليها","لأنه بلا فائدة","لأنه يسبب النوم","لأنه يمنع الدراسة"], correct:0 },
+      { q:"في «شاركت الطالبة» كلمة «شاركت» هي:", options:["فعل","اسم","حرف","ظرف"], correct:0 },
+      { q:"في «حملة توعوية» كلمة «توعوية» هي:", options:["صفة","فعل","حرف","ضمير"], correct:0 },
+      { q:"استنتاج من النص:", options:["التغيير يبدأ من الشخص نفسه","الترشيد مستحيل","لا فائدة من النصيحة","الأسرة لا تلاحظ"], correct:0 },
+    ]
+  },
 
-B:{ text:"نص النموذج ب", questions:[] },
-C:{ text:"نص النموذج ج", questions:[] },
-D:{ text:"نص النموذج د", questions:[] },
+  C: {
+    minutes: 25,
+    passage:
+`تدور أحداث النص حول آداب الحوار. في مجلس المدرسة كان الطلاب يتناقشون حول فكرة إقامة معرض للكتاب. بدأ الحوار بشكل جميل، ثم ارتفع الصوت عندما قاطع بعضهم المتحدث. تدخلت المعلمة وقالت: «الحوار الناجح له قواعد: نستمع أولًا، ولا نقاطع، ونحترم الرأي المختلف، ونختار كلمات لطيفة».
+بعد ذلك طلبت المعلمة من كل طالب أن يعيد فكرته بهدوء، وأن يذكر سبب رأيه دون تجريح. لاحظ الجميع أن الأفكار أصبحت أوضح، وأن التعاون في النقاش جعل القرار أسهل. وفي نهاية اللقاء اتفقوا على إقامة المعرض، وتوزيع المهام، والالتزام بالوقت المحدد.`,
+    questions: [
+      { q:"موضوع النص هو:", options:["آداب الحوار","السفر","الطبخ","السباحة"], correct:0 },
+      { q:"سبب ارتفاع الصوت في البداية:", options:["مقاطعة بعضهم للمتحدث","قراءة كتاب","انقطاع الكهرباء","تأخر المعلمة"], correct:0 },
+      { q:"من الذي تدخل لإصلاح الحوار؟", options:["المعلمة","الحارس","المقصف","السائق"], correct:0 },
+      { q:"من قواعد الحوار الناجح:", options:["الاستماع وعدم المقاطعة واحترام الرأي","السخرية والتجريح","الصراخ","رفض الجميع"], correct:0 },
+      { q:"ماذا طلبت المعلمة من الطلاب؟", options:["إعادة الفكرة بهدوء وذكر السبب دون تجريح","الخروج من المجلس","إلغاء المعرض","الصمت دائمًا"], correct:0 },
+      { q:"نتيجة الالتزام بالقواعد:", options:["الأفكار أوضح والقرار أسهل","زاد الخلاف","توقف النقاش","ضاعت الفكرة"], correct:0 },
+      { q:"قرار الطلاب في النهاية:", options:["إقامة معرض للكتاب","إلغاء القراءة","الذهاب للملعب","السفر"], correct:0 },
+      { q:"مرادف «تجريح» هو:", options:["إساءة","ترتيب","توضيح","ابتسامة"], correct:0 },
+      { q:"ضد «لطيفة» هو:", options:["قاسية","جميلة","هادئة","قريبة"], correct:0 },
+      { q:"عنوان مناسب:", options:["حوارنا يحترم الجميع","مغامرة القمر","طعام العيد","يوم ممطر"], correct:0 },
+      { q:"في «يتناقشون» الكلمة هي:", options:["فعل","اسم","حرف","ضمير"], correct:0 },
+      { q:"في «مجلس المدرسة» كلمة «مجلس» هي:", options:["اسم","فعل","حرف","أداة"], correct:0 },
+      { q:"أي جملة مفيدة؟", options:["أحترم الرأي المختلف في النقاش.","الرأي في.","أحترم في.","مختلف الرأي."], correct:0 },
+      { q:"الهدف من النص:", options:["تعليم آداب الحوار","تعليم الرسم","تعليم الجري","تعليم السباحة"], correct:0 },
+      { q:"استنتاج صحيح:", options:["الهدوء يجعل الحوار ناجحًا","الصوت العالي أفضل","المقاطعة مفيدة","لا حاجة للوقت"], correct:0 },
+      { q:"أي سلوك غير مناسب للحوار؟", options:["مقاطعة المتحدث","الاستماع","الاحترام","اختيار كلمات لطيفة"], correct:0 },
+      { q:"في «توزيع المهام» كلمة «توزيع» هي:", options:["اسم","فعل","حرف","ضمير"], correct:0 },
+      { q:"معنى «الالتزام بالوقت» هو:", options:["احترام الزمن المحدد","إضاعة الوقت","تأخير دائم","عدم تنظيم"], correct:0 },
+      { q:"ماذا جعل القرار أسهل؟", options:["التعاون في النقاش","الخلاف","الصراخ","التجريح"], correct:0 },
+      { q:"أفضل نهاية للنص:", options:["اتفاق وتوزيع مهام","شجار كبير","إلغاء الفكرة","صمت دائم"], correct:0 },
+    ]
+  },
+
+  D: {
+    minutes: 25,
+    passage:
+`يحكي النص عن التخطيط وتنظيم الوقت. كانت الطالبة تستعد لاختبار مهم، لكنها كانت تشعر أن الوقت يضيع سريعًا. جلست مع أمها، فاقترحت الأم أن تكتب جدولًا بسيطًا: ساعة للمراجعة، واستراحة قصيرة، ثم حل تدريبات. التزمت الطالبة بالخطة، وبدأت بالأصعب ثم الأسهل. وفي كل يوم كانت تضع علامة أمام ما أنجزت.
+بعد عدة أيام لاحظت الطالبة أنها أصبحت أكثر هدوءًا، وأنها تتذكر المعلومات بشكل أفضل. وعندما جاء يوم الاختبار دخلت بثقة، لأنها لم تعتمد على الحظ، بل اعتمدت على خطة واضحة ومتابعة مستمرة.`,
+    questions: [
+      { q:"الفكرة العامة للنص:", options:["تنظيم الوقت يساعد على النجاح","الطعام الصحي","رحلة مدرسية","ألعاب إلكترونية"], correct:0 },
+      { q:"لماذا كانت الطالبة تشعر بالضيق؟", options:["لأن الوقت يضيع سريعًا","لأنها لا تحب المدرسة","لأنها سافرت","لأنها مريضة"], correct:0 },
+      { q:"ما اقتراح الأم؟", options:["كتابة جدول بسيط للمراجعة والاستراحة والتدريبات","ترك الدراسة","النوم طوال اليوم","الاعتماد على الحظ"], correct:0 },
+      { q:"كيف رتّبت الطالبة دراستها؟", options:["بدأت بالأصعب ثم الأسهل","بدأت بالألعاب","تركت الأصعب","لم ترتب"], correct:0 },
+      { q:"ماذا كانت تفعل كل يوم؟", options:["تضع علامة أمام ما أنجزت","تترك الدفاتر","تؤجل العمل","تتذمر"], correct:0 },
+      { q:"نتيجة التخطيط بعد أيام:", options:["هدوء وتذكر أفضل","نسيان كامل","خوف أكبر","ضياع وقت"], correct:0 },
+      { q:"في يوم الاختبار دخلت الطالبة:", options:["بثقة","بحزن","بملل","بغضب"], correct:0 },
+      { q:"لم تعتمد الطالبة على:", options:["الحظ","الخطة","المراجعة","التدريب"], correct:0 },
+      { q:"عنوان مناسب:", options:["جدولي طريق نجاحي","رحلة البحر","قصة الأسد","حديقة جميلة"], correct:0 },
+      { q:"مرادف «خطة» هو:", options:["تنظيم","تعب","صمت","نوم"], correct:0 },
+      { q:"ضد «واضحة» هو:", options:["غامضة","مضيئة","قريبة","سريعة"], correct:0 },
+      { q:"في «جلست» الكلمة هي:", options:["فعل","اسم","حرف","ضمير"], correct:0 },
+      { q:"في «جدولًا بسيطًا» كلمة «بسيطًا» هي:", options:["صفة","فعل","حرف","ضمير"], correct:0 },
+      { q:"أي جملة مفيدة؟", options:["أنظم وقتي لأحقق هدفي.","وقتي لأحقق.","أنظم وقتي.","هدفي وقتي."], correct:0 },
+      { q:"سبب الثقة:", options:["خطة واضحة ومتابعة مستمرة","الحظ فقط","الراحة دون دراسة","الخوف"], correct:0 },
+      { q:"أفضل سلوك قبل الاختبار:", options:["مراجعة + تدريبات + استراحة منظمة","سهر بلا خطة","لعب طويل","تأجيل"], correct:0 },
+      { q:"استنتاج من النص:", options:["التخطيط يقلل التوتر","التخطيط يزيد الضياع","لا فائدة للجدول","النجاح صدفة"], correct:0 },
+      { q:"ما الدليل على المتابعة؟", options:["وضع علامة أمام ما أنجزت","كثرة النوم","ترك الدفاتر","نسيان الجدول"], correct:0 },
+      { q:"ما الذي تحسن لدى الطالبة؟", options:["تذكر المعلومات","صوتها","لون حقيبتها","سرعة المشي"], correct:0 },
+      { q:"الفعل في «اعتمدت» هو:", options:["اعتمدت","خطة","واضحة","مستمرة"], correct:0 },
+    ]
+  }
 };
 
-let currentModel="A";
-let answers={};
+/* =========================================================
+   2) حالة الاختبار + المؤقت + منع الرجوع
+   ========================================================= */
+const modelBtns = document.getElementById("modelBtns");
+const modelBadge = document.getElementById("modelBadge");
+const passageEl = document.getElementById("passage");
+const qNumEl = document.getElementById("qNum");
+const qTextEl = document.getElementById("qText");
+const optsEl = document.getElementById("opts");
 
-function loadModel(m){
-  currentModel=m;
-  answers={};
-  document.querySelectorAll(".model-select button").forEach(b=>b.classList.remove("active"));
-  document.getElementById("btn"+m).classList.add("active");
+const timerEl = document.getElementById("timer");
+const ptsEl = document.getElementById("pts");
+const okEl  = document.getElementById("ok");
+const badEl = document.getElementById("bad");
 
-  document.getElementById("text").innerText=models[m].text;
-  const qBox=document.getElementById("questions");
-  qBox.innerHTML="";
+const nextBtn = document.getElementById("nextBtn");
+const finishBtn = document.getElementById("finishBtn");
+const resetBtn = document.getElementById("resetBtn");
 
-  models[m].questions.forEach((q,i)=>{
-    const div=document.createElement("div");
-    div.className="question";
-    div.innerHTML=`<h4>${i+1}. ${q.q}</h4>`;
-    const opts=document.createElement("div");
-    opts.className="options";
+const omrGrid = document.getElementById("omrGrid");
+const omrSmall = document.getElementById("omrSmall");
 
-    q.a.forEach((op,idx)=>{
-      const o=document.createElement("div");
-      o.className="option";
-      o.innerText=["أ","ب","ج","د"][idx];
-      o.onclick=()=>{
-        answers[i]=idx;
-        [...opts.children].forEach(x=>x.classList.remove("selected"));
-        o.classList.add("selected");
-      };
-      opts.appendChild(o);
+const modal = document.getElementById("modal");
+const resultText = document.getElementById("resultText");
+const bigScore = document.getElementById("bigScore");
+const closeModal = document.getElementById("closeModal");
+
+let currentModelKey = "A";
+let currentExam = EXAMS[currentModelKey];
+
+let idx = 0;                       // السؤال الحالي (0..19)
+let lockedUntil = -1;              // آخر سؤال تم قفله (لا رجوع)
+let answers = Array(20).fill(null);// A/B/C/D => 0..3
+let finished = false;
+
+let points = 0, ok = 0, bad = 0;
+
+let timerId = null;
+let remainSec = 0;
+
+/* =========================================================
+   أدوات
+   ========================================================= */
+function fmtTime(sec){
+  const m = Math.floor(sec/60);
+  const s = sec%60;
+  return String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+}
+
+function setActiveModelBtn(key){
+  [...modelBtns.querySelectorAll("button")].forEach(b=>{
+    b.classList.toggle("active", b.dataset.m === key);
+  });
+}
+
+function resetState(){
+  idx = 0;
+  lockedUntil = -1;
+  answers = Array(20).fill(null);
+  finished = false;
+  points = 0; ok = 0; bad = 0;
+  updateStats();
+}
+
+function updateStats(){
+  ptsEl.textContent = String(points);
+  okEl.textContent  = String(ok);
+  badEl.textContent = String(bad);
+}
+
+function buildOMR(){
+  omrGrid.innerHTML = "";
+  omrSmall.textContent = "٢٠ سؤال";
+
+  // عمودين: 1-10 و 11-20 (شكل رسمي)
+  const col1 = document.createElement("div");
+  col1.className = "omrCol";
+  const col2 = document.createElement("div");
+  col2.className = "omrCol";
+
+  for(let i=0;i<20;i++){
+    const row = document.createElement("div");
+    row.className = "row";
+    row.id = "omrRow" + i;
+
+    const qno = document.createElement("div");
+    qno.className = "qno";
+    qno.textContent = String(i+1);
+
+    const bubbles = document.createElement("div");
+    bubbles.className = "bubbles";
+    ["أ","ب","ج","د"].forEach((letter,bi)=>{
+      const b = document.createElement("div");
+      b.className = "bub";
+      b.textContent = letter;
+      b.id = `bub_${i}_${bi}`;
+      bubbles.appendChild(b);
     });
 
-    div.appendChild(opts);
-    qBox.appendChild(div);
-  });
+    row.appendChild(qno);
+    row.appendChild(bubbles);
 
-  document.getElementById("score").innerText="";
+    if(i<10) col1.appendChild(row);
+    else col2.appendChild(row);
+  }
+
+  omrGrid.appendChild(col1);
+  omrGrid.appendChild(col2);
 }
 
-function finishExam(){
-  let score=0;
-  models[currentModel].questions.forEach((q,i)=>{
-    if(answers[i]===q.c) score++;
-  });
-  document.getElementById("score").innerText=`درجتك: ${score} / ${models[currentModel].questions.length}`;
+function updateOMR(){
+  for(let i=0;i<20;i++){
+    const row = document.getElementById("omrRow"+i);
+    if(row) row.classList.toggle("current", i===idx);
+
+    for(let b=0;b<4;b++){
+      const bub = document.getElementById(`bub_${i}_${b}`);
+      if(!bub) continue;
+      bub.classList.toggle("filled", answers[i] === b);
+    }
+  }
 }
 
+function renderQuestion(){
+  const q = currentExam.questions[idx];
+
+  qNumEl.textContent = `السؤال ${idx+1} من 20`;
+  qTextEl.textContent = q.q;
+
+  optsEl.innerHTML = "";
+  const letters = ["أ","ب","ج","د"];
+
+  q.options.forEach((txt, iOpt)=>{
+    const opt = document.createElement("div");
+    opt.className = "opt";
+    if(answers[idx] === iOpt) opt.classList.add("selected");
+
+    // إذا السؤال مقفول (سؤال سابق) لا يتغير
+    const isLocked = (idx <= lockedUntil) || finished;
+    if(isLocked) opt.classList.add("disabled");
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = letters[iOpt];
+
+    const span = document.createElement("div");
+    span.textContent = txt;
+
+    opt.appendChild(bubble);
+    opt.appendChild(span);
+
+    opt.addEventListener("click", ()=>{
+      if(finished) return;
+      if(idx <= lockedUntil) return;
+
+      answers[idx] = iOpt;
+      // تحديث تحديد
+      [...optsEl.children].forEach(c=>c.classList.remove("selected"));
+      opt.classList.add("selected");
+      updateOMR();
+    });
+
+    optsEl.appendChild(opt);
+  });
+
+  // أزرار
+  nextBtn.disabled = finished;
+  finishBtn.disabled = finished;
+
+  // تغيير نص زر التالي عند آخر سؤال
+  if(idx === 19){
+    nextBtn.textContent = "إنهاء ⬅️";
+  }else{
+    nextBtn.textContent = "التالي ⬅️";
+  }
+
+  updateOMR();
+}
+
+function loadModel(key){
+  currentModelKey = key;
+  currentExam = EXAMS[key];
+
+  setActiveModelBtn(key);
+  modelBadge.textContent = `— (${key})`;
+
+  passageEl.textContent = currentExam.passage;
+  resetState();
+  buildOMR();
+  updateOMR();
+  renderQuestion();
+  startTimer(currentExam.minutes);
+}
+
+function startTimer(minutes){
+  clearInterval(timerId);
+  remainSec = minutes * 60;
+  timerEl.textContent = fmtTime(remainSec);
+
+  timerId = setInterval(()=>{
+    if(finished){
+      clearInterval(timerId);
+      return;
+    }
+    remainSec--;
+    if(remainSec <= 0){
+      timerEl.textContent = "00:00";
+      finishExam(true);
+      return;
+    }
+    timerEl.textContent = fmtTime(remainSec);
+  }, 1000);
+}
+
+function finishExam(auto=false){
+  if(finished) return;
+
+  // قفل كامل
+  finished = true;
+  lockedUntil = 19;
+
+  // حساب الدرجة
+  ok = 0; bad = 0; points = 0;
+  currentExam.questions.forEach((q,i)=>{
+    const a = answers[i];
+    if(a === null){
+      // غير مجاب: يعتبر خطأ
+      bad++;
+      return;
+    }
+    if(a === q.correct){
+      ok++;
+      points++;
+    }else{
+      bad++;
+    }
+  });
+  updateStats();
+  renderQuestion();
+
+  // عرض النتيجة
+  const missed = answers.filter(x=>x===null).length;
+  resultText.textContent =
+    (auto ? "انتهى الوقت وتم إنهاء الاختبار تلقائيًا." : "تم إنهاء الاختبار.")
+    + (missed ? ` (عدد الأسئلة غير المجابة: ${missed})` : "");
+  bigScore.textContent = `${points} / 20`;
+
+  modal.classList.add("show");
+}
+
+function goNext(){
+  if(finished) return;
+
+  // لازم تختار قبل الإنتقال (شكل رسمي)
+  if(answers[idx] === null){
+    alert("من فضلك اختاري إجابة قبل الانتقال للسؤال التالي.");
+    return;
+  }
+
+  // قفل السؤال الحالي بعد الانتقال
+  lockedUntil = Math.max(lockedUntil, idx);
+
+  if(idx === 19){
+    finishExam(false);
+    return;
+  }
+
+  idx++;
+  renderQuestion();
+}
+
+function resetExam(){
+  if(!confirm("هل تريدين إعادة الاختبار؟ سيتم حذف جميع الإجابات.")) return;
+  resetState();
+  buildOMR();
+  updateOMR();
+  renderQuestion();
+  startTimer(currentExam.minutes);
+}
+
+/* =========================================================
+   أحداث
+   ========================================================= */
+modelBtns.addEventListener("click", (e)=>{
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  if(finished){
+    if(!confirm("الاختبار منتهٍ. هل تريدين فتح نموذج جديد والبدء من الصفر؟")) return;
+  }else{
+    if(!confirm("سيتم بدء نموذج جديد وحذف الإجابات الحالية. متابعة؟")) return;
+  }
+  loadModel(btn.dataset.m);
+});
+
+nextBtn.addEventListener("click", goNext);
+finishBtn.addEventListener("click", ()=> finishExam(false));
+resetBtn.addEventListener("click", resetExam);
+
+closeModal.addEventListener("click", ()=>{
+  modal.classList.remove("show");
+});
+
+/* بدء أولي */
 loadModel("A");
 </script>
-
 </body>
 </html>
