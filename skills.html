@@ -114,7 +114,6 @@
       box-shadow: var(--shadow);
       margin-bottom:18px;
     }
-    .hintCard b{ color:#0f172a; }
     .hintRow{
       display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap;
     }
@@ -135,12 +134,8 @@
       gap:14px;
       margin-bottom:18px;
     }
-    @media(min-width:640px){
-      .skillsGrid{ grid-template-columns: 1fr 1fr; }
-    }
-    @media(min-width:980px){
-      .skillsGrid{ grid-template-columns: 1fr 1fr 1fr; }
-    }
+    @media(min-width:640px){ .skillsGrid{ grid-template-columns: 1fr 1fr; } }
+    @media(min-width:980px){ .skillsGrid{ grid-template-columns: 1fr 1fr 1fr; } }
     .skillBtn{
       border:none;
       cursor:pointer;
@@ -182,9 +177,7 @@
       gap:12px;
       flex-wrap:wrap;
     }
-    .viewerHead .title{
-      font-size:18px;
-    }
+    .viewerHead .title{ font-size:18px; }
     .viewerBody{
       padding:14px;
       display:grid;
@@ -231,11 +224,7 @@
       font-size:13px;
       line-height:1.6;
     }
-    .btnRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    .btnRow{ display:flex; gap:10px; flex-wrap:wrap; }
     .bigBtn{
       border:none;
       cursor:pointer;
@@ -251,14 +240,9 @@
     }
     .bigBtn:hover{ transform: translateY(-2px); filter: brightness(1.03); }
     .bigBtn:active{ transform: translateY(0); }
-
     .bigBtn.video{ background: linear-gradient(135deg,#4f46e5,#8b5cf6); color:#fff; }
     .bigBtn.quiz{ background: linear-gradient(135deg,#22c55e,#16a34a); color:#fff; }
-    .bigBtn.disabled{
-      opacity:.55;
-      cursor:not-allowed;
-      filter:grayscale(.2);
-    }
+    .bigBtn.disabled{ opacity:.55; cursor:not-allowed; filter:grayscale(.2); }
 
     .foot{
       text-align:center;
@@ -317,10 +301,7 @@
     }
     .closeX:hover{ transform: translateY(-2px); filter: brightness(1.04); }
     .closeX:active{ transform: translateY(0); }
-    .modalBody{
-      padding:14px;
-      overflow:auto;
-    }
+    .modalBody{ padding:14px; overflow:auto; }
 
     /* TV Frame */
     .tv-frame{
@@ -344,11 +325,8 @@
       display:block;
       background:#0b1220;
     }
-    @media(max-width:520px){
-      .tv-screen iframe{ height: 38vh; }
-    }
+    @media(max-width:520px){ .tv-screen iframe{ height: 38vh; } }
 
-    /* ====== TV Controls (inside TV) ====== */
     .tv-controls{
       display:flex;
       gap:10px;
@@ -372,11 +350,9 @@
     }
     .tv-btn:hover{ transform: translateY(-2px); filter:brightness(1.03); }
     .tv-btn:active{ transform: translateY(0); }
-
     .tv-btn.full{ background: linear-gradient(135deg,#1fb6ff,#7c3aed); color:#fff; }
     .tv-btn.close{ background: linear-gradient(135deg,#ef4444,#fb7185); color:#fff; }
     .tv-btn.open{ background: linear-gradient(135deg,#22c55e,#16a34a); color:#fff; }
-
     .tv-hint{
       text-align:center;
       font-size:13px;
@@ -385,7 +361,6 @@
       font-weight:750;
     }
 
-    /* small switch buttons */
     .small-btn{
       border:none; cursor:pointer;
       padding:10px 12px;
@@ -443,10 +418,7 @@
       line-height:1.8;
       font-size:16px;
     }
-    .choices{
-      display:grid;
-      gap:10px;
-    }
+    .choices{ display:grid; gap:10px; }
     .choice{
       background: rgba(248,250,252,.9);
       border:1px solid rgba(148,163,184,.28);
@@ -468,10 +440,7 @@
       gap:10px;
       flex-wrap:wrap;
     }
-    .progress{
-      font-weight:950;
-      color:#334155;
-    }
+    .progress{ font-weight:950; color:#334155; }
     .nextBtn{
       border:none; cursor:pointer;
       padding:10px 14px;
@@ -480,6 +449,36 @@
       background: linear-gradient(135deg,#f59e0b,#fb7185);
       color:#fff;
       box-shadow: 0 12px 20px rgba(2,6,23,.12);
+    }
+
+    /* Mini table */
+    .miniCard{
+      background: rgba(255,255,255,.85);
+      border:1px solid rgba(148,163,184,.25);
+      border-radius:18px;
+      padding:14px;
+      box-shadow: 0 16px 28px rgba(2,6,23,.08);
+    }
+    table{ width:100%; border-collapse:collapse; }
+    th,td{ padding:10px; border-bottom:1px solid rgba(148,163,184,.22); text-align:right; }
+    th{ font-weight:950; color:#0f172a; background: rgba(99,102,241,.08); border-radius:12px; }
+    tr:last-child td{ border-bottom:none; }
+    .tag{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      font-weight:950;
+      font-size:12px;
+      background: rgba(34,197,94,.14);
+      color:#166534;
+      border:1px solid rgba(34,197,94,.25);
+      margin-left:6px;
+      white-space:nowrap;
+    }
+    .tag.gold{
+      background: rgba(245,158,11,.18);
+      color:#92400e;
+      border-color: rgba(245,158,11,.30);
     }
   </style>
 </head>
@@ -509,7 +508,7 @@
         <div class="check">✅</div>
         <p>
           <b>اختر مهارة (20 مهارة)</b> — ثم ستظهر بطاقة المهارة هنا مباشرة مع
-          <b>زر الفيديو</b> و<b>زر الاختبار</b>. (الفيديو يفتح داخل تلفزيون كرتوني + زر ملء الشاشة)
+          <b>زر الفيديو</b> و<b>زر الاختبار</b>. (الفيديو داخل تلفزيون كرتوني + زر ملء الشاشة)
         </p>
       </div>
     </section>
@@ -520,7 +519,7 @@
       <div class="viewerHead">
         <div class="title" id="viewerTitle">—</div>
         <div style="font-weight:900;color:#0b1220;opacity:.92;font-size:13px">
-          🎯 تدريب ممتع + اختبار واقعي
+          🎯 نقاط + كأس عند الإتقان
         </div>
       </div>
 
@@ -531,7 +530,7 @@
 
         <div class="actionBox">
           <h3>اختاري الآن</h3>
-          <p>شاهدي الفيديو داخل “تلفزيون” ثم انتقلي للاختبار. الأصوات واضحة مع تشجيع 🎉</p>
+          <p>شاهدي الفيديو داخل “تلفزيون” ثم انتقلي للاختبار. الدرجة تُحفظ تلقائياً وتدخل لوحة الصدارة 🏆</p>
           <div class="btnRow">
             <button id="videoBtn" class="bigBtn video" onclick="openVideoModal(currentSkill)">🎬 فيديو</button>
             <button id="quizBtn" class="bigBtn quiz" onclick="openQuiz(currentSkill)">📝 اختبار</button>
@@ -561,7 +560,9 @@
   <div id="toast" class="toast"></div>
 
   <script>
-    // ====== بيانات المهارات (20 مهارة) ======
+    // =========================
+    // 1) بيانات المهارات (20)
+    // =========================
     const skills = [
       { id:"word_types", name:"أقسام الكلمة", img:"image/skill_word_types.png", videos:["https://www.youtube.com/embed/CvTvx1TRYw4?rel=0&modestbranding=1&playsinline=1"], videoLinks:["https://youtu.be/CvTvx1TRYw4?feature=shared"] },
       { id:"verb_types", name:"أنواع الفعل", img:"image/skill_verb-types.png", videos:["https://www.youtube.com/embed/-fNt_5kOvIs?rel=0&modestbranding=1&playsinline=1"], videoLinks:["https://youtu.be/-fNt_5kOvIs?feature=shared"] },
@@ -587,7 +588,229 @@
 
     let currentSkill = null;
 
-    // ====== إنشاء الأزرار ======
+    // =========================
+    // 2) نظام الحفظ (LocalStorage)
+    // =========================
+    const LS_KEYS = {
+      name: "laghati_student_name_v1",
+      results: "laghati_results_v1",      // list of attempts
+      stats: "laghati_stats_v1"           // aggregated stats
+    };
+
+    function nowISO(){ return new Date().toISOString(); }
+
+    function getStudentName(){
+      return (localStorage.getItem(LS_KEYS.name) || "").trim();
+    }
+
+    function ensureStudentName(){
+      let n = getStudentName();
+      if(!n){
+        n = prompt("اكتب اسم الطالب/الطالبة لحفظ الدرجات في الصدارة:", "طالب");
+        if(n && n.trim()){
+          localStorage.setItem(LS_KEYS.name, n.trim());
+          toast("تم حفظ الاسم ✅");
+        }else{
+          toast("لم يتم حفظ الاسم. سيتم الحفظ باسم: طالب");
+          localStorage.setItem(LS_KEYS.name, "طالب");
+          n = "طالب";
+        }
+      }
+      return n;
+    }
+
+    function loadJSON(key, fallback){
+      try{
+        const raw = localStorage.getItem(key);
+        if(!raw) return fallback;
+        return JSON.parse(raw);
+      }catch(e){
+        return fallback;
+      }
+    }
+
+    function saveJSON(key, data){
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    function getResults(){
+      return loadJSON(LS_KEYS.results, []);
+    }
+
+    function getStats(){
+      // stats per student (we support multiple names on same device)
+      return loadJSON(LS_KEYS.stats, {});
+    }
+
+    // نقاط + كأس:
+    // - النقاط = عدد الإجابات الصحيحة (score)
+    // - إذا الدرجة كاملة => كأس +1 + bonus نقاط (اختياري) = +2
+    function calcAward(score, total){
+      const full = score === total;
+      const points = score + (full ? 2 : 0); // bonus للمتقن
+      const cups = full ? 1 : 0;
+      return { points, cups, full };
+    }
+
+    function recordAttempt({student, skillId, skillName, score, total}){
+      const results = getResults();
+      const stats = getStats();
+      const award = calcAward(score, total);
+
+      // add attempt
+      results.push({
+        student,
+        skillId,
+        skillName,
+        score,
+        total,
+        points: award.points,
+        cups: award.cups,
+        full: award.full,
+        at: nowISO()
+      });
+      saveJSON(LS_KEYS.results, results);
+
+      // aggregate per student
+      if(!stats[student]){
+        stats[student] = { points:0, cups:0, tests:0, lastAt: null };
+      }
+      stats[student].points += award.points;
+      stats[student].cups += award.cups;
+      stats[student].tests += 1;
+      stats[student].lastAt = nowISO();
+      saveJSON(LS_KEYS.stats, stats);
+    }
+
+    function formatDate(iso){
+      try{
+        const d = new Date(iso);
+        return d.toLocaleString("ar-SA", {hour12:true});
+      }catch(e){ return iso; }
+    }
+
+    function resetAllData(){
+      localStorage.removeItem(LS_KEYS.results);
+      localStorage.removeItem(LS_KEYS.stats);
+      toast("تم تصفير الدرجات ✅");
+    }
+
+    function changeStudentName(){
+      const oldName = getStudentName();
+      const n = prompt("اكتب الاسم الجديد:", oldName || "طالب");
+      if(n && n.trim()){
+        localStorage.setItem(LS_KEYS.name, n.trim());
+        toast("تم تحديث الاسم ✅");
+      }
+    }
+
+    function leaderboardRows(){
+      const stats = getStats();
+      const entries = Object.entries(stats).map(([name, s])=>({name, ...s}));
+
+      // ترتيب: نقاط ثم كؤوس ثم أحدث
+      entries.sort((a,b)=>{
+        if(b.points !== a.points) return b.points - a.points;
+        if(b.cups !== a.cups) return b.cups - a.cups;
+        return (b.lastAt||"").localeCompare(a.lastAt||"");
+      });
+
+      if(entries.length===0){
+        return `<div style="color:#475569;font-weight:850;line-height:1.9">
+          لا توجد درجات محفوظة بعد.<br/>ابدأ اختبارًا ثم عُد إلى الصدارة 🏆
+        </div>`;
+      }
+
+      return `
+        <div class="miniCard">
+          <table>
+            <thead>
+              <tr>
+                <th>الترتيب</th>
+                <th>الاسم</th>
+                <th>النقاط ⭐</th>
+                <th>الكؤوس 🏆</th>
+                <th>الاختبارات</th>
+                <th>آخر تحديث</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${entries.map((e,i)=>`
+                <tr>
+                  <td><b>${i+1}</b></td>
+                  <td>${e.name}</td>
+                  <td><span class="tag">${e.points}</span></td>
+                  <td><span class="tag gold">${e.cups}</span></td>
+                  <td>${e.tests}</td>
+                  <td style="color:#475569;font-weight:800">${e.lastAt ? formatDate(e.lastAt) : "—"}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function parentSummaryHTML(){
+      const name = ensureStudentName();
+      const stats = getStats();
+      const s = stats[name] || {points:0,cups:0,tests:0,lastAt:null};
+
+      const all = getResults().filter(r=>r.student===name).slice(-12).reverse();
+      const list = all.length ? `
+        <div class="miniCard" style="margin-top:12px">
+          <div style="font-weight:950;margin-bottom:10px">آخر النتائج</div>
+          <table>
+            <thead>
+              <tr>
+                <th>المهارة</th>
+                <th>الدرجة</th>
+                <th>النقاط</th>
+                <th>كأس</th>
+                <th>التاريخ</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${all.map(r=>`
+                <tr>
+                  <td>${r.skillName}</td>
+                  <td><b>${r.score}</b> / ${r.total}</td>
+                  <td><span class="tag">${r.points}</span></td>
+                  <td>${r.cups ? "🏆" : "—"}</td>
+                  <td style="color:#475569;font-weight:800">${formatDate(r.at)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      ` : `<div style="margin-top:10px;color:#475569;font-weight:850">لا توجد نتائج حتى الآن.</div>`;
+
+      return `
+        <div class="hintCard" style="margin:0">
+          <div style="font-weight:950;font-size:16px;margin-bottom:10px">متابعة ولي الأمر</div>
+          <div style="color:#475569;font-weight:850;line-height:1.9">
+            الاسم الحالي: <b>${name}</b>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+            <span class="tag">النقاط: ${s.points} ⭐</span>
+            <span class="tag gold">الكؤوس: ${s.cups} 🏆</span>
+            <span class="tag">الاختبارات: ${s.tests}</span>
+          </div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+            <button class="tv-btn open" onclick="changeStudentName()">✏️ تغيير الاسم</button>
+            <button class="tv-btn close" onclick="resetAllData(); openParent();">🧹 تصفير النتائج</button>
+            <button class="tv-btn full" onclick="openLeaderboard()">🏆 عرض الصدارة</button>
+          </div>
+
+          ${list}
+        </div>
+      `;
+    }
+
+    // =========================
+    // 3) إنشاء الأزرار
+    // =========================
     const skillsGrid = document.getElementById("skillsGrid");
     const viewer = document.getElementById("viewer");
     const viewerTitle = document.getElementById("viewerTitle");
@@ -607,7 +830,6 @@
 
     function selectSkill(id){
       currentSkill = skills.find(x=>x.id===id);
-      // active style
       [...document.querySelectorAll(".skillBtn")].forEach(btn=>{
         btn.classList.toggle("active", btn.textContent===currentSkill.name);
       });
@@ -616,7 +838,6 @@
       viewerImg.src = currentSkill.img;
       viewerImg.alt = currentSkill.name;
 
-      // enable/disable video button depending on links
       const hasVideo = currentSkill.videos && currentSkill.videos.length>0;
       videoBtn.classList.toggle("disabled", !hasVideo);
       videoBtn.disabled = !hasVideo;
@@ -627,41 +848,41 @@
       }
 
       viewer.classList.add("show");
-
-      // scroll to viewer (especially on mobile)
       setTimeout(()=> viewer.scrollIntoView({behavior:"smooth", block:"start"}), 200);
     }
 
-    // ====== التنقل ======
-    function goHome(){
-      window.location.href = "index.html";
-    }
+    // =========================
+    // 4) التنقل
+    // =========================
+    function goHome(){ window.location.href = "index.html"; }
+
     function openLeaderboard(){
-      openModal("🏆 لوحة الصدارة", `
+      // لا نطلب اسم هنا؛ الصدارة تعرض كل من تم حفظهم على نفس الجهاز
+      openModal("🏆 لوحة الصدارة (نقاط + كؤوس)", `
         <div class="hintCard" style="margin:0">
-          <div style="font-weight:950;font-size:16px;margin-bottom:8px">🎖️ لوحة الصدارة</div>
-          <div style="color:#475569;font-weight:750;line-height:1.8">
-            هذه الصفحة جاهزة لتسجيل درجات الطلاب وإظهار الأبطال.<br/>
-            <b>يمكننا لاحقاً</b> ربطها بدرجة الاختبار تلقائياً (النقاط + كأس).
+          <div style="font-weight:950;font-size:16px;margin-bottom:8px">🎖️ نظام الصدارة</div>
+          <div style="color:#475569;font-weight:850;line-height:1.9">
+            • النقاط ⭐ تُحسب من الدرجة + مكافأة عند الإتقان (الدرجة كاملة).<br/>
+            • كأس 🏆 عند الحصول على الدرجة الكاملة في الاختبار.<br/>
+            • الحفظ يتم تلقائيًا على هذا الجهاز (بدون تسجيل دخول).
           </div>
         </div>
-      `);
-    }
-    function openParent(){
-      openModal("👨‍👩‍👧‍👦 ولي الأمر", `
-        <div class="hintCard" style="margin:0">
-          <div style="font-weight:950;font-size:16px;margin-bottom:8px">متابعة ولي الأمر</div>
-          <div style="color:#475569;font-weight:750;line-height:1.9">
-            • متابعة المهارات التي تم التدريب عليها ✅<br/>
-            • معرفة الدرجة والإنجاز 🏆<br/>
-            • ملاحظات بسيطة للمنزل ✍️<br/><br/>
-            <b>ملاحظة:</b> يمكننا لاحقاً إضافة "تقرير أسبوعي" للطباعة.
-          </div>
+        <div style="margin-top:12px">${leaderboardRows()}</div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px">
+          <button class="tv-btn full" onclick="openParent()">👨‍👩‍👧‍👦 ولي الأمر</button>
+          <button class="tv-btn close" onclick="resetAllData(); openLeaderboard();">🧹 تصفير كل الصدارة</button>
         </div>
       `);
     }
 
-    // ====== Modal ======
+    function openParent(){
+      openModal("👨‍👩‍👧‍👦 ولي الأمر", parentSummaryHTML());
+    }
+
+    // =========================
+    // 5) Modal
+    // =========================
     const modalOverlay = document.getElementById("modalOverlay");
     const modalTitle = document.getElementById("modalTitle");
     const modalBody = document.getElementById("modalBody");
@@ -675,11 +896,11 @@
       modalOverlay.classList.remove("show");
       modalBody.innerHTML = "";
     }
-    function overlayClose(e){
-      if(e.target === modalOverlay) closeModal();
-    }
+    function overlayClose(e){ if(e.target === modalOverlay) closeModal(); }
 
-    // ====== Toast ======
+    // =========================
+    // 6) Toast
+    // =========================
     let toastTimer=null;
     function toast(msg){
       const t=document.getElementById("toast");
@@ -689,7 +910,9 @@
       toastTimer=setTimeout(()=>t.classList.remove("show"), 2200);
     }
 
-    // ====== تكبير الصورة ======
+    // =========================
+    // 7) تكبير الصورة
+    // =========================
     function openImageZoom(){
       if(!currentSkill) return;
       openModal("🔍 " + currentSkill.name, `
@@ -700,7 +923,9 @@
       `);
     }
 
-    // ====== فيديو داخل تلفزيون + أزرار داخل التلفزيون ======
+    // =========================
+    // 8) فيديو داخل تلفزيون
+    // =========================
     function openVideoModal(skill){
       if(!skill.videos || skill.videos.length===0){
         toast("لا يوجد فيديو لهذه المهارة حالياً.");
@@ -716,7 +941,6 @@
               allowfullscreen></iframe>
           </div>
 
-          <!-- أزرار داخل التلفزيون -->
           <div class="tv-controls" role="group" aria-label="أزرار الفيديو">
             <button class="tv-btn full" onclick="toggleTVFullscreen()" type="button">⛶ ملء الشاشة</button>
             <button class="tv-btn open" onclick="openVideoInNewTab()" type="button">🔗 فتح في يوتيوب</button>
@@ -770,12 +994,13 @@
       }
     }
 
-    // ====== اختبار (نفس فكرة قبل + أصوات واضحة وتشجيع) ======
-    // ملاحظة: هنا اختبار عام افتراضي، ويمكننا لاحقاً تخصيص بنك أسئلة لكل مهارة.
+    // =========================
+    // 9) اختبار + حفظ نتيجة للصدارة
+    // =========================
     function openQuiz(skill){
-      // أسئلة بسيطة (واقعية/مدرسية) — ويمكن التوسعة لاحقاً
-      const questions = buildQuestions(skill);
+      ensureStudentName(); // تأكد أن الاسم محفوظ قبل بدء الاختبار
 
+      const questions = buildQuestions(skill);
       let idx=0;
       let score=0;
 
@@ -800,7 +1025,6 @@
           </div>
         `);
 
-        // attach handlers to window for modal scope
         window.pick = (i)=>{
           const choiceEls = [...document.querySelectorAll(".choice")];
           choiceEls.forEach(el=>el.onclick=null);
@@ -816,7 +1040,6 @@
             choiceEls[q.correct].classList.add("correct");
             toast("❌ حاول مرة أخرى… الإجابة الصحيحة باللون الأخضر");
           }
-          // update score label
           const pr = document.querySelector(".progress");
           if(pr) pr.textContent = "الدرجة: " + score;
         };
@@ -826,21 +1049,40 @@
             idx++;
             renderQ();
           }else{
-            // نهاية
+            // النهاية: حفظ النتيجة
             playSound("finish");
-            const cup = score === questions.length ? "🏆" : (score >= Math.ceil(questions.length*0.7) ? "🥇" : "⭐");
+
+            const total = questions.length;
+            const student = ensureStudentName();
+            recordAttempt({
+              student,
+              skillId: skill.id,
+              skillName: skill.name,
+              score,
+              total
+            });
+
+            const award = calcAward(score, total);
+            const cup = award.full ? "🏆 كأس الإتقان!" : (score >= Math.ceil(total*0.7) ? "🥇 ممتاز" : "⭐ جيد");
+            const bonusTxt = award.full ? " (مكافأة +2 نقاط)" : "";
+
             openModal("🎉 انتهى الاختبار", `
               <div class="hintCard" style="margin:0;text-align:center">
-                <div style="font-weight:950;font-size:20px">${cup} نتيجتك</div>
+                <div style="font-weight:950;font-size:20px">${cup}</div>
+
                 <div style="margin-top:8px;font-weight:950;font-size:18px;color:#0f172a">
-                  ${score} / ${questions.length}
+                  درجتك: ${score} / ${total}
                 </div>
-                <div style="margin-top:8px;color:#475569;font-weight:800;line-height:1.9">
-                  أحسنت! يمكنك إعادة الاختبار لتحسين الدرجة أو اختيار مهارة أخرى.
+
+                <div style="margin-top:10px;color:#475569;font-weight:900;line-height:1.9">
+                  تم حفظ النتيجة في الصدارة ✅<br/>
+                  نقاطك لهذه المحاولة: <b>${award.points}</b> ⭐${bonusTxt}
                 </div>
+
                 <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px">
-                  <button class="tv-btn full" onclick="closeModal()">✅ حسنًا</button>
-                  <button class="tv-btn open" onclick="openQuiz(currentSkill)">🔁 أعد الاختبار</button>
+                  <button class="tv-btn full" onclick="openLeaderboard()">🏆 الصدارة</button>
+                  <button class="tv-btn open" onclick="openParent()">👨‍👩‍👧‍👦 ولي الأمر</button>
+                  <button class="tv-btn close" onclick="closeModal()">✅ حسنًا</button>
                 </div>
               </div>
             `);
@@ -852,42 +1094,19 @@
     }
 
     function buildQuestions(skill){
-      // أسئلة عامة “واقعية” مناسبة للصفوف الأولية (قابلة للتوسعة لبنك أسئلة لكل مهارة)
-      // الفكرة: نفس شكل قبل + أصوات واضحة + تشجيع
-      const common = [
-        {
-          q: "اختر الكلمة التي تُعَدُّ (فعلًا):",
-          choices: ["مدرسة", "يقرأُ", "قلم", "صديق"],
-          correct: 1
-        },
-        {
-          q: "اختر الكلمة التي تُعَدُّ (اسمًا):",
-          choices: ["يكتبُ", "من", "الكتابُ", "سوف"],
-          correct: 2
-        },
-        {
-          q: "اختر الجملة الصحيحة:",
-          choices: ["الطالبُ يكتبُ الواجبَ.", "يكتبُ الطالبُ.", "الواجبُ يكتب.", "من إلى في"],
-          correct: 0
-        },
-        {
-          q: "اختر علامة الترقيم المناسبة في نهاية السؤال:",
-          choices: ["؟", "،", "!", "؛"],
-          correct: 0
-        },
-        {
-          q: "أيّ الكلمات فيها (حرف مد):",
-          choices: ["قلم", "كتاب", "درس", "بيت"],
-          correct: 1
-        }
+      // أسئلة عامة “واقعية” — ويمكن لاحقاً تخصيص بنك أسئلة لكل مهارة
+      return [
+        { q: "اختر الكلمة التي تُعَدُّ (فعلًا):", choices: ["مدرسة", "يقرأُ", "قلم", "صديق"], correct: 1 },
+        { q: "اختر الكلمة التي تُعَدُّ (اسمًا):", choices: ["يكتبُ", "من", "الكتابُ", "سوف"], correct: 2 },
+        { q: "اختر الجملة الصحيحة:", choices: ["الطالبُ يكتبُ الواجبَ.", "يكتبُ الطالبُ.", "الواجبُ يكتب.", "من إلى في"], correct: 0 },
+        { q: "اختر علامة الترقيم المناسبة في نهاية السؤال:", choices: ["؟", "،", "!", "؛"], correct: 0 },
+        { q: "أيّ الكلمات فيها (حرف مد):", choices: ["قلم", "كتاب", "درس", "بيت"], correct: 1 },
       ];
-
-      // يمكن لاحقاً تخصيص حسب skill.id (بنك أسئلة لكل مهارة)
-      return common;
     }
 
-    // ====== أصوات واضحة (بدون ملفات خارجية) ======
-    // نستخدم WebAudio لصفارات قصيرة واضحة
+    // =========================
+    // 10) أصوات واضحة
+    // =========================
     function playSound(type){
       try{
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -895,18 +1114,14 @@
         const g = ctx.createGain();
         o.connect(g); g.connect(ctx.destination);
 
-        if(type==="correct"){ o.frequency.value = 880; }
-        else if(type==="wrong"){ o.frequency.value = 220; }
-        else { o.frequency.value = 660; }
+        if(type==="correct"){ o.frequency.value = 880; g.gain.value = 0.18; }
+        else if(type==="wrong"){ o.frequency.value = 220; g.gain.value = 0.20; }
+        else { o.frequency.value = 660; g.gain.value = 0.16; }
 
         o.type = "sine";
-        g.gain.value = 0.15;
-
         o.start();
-        setTimeout(()=>{ o.stop(); ctx.close(); }, type==="finish" ? 450 : 220);
-      }catch(e){
-        // ignore
-      }
+        setTimeout(()=>{ o.stop(); ctx.close(); }, type==="finish" ? 480 : 240);
+      }catch(e){}
     }
 
     // init
