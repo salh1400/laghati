@@ -2,16 +2,21 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ألعاب تعليمية</title>
+
   <style>
     :root {
       --bg1: #f4ebff;
       --bg2: #4c1d95;
+
       --card-bg: #ffffff;
       --board-bg: #2b2145;
-      --tile-gold: #f4c152;
+
+      --tile-gold: #f7d27a;      /* أهدأ */
       --tile-correct: #4ade80;
       --tile-wrong: #fb7185;
+
       --text-main: #111827;
       --skill-color: #2563eb; /* يتغير مع المهارة */
     }
@@ -31,6 +36,7 @@
       padding: 24px 12px;
       background: radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 100%);
       color: var(--text-main);
+      overflow-x: hidden; /* يمنع أي شريط/جزء زايد */
     }
 
     .game-card {
@@ -39,15 +45,41 @@
       background: var(--card-bg);
       border-radius: 30px;
       box-shadow: 0 20px 40px rgba(15, 23, 42, 0.4);
-      padding: 20px 18px 22px;
+      padding: 18px 18px 20px;
       position: relative;
+      overflow: hidden; /* يمنع أي زوائد داخل البطاقة */
+    }
+
+    /* ===== شريط علوي (زر رجوع + عنوان) ===== */
+    .nav-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .back-home {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:13px;
+      font-weight:900;
+      color:#fff;
+      background: linear-gradient(90deg, #6d28d9, #7c3aed);
+      box-shadow: 0 8px 18px rgba(109,40,217,0.45);
+      white-space:nowrap;
     }
 
     h1 {
       text-align: center;
-      font-size: 26px;
-      font-weight: 800;
-      margin-bottom: 14px;
+      font-size: 24px;
+      font-weight: 900;
+      margin: 0;
+      flex:1;
     }
 
     .skills-row {
@@ -55,51 +87,33 @@
       flex-wrap: wrap;
       gap: 8px;
       justify-content: center;
-      margin-bottom: 14px;
+      margin: 10px 0 14px;
     }
 
     .skill-btn {
       border: none;
       border-radius: 999px;
-      padding: 6px 10px;
+      padding: 7px 12px;
       font-size: 13px;
       cursor: pointer;
-      font-weight: 700;
-      box-shadow: 0 2px 4px rgba(15,23,42,0.25);
+      font-weight: 800;
+      box-shadow: 0 2px 4px rgba(15,23,42,0.18);
       transition: transform 0.12s, box-shadow 0.12s, opacity 0.12s;
       white-space: nowrap;
-      opacity: 0.9;
+      opacity: 0.92;
     }
 
     /* ألوان ثابتة لكل مهارة */
-    .skill-btn[data-skill="synonyms"] {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-    .skill-btn[data-skill="antonyms"] {
-      background: #ffedd5;
-      color: #c2410c;
-    }
-    .skill-btn[data-skill="gender"] {
-      background: #f3e8ff;
-      color: #7e22ce;
-    }
-    .skill-btn[data-skill="number"] {
-      background: #dcfce7;
-      color: #15803d;
-    }
-    .skill-btn[data-skill="pos"] {
-      background: #fee2e2;
-      color: #b91c1c;
-    }
-    .skill-btn[data-skill="sentence"] {
-      background: #e0f2fe;
-      color: #0369a1;
-    }
+    .skill-btn[data-skill="synonyms"] { background: #dbeafe; color: #1d4ed8; }
+    .skill-btn[data-skill="antonyms"] { background: #ffedd5; color: #c2410c; }
+    .skill-btn[data-skill="gender"]   { background: #f3e8ff; color: #7e22ce; }
+    .skill-btn[data-skill="number"]   { background: #dcfce7; color: #15803d; }
+    .skill-btn[data-skill="pos"]      { background: #fee2e2; color: #b91c1c; }
+    .skill-btn[data-skill="sentence"] { background: #e0f2fe; color: #0369a1; }
 
     .skill-btn.active {
       transform: translateY(-1px);
-      box-shadow: 0 5px 10px rgba(15,23,42,0.4);
+      box-shadow: 0 6px 14px rgba(15,23,42,0.25);
       opacity: 1;
     }
 
@@ -116,52 +130,50 @@
       background: linear-gradient(90deg, #16a34a, #22c55e);
       color: #ffffff;
       font-size: 15px;
-      font-weight: 800;
-      padding: 8px 0;
+      font-weight: 900;
+      padding: 10px 0;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      box-shadow: 0 8px 18px rgba(22, 163, 74, 0.6);
+      box-shadow: 0 10px 20px rgba(22, 163, 74, 0.45);
     }
 
-    .restart-btn span.icon {
-      font-size: 18px;
-    }
+    .restart-btn span.icon { font-size: 18px; }
 
     .stats-row {
       display: flex;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .stat-pill {
       flex: 1;
       border-radius: 16px;
-      padding: 5px 8px;
+      padding: 6px 8px;
       color: #f9fafb;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(15,23,42,0.5);
+      box-shadow: 0 4px 10px rgba(15,23,42,0.35);
     }
 
     .stat-pill .value {
       display: block;
       font-size: 16px;
-      font-weight: 800;
+      font-weight: 900;
       margin-top: 2px;
     }
 
-    .stat-points { background: linear-gradient(135deg, #0ea5e9, #2563eb); }
+    .stat-points  { background: linear-gradient(135deg, #0ea5e9, #2563eb); }
     .stat-correct { background: linear-gradient(135deg, #16a34a, #22c55e); }
-    .stat-wrong { background: linear-gradient(135deg, #ef4444, #f97373); }
+    .stat-wrong   { background: linear-gradient(135deg, #ef4444, #f97373); }
 
     .skill-title {
       text-align: center;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 900;
       margin-bottom: 10px;
     }
 
@@ -173,101 +185,85 @@
 
     .board {
       width: 100%;
-      max-width: 360px;
+      max-width: 380px;
       aspect-ratio: 1 / 1;
       background: #2b2145;
-      border-radius: 32px;
+      border-radius: 34px;
       padding: 14px;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat(5, 1fr);
-      gap: 7px;
-      box-shadow: 0 14px 30px rgba(10, 6, 29, 0.85);
+      gap: 8px;
+      box-shadow: 0 14px 30px rgba(10, 6, 29, 0.65);
     }
 
     .cell {
-      border-radius: 20px;
+      border-radius: 22px;
       background: var(--tile-gold);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      font-weight: 800;
+      font-size: 24px;      /* أكبر شوي */
+      font-weight: 900;     /* أثخن */
       color: #3b280e;
       cursor: pointer;
       box-shadow:
-        0 5px 10px rgba(0,0,0,0.4),
-        inset 0 0 0 1px rgba(255,255,255,0.4);
+        0 6px 14px rgba(0,0,0,0.35),
+        inset 0 0 0 1px rgba(255,255,255,0.45);
       transition: background 0.12s, transform 0.08s, box-shadow 0.08s, color 0.12s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .cell:hover {
       transform: translateY(-1px);
       box-shadow:
-        0 7px 16px rgba(0,0,0,0.55),
+        0 8px 18px rgba(0,0,0,0.45),
         inset 0 0 0 1px rgba(255,255,255,0.6);
     }
 
-    .cell.correct {
-      background: var(--tile-correct);
-      color: #022c16;
-    }
+    .cell.correct { background: var(--tile-correct); color: #022c16; }
+    .cell.wrong   { background: var(--tile-wrong);   color: #3b0b12; }
 
-    .cell.wrong {
-      background: var(--tile-wrong);
-      color: #3b0b12;
-    }
+    .cell.used { cursor: default; opacity: 0.98; }
 
-    .cell.used {
-      cursor: default;
-      opacity: 0.97;
-    }
-
-    .designer {
-      text-align: center;
-      margin-top: 4px;
-    }
+    .designer { text-align: center; margin-top: 6px; }
 
     .designer-pill {
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       background: #fde68a;
       color: #b91c1c;
-      padding: 4px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 700;
-      box-shadow: 0 4px 10px rgba(148,163,184,0.6);
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(148,163,184,0.45);
     }
 
-    .designer-pill .heart {
-      color: #f97373;
-      font-size: 13px;
-    }
+    .designer-pill .heart { color: #f97373; font-size: 13px; }
 
-    /* نافذة السؤال في أعلى الشاشة فوق اللوحة */
+    /* نافذة السؤال */
     .overlay {
       position: fixed;
       inset: 0;
       background: rgba(15, 23, 42, 0.55);
       display: none;
-      align-items: flex-start;   /* أعلى الشاشة */
-      justify-content: center;   /* وسط عرضيًا */
+      align-items: flex-start;
+      justify-content: center;
       z-index: 50;
-      padding: 80px 12px 12px;   /* ننزلها قليلاً من الأعلى */
+      padding: 80px 12px 12px;
     }
 
-    .overlay.active {
-      display: flex;
-    }
+    .overlay.active { display: flex; }
 
     .question-card {
       width: 100%;
       max-width: 480px;
       background: #ffffff;
       border-radius: 22px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.75);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.55);
       overflow: hidden;
       border: 3px solid var(--skill-color);
       animation: pop-in 0.18s ease-out;
@@ -284,8 +280,8 @@
       color: #f9fafb;
       text-align: center;
       font-size: 15px;
-      font-weight: 800;
-      padding: 8px 16px 10px;
+      font-weight: 900;
+      padding: 10px 16px 12px;
       position: relative;
     }
 
@@ -302,14 +298,14 @@
     }
 
     .question-body {
-      padding: 20px 18px 12px;
+      padding: 18px 16px 12px;
       background: radial-gradient(circle at top, #ffffff 0%, #eef2ff 55%, #e0f2fe 100%);
       text-align: center;
     }
 
     .question-text {
       font-size: 17px;
-      font-weight: 800;
+      font-weight: 900;
       color: #111827;
       margin-bottom: 14px;
       line-height: 1.8;
@@ -324,36 +320,37 @@
     .option-btn {
       border: none;
       border-radius: 999px;
-      padding: 9px 14px;
+      padding: 10px 14px;
       font-size: 16px;
-      font-weight: 800;
+      font-weight: 900;
       background: #1d4ed8;
       color: #ffffff;
       cursor: pointer;
       box-shadow:
-        0 8px 18px rgba(37, 99, 235, 0.5),
+        0 8px 18px rgba(37, 99, 235, 0.35),
         inset 0 0 0 1px rgba(255,255,255,0.7);
       transition: transform 0.08s, box-shadow 0.08s, background 0.12s;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .option-btn:hover {
       transform: translateY(-1px);
       box-shadow:
-        0 10px 22px rgba(37,99,235,0.7),
-        inset 0 0 0 1px rgba(255,255,255,0.8);
+        0 10px 22px rgba(37,99,235,0.45),
+        inset 0 0 0 1px rgba(255,255,255,0.85);
     }
 
     .option-btn.correct-choice {
       background: #22c55e;
       box-shadow:
-        0 8px 18px rgba(34,197,94,0.7),
+        0 8px 18px rgba(34,197,94,0.45),
         inset 0 0 0 1px rgba(255,255,255,0.9);
     }
 
     .option-btn.wrong-choice {
       background: #ef4444;
       box-shadow:
-        0 8px 18px rgba(248,113,113,0.7),
+        0 8px 18px rgba(248,113,113,0.45),
         inset 0 0 0 1px rgba(255,255,255,0.9);
     }
 
@@ -362,6 +359,7 @@
       color: #4b5563;
       padding: 4px 10px 12px;
       text-align: center;
+      font-weight: 700;
     }
 
     .status-message {
@@ -371,38 +369,42 @@
       transform: translateX(-50%);
       background: rgba(15,23,42,0.9);
       color: #f9fafb;
-      padding: 5px 10px;
+      padding: 6px 12px;
       border-radius: 999px;
       font-size: 11px;
       display: none;
       z-index: 60;
+      font-weight: 800;
     }
 
-    .status-message.show {
-      display: inline-block;
-    }
+    .status-message.show { display: inline-block; }
 
+    /* ===== تحسينات قوية للجوال: مربعات أكبر + حروف أكبر ===== */
     @media (max-width: 480px) {
-      .game-card {
-        padding: 16px 12px 18px;
-      }
-      .board {
-        max-width: 320px;
-        padding: 10px;
-        gap: 6px;
-      }
-      .cell {
-        font-size: 20px;
-      }
-      .question-text {
-        font-size: 16px;
-      }
+      body { padding: 18px 10px; }
+      .game-card { padding: 14px 12px 16px; border-radius: 26px; }
+      h1 { font-size: 22px; }
+      .board { max-width: 420px; padding: 12px; gap: 9px; border-radius: 30px; }
+      .cell { font-size: 34px; font-weight: 950; border-radius: 20px; }
+      .question-text { font-size: 16px; }
+      .skill-btn { padding: 8px 12px; font-size: 13px; font-weight: 900; }
+      .back-home { padding: 10px 12px; font-size: 12px; }
+    }
+
+    @media (max-width: 360px) {
+      .cell { font-size: 32px; }
     }
   </style>
 </head>
+
 <body>
   <div class="game-card">
-    <h1>ألعاب مهارات لغوية</h1>
+
+    <div class="nav-row">
+      <a class="back-home" href="index.html">🏠 العودة للرئيسية</a>
+      <h1>ألعاب مهارات لغوية</h1>
+      <div style="width: 10px;"></div>
+    </div>
 
     <div class="skills-row">
       <button class="skill-btn active" data-skill="synonyms">مرادفات المفردات</button>
@@ -908,5 +910,4 @@
     setSkill("synonyms");
   </script>
 </body>
-
 </html>
