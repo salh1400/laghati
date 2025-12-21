@@ -11,18 +11,14 @@
       --card:#ffffff;
       --ink:#1f2937;
       --muted:#6b7280;
-
       --p1:#5b5bd6;
       --p2:#7c3aed;
-
       --btnVideo:#4f46e5;
       --btnQuiz:#16a34a;
       --btnBack:#6b5bd6;
-
       --shadow: 0 12px 28px rgba(0,0,0,.12);
       --radius: 22px;
     }
-
     *{box-sizing:border-box}
     body{
       margin:0;
@@ -32,150 +28,85 @@
                   var(--bg);
       color:var(--ink);
     }
-
     .wrap{max-width:1100px;margin:0 auto;padding:14px 14px 26px}
 
     .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px;
-      border-radius: var(--radius);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px;border-radius: var(--radius);
       background: linear-gradient(135deg, var(--p1), var(--p2));
-      color:#fff;
-      box-shadow: var(--shadow);
-      position:sticky;
-      top:0;
-      z-index:30;
+      color:#fff;box-shadow: var(--shadow);
+      position:sticky;top:0;z-index:30;
     }
-    .topbar .title{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      line-height:1.15;
-    }
-    .topbar h1{
-      margin:0;
-      font-size:20px;
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .topbar p{
-      margin:0;
-      font-size:12px;
-      opacity:.95;
-    }
-    .topbar .actions{
-      display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;
-    }
+    .topbar .title{display:flex;flex-direction:column;gap:2px;line-height:1.15;}
+    .topbar h1{margin:0;font-size:20px;font-weight:800;letter-spacing:.2px;}
+    .topbar p{margin:0;font-size:12px;opacity:.95;}
+    .topbar .actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
     .chipbtn{
-      border:none;
-      cursor:pointer;
-      padding:10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.18);
-      color:#fff;
-      font-weight:800;
-      font-size:13px;
-      backdrop-filter: blur(8px);
-      transition:.15s;
-      white-space:nowrap;
+      border:none;cursor:pointer;padding:10px 12px;border-radius: 14px;
+      background: rgba(255,255,255,.18);color:#fff;font-weight:800;font-size:13px;
+      backdrop-filter: blur(8px);transition:.15s;white-space:nowrap;
     }
     .chipbtn:active{transform:scale(.98)}
     .chipbtn.secondary{background:rgba(255,255,255,.12)}
     .chipbtn.home{background:rgba(255,255,255,.22)}
 
-    .screen{margin-top:14px}
     .hint{
-      background:#ffffffcc;
-      border:1px solid rgba(0,0,0,.06);
-      padding:12px 14px;
-      border-radius: 16px;
-      color:var(--muted);
-      font-weight:700;
-      box-shadow: 0 8px 20px rgba(0,0,0,.06);
+      margin-top:14px;
+      background:#ffffffcc;border:1px solid rgba(0,0,0,.06);
+      padding:12px 14px;border-radius: 16px;color:var(--muted);
+      font-weight:700;box-shadow: 0 8px 20px rgba(0,0,0,.06);
     }
 
+    /* ✅ كل المهارات في نفس الصفحة */
     .skillsGrid{
       margin-top:14px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
+      display:flex;flex-wrap:wrap;gap:10px;
       justify-content:center;
     }
     .skillBtn{
-      border:none;
-      cursor:pointer;
-      padding:14px 16px;
-      border-radius: 999px;
-      background:#fff;
-      box-shadow: 0 10px 22px rgba(0,0,0,.10);
-      font-weight:900;
-      font-size:15px;
-      color:#2b2b2b;
-      transition:.15s;
-      max-width: 100%;
+      border:none;cursor:pointer;padding:14px 16px;border-radius: 999px;
+      background:#fff;box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      font-weight:900;font-size:15px;color:#2b2b2b;transition:.15s;
+      max-width:100%;
     }
     .skillBtn:active{transform:scale(.98)}
-
-    .viewer{margin-top:14px;display:none;}
-    .viewer.show{display:block}
-
-    .skillCard{
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      border:1px solid rgba(0,0,0,.06);
+    .skillBtn.active{
+      background: linear-gradient(135deg, rgba(91,91,214,.16), rgba(124,58,237,.18));
+      border:2px solid rgba(124,58,237,.25);
     }
 
+    /* ✅ بطاقة المهارة تظهر تحت الأزرار داخل نفس الصفحة */
+    .viewer{margin-top:14px;display:none;}
+    .viewer.show{display:block;}
+    .skillCard{
+      background: var(--card);border-radius: var(--radius);
+      box-shadow: var(--shadow);overflow:hidden;border:1px solid rgba(0,0,0,.06);
+    }
     .skillHeader{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
       padding:12px 14px;
       background: linear-gradient(135deg, rgba(91,91,214,.12), rgba(124,58,237,.12));
     }
-    .skillHeader h2{
-      margin:0;
-      font-size:18px;
-      font-weight:900;
-      color:#2b2b2b;
-    }
+    .skillHeader h2{margin:0;font-size:18px;font-weight:900;color:#2b2b2b;}
     .smallnote{font-size:12px;color:var(--muted);font-weight:800;}
 
     .skillImgWrap{background:#f3f4ff;padding:14px;}
     .skillImg{
-      width:100%;
-      height:auto;
-      border-radius: 18px;
+      width:100%;height:auto;border-radius: 18px;
       box-shadow: 0 10px 22px rgba(0,0,0,.10);
-      cursor: zoom-in;
-      transition:.15s;
+      cursor: zoom-in;transition:.15s;
     }
-    .skillImg:active{transform:scale(.995)}
 
+    /* ✅ الأزرار تحت الصورة مثل قبل */
     .btnRow{
-      display:flex;
-      gap:10px;
-      padding:14px;
-      flex-wrap:wrap;
-      justify-content:center;
+      display:flex;gap:10px;padding:14px;flex-wrap:wrap;justify-content:center;
       background:#fff;
     }
     .bigbtn{
-      border:none;
-      cursor:pointer;
-      padding:14px 16px;
-      border-radius: 16px;
-      font-weight:900;
-      font-size:15px;
-      min-width: 150px;
+      border:none;cursor:pointer;padding:14px 16px;border-radius: 16px;
+      font-weight:900;font-size:15px;min-width: 150px;
       box-shadow: 0 10px 20px rgba(0,0,0,.10);
-      transition:.15s;
-      color:#fff;
+      transition:.15s;color:#fff;
     }
     .bigbtn:active{transform:scale(.98)}
     .bigbtn.video{background: var(--btnVideo)}
@@ -183,138 +114,82 @@
     .bigbtn.back{background: var(--btnBack)}
 
     .footer{
-      margin-top:14px;
-      text-align:center;
-      color:#374151;
-      font-weight:900;
-      opacity:.9;
+      margin-top:14px;text-align:center;color:#374151;font-weight:900;opacity:.9;
     }
 
+    /* Modal */
     .modalOverlay{
-      position:fixed;
-      inset:0;
-      background: rgba(0,0,0,.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:80;
-      padding:16px;
+      position:fixed;inset:0;background: rgba(0,0,0,.55);
+      display:none;align-items:center;justify-content:center;
+      z-index:80;padding:16px;
     }
     .modalOverlay.show{display:flex}
     .modal{
       width:min(920px, 100%);
-      background:#fff;
-      border-radius: 22px;
-      box-shadow: 0 22px 60px rgba(0,0,0,.28);
-      overflow:hidden;
-      position:relative;
+      background:#fff;border-radius: 22px;box-shadow: 0 22px 60px rgba(0,0,0,.28);
+      overflow:hidden;position:relative;
     }
     .modalTop{
-      padding:12px 14px;
-      background: linear-gradient(135deg, var(--p1), var(--p2));
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
+      padding:12px 14px;background: linear-gradient(135deg, var(--p1), var(--p2));
+      color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;
     }
     .modalTop b{font-size:14px}
     .closeBtn{
-      border:none;
-      cursor:pointer;
-      padding:8px 10px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.18);
-      color:#fff;
-      font-weight:900;
+      border:none;cursor:pointer;padding:8px 10px;border-radius: 12px;
+      background: rgba(255,255,255,.18);color:#fff;font-weight:900;
     }
-    .closeBtn:active{transform:scale(.98)}
     .modalBody{padding:14px}
 
-    .videoFrame{
+    /* ✅ نافذة فيديو بشكل تلفزيون */
+    .tv{
+      width:100%;
+      max-width:860px;
+      margin:0 auto;
+    }
+    .tv-frame{
+      border-radius: 26px;
+      padding:16px;
+      background: linear-gradient(180deg, #2b2b2b, #0f172a);
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      border: 3px solid rgba(255,255,255,.08);
+      position:relative;
+    }
+    .tv-frame:before{
+      content:"";
+      position:absolute;inset:10px;
+      border-radius: 20px;
+      border: 2px solid rgba(255,255,255,.08);
+      pointer-events:none;
+    }
+    .tv-screen{
       width:100%;
       aspect-ratio: 16/9;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow:hidden;
       background:#000;
-      box-shadow: 0 10px 22px rgba(0,0,0,.12);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.10);
     }
-    .videoFrame iframe{width:100%;height:100%;border:0;}
-
-    .quizWrap{display:flex;flex-direction:column;gap:10px;}
-    .qmeta{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
-      color:#374151;font-weight:900;font-size:13px;
+    .tv-screen iframe{width:100%;height:100%;border:0;}
+    .tv-stand{
+      width:170px;height:16px;border-radius: 999px;
+      background: linear-gradient(180deg, #111827, #0b1220);
+      margin:14px auto 0;
+      box-shadow: 0 10px 20px rgba(0,0,0,.25);
     }
-    .progressPill{
-      background:#f3f4ff;border:1px solid rgba(0,0,0,.06);
-      padding:8px 10px;border-radius: 999px;font-weight:900;
+    .tv-base{
+      width:240px;height:10px;border-radius: 999px;
+      background: rgba(17,24,39,.9);
+      margin:8px auto 0;
+      box-shadow: 0 10px 18px rgba(0,0,0,.22);
+      opacity:.9;
     }
-    .question{
-      background:#fff;border:1px solid rgba(0,0,0,.08);
-      border-radius: 18px;padding:14px;box-shadow: 0 10px 20px rgba(0,0,0,.06);
-    }
-    .question h3{margin:0 0 10px;font-size:16px;font-weight:900;}
-    .choices{display:grid;grid-template-columns:1fr;gap:10px;}
-    .choice{
-      border:1px solid rgba(0,0,0,.10);
-      border-radius: 14px;
-      padding:12px 12px;
-      cursor:pointer;
-      font-weight:900;
-      background:#fafafa;
-      transition:.12s;
-    }
-    .choice:active{transform:scale(.99)}
-    .choice.correct{border-color:#16a34a;background:#eafff0}
-    .choice.wrong{border-color:#ef4444;background:#fff0f0}
-
-    .quizBtns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px;}
-    .smallbtn{
-      border:none;cursor:pointer;padding:10px 12px;border-radius: 14px;font-weight:900;
-      color:#fff;box-shadow: 0 10px 18px rgba(0,0,0,.10);
-    }
-    .smallbtn.next{background:#111827}
-    .smallbtn.restart{background:#b45309}
-
-    .resultBox{
-      text-align:center;font-weight:900;padding:12px;border-radius: 16px;
-      background:#f3f4ff;border:1px solid rgba(0,0,0,.06);
-    }
-
-    .panelGrid{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-      gap:12px;
-    }
-    .panel{
-      background:#fff;border-radius: 20px;box-shadow: 0 10px 22px rgba(0,0,0,.10);
-      border:1px solid rgba(0,0,0,.06);
-      padding:14px;
-    }
-    .panel h3{margin:0 0 10px;font-size:16px;font-weight:900}
-    .row{
-      display:flex;justify-content:space-between;gap:10px;padding:8px 0;
-      border-bottom:1px dashed rgba(0,0,0,.10);
-      font-weight:900;color:#374151;
-    }
-    .row:last-child{border-bottom:none}
-    .tag{
-      padding:6px 10px;border-radius:999px;background:#eef2ff;border:1px solid rgba(0,0,0,.06);
-      font-size:12px;font-weight:900;color:#3730a3;white-space:nowrap;
-    }
-    .ok{color:#16a34a}
-    .warn{color:#b45309}
-    .danger{color:#ef4444}
 
     .zoomImg{width:100%;height:auto;border-radius: 18px;display:block;}
 
     @media (max-width:520px){
       .topbar{border-radius:0; margin:0 -14px;}
       .wrap{padding:0 0 18px}
-      .screen{padding:0 14px}
-      .btnRow{padding:12px}
+      .content{padding:0 14px}
       .bigbtn{flex:1}
       .skillBtn{width:100%; text-align:center}
     }
@@ -326,7 +201,7 @@
     <div class="topbar">
       <div class="title">
         <h1>مهارات لغتي الممتعة</h1>
-        <p>اضغط على المهارة ثم شاهد الفيديو وابدأ الاختبار.</p>
+        <p>كل المهارات في صفحة واحدة — اختاري مهارة ثم فيديو/اختبار.</p>
       </div>
       <div class="actions">
         <button class="chipbtn home" onclick="goHome()">🏠 الرئيسية</button>
@@ -335,52 +210,36 @@
       </div>
     </div>
 
-    <!-- قائمة المهارات -->
-    <div id="skillsScreen" class="screen">
-      <div class="hint">✅ جميع المهارات معروضة هنا (20 مهارة). اختر مهارة للبدء.</div>
+    <div class="content">
+      <div class="hint">✅ اختاري مهارة (20 مهارة) ثم ستظهر بطاقة المهارة هنا مباشرة.</div>
+
+      <!-- ✅ كل الأزرار هنا -->
       <div id="skillsGrid" class="skillsGrid"></div>
 
-      <div class="panelGrid">
-        <div class="panel">
-          <h3>🎖 التقدم</h3>
-          <div class="row"><span>عدد المهارات المنجزة</span><span class="tag" id="doneCount">0 / 20</span></div>
-          <div class="row"><span>متوسط الدرجات</span><span class="tag" id="avgScore">0%</span></div>
-          <div class="row"><span>أعلى درجة</span><span class="tag" id="bestScore">0%</span></div>
-        </div>
-        <div class="panel">
-          <h3>🔔 ملاحظة</h3>
-          <div style="color:#6b7280;font-weight:900;line-height:1.7">
-            - الفيديو يفتح داخل نافذة صغيرة.<br>
-            - الاختبار واقعي لكل مهارة (أسئلة تخص المهارة).<br>
-            - النتائج تُحفظ تلقائيًا على نفس الجهاز.
+      <!-- ✅ نفس الصفحة: بطاقة المهارة تظهر تحت الأزرار -->
+      <div id="viewer" class="viewer">
+        <div class="skillCard">
+          <div class="skillHeader">
+            <div>
+              <h2 id="skillTitle">المهارة</h2>
+              <div class="smallnote">صورة شرح + فيديو (نافذة تلفزيون) + اختبار واقعي (5 أسئلة)</div>
+            </div>
+            <div class="smallnote" id="skillStatus"></div>
+          </div>
+
+          <div class="skillImgWrap">
+            <img id="skillImg" class="skillImg" src="" alt="صورة المهارة" />
+          </div>
+
+          <!-- ✅ الأزرار تحت الصورة -->
+          <div class="btnRow">
+            <button class="bigbtn back" onclick="closeViewer()">⬇ إخفاء البطاقة</button>
+            <button class="bigbtn video" id="videoBtn">🎬 فيديو</button>
+            <button class="bigbtn quiz" id="quizBtn">📝 اختبار</button>
           </div>
         </div>
-      </div>
 
-      <div class="footer">تصميم: صالحة علي الغامدي</div>
-    </div>
-
-    <!-- عرض المهارة -->
-    <div id="viewer" class="screen viewer">
-      <div class="skillCard">
-        <div class="skillHeader">
-          <div>
-            <h2 id="skillTitle">المهارة</h2>
-            <div class="smallnote">صورة شرح + فيديو + اختبار (5 أسئلة واقعية)</div>
-          </div>
-          <div class="smallnote" id="skillStatus"></div>
-        </div>
-
-        <div class="skillImgWrap">
-          <img id="skillImg" class="skillImg" src="" alt="صورة المهارة" />
-        </div>
-
-        <!-- الأزرار تحت الصورة (مثل قبل) -->
-        <div class="btnRow">
-          <button class="bigbtn back" onclick="backToSkills()">⬅ رجوع للمهارات</button>
-          <button class="bigbtn video" id="videoBtn">🎬 فيديو</button>
-          <button class="bigbtn quiz" id="quizBtn">📝 اختبار</button>
-        </div>
+        <div class="footer">تصميم: صالحة علي الغامدي</div>
       </div>
 
       <div class="footer">تصميم: صالحة علي الغامدي</div>
@@ -399,9 +258,7 @@
   </div>
 
 <script>
-/* =========================
-   المهارات (20)
-   ========================= */
+/* ====== المهارات (20) ====== */
 const skills = [
   { id:"word_types",   name:"أقسام الكلمة", img:"image/skill_word_types.png", videos:["https://youtu.be/CvTvx1TRYw4?feature=shared"] },
   { id:"verb_types",   name:"أنواع الفعل", img:"image/skill_verb-types.png", videos:["https://youtu.be/-fNt_5kOvIs?feature=shared"] },
@@ -425,16 +282,21 @@ const skills = [
   { id:"textparts",    name:"عناصر النص الأساسية", img:"image/skill_text_parts.png", videos:[] }
 ];
 
-/* =========================
-   بنك أسئلة واقعي (5 لكل مهارة)
-   ========================= */
+/* ====== بنك أسئلة (واقعي) ====== */
 const questionBank = {
+  tafdeel: [
+    {q:"اختر اسم التفضيل:", options:["جميل","أجمل","جمال","يجمل"], a:1},
+    {q:"اختر الجملة التي فيها اسم تفضيل صحيح:", options:["السماء أجملُ من البحر","السماء جميلة","السماء جمال","السماء يجمل"], a:0},
+    {q:"اسم التفضيل يُستخدم للمقارنة بين:", options:["شيئين أو أكثر","حرفين","جملتين فقط","أسماء فقط"], a:0},
+    {q:"اختر اسم تفضيل من الفعل (كبر):", options:["كبير","أكبر","كبر","مكبر"], a:1},
+    {q:"اختر اسم تفضيل من الفعل (سرع):", options:["سريع","أسرع","سرعة","يسرع"], a:1},
+  ],
   word_types: [
     {q:"اختر الكلمة التي تُعدّ (فعلًا):", options:["مدرسة","يكتبُ","قلم","جميل"], a:1},
     {q:"اختر الكلمة التي تُعدّ (اسمًا):", options:["يجري","في","الحديقة","اقرأ"], a:2},
     {q:"أيّ الكلمات الآتية (حرف)؟", options:["كتاب","على","ولد","أكل"], a:1},
     {q:"في جملة: (ذهبَ خالدٌ إلى المدرسة)، كلمة (ذهبَ) هي:", options:["اسم","فعل","حرف","صفة"], a:1},
-    {q:"في جملة: (القلمُ جديدٌ)، كلمة (جديدٌ) هي:", options:["اسم","فعل","حرف","فعل أمر"], a:0},
+    {q:"في جملة: (القلمُ جديدٌ)، كلمة (القلمُ) هي:", options:["اسم","فعل","حرف","أداة"], a:0},
   ],
   verb_types: [
     {q:"اختر الفعل الماضي:", options:["يكتبُ","اكتبْ","كتبَ","لن يكتبَ"], a:2},
@@ -456,13 +318,6 @@ const questionBank = {
     {q:"اختر الكلمة التي فيها تنوين كسر:", options:["جميلٌ","جميلٍ","جميلًا","الجميل"], a:1},
     {q:"التنوين هو:", options:["حرف مد","نون ساكنة تلحق آخر الاسم لفظًا لا خطًا","همزة وصل","أداة نفي"], a:1},
     {q:"أي الكلمات لا تقبل التنوين؟", options:["كتابٌ","بيتٍ","الطالبُ","قلمًا"], a:2},
-  ],
-  tafdeel: [
-    {q:"اختر اسم التفضيل:", options:["جميل","أجمل","جمال","يجمل"], a:1},
-    {q:"اختر الجملة التي فيها اسم تفضيل صحيح:", options:["السماء أجملُ من البحر","السماء جميلة","السماء جمال","السماء يجمل"], a:0},
-    {q:"اسم التفضيل يُستخدم للمقارنة بين:", options:["شيئين أو أكثر","حرفين","جملتين فقط","أسماء فقط"], a:0},
-    {q:"اختر اسم تفضيل من الفعل (كبر):", options:["كبير","أكبر","كبر","مكبر"], a:1},
-    {q:"اختر اسم تفضيل من الفعل (سرع):", options:["سريع","أسرع","سرعة","يسرع"], a:1},
   ],
   taa: [
     {q:"اختر كلمة تنتهي بتاء مربوطة:", options:["شجرة","بيت","قلم","ولد"], a:0},
@@ -571,17 +426,12 @@ const questionBank = {
   ],
 };
 
-/* =========================
-   التخزين المحلي
-   ========================= */
-const STORE_KEY = "laghati_skills_progress_v2";
+/* ====== تخزين ====== */
+const STORE_KEY = "laghati_skills_progress_onepage";
 function loadStore(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY) || "{}"); } catch(e){ return {}; } }
 function saveStore(obj){ localStorage.setItem(STORE_KEY, JSON.stringify(obj)); }
 
-/* =========================
-   عناصر
-   ========================= */
-const skillsScreen = document.getElementById("skillsScreen");
+/* ====== عناصر ====== */
 const skillsGrid = document.getElementById("skillsGrid");
 const viewer = document.getElementById("viewer");
 const skillTitleEl = document.getElementById("skillTitle");
@@ -590,17 +440,10 @@ const skillStatusEl = document.getElementById("skillStatus");
 const videoBtn = document.getElementById("videoBtn");
 const quizBtn  = document.getElementById("quizBtn");
 
-const doneCountEl = document.getElementById("doneCount");
-const avgScoreEl  = document.getElementById("avgScore");
-const bestScoreEl = document.getElementById("bestScore");
-
-/* =========================
-   Modal
-   ========================= */
+/* ====== Modal ====== */
 const modalOverlay = document.getElementById("modalOverlay");
 const modalTitle = document.getElementById("modalTitle");
 const modalBody  = document.getElementById("modalBody");
-
 modalOverlay.addEventListener("click", closeModal);
 
 function openModal(title, html){
@@ -615,34 +458,24 @@ function closeModal(){
   document.body.style.overflow="";
 }
 
-/* =========================
-   تنقل
-   ========================= */
+/* ====== تنقل ====== */
 function goHome(){ window.location.href = "index.html"; }
-function backToSkills(){
-  viewer.classList.remove("show");
-  skillsScreen.style.display = "";
-  window.scrollTo({top:0, behavior:"smooth"});
-}
 
-/* =========================
-   أصوات أوضح وأعلى + اهتزاز للجوال (إن توفر)
-   ========================= */
+/* ====== أصوات أوضح ====== */
 let audioCtx;
 function playTone(freq, durMs, vol){
   if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const o = audioCtx.createOscillator();
   const g = audioCtx.createGain();
-  o.type = "square";                 // أوضح
+  o.type = "square";
   o.frequency.value = freq;
-  g.gain.value = vol;                // أعلى
+  g.gain.value = vol;
   o.connect(g); g.connect(audioCtx.destination);
   const now = audioCtx.currentTime;
   o.start(now);
   o.stop(now + durMs/1000);
   g.gain.exponentialRampToValueAtTime(0.0001, now + durMs/1000);
 }
-
 function sound(type){
   try{
     if(navigator.vibrate){
@@ -650,137 +483,49 @@ function sound(type){
       if(type==="bad") navigator.vibrate([80,40,80]);
       if(type==="win") navigator.vibrate([120,60,120,60,160]);
     }
-    if(type==="ok"){
-      playTone(880, 110, 0.18);
-      setTimeout(()=>playTone(1320, 90, 0.16), 110);
-    }
-    if(type==="bad"){
-      playTone(220, 130, 0.22);
-      setTimeout(()=>playTone(180, 160, 0.22), 130);
-    }
-    if(type==="win"){
-      playTone(988, 110, 0.18);
-      setTimeout(()=>playTone(1318, 110, 0.18), 120);
-      setTimeout(()=>playTone(1760, 140, 0.18), 250);
-    }
+    if(type==="ok"){ playTone(880, 110, 0.18); setTimeout(()=>playTone(1320, 90, 0.16), 110); }
+    if(type==="bad"){ playTone(220, 130, 0.22); setTimeout(()=>playTone(180, 160, 0.22), 130); }
+    if(type==="win"){ playTone(988, 110, 0.18); setTimeout(()=>playTone(1318, 110, 0.18), 120); setTimeout(()=>playTone(1760, 140, 0.18), 250); }
   }catch(e){}
 }
 
-/* =========================
-   رسم الأزرار
-   ========================= */
-let currentSkill = null;
-
-function renderSkillsButtons(){
-  const store = loadStore();
-  skillsGrid.innerHTML = "";
-  skills.forEach(s=>{
-    const btn = document.createElement("button");
-    btn.className = "skillBtn";
-    btn.textContent = s.name;
-
-    const rec = store[s.id];
-    if(rec && rec.bestScore >= 80){
-      btn.style.border = "2px solid rgba(22,163,74,.55)";
-    }else if(rec && rec.bestScore >= 60){
-      btn.style.border = "2px solid rgba(180,83,9,.45)";
-    }
-
-    btn.onclick = ()=> openSkill(s.id);
-    skillsGrid.appendChild(btn);
-  });
-
-  updateProgressSummary();
-}
-
-function updateProgressSummary(){
-  const store = loadStore();
-  const scores = [];
-  let done = 0;
-  let best = 0;
-
-  skills.forEach(s=>{
-    const rec = store[s.id];
-    if(rec && typeof rec.bestScore === "number"){
-      scores.push(rec.bestScore);
-      if(rec.bestScore >= 60) done++;
-      if(rec.bestScore > best) best = rec.bestScore;
-    }
-  });
-
-  const avg = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0) / scores.length) : 0;
-  doneCountEl.textContent = `${done} / ${skills.length}`;
-  avgScoreEl.textContent  = `${avg}%`;
-  bestScoreEl.textContent = `${best}%`;
-}
-
-/* =========================
-   فتح المهارة
-   ========================= */
-function openSkill(id){
-  const s = skills.find(x=>x.id===id);
-  if(!s) return;
-  currentSkill = s;
-
-  skillsScreen.style.display = "none";
-  viewer.classList.add("show");
-
-  skillTitleEl.textContent = s.name;
-  skillImgEl.src = s.img;
-
-  const store = loadStore();
-  const rec = store[s.id];
-  const score = rec?.bestScore ?? 0;
-  skillStatusEl.innerHTML = score
-    ? `أفضل درجة: <span class="tag">${score}%</span>`
-    : `<span class="tag">لم يُحل بعد</span>`;
-
-  videoBtn.onclick = ()=> openVideoModal(s);
-  quizBtn.onclick  = ()=> openQuizModal(s);
-
-  skillImgEl.onclick = ()=> openModal("تكبير الصورة", `<img class="zoomImg" src="${s.img}" alt="صورة المهارة">`);
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-
-/* =========================
-   فيديو في نافذة (Modal)
-   ========================= */
+/* ====== فيديو TV ====== */
 function youtubeToEmbed(url){
   try{
     const u = new URL(url);
     let id = "";
-    if(u.hostname.includes("youtu.be")){
-      id = u.pathname.replace("/","");
-    }else{
-      id = u.searchParams.get("v") || "";
-    }
+    if(u.hostname.includes("youtu.be")) id = u.pathname.replace("/","");
+    else id = u.searchParams.get("v") || "";
     if(!id) return "";
     return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-  }catch(e){
-    return "";
-  }
+  }catch(e){ return ""; }
 }
-
 function openVideoModal(skill){
   if(!skill.videos || skill.videos.length===0){
-    openModal("🎬 فيديو", `<div class="resultBox">لا يوجد رابط فيديو لهذه المهارة حالياً.</div>`);
+    openModal("🎬 فيديو", `<div style="text-align:center;font-weight:900;padding:12px;border-radius:16px;background:#f3f4ff;border:1px solid rgba(0,0,0,.06)">لا يوجد فيديو لهذه المهارة حالياً.</div>`);
     return;
   }
+  const firstEmbed = youtubeToEmbed(skill.videos[0]);
 
   let switchers = "";
   if(skill.videos.length>1){
     switchers = `
-      <div class="quizBtns" style="margin-bottom:10px">
-        ${skill.videos.map((v,i)=>`<button class="smallbtn next" onclick="switchVideo('${youtubeToEmbed(v)}')">فيديو ${i+1}</button>`).join("")}
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px">
+        ${skill.videos.map((v,i)=>`<button style="border:none;cursor:pointer;padding:10px 12px;border-radius:14px;font-weight:900;color:#fff;background:#111827;box-shadow:0 10px 18px rgba(0,0,0,.10)" onclick="switchVideo('${youtubeToEmbed(v)}')">فيديو ${i+1}</button>`).join("")}
       </div>
     `;
   }
 
-  const firstEmbed = youtubeToEmbed(skill.videos[0]);
-  openModal(`🎬 فيديو — ${skill.name}`, `
+  openModal(`📺 فيديو — ${skill.name}`, `
     ${switchers}
-    <div class="videoFrame">
-      <iframe id="vidFrame" src="${firstEmbed}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="tv">
+      <div class="tv-frame">
+        <div class="tv-screen">
+          <iframe id="vidFrame" src="${firstEmbed}" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="tv-stand"></div>
+      <div class="tv-base"></div>
     </div>
   `);
 }
@@ -789,14 +534,10 @@ function switchVideo(embedUrl){
   if(f) f.src = embedUrl;
 }
 
-/* =========================
-   اختبار واقعي لكل مهارة
-   ========================= */
+/* ====== اختبار ====== */
 function getQuestions(skill){
-  // لو مهارة ما لها بنك (احتياط) نرجع أسئلة عامة
   const qs = questionBank[skill.id];
   if(qs && qs.length>=5) return qs.slice(0,5);
-
   return [
     {q:`اختر الإجابة الصحيحة المتعلقة بـ "${skill.name}":`, options:["إجابة صحيحة","إجابة خاطئة","اختيار ثالث","اختيار رابع"], a:0},
     {q:`سؤال تدريبي عن "${skill.name}":`, options:["أ","ب","ج","د"], a:1},
@@ -808,35 +549,31 @@ function getQuestions(skill){
 
 function openQuizModal(skill){
   const questions = getQuestions(skill);
-  let idx = 0;
-  let locked = false;
-  let score = 0;
+  let idx = 0, locked = false, score = 0;
 
   function render(){
     const total = questions.length;
     const q = questions[idx];
 
     openModal(`📝 اختبار — ${skill.name}`, `
-      <div class="quizWrap">
-        <div class="qmeta">
-          <div class="progressPill">السؤال ${idx+1} / ${total}</div>
-          <div class="progressPill">النقاط: ${score} / ${total}</div>
-        </div>
-
-        <div class="question">
-          <h3>${q.q}</h3>
-          <div class="choices">
-            ${q.options.map((t,i)=>`<div class="choice" data-i="${i}">${t}</div>`).join("")}
-          </div>
-        </div>
-
-        <div class="quizBtns">
-          <button class="smallbtn restart" id="restartBtn">إعادة</button>
-          <button class="smallbtn next" id="nextBtn">${idx===total-1 ? "إنهاء" : "التالي"}</button>
-        </div>
-
-        <div id="msg" class="resultBox" style="display:none"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;color:#374151;font-weight:900;font-size:13px;margin-bottom:10px">
+        <div style="background:#f3f4ff;border:1px solid rgba(0,0,0,.06);padding:8px 10px;border-radius:999px;font-weight:900">السؤال ${idx+1} / ${total}</div>
+        <div style="background:#f3f4ff;border:1px solid rgba(0,0,0,.06);padding:8px 10px;border-radius:999px;font-weight:900">النقاط: ${score} / ${total}</div>
       </div>
+
+      <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:18px;padding:14px;box-shadow:0 10px 20px rgba(0,0,0,.06)">
+        <div style="font-size:16px;font-weight:900;margin-bottom:10px">${q.q}</div>
+        <div id="choices" style="display:grid;grid-template-columns:1fr;gap:10px">
+          ${q.options.map((t,i)=>`<div class="choice" data-i="${i}" style="border:1px solid rgba(0,0,0,.10);border-radius:14px;padding:12px;cursor:pointer;font-weight:900;background:#fafafa">${t}</div>`).join("")}
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px">
+        <button id="restartBtn" style="border:none;cursor:pointer;padding:10px 12px;border-radius:14px;font-weight:900;color:#fff;background:#b45309;box-shadow:0 10px 18px rgba(0,0,0,.10)">إعادة</button>
+        <button id="nextBtn" style="border:none;cursor:pointer;padding:10px 12px;border-radius:14px;font-weight:900;color:#fff;background:#111827;box-shadow:0 10px 18px rgba(0,0,0,.10)">${idx===total-1 ? "إنهاء" : "التالي"}</button>
+      </div>
+
+      <div id="msg" style="display:none;margin-top:10px;text-align:center;font-weight:900;padding:12px;border-radius:16px;background:#f3f4ff;border:1px solid rgba(0,0,0,.06)"></div>
     `);
 
     locked = false;
@@ -852,8 +589,14 @@ function openQuizModal(skill){
 
         choiceEls.forEach(c=>{
           const ci = Number(c.getAttribute("data-i"));
-          if(ci === q.a) c.classList.add("correct");
-          if(ci === i && ci !== q.a) c.classList.add("wrong");
+          if(ci === q.a){
+            c.style.borderColor = "#16a34a";
+            c.style.background = "#eafff0";
+          }
+          if(ci === i && ci !== q.a){
+            c.style.borderColor = "#ef4444";
+            c.style.background = "#fff0f0";
+          }
         });
 
         const msg = modalBody.querySelector("#msg");
@@ -870,37 +613,26 @@ function openQuizModal(skill){
       });
     });
 
-    modalBody.querySelector("#restartBtn").onclick = ()=>{
-      idx = 0; score = 0;
-      render();
-    };
+    modalBody.querySelector("#restartBtn").onclick = ()=>{ idx=0; score=0; render(); };
 
     modalBody.querySelector("#nextBtn").onclick = ()=>{
-      if(idx < total-1){
-        idx++;
-        render();
-      }else{
+      if(idx < total-1){ idx++; render(); }
+      else{
         const percent = Math.round((score/total)*100);
         saveBestScore(skill.id, percent);
         sound("win");
-
-        openModal(`✅ تم إنهاء الاختبار — ${skill.name}`, `
-          <div class="resultBox">
-            نتيجتك: <span class="tag">${percent}%</span><br><br>
-            🏆 ممتاز! أعد المحاولة للوصول إلى 100%.
+        openModal(`✅ انتهى الاختبار — ${skill.name}`, `
+          <div style="text-align:center;font-weight:900;padding:12px;border-radius:16px;background:#f3f4ff;border:1px solid rgba(0,0,0,.06)">
+            نتيجتك: <span style="padding:6px 10px;border-radius:999px;background:#eef2ff;border:1px solid rgba(0,0,0,.06);font-weight:900;color:#3730a3">${percent}%</span>
+            <br><br>🏆 ممتاز! أعِد المحاولة للوصول إلى 100%.
           </div>
-          <div class="quizBtns" style="margin-top:12px">
-            <button class="smallbtn next" onclick="closeModal()">إغلاق</button>
-            <button class="smallbtn restart" onclick="openQuizModal(currentSkill)">إعادة الاختبار</button>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px">
+            <button style="border:none;cursor:pointer;padding:10px 12px;border-radius:14px;font-weight:900;color:#fff;background:#111827;box-shadow:0 10px 18px rgba(0,0,0,.10)" onclick="closeModal()">إغلاق</button>
+            <button style="border:none;cursor:pointer;padding:10px 12px;border-radius:14px;font-weight:900;color:#fff;background:#b45309;box-shadow:0 10px 18px rgba(0,0,0,.10)" onclick="openQuizModal(window.__currentSkill)">إعادة الاختبار</button>
           </div>
         `);
-
-        updateProgressSummary();
-        if(currentSkill && currentSkill.id === skill.id){
-          const store = loadStore();
-          const rec = store[skill.id];
-          skillStatusEl.innerHTML = `أفضل درجة: <span class="tag">${rec.bestScore}%</span>`;
-        }
+        // تحديث حالة البطاقة
+        updateViewerStatus(skill.id);
       }
     };
   }
@@ -916,32 +648,32 @@ function saveBestScore(skillId, percent){
   saveStore(store);
 }
 
-/* =========================
-   الصدارة + ولي الأمر
-   ========================= */
+function updateViewerStatus(skillId){
+  const store = loadStore();
+  const rec = store[skillId];
+  const score = rec?.bestScore ?? 0;
+  skillStatusEl.innerHTML = score ? `أفضل درجة: <span style="padding:6px 10px;border-radius:999px;background:#eef2ff;border:1px solid rgba(0,0,0,.06);font-weight:900;color:#3730a3">${score}%</span>` : "";
+}
+
+/* ====== الصدارة + ولي الأمر ====== */
 function openLeaderboard(){
   const store = loadStore();
-  const rows = skills
-    .map(s=>{
-      const best = store[s.id]?.bestScore ?? 0;
-      return {name:s.name, best};
-    })
-    .sort((a,b)=> b.best - a.best);
+  const rows = skills.map(s=>({name:s.name, best: store[s.id]?.bestScore ?? 0}))
+    .sort((a,b)=>b.best-a.best);
 
-  const html = `
-    <div class="panel">
-      <h3>🏆 لوحة الصدارة (على هذا الجهاز)</h3>
-      ${rows.map((r,i)=>{
-        const color = r.best>=80 ? "ok" : r.best>=60 ? "warn" : "danger";
-        return `<div class="row">
+  openModal("🏆 لوحة الصدارة", `
+    <div style="background:#fff;border-radius:20px;box-shadow:0 10px 22px rgba(0,0,0,.10);border:1px solid rgba(0,0,0,.06);padding:14px">
+      ${rows.map((r,i)=>`
+        <div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,.10);font-weight:900;color:#374151">
           <span>${i+1}) ${r.name}</span>
-          <span class="tag ${color}">${r.best}%</span>
-        </div>`;
-      }).join("")}
+          <span style="padding:6px 10px;border-radius:999px;background:#eef2ff;border:1px solid rgba(0,0,0,.06);font-size:12px;font-weight:900;color:#3730a3;white-space:nowrap">${r.best}%</span>
+        </div>
+      `).join("")}
     </div>
-    <div class="resultBox" style="margin-top:10px">💡 الصدارة محفوظة على نفس الجهاز.</div>
-  `;
-  openModal("🏆 لوحة الصدارة", html);
+    <div style="margin-top:10px;text-align:center;font-weight:900;padding:12px;border-radius:16px;background:#f3f4ff;border:1px solid rgba(0,0,0,.06)">
+      الصدارة محفوظة على هذا الجهاز.
+    </div>
+  `);
 }
 
 function openParent(){
@@ -949,43 +681,99 @@ function openParent(){
   const scores = [];
   let done = 0;
   let best = 0;
-
   skills.forEach(s=>{
-    const rec = store[s.id];
-    if(rec && typeof rec.bestScore === "number"){
-      scores.push(rec.bestScore);
-      if(rec.bestScore >= 60) done++;
-      if(rec.bestScore > best) best = rec.bestScore;
+    const b = store[s.id]?.bestScore;
+    if(typeof b === "number"){
+      scores.push(b);
+      if(b >= 60) done++;
+      if(b > best) best = b;
     }
   });
-
   const avg = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
 
-  const html = `
-    <div class="panel">
-      <h3>👨‍👩‍👧 تقرير ولي الأمر</h3>
-      <div class="row"><span>عدد المهارات</span><span class="tag">${skills.length}</span></div>
-      <div class="row"><span>المهارات المنجزة (≥ 60%)</span><span class="tag">${done}</span></div>
-      <div class="row"><span>متوسط الدرجات</span><span class="tag">${avg}%</span></div>
-      <div class="row"><span>أعلى درجة</span><span class="tag">${best}%</span></div>
+  openModal("👨‍👩‍👧 تقرير ولي الأمر", `
+    <div style="background:#fff;border-radius:20px;box-shadow:0 10px 22px rgba(0,0,0,.10);border:1px solid rgba(0,0,0,.06);padding:14px">
+      <div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,.10);font-weight:900;color:#374151">
+        <span>عدد المهارات</span><span style="padding:6px 10px;border-radius:999px;background:#eef2ff;border:1px solid rgba(0,0,0,.06);font-size:12px;font-weight:900;color:#3730a3">${skills.length}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,.10);font-weight:900;color:#374151">
+        <span>المهارات المنجزة (≥ 60%)</span><span style="padding:6px 10px;border-radius:999px;background:#eef2ff;border:1px solid rgba(0,0,0,.06);font-size:12px;font-weight:900;color:#3730a3">${done}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,.10);font-weight:900;color:#374151">
+        <span>متوسط الدرجات</span><span style="padding:6px 10px;border-radius:999px;background:#eef2ff;border:1px solid rgba(0,0,0,.06);font-size:12px;font-weight:900;color:#3730a3">${avg}%</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;font-weight:900;color:#374151">
+        <span>أعلى درجة</span><span style="padding:6px 10px;border-radius:999px;background:#eef2ff;border:1px solid rgba(0,0,0,.06);font-size:12px;font-weight:900;color:#3730a3">${best}%</span>
+      </div>
     </div>
-
-    <div class="panel" style="margin-top:12px">
-      <h3>✅ توصية</h3>
+    <div style="margin-top:12px;background:#fff;border-radius:20px;box-shadow:0 10px 22px rgba(0,0,0,.10);border:1px solid rgba(0,0,0,.06);padding:14px">
+      <div style="font-size:16px;font-weight:900;margin-bottom:10px">✅ توصية</div>
       <div style="color:#6b7280;font-weight:900;line-height:1.7">
         - مشاهدة الفيديو قبل الاختبار ترفع الدرجة.<br>
         - شجّع الطالب على إعادة الاختبار حتى يصل 80% فأكثر.
       </div>
     </div>
-  `;
-  openModal("👨‍👩‍👧 ولي الأمر", html);
+  `);
 }
 
-/* =========================
-   تشغيل
-   ========================= */
-function init(){ renderSkillsButtons(); }
-init();
+/* ====== صفحة واحدة: فتح/إغلاق البطاقة ====== */
+window.__currentSkill = null;
+
+function renderSkillsButtons(){
+  const store = loadStore();
+  skillsGrid.innerHTML = "";
+
+  skills.forEach(s=>{
+    const btn = document.createElement("button");
+    btn.className = "skillBtn";
+    btn.textContent = s.name;
+
+    const best = store[s.id]?.bestScore ?? 0;
+    if(best>=80) btn.style.border = "2px solid rgba(22,163,74,.55)";
+    else if(best>=60) btn.style.border = "2px solid rgba(180,83,9,.45)";
+
+    btn.onclick = ()=> openSkillOnePage(s.id, btn);
+    skillsGrid.appendChild(btn);
+  });
+}
+
+function openSkillOnePage(id, btnEl){
+  const s = skills.find(x=>x.id===id);
+  if(!s) return;
+
+  window.__currentSkill = s;
+
+  // تفعيل زر مختار
+  [...document.querySelectorAll(".skillBtn")].forEach(b=>b.classList.remove("active"));
+  if(btnEl) btnEl.classList.add("active");
+
+  // إظهار البطاقة داخل نفس الصفحة
+  viewer.classList.add("show");
+
+  skillTitleEl.textContent = s.name;
+  skillImgEl.src = s.img;
+
+  updateViewerStatus(s.id);
+
+  // أزرار
+  videoBtn.onclick = ()=> openVideoModal(s);
+  quizBtn.onclick  = ()=> openQuizModal(s);
+
+  // تكبير الصورة
+  skillImgEl.onclick = ()=> openModal("تكبير الصورة", `<img class="zoomImg" src="${s.img}" alt="صورة المهارة">`);
+
+  // نزّل للمشاهدة
+  setTimeout(()=> viewer.scrollIntoView({behavior:"smooth", block:"start"}), 50);
+}
+
+function closeViewer(){
+  viewer.classList.remove("show");
+  [...document.querySelectorAll(".skillBtn")].forEach(b=>b.classList.remove("active"));
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ====== تشغيل ====== */
+renderSkillsButtons();
 </script>
 </body>
 </html>
