@@ -1,314 +1,627 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>لغتي الممتعة | الصفحة الرئيسية</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>منصة لغتي الممتعة</title>
+
+  <!-- خط عربي جميل -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#f6f9ff;
-      --card: rgba(255,255,255,.75);
-      --stroke: rgba(255,255,255,.55);
-      --ink:#1f2937;
+      --bg1:#f7fbff;
+      --bg2:#fff7fb;
+      --card:#ffffffd9;
+      --stroke:#e7eeff;
+      --ink:#1a2457;
 
-      --pri:#1e3a8a;      /* أزرق أساسي */
-      --pri2:#2563eb;     /* أزرق فاتح */
-      --green:#22c55e;    /* أخضر */
-      --orange:#f59e0b;   /* برتقالي/ذهبي */
-      --blueBtn:#2d7dff;
-
-      --shadow: rgba(0,0,0,.12);
-      --shadow2: rgba(30,58,138,.25);
+      --p1:#6a5cff;   /* بنفسجي مرح */
+      --p2:#38bdf8;   /* سماوي */
+      --p3:#22c55e;   /* أخضر */
+      --p4:#f59e0b;   /* برتقالي */
+      --p5:#ef4444;   /* أحمر لطيف */
+      --shadow: 0 18px 45px rgba(20, 40, 120, .14);
+      --shadow2: 0 10px 25px rgba(20, 40, 120, .10);
+      --r: 22px;
     }
 
     *{ box-sizing:border-box; }
     body{
       margin:0;
-      min-height:100vh;
-      font-family: "Cairo","Tajawal", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-      background:
-        radial-gradient(900px 480px at 50% 0%, rgba(37,99,235,.18), transparent 55%),
-        radial-gradient(900px 520px at 20% 30%, rgba(34,197,94,.14), transparent 55%),
-        radial-gradient(900px 520px at 80% 40%, rgba(245,158,11,.12), transparent 55%),
-        var(--bg);
+      font-family:"Tajawal", system-ui, -apple-system, Segoe UI, Arial;
       color:var(--ink);
-      padding:18px 12px 28px;
-      display:flex;
-      justify-content:center;
+      background:
+        radial-gradient(1200px 800px at 10% 10%, rgba(106,92,255,.14), transparent 55%),
+        radial-gradient(900px 700px at 90% 20%, rgba(56,189,248,.16), transparent 55%),
+        radial-gradient(900px 700px at 30% 90%, rgba(34,197,94,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* زخارف نجوم/فقاعات */
+    .sparkles{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.6;
+      background:
+        radial-gradient(2px 2px at 12% 18%, rgba(245,158,11,.9) 40%, transparent 41%),
+        radial-gradient(2px 2px at 22% 78%, rgba(56,189,248,.9) 40%, transparent 41%),
+        radial-gradient(2px 2px at 65% 22%, rgba(34,197,94,.9) 40%, transparent 41%),
+        radial-gradient(2px 2px at 84% 66%, rgba(106,92,255,.9) 40%, transparent 41%),
+        radial-gradient(3px 3px at 92% 28%, rgba(239,68,68,.8) 40%, transparent 41%),
+        radial-gradient(3px 3px at 42% 12%, rgba(245,158,11,.7) 40%, transparent 41%),
+        radial-gradient(4px 4px at 8% 58%, rgba(106,92,255,.55) 40%, transparent 41%);
+      filter: blur(.2px);
     }
 
     .wrap{
-      width:min(980px, 96vw);
-      background: rgba(255,255,255,.55);
-      border: 1px solid rgba(255,255,255,.7);
-      border-radius: 26px;
-      box-shadow: 0 18px 50px var(--shadow);
-      backdrop-filter: blur(10px);
-      overflow:hidden;
-    }
-
-    /* ====== Header ====== */
-    .topbar{
+      max-width:1100px;
+      margin:0 auto;
+      padding:22px 16px 28px;
       position:relative;
-      padding:18px 18px 16px;
-      background: linear-gradient(135deg, var(--pri), var(--pri2));
-      color:#fff;
     }
 
-    .topbarInner{
+    /* شريط علوي */
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
+      padding:10px 0 0;
     }
-
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
+      user-select:none;
     }
-
     .logo{
-      width:56px;
-      height:56px;
+      width:52px; height:52px;
       border-radius:16px;
-      background: rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.25);
-      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+      background:
+        linear-gradient(135deg, rgba(106,92,255,1), rgba(56,189,248,1));
+      box-shadow: var(--shadow2);
       display:grid;
       place-items:center;
-      overflow:hidden;
-    }
-
-    .brandText{
-      line-height:1.15;
-    }
-    .brandText .name{
-      font-weight:1000;
-      font-size:20px;
-      letter-spacing:.2px;
-    }
-    .brandText .sub{
-      opacity:.92;
-      font-weight:800;
-      font-size:13px;
-      margin-top:4px;
-    }
-
-    .creditMini{
-      background: rgba(255,255,255,.14);
-      border:1px solid rgba(255,255,255,.25);
-      padding:10px 12px;
-      border-radius:16px;
-      text-align:center;
-      font-weight:900;
-      font-size:13px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.12);
-      white-space:nowrap;
-    }
-
-    .hero{
-      margin-top:14px;
-      background: rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.20);
-      border-radius:22px;
-      padding:16px 14px;
-      text-align:center;
-      box-shadow: 0 14px 30px rgba(0,0,0,.10);
-    }
-    .hero h1{
-      margin:0 0 6px;
-      font-size: clamp(22px, 3.4vw, 34px);
-      font-weight:1000;
-    }
-    .hero p{
-      margin:0;
-      font-size: clamp(13px, 2vw, 16px);
-      font-weight:900;
-      opacity:.95;
-    }
-
-    /* ====== Content ====== */
-    .content{
-      padding:18px 16px 18px;
-    }
-
-    .sectionTitle{
-      text-align:center;
-      margin:6px 0 14px;
-      font-weight:1000;
-      font-size:18px;
-      color:#1f2a44;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap:14px;
-    }
-
-    .card{
-      background: var(--card);
-      border:1px solid rgba(255,255,255,.75);
-      border-radius:22px;
-      padding:14px 14px 12px;
-      box-shadow: 0 14px 30px rgba(0,0,0,.10);
       position:relative;
       overflow:hidden;
-      min-height: 190px;
+    }
+    .logo::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle, rgba(255,255,255,.55), transparent 60%);
+      transform:rotate(20deg);
+      opacity:.55;
+    }
+    .logo span{
+      position:relative;
+      font-size:26px;
+      color:white;
+      font-weight:900;
+      text-shadow: 0 10px 25px rgba(0,0,0,.18);
+    }
+    .brandText .title{
+      font-weight:900;
+      font-size:18px;
+      letter-spacing:.2px;
+      margin:0;
+      line-height:1.1;
+    }
+    .brandText .sub{
+      margin:0;
+      opacity:.8;
+      font-size:13px;
+      font-weight:700;
     }
 
+    .chipRow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-start;
+    }
+    .chip{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.72);
+      backdrop-filter: blur(10px);
+      border-radius:999px;
+      padding:8px 12px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: 0 8px 20px rgba(20,40,120,.08);
+      font-weight:800;
+      font-size:13px;
+      cursor:pointer;
+      text-decoration:none;
+      color:var(--ink);
+      transition:.18s ease;
+    }
+    .chip:hover{ transform:translateY(-2px); }
+
+    /* الهيرو */
+    .hero{
+      margin-top:16px;
+      border-radius:calc(var(--r) + 8px);
+      padding:18px;
+      border:1px solid var(--stroke);
+      background: linear-gradient(135deg,
+        rgba(106,92,255,.16),
+        rgba(56,189,248,.14),
+        rgba(34,197,94,.10),
+        rgba(245,158,11,.10)
+      );
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:680px; height:680px;
+      border-radius:50%;
+      background: radial-gradient(circle, rgba(255,255,255,.7), transparent 60%);
+      right:-360px; top:-360px;
+      opacity:.65;
+    }
+    .heroGrid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:14px;
+      align-items:center;
+    }
+    @media (max-width: 860px){
+      .heroGrid{ grid-template-columns: 1fr; }
+    }
+
+    .heroText h1{
+      margin:0 0 6px;
+      font-size:34px;
+      font-weight:900;
+      line-height:1.15;
+    }
+    .heroText p{
+      margin:0 0 14px;
+      font-size:16px;
+      line-height:1.75;
+      opacity:.92;
+      font-weight:700;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    /* أزرار جميلة */
+    .btn{
+      border:0;
+      border-radius:16px;
+      padding:12px 14px;
+      font-weight:900;
+      font-size:15px;
+      cursor:pointer;
+      box-shadow: var(--shadow2);
+      transition:.18s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      text-decoration:none;
+      color:white;
+      min-width:170px;
+    }
+    .btn:hover{ transform:translateY(-2px) scale(1.01); }
+    .btn:active{ transform:translateY(0px) scale(.99); }
+
+    .btn.primary{ background: linear-gradient(135deg, var(--p1), var(--p2)); }
+    .btn.green{ background: linear-gradient(135deg, var(--p3), #16a34a); }
+    .btn.orange{ background: linear-gradient(135deg, var(--p4), #fb7185); }
+    .btn.dark{ background: linear-gradient(135deg, #111827, #374151); }
+
+    /* لوحة إحصاءات لطيفة */
+    .miniPanel{
+      background: rgba(255,255,255,.78);
+      border:1px solid var(--stroke);
+      border-radius: var(--r);
+      padding:14px;
+      box-shadow: var(--shadow2);
+    }
+    .miniPanel h3{
+      margin:0 0 10px;
+      font-size:16px;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:10px;
+    }
+    .stat{
+      background:white;
+      border:1px solid var(--stroke);
+      border-radius:18px;
+      padding:10px;
+      box-shadow: 0 10px 22px rgba(20,40,120,.08);
+    }
+    .stat .k{
+      font-weight:900;
+      font-size:22px;
+      margin:0;
+    }
+    .stat .t{
+      margin:2px 0 0;
+      opacity:.85;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    /* قسم البطاقات */
+    .cards{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (max-width: 980px){
+      .cards{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 640px){
+      .cards{ grid-template-columns: 1fr; }
+    }
+    .card{
+      background: rgba(255,255,255,.75);
+      border:1px solid var(--stroke);
+      border-radius: calc(var(--r) + 6px);
+      box-shadow: var(--shadow2);
+      padding:14px;
+      position:relative;
+      overflow:hidden;
+      min-height:150px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:12px;
+    }
     .card::before{
       content:"";
       position:absolute;
       inset:-40px -60px auto auto;
-      width:160px;
-      height:160px;
-      border-radius:50%;
-      opacity:.18;
-      filter: blur(0px);
-      pointer-events:none;
+      width:150px; height:150px;
+      border-radius:40px;
+      filter:blur(0px);
+      opacity:.28;
+      transform:rotate(18deg);
     }
-    .cSkills::before{ background: var(--orange); }
-    .cBankQ::before{ background: var(--green); }
-    .cBankF::before{ background: var(--blueBtn); }
+    .card.c1::before{ background: linear-gradient(135deg, var(--p1), var(--p2)); }
+    .card.c2::before{ background: linear-gradient(135deg, var(--p3), var(--p2)); }
+    .card.c3::before{ background: linear-gradient(135deg, var(--p4), var(--p5)); }
 
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:8px 10px;
+    .cardHead{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .badge{
       border-radius:999px;
-      font-weight:1000;
-      font-size:13px;
-      background: rgba(255,255,255,.75);
-      border:1px solid rgba(0,0,0,.06);
-      color:#22304d;
+      padding:7px 10px;
+      font-weight:900;
+      font-size:12px;
+      background: rgba(17,24,39,.06);
+      border:1px solid var(--stroke);
     }
-
-    .card h3{
-      margin:10px 0 6px;
+    .card h2{
+      margin:0;
       font-size:18px;
-      font-weight:1000;
-      color:#16213a;
+      font-weight:900;
     }
     .card p{
-      margin:0 0 12px;
-      color:#334155;
-      font-weight:900;
-      font-size:13px;
+      margin:0;
       line-height:1.7;
+      font-weight:700;
+      opacity:.9;
+      font-size:14px;
     }
-
-    .btn{
-      width:100%;
+    .cardFoot{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .linkBtn{
       border:0;
-      border-radius:16px;
-      padding:12px 14px;
-      font-weight:1000;
-      font-size:15px;
-      cursor:pointer;
-      box-shadow: 0 14px 24px rgba(0,0,0,.10);
-      transition: transform .12s ease, filter .12s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); filter:brightness(1.02); }
-    .btn:active{ transform: translateY(1px); }
-
-    .btnOrange{ background: linear-gradient(180deg, #ffb43a, #f59e0b); color:#2b1a00; }
-    .btnGreen{ background: linear-gradient(180deg, #34d399, #16a34a); color:#062814; }
-    .btnBlue{ background: linear-gradient(180deg, #5aa8ff, #2d7dff); color:#fff; }
-
-    .footer{
-      padding:10px 16px 16px;
-      text-align:center;
-      color:#475569;
+      border-radius:14px;
+      padding:10px 12px;
       font-weight:900;
+      cursor:pointer;
+      box-shadow: 0 10px 22px rgba(20,40,120,.10);
+      color:white;
+      text-decoration:none;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      min-width:150px;
+      transition:.18s ease;
+    }
+    .linkBtn:hover{ transform:translateY(-2px); }
+    .linkBtn.blue{ background: linear-gradient(135deg, var(--p1), var(--p2)); }
+    .linkBtn.green{ background: linear-gradient(135deg, var(--p3), #16a34a); }
+    .linkBtn.orange{ background: linear-gradient(135deg, var(--p4), #fb7185); }
+
+    /* شريط سفلي */
+    footer{
+      margin-top:14px;
+      text-align:center;
+      opacity:.85;
+      font-weight:800;
       font-size:13px;
+      padding:8px 0 2px;
     }
 
-    @media (max-width: 860px){
-      .cards{ grid-template-columns: 1fr; }
-      .creditMini{ display:none; }
+    /* نوافذ بسيطة (عن المنصة / ولي الأمر) */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(15,23,42,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:14px;
+      z-index:50;
+    }
+    .modal.show{ display:flex; }
+    .modalBox{
+      width:min(720px, 96vw);
+      background: white;
+      border-radius: 24px;
+      border:1px solid var(--stroke);
+      box-shadow: 0 30px 80px rgba(0,0,0,.22);
+      overflow:hidden;
+    }
+    .modalTop{
+      padding:14px 14px;
+      background: linear-gradient(135deg, rgba(106,92,255,.14), rgba(56,189,248,.12));
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .modalTop h3{
+      margin:0;
+      font-weight:900;
+    }
+    .x{
+      border:0;
+      width:40px; height:40px;
+      border-radius:14px;
+      cursor:pointer;
+      font-size:18px;
+      font-weight:900;
+      background: rgba(17,24,39,.08);
+    }
+    .modalBody{
+      padding:14px;
+      line-height:1.9;
+      font-weight:700;
+      color:#253067;
+    }
+    .modalBody ul{
+      margin:10px 0 0;
+      padding:0 18px 0 0;
+    }
+    .tip{
+      background:#f8fafc;
+      border:1px dashed #dbeafe;
+      border-radius:18px;
+      padding:10px 12px;
+      margin-top:10px;
+      font-weight:800;
     }
   </style>
 </head>
 
 <body>
+  <div class="sparkles"></div>
+
   <div class="wrap">
 
-    <!-- Header -->
+    <!-- TOP BAR -->
     <div class="topbar">
-      <div class="topbarInner">
-        <div class="brand">
-          <div class="logo" aria-label="شعار لغتي الممتعة">
-            <!-- شعار SVG (بدون صور خارجية) -->
-            <svg width="46" height="46" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect x="6" y="6" width="52" height="52" rx="16" fill="rgba(255,255,255,0.18)"/>
-              <!-- كتاب -->
-              <path d="M18 24c0-2 1.6-3.6 3.6-3.6H32v24H21.6C19.6 44.4 18 42.8 18 40.8V24Z" fill="white" opacity="0.95"/>
-              <path d="M46 24c0-2-1.6-3.6-3.6-3.6H32v24h10.4c2 0 3.6-1.6 3.6-3.6V24Z" fill="white" opacity="0.88"/>
-              <!-- نجمة -->
-              <path d="M42.8 18.5l1.2 2.5 2.8.4-2 2 0.5 2.8-2.5-1.3-2.5 1.3 0.5-2.8-2-2 2.8-.4 1.2-2.5Z" fill="#FBBF24"/>
-            </svg>
-          </div>
-
-          <div class="brandText">
-            <div class="name">لغتي الممتعة</div>
-            <div class="sub">صفحة البداية — ألعاب + مهارات + اختبارات قصيرة</div>
-          </div>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><span>لغ</span></div>
+        <div class="brandText">
+          <p class="title">منصة لغتي الممتعة</p>
+          <p class="sub">تصميم: صالحة علي الغامدي</p>
         </div>
-
-        <div class="creditMini">إعداد: صالحة علي الغامدي</div>
       </div>
 
-      <div class="hero">
-        <h1>منصة لغتي الممتعة</h1>
-        <p>اختَر من الخيارات أدناه للانتقال مباشرة ✨</p>
+      <div class="chipRow">
+        <a class="chip" href="skills.html">🧩 صفحة المهارات</a>
+        <button class="chip" id="openParent">👨‍👩‍👧‍👦 وليّ الأمر</button>
+        <button class="chip" id="openAbout">✨ عن المنصة</button>
       </div>
     </div>
 
-    <!-- Content -->
-    <div class="content">
-      <div class="sectionTitle">اختر قسمًا</div>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="heroGrid">
+        <div class="heroText">
+          <h1>تعلّم ممتع… ونتائج فورية 🎯</h1>
+          <p>
+            اختاري من الأنشطة مباشرة: <b>بطاقات المهارات</b> (صور + فيديو + اختبار) أو
+            <b>بنك الأسئلة</b> أو <b>بنك الفهم</b>.
+            <br>
+            الواجهة مناسبة للسبورة الذكية والجوال، مع تجربة واضحة وبسيطة للطلاب.
+          </p>
 
-      <div class="cards">
-
-        <!-- 1) بطاقات المهارات -->
-        <div class="card cSkills">
-          <div class="chip">⭐ بطاقات المهارات</div>
-          <h3>صور + فيديو + اختبار (5 أسئلة)</h3>
-          <p>اختر مهارة ثم اضغط "فيديو" للمشاهدة أو "اختبار" للإجابة السريعة داخل صفحة المهارات.</p>
-          <button class="btn btnOrange" type="button" onclick="goTo('skills.html')">ابدأ الآن</button>
+          <div class="ctaRow">
+            <!-- عدلي الروابط إذا كانت مختلفة لديك -->
+            <a class="btn primary" href="skills.html">🎴 بطاقات المهارات</a>
+            <a class="btn green" href="vocab_game.html">🌿 بنك الأسئلة</a>
+            <a class="btn orange" href="reading_skills_game.html">📘 بنك الفهم</a>
+            <button class="btn dark" id="scrollToCards">⬇️ ابدأ الآن</button>
+          </div>
         </div>
 
-        <!-- 2) بنك الأسئلة -> vocab_game.html (لا نلمسه) -->
-        <div class="card cBankQ">
-          <div class="chip">🧠 بنك الأسئلة</div>
-          <h3>تدريبات متنوعة</h3>
-          <p>أسئلة سريعة ومتنوعة للتدريب والمراجعة (من ملف اللعبة الحالي لديك).</p>
-          <button class="btn btnGreen" type="button" onclick="goTo('vocab_game.html')">ابدأ الآن</button>
-        </div>
+        <div class="miniPanel">
+          <h3>⭐ لوحة سريعة</h3>
+          <div class="stats">
+            <div class="stat">
+              <p class="k">20</p>
+              <p class="t">مهارة جاهزة</p>
+            </div>
+            <div class="stat">
+              <p class="k">فيديو</p>
+              <p class="t">شرح لكل مهارة</p>
+            </div>
+            <div class="stat">
+              <p class="k">اختبار</p>
+              <p class="t">نتيجة فورية</p>
+            </div>
+            <div class="stat">
+              <p class="k">📺</p>
+              <p class="t">مناسب للسبورة</p>
+            </div>
+          </div>
 
-        <!-- 3) بنك الفهم -> reading_skills_game.html (لا نلمسه) -->
-        <div class="card cBankF">
-          <div class="chip">📘 بنك الفهم</div>
-          <h3>تدريبات الفهم القرائي</h3>
-          <p>تدريبات موجهة للفهم القرائي والمهارات المرتبطة به (من ملف اللعبة الحالي لديك).</p>
-          <button class="btn btnBlue" type="button" onclick="goTo('reading_skills_game.html')">ابدأ الآن</button>
+          <div class="tip">
+            ✅ ملاحظة: إذا تغيّر اسم أي ملف داخل GitHub، تأكدي أن الرابط هنا صحيح.
+          </div>
         </div>
+      </div>
+    </section>
 
+    <!-- CARDS -->
+    <section class="cards" id="cards">
+      <div class="card c1">
+        <div>
+          <div class="cardHead">
+            <h2>بطاقات المهارات</h2>
+            <span class="badge">صور + فيديو + اختبار</span>
+          </div>
+          <p>
+            اختاري مهارة واحدة وستظهر البطاقة التعليمية، ثم افتحي الفيديو داخل نافذة،
+            وبعدها ابدئي الاختبار لتحصلي على درجتك فورًا.
+          </p>
+        </div>
+        <div class="cardFoot">
+          <a class="linkBtn blue" href="skills.html">🚀 افتح صفحة المهارات</a>
+          <span class="badge">الأفضل للطلاب</span>
+        </div>
+      </div>
+
+      <div class="card c2">
+        <div>
+          <div class="cardHead">
+            <h2>بنك الأسئلة</h2>
+            <span class="badge">تدريب سريع</span>
+          </div>
+          <p>
+            أسئلة متنوعة وسريعة مع تغذية راجعة—ممتازة للمراجعة اليومية داخل الفصل أو في المنزل.
+          </p>
+        </div>
+        <div class="cardFoot">
+          <a class="linkBtn green" href="vocab_game.html">🟢 ابدأ بنك الأسئلة</a>
+          <span class="badge">نقاط وتشجيع</span>
+        </div>
+      </div>
+
+      <div class="card c3">
+        <div>
+          <div class="cardHead">
+            <h2>بنك الفهم</h2>
+            <span class="badge">فهم قرائي</span>
+          </div>
+          <p>
+            تدريب مخصص للفهم: فكرة عامة، ترتيب أحداث، شبه واختلاف… مع أسئلة متدرجة.
+          </p>
+        </div>
+        <div class="cardFoot">
+          <a class="linkBtn orange" href="reading_skills_game.html">🟠 ابدأ بنك الفهم</a>
+          <span class="badge">مناسب للسبورة</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © منصة لغتي الممتعة — تصميم: صالحة علي الغامدي
+    </footer>
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal" id="aboutModal" role="dialog" aria-modal="true">
+    <div class="modalBox">
+      <div class="modalTop">
+        <h3>✨ عن منصة لغتي الممتعة</h3>
+        <button class="x" data-close="aboutModal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modalBody">
+        منصة تعليمية تفاعلية للطلاب، تجمع بين:
+        <ul>
+          <li>بطاقات مهارات تعليمية (صورة + فيديو + اختبار).</li>
+          <li>بنوك تدريب ممتعة للتحفيز والمراجعة.</li>
+          <li>واجهة مناسبة للجوال والسبورة الذكية.</li>
+        </ul>
+        <div class="tip">اقتراح: ابدئي دائمًا من “بطاقات المهارات” ثم انتقلي للتدريبات.</div>
       </div>
     </div>
+  </div>
 
-    <div class="footer">© جميع الحقوق محفوظة — لغتي الممتعة | إعداد: صالحة علي الغامدي</div>
+  <div class="modal" id="parentModal" role="dialog" aria-modal="true">
+    <div class="modalBox">
+      <div class="modalTop">
+        <h3>👨‍👩‍👧‍👦 وليّ الأمر</h3>
+        <button class="x" data-close="parentModal" aria-label="إغلاق">✕</button>
+      </div>
+      <div class="modalBody">
+        <b>كيف أساعد طفلي؟</b>
+        <ul>
+          <li>اختاري مهارة واحدة يوميًا (5–10 دقائق).</li>
+          <li>شاهدوا الفيديو معًا ثم ابدؤوا الاختبار.</li>
+          <li>شجعيه على إعادة المحاولة لتحسين الدرجة.</li>
+        </ul>
+        <div class="tip">🎁 مكافأة لطيفة: نجمة ⭐ لكل اختبار مكتمل!</div>
+      </div>
+    </div>
   </div>
 
   <script>
-    function goTo(path){
-      // فتح داخل نفس الصفحة (أفضل داخل GitHub Pages)
-      window.location.href = path;
-    }
+    // أزرار النوافذ
+    const aboutModal = document.getElementById("aboutModal");
+    const parentModal = document.getElementById("parentModal");
+
+    document.getElementById("openAbout").addEventListener("click", () => aboutModal.classList.add("show"));
+    document.getElementById("openParent").addEventListener("click", () => parentModal.classList.add("show"));
+
+    document.querySelectorAll("[data-close]").forEach(btn=>{
+      btn.addEventListener("click", (e)=>{
+        const id = e.currentTarget.getAttribute("data-close");
+        document.getElementById(id).classList.remove("show");
+      });
+    });
+
+    // إغلاق عند الضغط خارج الصندوق
+    [aboutModal, parentModal].forEach(m=>{
+      m.addEventListener("click", (e)=>{
+        if(e.target === m) m.classList.remove("show");
+      });
+    });
+
+    // زر "ابدأ الآن"
+    document.getElementById("scrollToCards").addEventListener("click", ()=>{
+      document.getElementById("cards").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    // إذا كانت بعض صفحاتك غير موجودة (vocab_game.html/reading_skills_game.html)
+    // عدلي الروابط بالأسماء الصحيحة لملفاتك الحالية.
   </script>
 </body>
 </html>
