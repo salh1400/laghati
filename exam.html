@@ -2,146 +2,211 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>اختبار إلكتروني - لغتي الممتعة</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الاختبار الإلكتروني</title>
 
 <style>
 body{
-  font-family: "Tajawal", sans-serif;
-  background:#f5f6ff;
+  font-family: "Cairo","Tajawal",sans-serif;
+  background:#f6f7fb;
   margin:0;
-  padding:20px;
-}
-
-h1{
-  text-align:center;
-  color:#4b4bd4;
+  padding:12px;
 }
 
 .exam-box{
-  max-width:800px;
+  max-width:900px;
   margin:auto;
   background:#fff;
-  padding:20px;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.header h2{
+  margin:0;
+  font-size:20px;
+}
+
+.model-select button{
+  border:0;
+  padding:8px 14px;
+  margin:2px;
   border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,.1);
+  font-weight:700;
+  cursor:pointer;
+  background:#e0e0ff;
+}
+.model-select button.active{
+  background:#6b5bd6;
+  color:#fff;
+}
+
+.text-box{
+  background:#f3f4ff;
+  padding:14px;
+  border-radius:12px;
+  margin:14px 0;
+  line-height:1.9;
+  font-weight:600;
 }
 
 .question{
-  margin-bottom:20px;
-  padding:15px;
-  border-radius:15px;
-  background:#f9f9ff;
+  margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1px dashed #ddd;
 }
 
-.question-title{
-  margin-bottom:10px;
-  font-weight:bold;
+.question h4{
+  margin:0 0 8px;
+  font-size:15px;
 }
 
 .options{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
+  grid-template-columns: repeat(4,1fr);
+  gap:8px;
 }
 
 .option{
-  border:2px solid #ccc;
+  border:2px solid #bbb;
   border-radius:50px;
-  padding:10px;
+  padding:6px;
   text-align:center;
   cursor:pointer;
+  font-weight:700;
   background:#fff;
-  transition:.2s;
 }
 
 .option.selected{
-  background:#4b4bd4;
+  background:#6b5bd6;
   color:#fff;
-  border-color:#4b4bd4;
+  border-color:#6b5bd6;
 }
 
-.submit-btn{
-  width:100%;
-  padding:15px;
-  font-size:18px;
-  border:none;
-  border-radius:50px;
-  background:#4CAF50;
+.finish{
+  margin-top:20px;
+  text-align:center;
+}
+
+.finish button{
+  border:0;
+  padding:12px 24px;
+  border-radius:30px;
+  background:#15b26b;
   color:#fff;
+  font-size:16px;
+  font-weight:800;
   cursor:pointer;
 }
 
-.result{
-  margin-top:20px;
-  font-size:22px;
-  text-align:center;
-  display:none;
+.score{
+  margin-top:12px;
+  font-size:18px;
+  font-weight:900;
 }
 </style>
 </head>
 
 <body>
 
-<h1>📝 اختبار لغتي الممتعة</h1>
+<div class="exam-box">
 
-<div class="exam-box" id="exam"></div>
+  <div class="header">
+    <h2>الاختبار الإلكتروني – لغتي</h2>
+    <div class="model-select">
+      <button onclick="loadModel('A')" class="active" id="btnA">نموذج أ</button>
+      <button onclick="loadModel('B')" id="btnB">نموذج ب</button>
+      <button onclick="loadModel('C')" id="btnC">نموذج ج</button>
+      <button onclick="loadModel('D')" id="btnD">نموذج د</button>
+    </div>
+  </div>
 
-<button class="submit-btn" onclick="submitExam()">إنهاء الاختبار</button>
+  <div id="text" class="text-box"></div>
 
-<div class="result" id="result"></div>
+  <div id="questions"></div>
 
-<audio id="correctSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_2b7b3b9d94.mp3"></audio>
-<audio id="wrongSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_4f3e7d6d58.mp3"></audio>
+  <div class="finish">
+    <button onclick="finishExam()">إنهاء الاختبار</button>
+    <div class="score" id="score"></div>
+  </div>
+
+</div>
 
 <script>
-const questions = [
- {q:"اختر الكلمة التي تدل على فعل:", o:["مدرسة","يكتب","قلم","جميل"], a:1},
- {q:"جمع كلمة (طالب):", o:["طالبون","طلاب","طالبة","طلب"], a:1},
- {q:"الكلمة المعرفة بـ (ال):", o:["كتاب","قلم","البيت","دفتر"], a:2},
- // كمّلي حتى 20 سؤال
-];
+const models = {
+A:{
+text:`النص:
+تعاونَ طلابُ الصفِّ في تنظيفِ الفصلِ، فقام بعضُهم بترتيبِ المقاعد،
+وقام آخرون بتنظيفِ السبورة، وشعر الجميع بالسعادة بعد انتهاء العمل.`,
 
-let answers = Array(questions.length).fill(null);
+questions:[
+{q:"ما الفكرة العامة للنص؟",a:["التعاون في تنظيف الفصل","اللعب في الساحة","زيارة المكتبة","رحلة مدرسية"],c:0},
+{q:"بماذا شعر الطلاب بعد انتهاء العمل؟",a:["السعادة","التعب","الغضب","الملل"],c:0},
+{q:"أين حدثت القصة؟",a:["في الفصل","في السوق","في الحديقة","في المنزل"],c:0},
+// ✨ كمّلي حتى 20 سؤال بنفس النمط
+]
+},
 
-const examDiv = document.getElementById("exam");
+B:{ text:"نص النموذج ب", questions:[] },
+C:{ text:"نص النموذج ج", questions:[] },
+D:{ text:"نص النموذج د", questions:[] },
+};
 
-questions.forEach((item,i)=>{
-  const qDiv = document.createElement("div");
-  qDiv.className="question";
-  qDiv.innerHTML = `
-    <div class="question-title">${i+1}. ${item.q}</div>
-    <div class="options">
-      ${item.o.map((opt,j)=>`
-        <div class="option" onclick="selectOption(${i},${j},this)">${opt}</div>
-      `).join("")}
-    </div>
-  `;
-  examDiv.appendChild(qDiv);
-});
+let currentModel="A";
+let answers={};
 
-function selectOption(qIndex,oIndex,el){
-  const options = el.parentElement.children;
-  for(let op of options) op.classList.remove("selected");
-  el.classList.add("selected");
-  answers[qIndex]=oIndex;
-}
+function loadModel(m){
+  currentModel=m;
+  answers={};
+  document.querySelectorAll(".model-select button").forEach(b=>b.classList.remove("active"));
+  document.getElementById("btn"+m).classList.add("active");
 
-function submitExam(){
-  let score=0;
-  questions.forEach((q,i)=>{
-    if(answers[i]===q.a) score++;
+  document.getElementById("text").innerText=models[m].text;
+  const qBox=document.getElementById("questions");
+  qBox.innerHTML="";
+
+  models[m].questions.forEach((q,i)=>{
+    const div=document.createElement("div");
+    div.className="question";
+    div.innerHTML=`<h4>${i+1}. ${q.q}</h4>`;
+    const opts=document.createElement("div");
+    opts.className="options";
+
+    q.a.forEach((op,idx)=>{
+      const o=document.createElement("div");
+      o.className="option";
+      o.innerText=["أ","ب","ج","د"][idx];
+      o.onclick=()=>{
+        answers[i]=idx;
+        [...opts.children].forEach(x=>x.classList.remove("selected"));
+        o.classList.add("selected");
+      };
+      opts.appendChild(o);
+    });
+
+    div.appendChild(opts);
+    qBox.appendChild(div);
   });
 
-  document.getElementById("result").style.display="block";
-  document.getElementById("result").innerHTML=
-    `🎉 نتيجتك: ${score} / ${questions.length}`;
-
-  if(score >= questions.length/2){
-    document.getElementById("correctSound").play();
-  }else{
-    document.getElementById("wrongSound").play();
-  }
+  document.getElementById("score").innerText="";
 }
+
+function finishExam(){
+  let score=0;
+  models[currentModel].questions.forEach((q,i)=>{
+    if(answers[i]===q.c) score++;
+  });
+  document.getElementById("score").innerText=`درجتك: ${score} / ${models[currentModel].questions.length}`;
+}
+
+loadModel("A");
 </script>
 
 </body>
