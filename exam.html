@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>اختبار إلكتروني - لغتي الممتعة</title>
+
+<style>
+body{
+  font-family: "Tajawal", sans-serif;
+  background:#f5f6ff;
+  margin:0;
+  padding:20px;
+}
+
+h1{
+  text-align:center;
+  color:#4b4bd4;
+}
+
+.exam-box{
+  max-width:800px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+.question{
+  margin-bottom:20px;
+  padding:15px;
+  border-radius:15px;
+  background:#f9f9ff;
+}
+
+.question-title{
+  margin-bottom:10px;
+  font-weight:bold;
+}
+
+.options{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.option{
+  border:2px solid #ccc;
+  border-radius:50px;
+  padding:10px;
+  text-align:center;
+  cursor:pointer;
+  background:#fff;
+  transition:.2s;
+}
+
+.option.selected{
+  background:#4b4bd4;
+  color:#fff;
+  border-color:#4b4bd4;
+}
+
+.submit-btn{
+  width:100%;
+  padding:15px;
+  font-size:18px;
+  border:none;
+  border-radius:50px;
+  background:#4CAF50;
+  color:#fff;
+  cursor:pointer;
+}
+
+.result{
+  margin-top:20px;
+  font-size:22px;
+  text-align:center;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📝 اختبار لغتي الممتعة</h1>
+
+<div class="exam-box" id="exam"></div>
+
+<button class="submit-btn" onclick="submitExam()">إنهاء الاختبار</button>
+
+<div class="result" id="result"></div>
+
+<audio id="correctSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_2b7b3b9d94.mp3"></audio>
+<audio id="wrongSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_4f3e7d6d58.mp3"></audio>
+
+<script>
+const questions = [
+ {q:"اختر الكلمة التي تدل على فعل:", o:["مدرسة","يكتب","قلم","جميل"], a:1},
+ {q:"جمع كلمة (طالب):", o:["طالبون","طلاب","طالبة","طلب"], a:1},
+ {q:"الكلمة المعرفة بـ (ال):", o:["كتاب","قلم","البيت","دفتر"], a:2},
+ // كمّلي حتى 20 سؤال
+];
+
+let answers = Array(questions.length).fill(null);
+
+const examDiv = document.getElementById("exam");
+
+questions.forEach((item,i)=>{
+  const qDiv = document.createElement("div");
+  qDiv.className="question";
+  qDiv.innerHTML = `
+    <div class="question-title">${i+1}. ${item.q}</div>
+    <div class="options">
+      ${item.o.map((opt,j)=>`
+        <div class="option" onclick="selectOption(${i},${j},this)">${opt}</div>
+      `).join("")}
+    </div>
+  `;
+  examDiv.appendChild(qDiv);
+});
+
+function selectOption(qIndex,oIndex,el){
+  const options = el.parentElement.children;
+  for(let op of options) op.classList.remove("selected");
+  el.classList.add("selected");
+  answers[qIndex]=oIndex;
+}
+
+function submitExam(){
+  let score=0;
+  questions.forEach((q,i)=>{
+    if(answers[i]===q.a) score++;
+  });
+
+  document.getElementById("result").style.display="block";
+  document.getElementById("result").innerHTML=
+    `🎉 نتيجتك: ${score} / ${questions.length}`;
+
+  if(score >= questions.length/2){
+    document.getElementById("correctSound").play();
+  }else{
+    document.getElementById("wrongSound").play();
+  }
+}
+</script>
+
+</body>
+</html>
