@@ -1,223 +1,245 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>لغتي الممتعة</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة لغتي الممتعة</title>
 
-  <style>
-    :root{
-      --bg1:#f6f4ff;
-      --bg2:#efeaff;
-      --ink:#1f2430;
+<style>
+:root{
+  --grad-main: linear-gradient(135deg,#6a6ff5,#5b8cff,#38bdf8);
+  --bg: #f4f6ff;
+  --card: #ffffff;
+  --text: #1f2937;
+  --shadow: 0 14px 30px rgba(0,0,0,.12);
+}
 
-      --cardShadow: rgba(0,0,0,.10);
-      --stroke: rgba(255,255,255,.85);
+*{box-sizing:border-box;font-family:'Tajawal',sans-serif}
 
-      --cSkills1:#dcd8ff;
-      --cSkills2:#cfcaff;
+body{
+  margin:0;
+  background: var(--bg);
+  color:var(--text);
+}
 
-      --cRead1:#d8eeff;
-      --cRead2:#cbe7ff;
+/* ====== HEADER ====== */
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  padding:14px;
+}
 
-      --cVocab1:#d9f7ea;
-      --cVocab2:#c9f2df;
+.header-inner{
+  background: var(--grad-main);
+  border-radius:22px;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:#fff;
+  box-shadow:var(--shadow);
+}
 
-      --cExam1:#ffe3c9;
-      --cExam2:#ffd7b0;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 
-      --header1:#6b5bd6;
-      --header2:#9a7bff;
+.brand span{
+  font-size:28px;
+}
 
-      --sign:#6b5bd6;
-    }
+.brand div{
+  line-height:1.3;
+}
 
-    *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:"Cairo","Tajawal",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-      color:var(--ink);
-      background:
-        radial-gradient(900px 600px at 50% -10%, var(--bg2), var(--bg1));
-      display:flex;
-      justify-content:center;
-      padding:18px 12px 26px;
-    }
+.brand b{
+  font-size:18px;
+}
 
-    .wrap{
-      width:min(760px, 96vw);
-      background: rgba(255,255,255,.60);
-      border:1px solid var(--stroke);
-      border-radius:26px;
-      padding:18px 14px 20px;
-      box-shadow: 0 18px 45px var(--cardShadow);
-      backdrop-filter: blur(10px);
-    }
+.brand small{
+  opacity:.9;
+  font-size:13px;
+}
 
-    .hero{
-      text-align:center;
-      padding:8px 8px 2px;
-    }
+.nav{
+  display:flex;
+  gap:10px;
+}
 
-    .hello{
-      font-size: clamp(26px, 4vw, 38px);
-      font-weight:1000;
-      color: var(--header1);
-      margin:6px 0 6px;
-      letter-spacing:.2px;
-    }
+.nav button{
+  border:none;
+  padding:10px 18px;
+  border-radius:999px;
+  background:rgba(255,255,255,.2);
+  color:#fff;
+  font-size:14px;
+  cursor:pointer;
+}
 
-    .sub{
-      margin:0 auto;
-      max-width: 620px;
-      font-size: 16px;
-      line-height:1.9;
-      color:#3a425a;
-      font-weight:800;
-      opacity:.95;
-    }
+.nav button:hover{
+  background:rgba(255,255,255,.35);
+}
 
-    .brandLine{
-      margin:6px 0 0;
-      font-size: 15px;
-      font-weight:1000;
-      color:#5b5f74;
-    }
-    .brandLine b{ color: var(--header1); }
+/* ====== MAIN ====== */
+main{
+  padding:26px 16px 40px;
+  max-width:760px;
+  margin:auto;
+}
 
-    .cards{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      margin-top:18px;
-    }
+.welcome{
+  text-align:center;
+  margin-bottom:26px;
+}
 
-    a.card, .card{
-      text-decoration:none;
-      display:block;
-      border-radius:26px;
-      padding:18px 18px;
-      border: 1px solid rgba(255,255,255,.85);
-      box-shadow: 0 16px 35px rgba(0,0,0,.08);
-      transition: transform .12s ease, filter .12s ease;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-    }
-    a.card:hover, .card:hover{ transform: translateY(-2px); filter:brightness(1.01); }
+.welcome h1{
+  color:#5b5fe0;
+  margin:0;
+}
 
-    .card h3{
-      margin:0 0 6px;
-      font-size: 22px;
-      font-weight:1000;
-      color:#1f2430;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      justify-content:center;
-      text-align:center;
-    }
-    .card p{
-      margin:0;
-      text-align:center;
-      font-weight:900;
-      color:#3b4358;
-      opacity:.95;
-      font-size:15px;
-    }
+.welcome p{
+  margin-top:10px;
+  line-height:1.9;
+  color:#555;
+}
 
-    .card::after{
-      content:"";
-      position:absolute;
-      inset:auto -30px -40px auto;
-      width:180px;
-      height:180px;
-      background: rgba(255,255,255,.35);
-      border-radius: 40px;
-      transform: rotate(18deg);
-      filter: blur(0px);
-    }
+/* ====== CARDS ====== */
+.card{
+  background:var(--card);
+  border-radius:22px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:var(--shadow);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+}
 
-    .card-skills{ background: linear-gradient(135deg, var(--cSkills1), var(--cSkills2)); }
-    .card-read  { background: linear-gradient(135deg, var(--cRead1), var(--cRead2)); }
-    .card-vocab { background: linear-gradient(135deg, var(--cVocab1), var(--cVocab2)); }
-    .card-exam  { background: linear-gradient(135deg, var(--cExam1), var(--cExam2)); }
+.card h3{
+  margin:0 0 6px;
+}
 
-    .footer{
-      margin-top:18px;
-      text-align:center;
-      font-weight:1000;
-      color:#5b5f74;
-    }
+.card p{
+  margin:0;
+  font-size:14px;
+  color:#555;
+}
 
-    .signature{
-      margin-top:10px;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.9);
-      background: rgba(255,255,255,.70);
-      box-shadow: 0 12px 24px rgba(0,0,0,.07);
-      color: var(--sign);
-      font-weight:1000;
-    }
-    .signature b{ color: var(--header1); }
+.open{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:999px;
+  padding:10px 16px;
+  font-size:14px;
+  cursor:pointer;
+}
 
-    @media (max-width:520px){
-      .card{ padding:16px 14px; }
-      .card h3{ font-size:20px; }
-    }
-  </style>
+.open:hover{
+  background:#f3f4f6;
+}
+
+/* ====== COLORS ====== */
+.c-skill{border-right:6px solid #6a6ff5}
+.c-read{border-right:6px solid #38bdf8}
+.c-vocab{border-right:6px solid #22c55e}
+.c-exam{border-right:6px solid #f59e0b}
+
+/* ====== FOOTER ====== */
+footer{
+  margin-top:30px;
+  text-align:center;
+}
+
+.signature{
+  display:inline-block;
+  background:var(--grad-main);
+  color:#fff;
+  padding:10px 22px;
+  border-radius:999px;
+  font-size:14px;
+  box-shadow:var(--shadow);
+}
+</style>
 </head>
 
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="hello">👋 أهلاً بكم</div>
 
-      <!-- سطر تحت أهلاً بكم -->
-      <div class="brandLine">في <b>منصة لغتي الممتعة</b></div>
-
-      <p class="sub">
-        في هذه المنصة ستجدون مهارات لغوية، ألعاب تعليمية، واختبارات إلكترونية
-        مصممة بأسلوب ممتع يناسب طلاب الصفوف الأولية ويشجعهم على التعلم بثقة وحماس.
-      </p>
-    </section>
-
-    <section class="cards">
-      <!-- المهارات (تبويب جديد) -->
-      <a class="card card-skills" href="skills.html" target="_blank">
-        <h3>🎯 المهارات التفاعلية</h3>
-        <p>ألعاب وأنشطة تعليمية</p>
-      </a>
-
-      <!-- القراءة (تبويب جديد) -->
-      <a class="card card-read" href="reading_skills_game.html" target="_blank">
-        <h3>📘 لعبة القراءة</h3>
-        <p>تنمية مهارات الفهم</p>
-      </a>
-
-      <!-- المفردات (تبويب جديد) -->
-      <a class="card card-vocab" href="vocab_game.html" target="_blank">
-        <h3>🧩 لعبة المفردات</h3>
-        <p>مرادفات – أضداد</p>
-      </a>
-
-      <!-- الاختبار (تبويب جديد) -->
-      <a class="card card-exam" href="exam.html" target="_blank">
-        <h3>📝 الاختبار الإلكتروني</h3>
-        <p>نماذج رسمية بأسلوب ممتع</p>
-      </a>
-    </section>
-
-    <div class="footer">
-      <div class="signature">
-        إعداد وتصميم ✨ <b>صالحة علي الغامدي</b>
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <span>📚</span>
+      <div>
+        <b>منصة لغتي الممتعة</b><br>
+        <small>تعلّم · شاهد · العب · اختبر</small>
       </div>
     </div>
-  </main>
+
+    <div class="nav">
+      <button onclick="alert('قريبًا ✨')">شاهد 🎬</button>
+      <button onclick="alert('قائمة المحتوى 📂')">القائمة ☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="welcome">
+    <h1>👋 أهلًا بكم</h1>
+    <p>
+      في منصة <b>لغتي الممتعة</b><br>
+      ستجدون مهارات لغوية، ألعاب تعليمية، واختبارات إلكترونية
+      مصممة بأسلوب ممتع يناسب طلاب الصفوف الأولية
+      ويشجعهم على التعلّم بثقة وحماس.
+    </p>
+  </div>
+
+  <!-- المهارات -->
+  <div class="card c-skill">
+    <div>
+      <h3>🎯 المهارات التفاعلية</h3>
+      <p>تدريبات وأنشطة لكل مهارة بأسلوب واضح وممتع</p>
+    </div>
+    <button class="open" onclick="location.href='skills.html'">فتح ↗</button>
+  </div>
+
+  <!-- القراءة -->
+  <div class="card c-read">
+    <div>
+      <h3>📘 مهارات القراءة والفهم</h3>
+      <p>أنشطة قراءة + أسئلة فهم وتطبيقات متنوعة</p>
+    </div>
+    <button class="open" onclick="location.href='reading_skills_game.html'">فتح ↗</button>
+  </div>
+
+  <!-- المفردات -->
+  <div class="card c-vocab">
+    <div>
+      <h3>🧩 مركز المفردات والمعاني</h3>
+      <p>مرادفات · أضداد · تصنيف كلمات · تدريبات متعددة</p>
+    </div>
+    <button class="open" onclick="location.href='vocab_game.html'">فتح ↗</button>
+  </div>
+
+  <!-- الاختبار -->
+  <div class="card c-exam">
+    <div>
+      <h3>✍️ الاختبار الإلكتروني</h3>
+      <p>4 نماذج · نصوص طويلة · 20 سؤال لكل نموذج</p>
+    </div>
+    <button class="open" onclick="location.href='exam.html'">فتح ↗</button>
+  </div>
+
+</main>
+
+<footer>
+  <div class="signature">
+    إعداد وتصميم ✨ صالحة علي الغامدي
+  </div>
+</footer>
+
 </body>
 </html>
