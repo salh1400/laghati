@@ -1,245 +1,479 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة لغتي الممتعة</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>منصة لغتي الممتعة</title>
 
-<style>
-:root{
-  --grad-main: linear-gradient(135deg,#6a6ff5,#5b8cff,#38bdf8);
-  --bg: #f4f6ff;
-  --card: #ffffff;
-  --text: #1f2937;
-  --shadow: 0 14px 30px rgba(0,0,0,.12);
-}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 
-*{box-sizing:border-box;font-family:'Tajawal',sans-serif}
+  <style>
+    :root{
+      --bg:#f4f6ff;
+      --text:#111827;
+      --muted:#6b7280;
 
-body{
-  margin:0;
-  background: var(--bg);
-  color:var(--text);
-}
+      --brand1:#5b6cff;
+      --brand2:#38bdf8;
 
-/* ====== HEADER ====== */
-header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  padding:14px;
-}
+      --shadow: 0 16px 40px rgba(17,24,39,.10);
+      --shadow2: 0 10px 20px rgba(17,24,39,.08);
+    }
 
-.header-inner{
-  background: var(--grad-main);
-  border-radius:22px;
-  padding:16px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  color:#fff;
-  box-shadow:var(--shadow);
-}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 80% 0%, rgba(91,108,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 10% 20%, rgba(56,189,248,.14), transparent 60%),
+        linear-gradient(180deg, #f7f8ff 0%, #f7fbff 35%, #fbfbff 100%);
+      overflow-x:hidden;
+    }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
+    .wrap{
+      width:min(940px, 92vw);
+      margin: 18px auto 28px;
+    }
 
-.brand span{
-  font-size:28px;
-}
+    /* ====== Top App Bar ====== */
+    .topbar{
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
+      border-radius: 26px;
+      padding: 12px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      position: sticky;
+      top: 10px;
+      z-index: 50;
+    }
 
-.brand div{
-  line-height:1.3;
-}
+    .pill{
+      border:none;
+      cursor:pointer;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow2);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight:900;
+      display:flex; align-items:center; gap:8px;
+      white-space:nowrap;
+    }
+    .pill:active{ transform: translateY(1px); }
 
-.brand b{
-  font-size:18px;
-}
+    /* عنوان بالوسط */
+    .brand{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-align:center;
+      flex: 1;
+    }
+    .logo{
+      width:46px; height:46px;
+      border-radius:18px;
+      background: linear-gradient(135deg, var(--brand1), var(--brand2));
+      display:grid; place-items:center;
+      color:#fff; font-size:22px;
+      box-shadow: 0 16px 30px rgba(59,130,246,.22);
+      flex:0 0 auto;
+    }
+    .brand b{ display:block; font-size:16px; line-height:1.1; font-weight:900; }
+    .brand small{ display:block; color:rgba(17,24,39,.60); font-weight:800; margin-top:2px; }
 
-.brand small{
-  opacity:.9;
-  font-size:13px;
-}
+    /* مسافة جهة اليسار لمعادلة زر القائمة حتى يبقى العنوان في الوسط */
+    .ghost{
+      width: 96px; /* تقريبا نفس عرض زر القائمة */
+      flex: 0 0 auto;
+    }
 
-.nav{
-  display:flex;
-  gap:10px;
-}
+    /* ====== Hero Card ====== */
+    .hero{
+      margin-top: 14px;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(255,255,255,.60);
+      box-shadow: var(--shadow);
+      border-radius: 26px;
+      padding: 16px 16px 18px;
+      position: relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 260px at 80% 10%, rgba(91,108,255,.18), transparent 60%),
+        radial-gradient(700px 260px at 10% 20%, rgba(56,189,248,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-inner{ position:relative; }
 
-.nav button{
-  border:none;
-  padding:10px 18px;
-  border-radius:999px;
-  background:rgba(255,255,255,.2);
-  color:#fff;
-  font-size:14px;
-  cursor:pointer;
-}
+    .hello{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow2);
+      font-weight:900;
+      color:#374151;
+      margin-bottom: 10px;
+    }
+    .title{
+      margin: 6px 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+    .title .grad{
+      background: linear-gradient(135deg, var(--brand1), var(--brand2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .desc{
+      margin: 0;
+      color: rgba(17,24,39,.70);
+      font-weight:700;
+      line-height: 1.95;
+      font-size: 14px;
+    }
 
-.nav button:hover{
-  background:rgba(255,255,255,.35);
-}
+    .section{
+      margin-top: 14px;
+    }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 900;
+      color: rgba(17,24,39,.82);
+    }
 
-/* ====== MAIN ====== */
-main{
-  padding:26px 16px 40px;
-  max-width:760px;
-  margin:auto;
-}
+    .list{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
 
-.welcome{
-  text-align:center;
-  margin-bottom:26px;
-}
+    /* بطاقات بدون زر فتح */
+    .card{
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow);
+      border-radius: 22px;
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      position: relative;
+      overflow:hidden;
+      cursor:pointer;
+      transition: transform .12s ease;
+    }
+    .card:hover{ transform: translateY(-2px); }
 
-.welcome h1{
-  color:#5b5fe0;
-  margin:0;
-}
+    .card:after{
+      content:"";
+      position:absolute;
+      top:0; bottom:0;
+      left:0;
+      width: 10px;
+      border-radius: 0 18px 18px 0;
+      opacity:.95;
+    }
 
-.welcome p{
-  margin-top:10px;
-  line-height:1.9;
-  color:#555;
-}
+    .info{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+      width: 100%;
+    }
 
-/* ====== CARDS ====== */
-.card{
-  background:var(--card);
-  border-radius:22px;
-  padding:22px;
-  margin-bottom:18px;
-  box-shadow:var(--shadow);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:14px;
-}
+    .ic{
+      width: 52px; height: 52px;
+      border-radius: 18px;
+      display:grid; place-items:center;
+      color:#fff;
+      font-size: 22px;
+      box-shadow: 0 14px 26px rgba(17,24,39,.12);
+      flex:0 0 auto;
+    }
 
-.card h3{
-  margin:0 0 6px;
-}
+    .txt{
+      min-width: 0;
+      width: 100%;
+    }
+    .txt b{
+      display:block;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 3px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .txt span{
+      display:block;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: rgba(17,24,39,.62);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
 
-.card p{
-  margin:0;
-  font-size:14px;
-  color:#555;
-}
+    .hint{
+      font-weight: 900;
+      color: rgba(17,24,39,.55);
+      flex:0 0 auto;
+      margin-right:auto;
+    }
 
-.open{
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:999px;
-  padding:10px 16px;
-  font-size:14px;
-  cursor:pointer;
-}
+    .c-skill:after{ background: linear-gradient(180deg, #6366f1, #7c83ff); }
+    .c-skill .ic{ background: linear-gradient(135deg, #6366f1, #7c83ff); }
 
-.open:hover{
-  background:#f3f4f6;
-}
+    .c-read:after{ background: linear-gradient(180deg, #0ea5e9, #38bdf8); }
+    .c-read .ic{ background: linear-gradient(135deg, #0ea5e9, #38bdf8); }
 
-/* ====== COLORS ====== */
-.c-skill{border-right:6px solid #6a6ff5}
-.c-read{border-right:6px solid #38bdf8}
-.c-vocab{border-right:6px solid #22c55e}
-.c-exam{border-right:6px solid #f59e0b}
+    .c-vocab:after{ background: linear-gradient(180deg, #16a34a, #22c55e); }
+    .c-vocab .ic{ background: linear-gradient(135deg, #16a34a, #22c55e); }
 
-/* ====== FOOTER ====== */
-footer{
-  margin-top:30px;
-  text-align:center;
-}
+    .c-exam:after{ background: linear-gradient(180deg, #f59e0b, #ffb545); }
+    .c-exam .ic{ background: linear-gradient(135deg, #f59e0b, #ffb545); }
 
-.signature{
-  display:inline-block;
-  background:var(--grad-main);
-  color:#fff;
-  padding:10px 22px;
-  border-radius:999px;
-  font-size:14px;
-  box-shadow:var(--shadow);
-}
-</style>
+    .footer{
+      margin-top: 18px;
+      display:flex;
+      justify-content:center;
+    }
+    .sig{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(255,255,255,.60);
+      box-shadow: var(--shadow2);
+      font-weight: 900;
+      color:#1f2937;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--brand1), var(--brand2));
+      box-shadow: 0 10px 18px rgba(59,130,246,.20);
+    }
+
+    /* ====== Drawer ====== */
+    .backdrop{
+      position:fixed; inset:0;
+      background: rgba(17,24,39,.35);
+      backdrop-filter: blur(6px);
+      display:none;
+      z-index:80;
+    }
+    .backdrop.show{ display:block; }
+    .drawer{
+      position:fixed; top:0; right:0;
+      height:100%;
+      width:min(330px, 86vw);
+      background: rgba(255,255,255,.90);
+      border-left: 1px solid rgba(255,255,255,.65);
+      box-shadow: -20px 0 45px rgba(17,24,39,.18);
+      transform: translateX(105%);
+      transition: transform .25s ease;
+      z-index:90;
+      padding: 18px 14px;
+    }
+    .drawer.show{ transform: translateX(0); }
+    .drawer .head{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:12px;
+    }
+    .drawer .head b{ font-size:16px; }
+    .x{
+      border:none; cursor:pointer;
+      width:40px;height:40px;
+      border-radius:14px;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow2);
+      font-size:18px;
+      font-weight:900;
+    }
+    .drawer a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 14px 12px;
+      margin: 10px 0;
+      border-radius: 18px;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow2);
+      font-weight:900;
+      color:#111827;
+      text-decoration:none;
+    }
+    .drawer a small{ font-weight:700; color: rgba(17,24,39,.62); }
+
+    @media (max-width: 420px){
+      .title{ font-size: 26px; }
+      .brand b{ font-size: 15px; }
+      .ghost{ width: 92px; }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="wrap">
 
-<header>
-  <div class="header-inner">
-    <div class="brand">
-      <span>📚</span>
-      <div>
-        <b>منصة لغتي الممتعة</b><br>
-        <small>تعلّم · شاهد · العب · اختبر</small>
+    <!-- Top Bar -->
+    <div class="topbar">
+      <!-- يسار: زر القائمة فقط -->
+      <button class="pill" onclick="openDrawer()">☰ القائمة</button>
+
+      <!-- وسط: العنوان -->
+      <div class="brand">
+        <div class="logo">📚</div>
+        <div>
+          <b>منصة لغتي الممتعة</b>
+          <small>تعلّم · شاهد · العب · اختبر</small>
+        </div>
+      </div>
+
+      <!-- يمين: مساحة وهمية لمعادلة العنوان في الوسط -->
+      <div class="ghost" aria-hidden="true"></div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hello">👋 أهلًا بكم | في منصة لغتي الممتعة</div>
+        <div class="title">تجربة <span class="grad">راقية</span> لتعليم اللغة العربية</div>
+        <p class="desc">
+          منصة تفاعلية لطلاب المرحلة الابتدائية: مهارات لغوية، ألعاب تعليمية، واختبارات إلكترونية
+          بتصميم واضح ومريح يساعد الطالب على التركيز ويشجّعه على التعلّم بثقة وحماس.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Cards -->
+    <section class="section">
+      <h2>الأقسام الرئيسية</h2>
+
+      <div class="list">
+
+        <div class="card c-skill" onclick="location.href='skills.html'">
+          <div class="info">
+            <div class="ic">🎯</div>
+            <div class="txt">
+              <b>المهارات التفاعلية</b>
+              <span>تدريبات وأنشطة لكل مهارة بأسلوب ممتع وواضح.</span>
+            </div>
+            <div class="hint">↗</div>
+          </div>
+        </div>
+
+        <div class="card c-read" onclick="location.href='reading_skills_game.html'">
+          <div class="info">
+            <div class="ic">📘</div>
+            <div class="txt">
+              <b>مهارات القراءة والفهم</b>
+              <span>قراءة + فهم + أنشطة متنوعة (ملف شامل).</span>
+            </div>
+            <div class="hint">↗</div>
+          </div>
+        </div>
+
+        <div class="card c-vocab" onclick="location.href='vocab_game.html'">
+          <div class="info">
+            <div class="ic">🧩</div>
+            <div class="txt">
+              <b>مفردات ومعاني</b>
+              <span>مرادفات · أضداد · تدريبات كلمات متنوعة.</span>
+            </div>
+            <div class="hint">↗</div>
+          </div>
+        </div>
+
+        <div class="card c-exam" onclick="location.href='exam.html'">
+          <div class="info">
+            <div class="ic">✍️</div>
+            <div class="txt">
+              <b>الاختبار الإلكتروني</b>
+              <span>4 نماذج · نصوص طويلة · 20 سؤال لكل نموذج + ورقة تظليل.</span>
+            </div>
+            <div class="hint">↗</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Signature -->
+    <div class="footer">
+      <div class="sig">
+        <span class="dot"></span>
+        إعداد وتصميم ✨ صالحة علي الغامدي
       </div>
     </div>
+  </div>
 
-    <div class="nav">
-      <button onclick="alert('قريبًا ✨')">شاهد 🎬</button>
-      <button onclick="alert('قائمة المحتوى 📂')">القائمة ☰</button>
+  <!-- Drawer -->
+  <div class="backdrop" id="backdrop" onclick="closeDrawer()"></div>
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="head">
+      <b>☰ القائمة</b>
+      <button class="x" onclick="closeDrawer()">✕</button>
     </div>
-  </div>
-</header>
 
-<main>
+    <a href="skills.html">
+      <div>🎯 المهارات التفاعلية<br><small>تدريبات وأنشطة</small></div>
+      <span>↗</span>
+    </a>
 
-  <div class="welcome">
-    <h1>👋 أهلًا بكم</h1>
-    <p>
-      في منصة <b>لغتي الممتعة</b><br>
-      ستجدون مهارات لغوية، ألعاب تعليمية، واختبارات إلكترونية
-      مصممة بأسلوب ممتع يناسب طلاب الصفوف الأولية
-      ويشجعهم على التعلّم بثقة وحماس.
-    </p>
-  </div>
+    <a href="reading_skills_game.html">
+      <div>📘 مهارات القراءة والفهم<br><small>قراءة + فهم</small></div>
+      <span>↗</span>
+    </a>
 
-  <!-- المهارات -->
-  <div class="card c-skill">
-    <div>
-      <h3>🎯 المهارات التفاعلية</h3>
-      <p>تدريبات وأنشطة لكل مهارة بأسلوب واضح وممتع</p>
-    </div>
-    <button class="open" onclick="location.href='skills.html'">فتح ↗</button>
+    <a href="vocab_game.html">
+      <div>🧩 مفردات ومعاني<br><small>مرادفات · أضداد</small></div>
+      <span>↗</span>
+    </a>
+
+    <a href="exam.html">
+      <div>✍️ الاختبار الإلكتروني<br><small>4 نماذج + ورقة تظليل</small></div>
+      <span>↗</span>
+    </a>
   </div>
 
-  <!-- القراءة -->
-  <div class="card c-read">
-    <div>
-      <h3>📘 مهارات القراءة والفهم</h3>
-      <p>أنشطة قراءة + أسئلة فهم وتطبيقات متنوعة</p>
-    </div>
-    <button class="open" onclick="location.href='reading_skills_game.html'">فتح ↗</button>
-  </div>
-
-  <!-- المفردات -->
-  <div class="card c-vocab">
-    <div>
-      <h3>🧩 مركز المفردات والمعاني</h3>
-      <p>مرادفات · أضداد · تصنيف كلمات · تدريبات متعددة</p>
-    </div>
-    <button class="open" onclick="location.href='vocab_game.html'">فتح ↗</button>
-  </div>
-
-  <!-- الاختبار -->
-  <div class="card c-exam">
-    <div>
-      <h3>✍️ الاختبار الإلكتروني</h3>
-      <p>4 نماذج · نصوص طويلة · 20 سؤال لكل نموذج</p>
-    </div>
-    <button class="open" onclick="location.href='exam.html'">فتح ↗</button>
-  </div>
-
-</main>
-
-<footer>
-  <div class="signature">
-    إعداد وتصميم ✨ صالحة علي الغامدي
-  </div>
-</footer>
-
+  <script>
+    function openDrawer(){
+      document.getElementById("drawer").classList.add("show");
+      document.getElementById("backdrop").classList.add("show");
+    }
+    function closeDrawer(){
+      document.getElementById("drawer").classList.remove("show");
+      document.getElementById("backdrop").classList.remove("show");
+    }
+  </script>
 </body>
 </html>
